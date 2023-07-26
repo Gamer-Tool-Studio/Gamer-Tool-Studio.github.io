@@ -167,13 +167,13 @@ section ul, section ol {
 	list-style: none;
     padding: 0;
     margin: 0;
-    text-align: left; /* Align the list items to the left */
-    column-count: 2; /* Add this line to create two columns */
-    column-gap: 20px; /* Add some gap between the columns */
+    text-align: left; 
+    column-count: 2;
+    column-gap: 20px;
 }
 
 .pricing-tables li {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
     font-size: 18px;
     font-weight: 100;
     font-family: "bebas neue";
