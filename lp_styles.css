@@ -14,95 +14,122 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-	background-color: black;
+    background-color: black;
 }
 
 nav {
     background-color: black;
     color: #333;
-    padding: 10px 0;
+	max-width: 1200px;
     max-height: 50px;
     overflow: hidden;
-	text-align: center;
-	align-items: center;
-	align-content: center;
-	justify-content: center;
+    display: flex;
+    margin: 0 auto;
 }
 
 main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-	background-color: black;
-	cursor:default;
+    background-color: black;
+    cursor: default;
 }
 
 h1, h2 {
     color: #fff;
-	font-family:'Titillium Web';
+    font-family: 'Titillium Web';
 }
 
 p {
-	font-family:'Bebas Neue';
-	color: #fff;
+    font-family: 'Bebas Neue';
+    color: #fff;
 }
 
 /* Navigation Bar Styles */
 
 .navbar {
-	max-width: 1200px;
-    max-height: 35px;
-    margin: 0 auto;
+	background:black;
+	min-width: 100%;
+    margin: 0;
     display: flex;
-    align-items: center;
-}
-
-
-.nav-logo {
-	margin:0;
-	padding:0;
-	display: flex;
-	flex-wrap: wrap;
-	height: 100%;
-}
-
-.nav-logo img {
-	display: block;
-	max-height: 50px;;
+    align-items: flex-end;
+    width: 100%;
+	position: fixed;
+	top:0;
+	left:0;
 }
 
 .nav-links {
-    list-style: none;
-    margin-left: 8px;
+    margin: 0;
+	margin-left: 10px;
     padding: 0;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center; 
+    list-style: none;
+    display: flex;
 }
 
 .nav-links li {
-    padding: 0;
+    padding-left: 5px;
+    margin: 0;
 }
 
 .nav-links a {
-    color:#fff;;
+    color: #fff;
     text-decoration: none;
-    font-size: 14px;
+    font-family: 'bebas neue';
+	font-size:16px;
     transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
+    text-decoration: underline;
+}
+
+.login-section {
+    margin: 0;
+	margin-right: 2%;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-right {
+    margin-left: 10px;
+}
+
+.nav-right a {
+	color: #fff;
+	text-decoration: none;
+	font-family: 'bebas neue';
+	font-size:16px;
+	transition: color 0.3s ease;
+}
+
+.nav-right a:hover{
 	text-decoration: underline;
 }
 
-.nav-buttons {
-    display: inline-flex;
+.nav-left {
+    margin-right: auto;
+    display: flex;
     align-items: center;
+}
+
+.nav-logo {
+    margin: 0;
+    padding: 0;
     max-height: 50px;
 }
 
+/* New Code to Align Login and Signup to Right */
+.login-section {
+    margin-left: auto;
+}
+
+
+
 /* Styles for "Login" Link */
-.nav-buttons .nav-link {
+.login-section .nav-link {
     color: #fff;
     text-decoration: none;
     margin: 0;
@@ -115,7 +142,7 @@ p {
     text-decoration: underline;
 }
 
-.nav-buttons .nav-link:hover {
+.login-section .nav-link:hover {
     text-decoration: underline;
 }
 
