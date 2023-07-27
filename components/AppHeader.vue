@@ -125,6 +125,7 @@ nav {
 
 nav.lp {
   background-color: black;
+  border-bottom: none;
   * {
     color: white !important;
   }
