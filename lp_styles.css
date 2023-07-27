@@ -10,7 +10,7 @@
 
 /* Global Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'bebas neue', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -20,11 +20,13 @@ body {
 nav {
     background-color: black;
     color: #333;
+	width: 1200px;
 	max-width: 1200px;
-    max-height: 50px;
+    max-height: 80px;
     overflow: hidden;
     display: flex;
     margin: 0 auto;
+	align-content: center;
 }
 
 main {
@@ -50,6 +52,7 @@ p {
 .navbar {
 	background:black;
 	min-width: 100%;
+	height: 70px;
     margin: 0;
     display: flex;
     align-items: flex-end;
@@ -76,7 +79,7 @@ p {
     color: #fff;
     text-decoration: none;
     font-family: 'bebas neue';
-	font-size:16px;
+	font-size:18px;
     transition: color 0.3s ease;
 }
 
@@ -101,7 +104,7 @@ p {
 	color: #fff;
 	text-decoration: none;
 	font-family: 'bebas neue';
-	font-size:16px;
+	font-size:18px;
 	transition: color 0.3s ease;
 }
 
@@ -167,29 +170,33 @@ section ul, section ol {
 /* Intro Section */
 .intro-section {
 	margin:30px;
+	padding-top: 90px;
 	margin-left: 90px;
 	margin-right: 0;
+	margin-bottom: 100px;
 	display: block;
 }
 
 .intro-section h1{
-	font-size: 77px;
+	font-size: 90px;
 	font-weight: 100;
-	line-height: 70px;	
+	line-height: 80px;	
 }
 
 .intro-cta{
 	display: inline-flex;
 	align-items: flex-end;
 	flex-wrap: wrap;
+	
 }
 
 .intro-cta p {
 	margin:0;
 	padding: 0;
 	margin-left:20px;
+	font-family: 'bebas neue';
 	text-decoration: underline;
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: 100;
 	
 }
@@ -197,6 +204,10 @@ section ul, section ol {
 .intro-cta p:hover{
 	text-decoration-color: #6E6E80;
 	cursor: pointer;
+}
+
+.intro-cta button {
+	font-size: 18px;
 }
 
 /*Demo Video */
