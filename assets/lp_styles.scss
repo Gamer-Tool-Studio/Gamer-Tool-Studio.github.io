@@ -1,0 +1,298 @@
+h1,
+h2 {
+  color: #fff;
+}
+
+main.lp {
+  > div {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+/* Section Styles */
+section {
+  margin-bottom: 30px;
+}
+
+.intro-cta {
+  display: inline-flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.intro-cta p {
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+  font-family: "Bebas Neue";
+  text-decoration: underline;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.intro-cta p:hover {
+  text-decoration-color: #6e6e80;
+  cursor: pointer;
+}
+
+.intro-cta button {
+  font-size: 18px;
+}
+
+/*Demo Video */
+
+.demo-video {
+  display: block;
+  margin-top: 40px;
+}
+
+/* Features Section */
+
+.features {
+  border-top: 1px solid #fff;
+  margin-top: 60px;
+}
+
+.page-headers {
+  margin-top: 10px;
+  font-size: 30px;
+  font-weight: 200;
+  line-height: 40px;
+}
+
+/* Plugin Features Box Styles */
+.feature-boxes {
+  margin-top: 60px;
+  width: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feature-box {
+  width: 200px;
+  margin: 20px;
+  padding: 20px;
+  background-color: black;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.feature-box img {
+  max-width: 100px;
+  margin-bottom: 15px;
+}
+
+.feature-box h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+.feature-box p {
+  font-size: 18px;
+  font-weight: 100;
+  font-family: "Bebas Neue";
+  text-align: justify;
+  color: #fff;
+}
+
+/* Get started Section */
+
+.get-started {
+  margin-top: 60px;
+  border-top: 1px solid #fff;
+}
+
+.started-grid {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+.how-to-start {
+  display: block;
+  margin: 0;
+  max-width: 40%;
+  float: left;
+  line-height: 30px;
+  font-size: 19px;
+}
+
+.how-to-start li {
+  font-family: "Bebas Neue";
+  margin-bottom: 25px;
+}
+
+.engines-available {
+  height: 100%;
+  float: right;
+}
+
+.engine-logo {
+  min-height: 180px;
+  max-width: 450px;
+  margin: 20px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.started-hs {
+  color: #fff;
+  font-family: "Bebas Neue";
+  font-weight: 200;
+  font-size: 25px;
+  font-family: "Bebas Neue";
+}
+
+/* Call to Action Button Styles */
+.button {
+  display: inline-block;
+  background-color: black;
+  color: #fff;
+  padding: 8px 15px;
+  text-decoration: none;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #fff;
+  color: black;
+}
+
+/*Start Trial Section */
+
+.start-trial {
+  display: block;
+  border-top: 1px solid #fff;
+  text-align: center;
+}
+
+.start-trial h2 {
+  text-align: left;
+}
+
+.start-trial button {
+  height: 60px;
+  font-size: 20px;
+}
+
+/* Footer Styles */
+footer {
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-logo {
+    margin-bottom: 10px;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    margin-left: 0;
+  }
+
+  .nav-links li {
+    margin: 0 15px;
+  }
+
+  .nav-buttons {
+    margin-top: 10px;
+  }
+
+  .nav-buttons .nav-link {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .demo-video {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-boxes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-box {
+    margin: 20px 0;
+  }
+
+  .feature-box p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .get-started .started-grid {
+    flex-direction: column;
+  }
+
+  .how-to-start {
+    max-width: 100%;
+    float: none;
+  }
+
+  .engines-available {
+    float: none;
+    text-align: center;
+  }
+
+  .engine-logo {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .start-trial h2 {
+    text-align: center;
+  }
+
+  .start-trial button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-links {
+    flex-direction: row;
+  }
+
+  .nav-links li {
+    margin: 0 10px;
+  }
+
+  .nav-buttons {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .how-to-start {
+    width: 60%;
+  }
+
+  .engines-available {
+    width: 40%;
+  }
+}
