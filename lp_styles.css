@@ -1,16 +1,19 @@
 @font-face {
   font-family: 'Bebas Neue';
-  src: url('fonts/BebasNeue-Regular.ttf') format('truetype');
+  src: url('./fonts/BebasNeue-Regular.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Titillium Web';
-  src: url('fonts/TitilliumWeb-Regular.ttf') format('truetype');
+  src: url('./fonts/TitilliumWeb-Regular.ttf') format('truetype');
 }
 
 
 /* Global Styles */
+
+*{
+	font-family: 'Bebas Neue', sans-serif;
+}
 body {
-    font-family: 'bebas neue', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -26,11 +29,9 @@ nav {
     margin: 0 auto;
 	align-content: center;
     position: fixed;
-
     padding: 10px 0;
     max-height: 50px;
     overflow: hidden;
-    border-bottom: 1px groove #C5C5D2;
     align-content: center;
     justify-content: center;
 
@@ -44,13 +45,12 @@ main {
     cursor: default;
 }
 
-h1, h2 {
+h1, h2, h3, h4 {
     color: #fff;
     font-family: 'Titillium Web';
 }
 
 p {
-    font-family: 'Bebas Neue';
     color: #fff;
 }
 
@@ -71,7 +71,6 @@ p {
 
 .nav-links {
     margin: 0;
-	margin-left: 10px;
     padding: 0;
     list-style: none;
     display: flex;
@@ -85,13 +84,16 @@ p {
 .nav-links a {
     color: #fff;
     text-decoration: none;
-    font-family: 'bebas neue';
 	font-size:18px;
     transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
     text-decoration: underline;
+}
+
+.present-page{
+	color:
 }
 
 .login-section {
@@ -111,7 +113,6 @@ p {
 .nav-right a {
 	color: #fff;
 	text-decoration: none;
-	font-family: 'bebas neue';
 	font-size:18px;
 	transition: color 0.3s ease;
 }
@@ -256,8 +257,8 @@ section ul, section ol {
     margin: 20px;
     padding: 20px;
     background-color: black;
-    border: 1px solid #fff;
-    border-radius: 5px;
+    border: 1px groove #ddd;
+    border-radius: 10px;
     text-align: center;
 }
 
@@ -267,16 +268,17 @@ section ul, section ol {
 }
 
 .feature-box h3 {
-	font-size: 18px;
-	font-weight: 600;
-	color:#fff
+	font-size: 20px;
+	font-weight: 400;
+	color:#fff;
+	font-family: 'Bebas Neue';
 }
 .feature-box p {
-    font-size: 18px;
+    font-size: 16px;
 	font-weight: 100;
-	font-family: "bebas neue";
 	text-align: justify;
     color: #fff;
+	font-family: 'Titillium Web'
 }
 
 
@@ -303,7 +305,6 @@ section ul, section ol {
 }
 
 .how-to-start li{
-	font-family:"bebas neue";
 	margin-bottom:25px;
 }
 
@@ -321,10 +322,8 @@ section ul, section ol {
 }
 .started-hs {
 	color: #fff;
-	font-family: 'Bebas Neue';
 	font-weight: 200;
 	font-size: 25px;
-	font-family: 'bebas neue';
 
 }
 
@@ -369,12 +368,52 @@ section ul, section ol {
 
 /* Footer Styles */
 footer {
-    background-color: black;
+    background-color: #333;
     color: #fff;
     text-align: center;
     padding: 20px;
 }
 
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex-basis: 30%;
+    margin-bottom: 20px;
+}
+
+.footer-section h4 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section li {
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-copy {
+    margin-top: 20px;
+    font-size: 14px;
+}
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .navbar {
