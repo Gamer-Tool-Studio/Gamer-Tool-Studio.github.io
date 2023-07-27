@@ -146,25 +146,9 @@ section {
 }
 
 /* Call to Action Button Styles */
-.button {
-  display: inline-block;
-  background-color: black;
-  color: #fff;
-  padding: 8px 15px;
-  text-decoration: none;
-  border: 1px solid #fff;
-  border-radius: 5px;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-}
 
 .button:hover {
   cursor: pointer;
-}
-
-.button:hover {
-  background-color: #fff;
-  color: black;
 }
 
 /*Start Trial Section */

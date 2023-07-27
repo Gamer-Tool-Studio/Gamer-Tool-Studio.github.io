@@ -34,6 +34,8 @@ export default {
 };
 </script>
 <style lang="scss">
+@use "sass:selector";
+
 nav {
   width: 100%;
   max-height: 50px;
@@ -108,6 +110,12 @@ nav {
   /* New Code to Align Login and Signup to Right */
   .login-section {
     margin-left: auto;
+
+    .button {
+      @at-root #{selector.unify(&, a)} {
+        color: white;
+      }
+    }
   }
 
   .login-section {
@@ -127,11 +135,27 @@ nav.lp {
   background-color: black;
   border-bottom: none;
   * {
-    color: white !important;
+    color: white;
   }
-  .nav-links a {
+  .nav-links a,
+  a {
     color: #fff;
     text-decoration: none;
+  }
+  .button {
+    display: inline-block;
+    background-color: black;
+    color: #fff;
+    padding: 8px 15px;
+    text-decoration: none;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: #fff;
+      color: black;
+    }
   }
 }
 </style>
