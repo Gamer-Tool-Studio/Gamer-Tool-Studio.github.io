@@ -15,7 +15,7 @@
         <li class="nav-left"><NuxtLink to="/about">About</NuxtLink></li>
       </ul>
       <ul class="login-section">
-        <li class="nav-right"><a href="#login">Log in</a></li>
+        <li class="nav-right"><NuxtLink to="/dashboard">Log in</NuxtLink></li>
         <li class="nav-right">
           <a href="#register" class="button">Sign up</a>
         </li>
@@ -38,7 +38,7 @@ export default {
 
 nav {
   width: 100%;
-  max-height: 50px;
+  height: 100%;
   margin: 0 auto;
 
   position: fixed;
@@ -47,7 +47,7 @@ nav {
   align-content: center;
   justify-content: center;
 
-  background-color: #fff;
+  background-color: transparent;
   color: #333;
   padding: 10px 0;
   border-bottom: 1px groove #c5c5d2;

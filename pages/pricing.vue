@@ -1,14 +1,16 @@
 <template>
-  <main class="pricing">
-    <section class="intro-section">
-      <h1>Dialog Craft GPT Pricing Packs</h1>
-      <h4>
-        Simple and flexible pricing plans adapted to the development stage of
-        your game. Pay per volume of requests made to our API only.
-      </h4>
-    </section>
+  <v-container class="pricing">
+    <v-row class="intro-section">
+      <v-col>
+        <h1>Dialog Craft GPT Pricing Packs</h1>
+        <h4>
+          Simple and flexible pricing plans adapted to the development stage of
+          your game. Pay per volume of requests made to our API only.
+        </h4>
+      </v-col>
+    </v-row>
 
-    <section>
+    <v-row>
       <div class="feature-boxes">
         <div class="feature-box">
           <h3>Free Trial</h3>
@@ -59,11 +61,11 @@
           <button class="button">Subscribe</button>
         </div>
       </div>
-    </section>
+    </v-row>
 
     <section>
       <h3>Need a tailored solution for your game?</h3>
       <button class="button">Contact to our Sales</button>
     </section>
-  </main>
+  </v-container>
 </template>

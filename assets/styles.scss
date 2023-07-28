@@ -38,13 +38,14 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  width: 100%;
 }
 
 main.lp {
   max-width: unset;
   margin: 0 auto;
   padding: 20px;
-  background-color: black;
+  // background-color: black;
 }
 
 h1,
@@ -101,14 +102,12 @@ section ol {
 
 /* Intro Section */
 .intro-section {
-  padding-top: 90px;
   display: block;
 }
 
 .intro-section h1 {
   font-size: 90px;
   font-weight: 100;
-  line-height: 80px;
 }
 
 @media (max-width: 768px) {

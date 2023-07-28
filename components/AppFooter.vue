@@ -1,5 +1,5 @@
 <template>
-  <footer :class="{ lp: isLandingPage }">
+  <footer :class="{ lp: isLandingPage }" class="comp-footer">
     <p>© Gamer Tools Studio All rights Reserved 2023</p>
   </footer>
 </template>

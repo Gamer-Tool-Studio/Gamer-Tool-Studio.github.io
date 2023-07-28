@@ -1,12 +1,45 @@
 <template>
-  <div>
-    <AppHeader />
-    <slot />
+  <v-layout :style="cssVars">
+    <v-app-bar color="w-100" elevation="0">
+      <AppHeader />
+    </v-app-bar>
+    <v-main class="content h-50"><slot /></v-main>
     <AppFooter />
-  </div>
+  </v-layout>
 </template>
-<style scoped>
-div {
-  height: 100%;
+<script setup>
+import { useTheme } from "vuetify";
+import { useRoute } from "vue-router";
+import { computed } from "vue";
+
+const cssVars = {};
+
+const route = useRoute();
+
+const path = computed(() => route.path);
+
+const theme = useTheme();
+
+theme.global.name.value = path.value == "/" ? "myDarkTheme" : "light";
+cssVars["--background"] = path.value == "/" ? "black" : "white";
+
+watch(path, () => {
+  theme.global.name.value = path.value == "/" ? "myDarkTheme" : "light";
+  cssVars["--background"] = path.value == "/" ? "black" : "white";
+});
+</script>
+
+<style lang="scss" scoped>
+.v-layout {
+  flex-direction: column;
+  background-color: var(--background);
+  transition: background-color 1.5s ease;
+  min-height: 100vh;
+}
+.content {
+  margin-top: 4rem;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
 }
 </style>
