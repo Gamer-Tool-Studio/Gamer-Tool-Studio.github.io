@@ -15,7 +15,7 @@
         <li class="nav-left"><NuxtLink to="/about">About</NuxtLink></li>
       </ul>
       <ul class="login-section">
-        <li class="nav-right"><NuxtLink to="/dashboard">Log in</NuxtLink></li>
+        <li class="nav-right link" @click="goToRoute('/dashboard')">Log in</li>
         <li class="nav-right">
           <a href="#register" class="button">Sign up</a>
         </li>
@@ -23,15 +23,21 @@
     </div>
   </nav>
 </template>
-<script>
-export default {
-  computed: {
-    // Going to make some small js tweaks
-    isLandingPage() {
-      return this.$route.path == "/";
-    },
-  },
+<script lang="ts" setup>
+import { useUserStore } from "../store/user";
+const userStore = useUserStore();
+const route = useRoute();
+
+const router = useRouter();
+
+const goToRoute = (path: string) => {
+  userStore.setLogin(true);
+  console.log(userStore.isUserLoggedIn);
+
+  router.push({ path });
 };
+
+const isLandingPage = computed(() => route.path == "/");
 </script>
 <style lang="scss">
 @use "sass:selector";

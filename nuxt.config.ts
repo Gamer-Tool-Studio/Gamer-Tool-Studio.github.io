@@ -21,12 +21,9 @@ export default defineNuxtConfig({
       },
     },
   },
-  modules: [
-    [
-      "@pinia/nuxt",
-      {
-        autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
-      },
-    ],
-  ],
+  // plugins: ["@/plugins/chartist.js"],
+  modules: [["@pinia/nuxt", { autoImports: ["defineStore"] }]],
+  imports: {
+    dirs: ["store"],
+  },
 });

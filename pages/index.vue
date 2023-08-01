@@ -115,6 +115,10 @@
   </v-container>
 </template>
 <script lang="ts" setup>
+definePageMeta({
+  layout: "default",
+});
+
 useHead({
   title: "Home Page",
 });
