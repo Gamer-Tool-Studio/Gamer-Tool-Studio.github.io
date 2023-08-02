@@ -1,16 +1,8 @@
 <template>
-  <Transition name="layout" mode="out-in">
-    <div>
-      <h1 color="red" style="position: absolute; z-index: 99999"></h1>
-      <NuxtLayout :name="layout">
-        <Transition name="page" mode="out-in">
-          <div :key="route.fullPath">
-            <NuxtPage />
-          </div>
-        </Transition>
-      </NuxtLayout>
-    </div>
-  </Transition>
+  <NuxtLayout :name="layout">
+    <NuxtLoadingIndicator />
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 <script lang="ts" setup>
 const route = useRoute();
@@ -44,6 +36,22 @@ useHead({
   // where `%s` is replaced with the title
   // of the current page
   title: "Welcome ",
-  titleTemplate: "%s - bT Boilerplate 2023",
+  titleTemplate: "%s - GTS",
 });
 </script>
+<style>
+.page-enter-active,
+.page-leave-active,
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.4s;
+}
+
+.page-enter-from,
+.page-leave-to,
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+</style>
