@@ -1,47 +1,16 @@
 <template>
   <v-container id="core-navigation-drawer" class="pa-0">
-    <v-row no-gutters> </v-row>
-
-    <v-divider class="mb-1" />
-
-    <v-list dense nav>
-      <v-list-item>
-        <v-list-item
-          :prepend-avatar="'https://demos.creative-tim.com/vuetify-material-dashboard/favicon.ico'"
-          class="align-self-center"
-          color="white"
-          contain
-        >
-          <v-list-item-title class="display-1" v-text="profile.title" />
-        </v-list-item>
-      </v-list-item>
-    </v-list>
-
-    <v-divider class="mb-2" />
-
-    <v-list expand nav>
-      <base-item-group :items="computedItems"></base-item-group>
-    </v-list>
-
-    <template v-slot:append>
-      <base-item
-        :item="{
-          title: 'Upgrade',
-          icon: 'mdi-package-up',
-          to: '/upgrade',
-        }"
-      />
-    </template>
+    <v-row no-gutters>
+      <v-list expand nav>
+        <base-item-group :items="computedItems"></base-item-group>
+      </v-list>
+    </v-row>
   </v-container>
 </template>
 
 <script setup>
 // Utilities
 // import { mapState } from "vuex";
-
-const props = defineProps({
-  expandOnHover: { type: Boolean, required: true },
-});
 
 onMounted(() => {
   console.log("mounted drawer");
@@ -51,7 +20,7 @@ const items = ref([
   {
     title: "dashboard",
     value: 1,
-    to: "/",
+    to: "/dashboard",
     props: {
       prependIcon: "mdi-view-dashboard",
     },
@@ -64,38 +33,31 @@ const items = ref([
     },
   },
   {
-    title: "rtables",
-    to: "/tables/regular-tables",
+    title: "usage",
+    to: "/dashboard/usage",
     props: {
-      prependIcon: "mdi-clipboard-outline",
+      prependIcon: "mdi-chart-bar",
     },
   },
   {
-    title: "typography",
-    to: "/components/typography",
+    title: "members",
+    to: "/dashboard/members",
     props: {
-      prependIcon: "mdi-format-font",
+      prependIcon: "mdi-account-group",
     },
   },
   {
-    title: "icons",
-    to: "/components/icons",
+    title: "billing",
+    to: "/dashboard/billing",
     props: {
-      prependIcon: "mdi-chart-bubble",
+      prependIcon: "mdi-wallet-bifold",
     },
   },
   {
-    title: "google",
-    to: "/maps/google-maps",
+    title: "API keys",
+    to: "/dashboard/api-keys",
     props: {
-      prependIcon: "mdi-map-marker",
-    },
-  },
-  {
-    title: "notifications",
-    to: "/components/notifications",
-    props: {
-      prependIcon: "mdi-bell",
+      prependIcon: "mdi-key-chain",
     },
   },
 ]);
@@ -118,34 +80,45 @@ const mapItem = (item) => {
   };
 };
 </script>
-<style lang="sass">
+<style lang="scss">
+#core-navigation-drawer {
+  height: 100%;
+  max-width: 200px;
+  flex: 0 0 15%;
+  border-right: solid 1px lightgrey;
+  .v-list-group__header.v-list-item--active:before {
+    opacity: 0.24;
 
-#core-navigation-drawer
-  max-width: 200px
-  flex: 0 0 15%
-  .v-list-group__header.v-list-item--active:before
-    opacity: .24
-
-  .v-list-item
-    &__icon--text,
-    &__icon:first-child
-      justify-content: center
-      text-align: center
-      width: 20px
-
-  .v-list--dense
-    .v-list-item
+    .v-list-item {
       &__icon--text,
-      &__icon:first-child
-        margin-top: 10px
+      &__icon:first-child {
+        justify-content: center;
+        text-align: center;
+        width: 20px;
+      }
+    }
 
-  .v-list-group--sub-group
-    .v-list-group__header
+    .v-list--dense {
+      .v-list-item {
+        &__icon--text,
+        &__icon:first-child {
+          margin-top: 10px;
+        }
+      }
+    }
 
-      .v-list-item__icon--text
-        margin-top: 19px
-        order: 0
+    .v-list-group--sub-group {
+      .v-list-group__header {
+        .v-list-item__icon--text {
+          margin-top: 19px;
+          order: 0;
 
-      .v-list-group__header__prepend-icon
-        order: 2
+          .v-list-group__header__prepend-icon {
+            order: 2;
+          }
+        }
+      }
+    }
+  }
+}
 </style>

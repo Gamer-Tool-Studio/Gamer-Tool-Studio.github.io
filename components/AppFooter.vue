@@ -16,6 +16,7 @@ export default {
 <style lang="scss">
 /* Footer Styles */
 footer {
+  border-top: solid 1px lightgray;
   p {
     margin: 0;
   }
