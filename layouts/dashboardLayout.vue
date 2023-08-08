@@ -3,9 +3,9 @@
     <v-app-bar color="w-100" elevation="0">
       <AppHeader />
     </v-app-bar>
-    <v-main class="">
-      <v-container fluid no-gutters>
-        <v-row>
+    <v-main class="d-flex">
+      <v-container fluid class="pa-0 d-flex flex-grow-1">
+        <v-row no-gutters>
           <v-col cols="2">
             <dashboard-drawer />
           </v-col>
