@@ -11,7 +11,7 @@
           </v-col>
 
           <v-col cols="10" class="">
-            <v-card class="dashboard-content" outlined>
+            <v-card class="dashboard-content" elevation="0" outlined>
               <slot />
             </v-card>
           </v-col>
@@ -46,9 +46,10 @@ cssVars["--background"] = "white";
     margin-left: calc(50vw - 686px);
   }
 
-  * {
-    outline: solid 1px red;
-  }
+  // debug outline
+  // * {
+  //   outline: solid 1px red;
+  // }
 }
 .v-layout {
   flex-direction: column;

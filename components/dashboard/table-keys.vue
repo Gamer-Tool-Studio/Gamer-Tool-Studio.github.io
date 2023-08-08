@@ -4,7 +4,7 @@
     :headers="headers"
     :items="keys"
     item-value="name"
-    class="elevation-1"
+    class="elevation-0"
   >
     <template #item.created="{ item }">
       {{ item.raw.created.toLocaleString() }}
