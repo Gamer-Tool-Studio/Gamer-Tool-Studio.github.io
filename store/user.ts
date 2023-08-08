@@ -1,8 +1,25 @@
 import { defineStore } from "pinia";
+
+interface MemberInfo {
+  name: string;
+  email: string;
+  role: string;
+}
+
+interface KeysInfo {
+  name: string;
+  key: string;
+  created: Date;
+  used: string;
+}
 interface State {
   userList: UserInfo[];
   user: UserInfo | null;
   isLoggedIn: boolean;
+  orgName: string;
+  orgId: string;
+  members: Array<MemberInfo>;
+  keys: Array<KeysInfo>;
 }
 interface UserInfo {
   full_name?: string | "Full name";
@@ -16,6 +33,17 @@ export const useUserStore = defineStore("user", {
       userList: [],
       user: null,
       isLoggedIn: false,
+      orgName: "MyOgrName",
+      orgId: "MyOrgId",
+      members: [{ name: "John Doe", email: "johndoe@mail.com", role: "admin" }],
+      keys: [
+        {
+          name: "query-game-test",
+          key: "sk-...1nF6",
+          created: new Date(Date.now()),
+          used: "Never",
+        },
+      ],
     };
   },
   getters: {
