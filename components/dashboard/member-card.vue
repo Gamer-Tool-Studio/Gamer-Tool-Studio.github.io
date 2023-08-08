@@ -6,7 +6,7 @@
           {{ member?.name[0] }}
         </div>
       </v-col>
-      <v-col cols="4">
+      <v-col cols="6">
         {{ member.name }}
         {{ member.mail }}
       </v-col>
