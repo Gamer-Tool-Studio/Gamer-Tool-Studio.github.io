@@ -5,9 +5,9 @@
         <h1>Download Plugin</h1>
       </v-col>
       <v-col>
-        <h5>
+        <p>
           Download the Javascript file with the plugin compatible with your game engine.
-        </h5>
+        </p>
       </v-col>
     </v-row>
   </v-container>
@@ -39,9 +39,8 @@ export default {
   font-size: 32px;
 }
 
-.download-plugin-page h5 {
-  font-size: 20px;
-  font-weight: 100;
+.download-plugin-page p {
+  font-size: 16px;
   margin-bottom: 10px;
   margin-top: 15px;
 }

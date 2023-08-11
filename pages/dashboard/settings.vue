@@ -38,11 +38,9 @@ const updateProfile = (e) => {
 
 .settings-page h4 {
   font-size: 24px;
-  font-weight: 100;
   margin-bottom: 10px;
   margin-top: 15px;
 }
-
 
 .settings-page button {
   font-size: 20px;

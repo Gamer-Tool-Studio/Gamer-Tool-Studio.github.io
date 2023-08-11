@@ -7,10 +7,10 @@
       <v-col cols="12">
         <p>
           Your secret API keys are listed below. Please note that we do
-          not display your secret API keys again after you generate them.<br> Do not
+          not display your secret API keys again after you generate them.<br><br>Do not
           share your API key with others, or expose it in the browser or other
           client-side code. In order to protect the security of your account,
-          OpenAI may also automatically disable any API key that we've found has
+          Gamer Tools Studio may also automatically disable any API key that we've found has
           leaked publicly.
         </p>
       </v-col>
@@ -61,8 +61,7 @@ function addItem(editedItem) {
 <style lang="scss">
 
 .keys-page p {
-  font-size: 20px;
-  font-weight: 100;
+  font-size: 16px;
   margin-bottom: 10px;
   margin-top: 15px;
 }
