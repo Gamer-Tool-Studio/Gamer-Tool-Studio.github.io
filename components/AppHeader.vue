@@ -15,7 +15,7 @@
         <li class="nav-left"><NuxtLink to="/about">About</NuxtLink></li>
       </ul>
       <ul class="login-section">
-        <li class="nav-right link" @click="goToRoute('/dashboard')">Log in</li>
+        <li class="nav-right-link" @click="goToRoute('/dashboard')">Log in</li>
         <li class="nav-right">
           <a href="#register" class="button">Sign up</a>
         </li>
@@ -46,17 +46,19 @@ nav {
   width: 100%;
   height: 100%;
   margin: 0 auto;
-
   position: fixed;
   overflow: hidden;
   display: flex;
   align-content: center;
   justify-content: center;
-
   background-color: transparent;
   color: #333;
   padding: 10px 0;
   border-bottom: 1px groove #c5c5d2;
+
+  nav.pricing {
+    border-bottom: 1px solid white !important;
+  }
 
   /* Navigation Bar Styles */
 
@@ -84,7 +86,7 @@ nav {
         font-weight: 100;
         transition: color 0.3s ease;
         :hover {
-          color: #10a37f;
+          color: #6200EE;
         }
       }
     }
@@ -131,20 +133,25 @@ nav {
 
   .login-section {
     margin: 0;
+    margin-left: auto;
     padding: 0;
     list-style: none;
     display: flex;
     align-items: center;
+    font-family: 'Bebas Neue';
   }
 
-  .login-section {
-    margin-left: auto;
-  }
-
-  .nav-right a{
+  .nav-right a {
     font-size: 22px;
   }
 
+  .nav-right-link {
+    font-family: 'Bebas Neue';
+  }
+  .nav-right-link:hover{
+    text-decoration: underline;
+    cursor: pointer;
+  }
   .nav-right:hover{
     text-decoration: underline;
     cursor: pointer;
