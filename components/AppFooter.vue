@@ -52,7 +52,14 @@ footer {
 
 footer.lp {
   background-color: black;
-  color: #6E6E80;
+  color: #fff;
+}
+
+footer.lp a {
+  color: #fff;
+}
+footer.lp p {
+  color: #fff;
 }
 
 footer p {
