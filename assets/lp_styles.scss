@@ -14,7 +14,12 @@ main.lp {
 section {
   margin-bottom: 30px;
 }
+/* Intro Section Styles */
 
+.intro-section h1 {
+  line-height: 100px;
+  margin-bottom: 60px;
+}
 .intro-cta {
   display: inline-flex;
   align-items: flex-end;
@@ -38,6 +43,10 @@ section {
 
 .intro-cta button {
   font-size: 18px;
+}
+
+.intro-cta button:hover{
+  color: #6200EE;
 }
 
 /*Demo Video */
@@ -65,13 +74,14 @@ section {
 .feature-boxes {
   margin-top: 60px;
   width: 100%;
+  padding: 0;
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
 .feature-box {
-  max-width: 200px;
+  max-width: 300px;
   margin: 20px;
   padding: 20px;
   background-color: black;
@@ -86,15 +96,17 @@ section {
 }
 
 .feature-box h3 {
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 600;
   color: #fff;
+  margin-bottom: 30px;
+  text-align: center;
 }
 .feature-box p {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 100;
   font-family: "Bebas Neue";
-  text-align: justify;
+  
   color: #fff;
 }
 
@@ -167,6 +179,10 @@ section {
 .start-trial button {
   height: 60px;
   font-size: 20px;
+}
+
+.start-trial button:hover {
+  color:#6200EE;
 }
 
 /* Footer Styles */

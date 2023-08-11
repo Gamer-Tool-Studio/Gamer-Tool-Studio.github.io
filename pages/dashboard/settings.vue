@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="settings-page">
     <v-row>
       <v-col cols="12">
         <h1>Organization settings</h1>
@@ -33,3 +33,21 @@ const updateProfile = (e) => {
   console.log("updateProfile", e);
 };
 </script>
+
+<style lang="scss">
+
+.settings-page h4 {
+  font-size: 24px;
+  font-weight: 100;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+
+.settings-page button {
+  font-size: 20px;
+}
+
+</style>
+
+

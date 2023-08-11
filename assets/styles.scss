@@ -66,13 +66,13 @@ h2 {
 }
 
 .nav-links a:hover {
-  color: #10a37f !important;
+  text-decoration: underline !important;
 }
 
 .nav-buttons {
   display: inline-flex;
   align-items: center;
-  max-height: 50px;
+  max-height: 20px;
 }
 
 /* Styles for "Login" Link */
@@ -186,7 +186,7 @@ section ol {
 /* Call to Action Button Styles */
 .button {
   display: inline-block;
-  background-color: #10a37f;
+  background-color: #6200EE;
   color: #fff;
   padding: 8px 15px;
   text-decoration: none;
@@ -195,6 +195,10 @@ section ol {
   transition: background-color 0.3s ease;
   line-height: normal;
   cursor: pointer;
+}
+
+.button:hover {
+  color: #6200EE;
 }
 
 /* Media Queries for Responsiveness */

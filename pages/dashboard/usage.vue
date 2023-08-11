@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="usage-page">
     <v-row>
       <v-col cols="12">
         <h1>Usage</h1>
@@ -15,3 +15,16 @@
   </v-container>
 </template>
 <script setup></script>
+
+
+<style lang="scss">
+
+.usage-page h5 {
+  font-size: 20px;
+  font-weight: 100;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+
+</style>

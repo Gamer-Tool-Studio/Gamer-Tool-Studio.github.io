@@ -62,25 +62,27 @@ nav {
 
   .navbar {
     max-width: 1200px;
-    max-height: 35px;
+    max-height: 55px;
     width: 100%;
     margin: 0 auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
     display: flex;
     align-items: center;
-    justify-content: center; /* Align elements at the center  */
+    justify-content: center; 
     .login-section li {
       margin: 0 12px;
     }
     .nav-links {
       list-style: none;
-      padding: 0;
       display: inline-flex;
-      align-items: center; /* Align links at the center */
+      align-items: center;
       a {
         color: #000;
         text-decoration: none;
         font-family: "Bebas Neue";
-        font-size: 18px;
+        font-size: 22px;
+        font-weight: 100;
         transition: color 0.3s ease;
         :hover {
           color: #10a37f;
@@ -92,7 +94,7 @@ nav {
       text-decoration: none;
     }
     .nav-logo {
-      margin: 0;
+      margin-right: 10px;
       padding: 0;
       display: flex;
       flex-wrap: wrap;
@@ -102,6 +104,7 @@ nav {
     img.nav-logo {
       display: block;
       max-height: 50px;
+      margin-bottom: 15px;
     }
   }
 
@@ -116,10 +119,12 @@ nav {
   /* New Code to Align Login and Signup to Right */
   .login-section {
     margin-left: auto;
+    font-size: 22px;
 
     .button {
       @at-root #{selector.unify(&, a)} {
         color: white;
+        padding-bottom: 1px;
       }
     }
   }
@@ -134,6 +139,15 @@ nav {
 
   .login-section {
     margin-left: auto;
+  }
+
+  .nav-right a{
+    font-size: 22px;
+  }
+
+  .nav-right:hover{
+    text-decoration: underline;
+    cursor: pointer;
   }
 }
 
@@ -152,11 +166,11 @@ nav.lp {
     display: inline-block;
     background-color: black;
     color: #fff;
-    padding: 8px 15px;
+    padding: 5px 15px 1px 15px;
     text-decoration: none;
     border: 1px solid #fff;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 22px;
     transition: background-color 0.3s ease;
     &:hover {
       background-color: #fff;
