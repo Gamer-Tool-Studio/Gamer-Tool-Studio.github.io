@@ -30,8 +30,8 @@ section {
   margin: 0;
   padding: 0;
   margin-left: 20px;
-  font-family: "Bebas Neue";
   text-decoration: underline;
+  font-family: "Bebas Neue";
   font-size: 20px;
   font-weight: 100;
 }
@@ -43,6 +43,7 @@ section {
 
 .intro-cta button {
   font-size: 18px;
+  font-family: "Bebas Neue";
 }
 
 .intro-cta button:hover{
@@ -104,9 +105,6 @@ section {
 }
 .feature-box p {
   font-size: 20px;
-  font-weight: 100;
-  font-family: "Bebas Neue";
-  
   color: #fff;
 }
 
@@ -134,7 +132,6 @@ section {
 }
 
 .how-to-start li {
-  font-family: "Bebas Neue";
   margin-bottom: 25px;
 }
 
@@ -152,10 +149,8 @@ section {
 }
 .started-hs {
   color: #fff;
-  font-family: "Bebas Neue";
   font-weight: 200;
   font-size: 25px;
-  font-family: "Bebas Neue";
 }
 
 /* Call to Action Button Styles */
@@ -179,6 +174,7 @@ section {
 .start-trial button {
   height: 60px;
   font-size: 20px;
+  font-family: "Bebas Neue";
 }
 
 .start-trial button:hover {

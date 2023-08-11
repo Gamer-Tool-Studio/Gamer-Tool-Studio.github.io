@@ -80,7 +80,6 @@ nav {
       a {
         color: #000;
         text-decoration: none;
-        font-family: "Bebas Neue";
         font-size: 22px;
         font-weight: 100;
         transition: color 0.3s ease;
@@ -92,6 +91,7 @@ nav {
     a {
       color: black;
       text-decoration: none;
+      font-family: "Bebas Neue";
     }
     .nav-logo {
       margin-right: 10px;

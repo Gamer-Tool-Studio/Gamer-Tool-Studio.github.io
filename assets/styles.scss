@@ -7,6 +7,11 @@
   src: url("fonts/TitilliumWeb-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "NunitoSans";
+  src: url("fonts/NunitoSans-Regular.ttf") format("truetype");
+}
+
 html {
   width: 100%;
   height: 100%;
@@ -23,7 +28,7 @@ body {
   overflow-y: scroll;
 }
 * {
-  font-family: "Bebas Neue";
+  font-family: "NunitoSans";
   // color: #fff;
 }
 /* Global Styles */
@@ -54,6 +59,7 @@ h2 {
   font-family: "Titillium Web";
 }
 
+
 .nav-links li {
   padding: 0;
 }
@@ -63,6 +69,7 @@ h2 {
   text-decoration: none;
   font-size: 14px;
   transition: color 0.3s ease;
+  
 }
 
 .nav-links a:hover {
@@ -83,6 +90,7 @@ h2 {
   padding: 5px 10px;
   font-size: 14px;
   transition: color 0.3s ease;
+  font-family: "Bebas Neue";
 }
 
 /* Section Styles */
@@ -173,7 +181,7 @@ section ol {
   margin-bottom: 5px;
   font-size: 18px;
   font-weight: 100;
-  font-family: "bebas neue";
+  font-family: "NunitoSans";
 }
 
 .align-right {
@@ -195,6 +203,7 @@ section ol {
   transition: background-color 0.3s ease;
   line-height: normal;
   cursor: pointer;
+  font-family: "Bebas Neue";
 }
 
 .button:hover {

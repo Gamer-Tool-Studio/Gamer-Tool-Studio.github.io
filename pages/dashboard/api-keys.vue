@@ -23,7 +23,7 @@
         />
       </v-col>
       <v-col v-if="false" cols="12">
-        <h3>Default organization</h3>
+        <h3>Default organization</h3> 
         <p>
           If you belong to multiple organizations, this setting controls which
           organization is used by default when making requests with the API keys
