@@ -6,7 +6,7 @@
     <v-main class="d-flex">
       <v-container fluid class="pa-0 d-flex flex-grow-1">
         <v-row no-gutters>
-          <v-col cols="auto">
+          <v-col cols="1" lg="2">
             <dashboard-drawer />
           </v-col>
 

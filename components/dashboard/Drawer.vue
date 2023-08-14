@@ -49,6 +49,20 @@ const items = ref([
     to: "/dashboard/billing",
     props: {
       prependIcon: "mdi-wallet-bifold",
+      subPages: [
+        {
+          title: "Overview",
+          to: "/overview",
+        },
+        {
+          title: "Payment methods",
+          to: "/payment",
+        },
+        {
+          title: "Billing history",
+          to: "/billing",
+        },
+      ],
     },
   },
   {
@@ -89,6 +103,20 @@ const mapItem = (item) => {
   }
 
   .v-list-item {
+    padding-inline-start: 24px;
+    padding-inline-end: 24px;
+
+    &__prepend {
+      .v-icon {
+        margin-inline-end: 8px;
+      }
+    }
+
+    &__icon--text,
+    &__icon:first-child {
+      margin-top: 10px;
+    }
+
     &__icon--text,
     &__icon:first-child {
       justify-content: center;
@@ -98,15 +126,6 @@ const mapItem = (item) => {
 
     .v-list-item-title {
       text-transform: capitalize;
-    }
-  }
-
-  .v-list-item {
-    padding-inline-start: 24px;
-    padding-inline-end: 24px;
-    &__icon--text,
-    &__icon:first-child {
-      margin-top: 10px;
     }
   }
 }

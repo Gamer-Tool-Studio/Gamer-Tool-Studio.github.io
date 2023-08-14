@@ -53,10 +53,4 @@ npm run preview
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
-## Any questions?
-Reach out to me on [ugur@burakturkis.com](mailto:ugur@burakturkis.com)
-
-## Buy me a coffee
-[![Buy me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/burakturkis)
-
-*** Happy Coding ***
+**_ Happy Coding _**

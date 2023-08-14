@@ -15,7 +15,6 @@ watch(
   () => {
     console.debug(`watch route.name changed to ${String(route.name)}`);
     // Do something here...
-    console.log("route changed:", route.path);
     // setPageLayout(
     //   route.path.includes("dashboard") ? "dashboard-layout" : "default"
     // );

@@ -1,18 +1,43 @@
 <template>
-  <v-list density="compact">
-    <v-list-item
-      v-for="(item, i) in items"
-      :key="i"
-      :value="item"
-      :to="item.to"
-      color="primary"
-    >
-      <template v-slot:prepend>
-        <v-icon :icon="item.props.prependIcon"></v-icon>
-      </template>
+  <v-list density="compact" v-model:opened="open">
+    <template v-for="(item, i) in items" :key="i">
+      <v-list-group v-if="getChildren(item)" :value="item.title">
+        <template #activator="{ props }">
+          <v-list-item
+            v-bind="props"
+            :title="item.title"
+            @click="$router.push(item.to)"
+          >
+            <template #prepend>
+              <v-icon :icon="item.props.prependIcon"> </v-icon>
+            </template>
 
-      <v-list-item-title v-text="item.title"></v-list-item-title>
-    </v-list-item>
+            <template #append> </template>
+          </v-list-item>
+        </template>
+        <template
+          v-for="({ title, icon, to }, j) in getChildren(item)"
+          :key="j"
+        >
+          <v-list-item
+            :title="title"
+            :prepend-icon="icon"
+            :value="title"
+            :aria-label="title"
+            :to="to"
+          >
+          </v-list-item>
+        </template>
+      </v-list-group>
+
+      <v-list-item v-else :to="item.to" color="primary" :value="item">
+        <v-list-item-title v-text="item.title" :aria-label="item.title">
+        </v-list-item-title>
+        <template #prepend>
+          <v-icon :icon="item.props.prependIcon"></v-icon>
+        </template>
+      </v-list-item>
+    </template>
   </v-list>
 </template>
 
@@ -38,21 +63,28 @@ export default {
       default: false,
     },
   },
-
+  data() {
+    return {
+      open: [],
+    };
+  },
   computed: {
-    children() {
-      return this.items?.children?.map((item) => ({
-        ...item,
-        to: !item.to ? undefined : `${this.items.group}/${item.to}`,
-      }));
-    },
-
     group() {
       return this.genGroup(this.items.children);
     },
   },
-
+  watch: {},
+  mounted() {},
   methods: {
+    getPrependIcon(item) {
+      return item?.props?.prependIcon;
+    },
+    getChildren(item) {
+      return item?.props?.subPages?.map((i) => ({
+        ...i,
+        to: !i.to ? undefined : `${item.to}${i.to}`,
+      }));
+    },
     computedText(item) {
       if (!item?.title) return "";
 
