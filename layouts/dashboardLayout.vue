@@ -4,7 +4,7 @@
       <AppHeader />
     </v-app-bar>
     <v-main class="d-flex">
-      <v-container fluid class="pa-0 d-flex flex-grow-1">
+      <v-container fluid class="pa-0 d-flex flex-grow-1 dashboard-border" >
         <v-row no-gutters>
           <v-col cols="1" lg="2">
             <dashboard-drawer />
@@ -56,5 +56,9 @@ cssVars["--background"] = "white";
   background-color: var(--background);
   transition: background-color 1.5s ease;
   min-height: 100vh;
+
+.dashboard-border {
+  border-top: 1px groove #c5c5d2;
+  }
 }
 </style>

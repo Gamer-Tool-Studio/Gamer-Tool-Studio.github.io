@@ -54,11 +54,8 @@ nav {
   background-color: transparent;
   color: #333;
   padding: 10px 0;
-  border-bottom: 1px groove #c5c5d2;
 
-  nav.pricing {
-    border-bottom: 1px solid white !important;
-  }
+
 
   /* Navigation Bar Styles */
 
@@ -161,7 +158,6 @@ nav {
 
 nav.lp {
   background-color: black;
-  border-bottom: none;
   * {
     color: white;
   }

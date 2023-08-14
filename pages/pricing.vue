@@ -2,7 +2,7 @@
   <v-container class="pricing">
     <v-row class="intro-section">
       <v-col>
-        <h1>Dialog Craft GPT Pricing Packs</h1>
+        <h1>Dialog Craft GPT Pricing Plans</h1>
         <p>
           Simple and flexible pricing plans adapted to the development stage of
           your game. Pay per volume of requests made to our API only.<br> Only Developer packs are available at the moment. Production packs for games published will be available soon.
@@ -12,8 +12,8 @@
 
     <v-row>
       <div class="feature-boxes">
-        <div class="feature-box">
-          <h3>Free Trial</h3>
+        <div class="feature-box light-boxes">
+          <h3 class="light-title">Free Trial</h3>
           <ul class="pricing-tables">
             <li>Input tokens</li>
             <li>Output tokens</li>
@@ -23,10 +23,12 @@
             <li class="align-right">1K</li>
             <li class="align-right">1</li>
           </ul>
-          <h4 class="light-header">$00,00</h4>
-          <button class="button">Subscribe</button>
+          <div class="price-display-free">
+            <h4 class="light-header">Free</h4>
+          </div>
+          <button class="button light-button">Subscribe</button>
         </div>
-        <div class="feature-box">
+        <div class="feature-box bold-boxes">
           <h3>Solo Developer</h3>
           <ul class="pricing-tables">
             <li>Input tokens</li>
@@ -37,11 +39,14 @@
             <li class="align-right">1.5M</li>
             <li class="align-right">1</li>
           </ul>
-          <h4 class="bold-header">$199,00</h4>
+          <div class="price-display">
+            <h4 class="bold-header">$99,00</h4>
+            <h5 class="bold-month">/month</h5>
+          </div>
           <button class="button">Subscribe</button>
         </div>
-        <div class="feature-box">
-          <h3>Indie Studio</h3>
+        <div class="feature-box light-boxes">
+          <h3 class="light-title">Indie Studio</h3>
           <ul class="pricing-tables">
             <li>Input tokens</li>
             <li>Output tokens</li>
@@ -51,8 +56,11 @@
             <li class="align-right">75M</li>
             <li class="align-right">10</li>
           </ul>
-          <h4 class="light-header">$989,00</h4>
-          <button class="button">Subscribe</button>
+          <div class="price-display">
+            <h4 class="light-header">$199,00</h4>
+            <h5 class="light-month">/month</h5>
+          </div>
+          <button class="button light-button">Subscribe</button>
         </div>
       </div>
     </v-row>
@@ -88,9 +96,57 @@ definePageMeta({
   margin-top:30px;
 }
 
+.bold-boxes {
+  border: 1px solid #6200EE;
+}
+
+.bold-boxes .price-display {
+  margin-top: 9px !important;
+  margin-bottom: 17px !important;
+}
+
+.light-boxes {
+  border: 2px solid #ECECF1;
+}
+
+.light-boxes:hover {
+  border: 1px solid #6200EE;
+}
+
 .pricing p {
   font-size: 20px;
   font-weight: 100;
+}
+
+.pricing .feature-box {
+  background-color: #fff;
+  margin-left:30px;
+  margin-right:30px;
+  width: 280px;
+}
+
+.pricing-tables {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  column-count: 2;
+  column-gap: 20px;
+}
+
+.pricing-tables li {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "NunitoSans";
+}
+
+.align-right {
+  text-align: end;
+}
+
+.feature-box button {
+  border: none;
 }
 
 .pricing .feature-box h3 {
@@ -101,19 +157,64 @@ definePageMeta({
 }
 
 .pricing .feature-box h4 {
-  font-size: 25px;
   margin-bottom: 10px;
 }
 
-.bold-header {
-  font-weight: 900;
-  font-size: 20px;
-  font-weight: 100;
+.light-title {
+  font-weight: 100 !important;
 }
+
+.bold-header {
+  font-weight: 500;
+  font-size: 30px;
+  color:  #6200EE;
+}
+
+.bold-month {
+  font-size: 18px;
+  font-weight: bold;
+  padding-top: 3px;
+  color:#6200EE;
+}
+
 .light-header {
-  font-weight: 200;
+  font-weight: 400;
   font-size: 20px;
-  font-weight: 100;
+}
+
+.price-display {
+  display: inline-flex;
+  margin-left: auto;
+  margin-right:auto;
+  margin-top: 14px;
+  margin-bottom: 26px;
+  min-width: 100%;
+}
+
+.price-display-free {
+  margin-top:12px;
+  margin-bottom: 38px;
+
+}
+
+.price-display h4 {
+  width:58%;
+  text-align: right;
+
+}
+
+.price-display h5 {
+  text-align: left;
+  width: 43%;
+  margin-bottom: 0;
+  padding-left:0;
+  margin-top:8px;
+}
+
+
+
+.light-month {
+font-weight: 500;
 }
 
 .pricing .feature-box button {
@@ -142,5 +243,13 @@ definePageMeta({
 
 .light-button {
   background-color: #fff;
+  border: 1px solid #6200EE !important;
+  color: #6200EE;
+}
+
+.light-button:hover {
+  background-color:#6200EE;
+  border: 1px solid #fff !important;
+  color: #FFF !important;
 }
 </style>

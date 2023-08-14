@@ -16,7 +16,7 @@ onMounted(() => {
 
 const items = ref([
   {
-    title: "dashboard",
+    title: "Download Plugin",
     value: 1,
     to: "/dashboard",
     props: {
@@ -24,28 +24,28 @@ const items = ref([
     },
   },
   {
-    title: "settings",
+    title: "Settings",
     to: "/dashboard/settings",
     props: {
       prependIcon: "mdi-cog",
     },
   },
   {
-    title: "usage",
+    title: "Usage",
     to: "/dashboard/usage",
     props: {
       prependIcon: "mdi-chart-bar",
     },
   },
   {
-    title: "members",
+    title: "Members",
     to: "/dashboard/members",
     props: {
       prependIcon: "mdi-account-group",
     },
   },
   {
-    title: "billing",
+    title: "Billing",
     to: "/dashboard/billing",
     props: {
       prependIcon: "mdi-wallet-bifold",
@@ -95,7 +95,7 @@ const mapItem = (item) => {
 <style lang="scss">
 #core-navigation-drawer {
   height: 100%;
-  max-width: 200px;
+  max-width: 300px;
   flex: 0 0 15%;
   border-right: solid 1px lightgrey;
   .v-list-group__header.v-list-item--active:before {
