@@ -106,7 +106,7 @@ definePageMeta({
 }
 
 .light-boxes {
-  border: 1px solid #ECECF1;
+  border: 2px solid #ECECF1;
 }
 
 .light-boxes:hover {
