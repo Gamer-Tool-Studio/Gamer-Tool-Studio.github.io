@@ -1,11 +1,9 @@
 <template>
-  <v-container id="core-navigation-drawer" class="pa-0">
-    <v-row no-gutters>
-      <v-list expand nav>
-        <base-item-group :items="computedItems"></base-item-group>
-      </v-list>
-    </v-row>
-  </v-container>
+  <v-card id="core-navigation-drawer" class="pa-0" elevation="0">
+    <v-list expand nav class="pa-0" density="compact">
+      <base-item-group :items="computedItems"></base-item-group>
+    </v-list>
+  </v-card>
 </template>
 
 <script setup>
@@ -88,35 +86,39 @@ const mapItem = (item) => {
   border-right: solid 1px lightgrey;
   .v-list-group__header.v-list-item--active:before {
     opacity: 0.24;
+  }
 
-    .v-list-item {
-      &__icon--text,
-      &__icon:first-child {
-        justify-content: center;
-        text-align: center;
-        width: 20px;
-      }
+  .v-list-item {
+    &__icon--text,
+    &__icon:first-child {
+      justify-content: center;
+      text-align: center;
+      width: 20px;
     }
 
-    .v-list--dense {
-      .v-list-item {
-        &__icon--text,
-        &__icon:first-child {
-          margin-top: 10px;
-        }
-      }
+    .v-list-item-title {
+      text-transform: capitalize;
     }
+  }
 
-    .v-list-group--sub-group {
-      .v-list-group__header {
-        .v-list-item__icon--text {
-          margin-top: 19px;
-          order: 0;
+  .v-list-item {
+    padding-inline-start: 24px;
+    padding-inline-end: 24px;
+    &__icon--text,
+    &__icon:first-child {
+      margin-top: 10px;
+    }
+  }
+}
 
-          .v-list-group__header__prepend-icon {
-            order: 2;
-          }
-        }
+.v-list-group--sub-group {
+  .v-list-group__header {
+    .v-list-item__icon--text {
+      margin-top: 19px;
+      order: 0;
+
+      .v-list-group__header__prepend-icon {
+        order: 2;
       }
     }
   }

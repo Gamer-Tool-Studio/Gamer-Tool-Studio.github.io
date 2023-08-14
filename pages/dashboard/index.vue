@@ -6,7 +6,8 @@
       </v-col>
       <v-col>
         <p>
-          Download the Javascript file with the plugin compatible with your game engine.
+          Download the Javascript file with the plugin compatible with your game
+          engine.
         </p>
       </v-col>
     </v-row>
@@ -30,11 +31,13 @@ export default {
     },
   },
 };
+
+useHead({
+  title: "Home ",
+});
 </script>
 
-
 <style lang="scss">
-
 .download-plugin-page h1 {
   font-size: 32px;
 }
@@ -44,6 +47,4 @@ export default {
   margin-bottom: 10px;
   margin-top: 15px;
 }
-
-
 </style>

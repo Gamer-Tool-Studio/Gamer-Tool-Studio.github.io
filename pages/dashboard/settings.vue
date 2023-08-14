@@ -32,10 +32,13 @@ const { orgName, orgId } = storeToRefs(store);
 const updateProfile = (e) => {
   console.log("updateProfile", e);
 };
+
+useHead({
+  title: "Settings ",
+});
 </script>
 
 <style lang="scss">
-
 .settings-page h4 {
   font-size: 24px;
   margin-bottom: 10px;
@@ -45,7 +48,4 @@ const updateProfile = (e) => {
 .settings-page button {
   font-size: 20px;
 }
-
 </style>
-
-

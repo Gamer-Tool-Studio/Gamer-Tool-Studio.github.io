@@ -14,16 +14,16 @@
     </v-row>
   </v-container>
 </template>
-<script setup></script>
-
+<script setup>
+useHead({
+  title: "Usage ",
+});
+</script>
 
 <style lang="scss">
-
 .usage-page p {
   font-size: 16px;
   margin-bottom: 10px;
   margin-top: 15px;
 }
-
-
 </style>

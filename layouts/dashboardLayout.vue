@@ -6,7 +6,7 @@
     <v-main class="d-flex">
       <v-container fluid class="pa-0 d-flex flex-grow-1">
         <v-row no-gutters>
-          <v-col cols="2">
+          <v-col cols="auto">
             <dashboard-drawer />
           </v-col>
 
@@ -18,7 +18,7 @@
         </v-row>
       </v-container>
     </v-main>
-    <AppFooter />
+    <!-- <AppFooter /> -->
   </v-layout>
 </template>
 <script setup>
@@ -33,8 +33,8 @@ cssVars["--background"] = "white";
 </script>
 <style lang="scss">
 :root {
-  --content-v-padding: 40px
-  --content-h-padding: 40px
+  --content-v-padding: 12px;
+  --content-h-padding: 24px;
 }
 .content-dashboard {
   display: flex;

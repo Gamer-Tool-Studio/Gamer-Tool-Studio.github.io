@@ -6,12 +6,12 @@
       </v-col>
       <v-col cols="12">
         <p>
-          Your secret API keys are listed below. Please note that we do
-          not display your secret API keys again after you generate them.<br><br>Do not
-          share your API key with others, or expose it in the browser or other
-          client-side code. In order to protect the security of your account,
-          Gamer Tools Studio may also automatically disable any API key that we've found has
-          leaked publicly.
+          Your secret API keys are listed below. Please note that we do not
+          display your secret API keys again after you generate them.<br /><br />Do
+          not share your API key with others, or expose it in the browser or
+          other client-side code. In order to protect the security of your
+          account, Gamer Tools Studio may also automatically disable any API key
+          that we've found has leaked publicly.
         </p>
       </v-col>
       <v-col cols="12">
@@ -23,7 +23,7 @@
         />
       </v-col>
       <v-col v-if="false" cols="12">
-        <h3>Default organization</h3> 
+        <h3>Default organization</h3>
         <p>
           If you belong to multiple organizations, this setting controls which
           organization is used by default when making requests with the API keys
@@ -56,15 +56,16 @@ function addItem(editedItem) {
   editedItem.created = new Date(Date.now());
   keys.value.push(editedItem);
 }
+
+useHead({
+  title: "API Keys ",
+});
 </script>
 
 <style lang="scss">
-
 .keys-page p {
   font-size: 16px;
   margin-bottom: 10px;
   margin-top: 15px;
 }
-
-
 </style>

@@ -19,4 +19,8 @@ import { useUserStore } from "@/store/user";
 const store = useUserStore();
 
 const { members } = storeToRefs(store);
+
+useHead({
+  title: "Members ",
+});
 </script>

@@ -63,15 +63,16 @@ nav {
   /* Navigation Bar Styles */
 
   .navbar {
-    max-width: 1200px;
     max-height: 55px;
     width: 100%;
     margin: 0 auto;
-    padding-top: 30px;
-    padding-bottom: 30px;
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
+    padding-left: 24px;
+    .lp {
+      max-width: 1200px;
+    }
     .login-section li {
       margin: 0 12px;
     }
@@ -86,7 +87,7 @@ nav {
         font-weight: 100;
         transition: color 0.3s ease;
         :hover {
-          color: #6200EE;
+          color: #6200ee;
         }
       }
     }
@@ -106,7 +107,7 @@ nav {
     img.nav-logo {
       display: block;
       max-height: 50px;
-      margin-bottom: 15px;
+      // margin-bottom: 15px;
     }
   }
 
@@ -126,7 +127,7 @@ nav {
     .button {
       @at-root #{selector.unify(&, a)} {
         color: white;
-        padding-bottom: 1px;
+        // padding-bottom: 1px;
       }
     }
   }
@@ -138,7 +139,7 @@ nav {
     list-style: none;
     display: flex;
     align-items: center;
-    font-family: 'Bebas Neue';
+    font-family: "Bebas Neue";
   }
 
   .nav-right a {
@@ -146,13 +147,13 @@ nav {
   }
 
   .nav-right-link {
-    font-family: 'Bebas Neue';
+    font-family: "Bebas Neue";
   }
-  .nav-right-link:hover{
+  .nav-right-link:hover {
     text-decoration: underline;
     cursor: pointer;
   }
-  .nav-right:hover{
+  .nav-right:hover {
     text-decoration: underline;
     cursor: pointer;
   }

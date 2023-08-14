@@ -13,9 +13,7 @@ let layout = ref("default");
 watch(
   () => route.name,
   () => {
-    console.debug(
-      `MyCoolComponent - watch route.name changed to ${String(route.name)}`
-    );
+    console.debug(`watch route.name changed to ${String(route.name)}`);
     // Do something here...
     console.log("route changed:", route.path);
     // setPageLayout(
