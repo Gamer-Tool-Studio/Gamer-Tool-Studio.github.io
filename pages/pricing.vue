@@ -12,7 +12,7 @@
 
     <v-row>
       <div class="feature-boxes">
-        <div class="feature-box light-boxes">
+        <div class="feature-box light-boxes" id="free-box">
           <h3 class="light-title">Free Trial</h3>
           <ul class="pricing-tables">
             <li>Input tokens</li>
@@ -28,7 +28,7 @@
           </div>
           <button class="button light-button">Subscribe</button>
         </div>
-        <div class="feature-box bold-boxes">
+        <div class="feature-box bold-boxes" id="solo-box">
           <h3>Solo Developer</h3>
           <ul class="pricing-tables">
             <li>Input tokens</li>
@@ -45,7 +45,7 @@
           </div>
           <button class="button">Subscribe</button>
         </div>
-        <div class="feature-box light-boxes">
+        <div class="feature-box light-boxes" id="indie-box">
           <h3 class="light-title">Indie Studio</h3>
           <ul class="pricing-tables">
             <li>Input tokens</li>
@@ -96,10 +96,6 @@ definePageMeta({
   margin-top:30px;
 }
 
-.bold-boxes {
-  border: 1px solid #6200EE;
-}
-
 .bold-boxes .price-display {
   margin-top: 9px !important;
   margin-bottom: 17px !important;
@@ -107,10 +103,21 @@ definePageMeta({
 
 .light-boxes {
   border: 2px solid #ECECF1;
+  transition: border-color 0.3s ease-in-out; /* Add transition for smooth effect */
 }
 
 .light-boxes:hover {
+  border-color: #6200EE;
+}
+
+.bold-boxes {
   border: 1px solid #6200EE;
+  transition: border-color 0.3s ease-in-out; /* Add transition for smooth effect */
+}
+
+
+.bold-boxes.hovered {
+  border-color: #ECECF1;
 }
 
 .pricing p {
