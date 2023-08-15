@@ -39,7 +39,7 @@
         <div class="feature-box">
           <h3>Open interactions</h3>
           <p>
-            Leverage the capabilities of GPT-3 to enable players to input
+            Leverage the capabilities of GPT-3 and enable players to input
             their own text to interact with characters and let the AI do 
             the rest of the work.
           </p>

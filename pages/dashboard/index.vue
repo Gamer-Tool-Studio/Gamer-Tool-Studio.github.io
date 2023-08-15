@@ -18,14 +18,14 @@
               <img class="download-logo" src="images/RPGM-icon.png"/>
               <h3>RPG Maker MZ</h3>
             </v-col>
-            <p>&#8595 Download</p>
+            <p>&#8595Download</p>
           </v-col>
           <v-col cols="6" class="download-cards">
             <v-col cols="6" class="card-icon-name">
               <img class="download-logo" src="images/MV-icon.png"/>
               <h3>RPG Maker MV</h3>
             </v-col>
-            <p>&#8595 Download</p>
+            <p>&#8595Download</p>
           </v-col>
         </div>
       </v-col>
@@ -106,6 +106,7 @@ useHead({
 
 .download-cards p:hover {
   text-decoration: underline;
+  color:#6200EE;
 } 
 
 .download-logo {
