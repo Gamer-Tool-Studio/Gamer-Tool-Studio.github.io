@@ -12,7 +12,7 @@
 
     <v-row>
       <div class="feature-boxes">
-        <div class="feature-box light-boxes" id="free-box">
+        <div class="feature-box light-boxes">
           <h3 class="light-title">Free Trial</h3>
           <ul class="pricing-tables">
             <li>Input tokens</li>
@@ -28,7 +28,7 @@
           </div>
           <button class="button light-button">Subscribe</button>
         </div>
-        <div class="feature-box bold-boxes" id="solo-box">
+        <div class="feature-box bold-boxes">
           <h3>Solo Developer</h3>
           <ul class="pricing-tables">
             <li>Input tokens</li>
@@ -45,7 +45,7 @@
           </div>
           <button class="button">Subscribe</button>
         </div>
-        <div class="feature-box light-boxes" id="indie-box">
+        <div class="feature-box light-boxes">
           <h3 class="light-title">Indie Studio</h3>
           <ul class="pricing-tables">
             <li>Input tokens</li>
@@ -74,6 +74,38 @@
 <script lang="ts" setup>
 definePageMeta({
   layout: "default",
+});
+
+import { ref, onMounted } from "vue";
+
+// Ref to track whether the light-boxes are being hovered
+const isLightBoxHovered = ref(false);
+
+// Function to toggle the bold-boxes.hovered class based on light-boxes hover state
+function toggleBoldBoxHovered() {
+  const boldBoxes = document.querySelectorAll(".bold-boxes");
+  boldBoxes.forEach(box => {
+    if (isLightBoxHovered.value) {
+      box.classList.add("hovered");
+    } else {
+      box.classList.remove("hovered");
+    }
+  });
+}
+
+// Hook to listen for hover events on light-boxes
+onMounted(() => {
+  const lightBoxes = document.querySelectorAll(".light-boxes");
+  lightBoxes.forEach(box => {
+    box.addEventListener("mouseenter", () => {
+      isLightBoxHovered.value = true;
+      toggleBoldBoxHovered();
+    });
+    box.addEventListener("mouseleave", () => {
+      isLightBoxHovered.value = false;
+      toggleBoldBoxHovered();
+    });
+  });
 });
 </script>
 
