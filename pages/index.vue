@@ -37,11 +37,11 @@
       </v-col>
       <div class="feature-boxes">
         <div class="feature-box">
-          <h3>AI-Powered Dialogues</h3>
+          <h3>Open interactions</h3>
           <p>
-            Leverage the capabilities of Chat GPT AI to generate natural and
-            realistic dialogues, enhancing the emotional depth and knowledge of
-            game events of your characters.
+            Leverage the capabilities of GPT-3 to enable players to input
+            their own text to interact with characters and let the AI do 
+            the rest of the work.
           </p>
         </div>
         <div class="feature-box">
