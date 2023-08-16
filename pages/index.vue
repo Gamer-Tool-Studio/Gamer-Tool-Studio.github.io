@@ -29,7 +29,7 @@
     <v-row class="features">
       <v-col>
         <h2 class="page-headers">
-          Take your storytelling to new heights with a game engine plugin to
+          Take your storytelling to new heights with a game development tool to
           revolutionize the way you create character dialogues for your games.
           Craft immersive conversations efortlessly with the power of Chat GPT
           AI technology
@@ -40,15 +40,15 @@
           <h3>Open interactions</h3>
           <p>
             Leverage the capabilities of GPT-3 and enable players to input
-            their own text to interact with characters and let the AI do 
-            the rest of the work.
+            their own text to interact with characters and open the possibilities
+            within to your game to the maximum.
           </p>
         </div>
         <div class="feature-box">
           <h3>AI-Powered Characters</h3>
           <p>
             Build immersive character backstories and customize the way they
-            interact with players. Make chat GPT a friend or a foe in your game
+            respond to players. Make chat GPT a friend or a foe in your game
             quests.
           </p>
         </div>
