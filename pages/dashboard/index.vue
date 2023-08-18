@@ -81,6 +81,7 @@ useHead({
 .download-cards {
   margin:10px;
   border: 1px solid #ECECF1;
+  padding: 0;
 }
 
 .download-cards:hover {
@@ -92,6 +93,7 @@ useHead({
   min-width: 100% !important;
   display: inline-flex;
   align-items: center;
+  padding-bottom: 0;
 }
 .download-cards h3 {
   float: right;
