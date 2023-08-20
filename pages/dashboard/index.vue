@@ -29,6 +29,12 @@
           </v-col>
         </div>
       </v-col>
+      <v-col cols="12" class="api-link">
+        <h3>Want to use Dialog Craft GPT in another environment?</h3>
+        <p class="reference_link">
+          Check our <a href="">API reference here.</a>
+        </p>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -114,5 +120,12 @@ useHead({
 .download-logo {
   max-width: 50px;
   max-height: 50px;
+}
+.api-link{
+  margin-top: 20px;
+}
+.reference_link {
+  padding:0;
+  margin-top:0;
 }
 </style>
