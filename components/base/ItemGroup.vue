@@ -1,5 +1,11 @@
 <template>
-  <v-list density="compact" v-model:opened="open">
+  <v-list
+    density="compact"
+    v-model:opened="open"
+    v-model:selected="selected"
+    open-strategy="single"
+    select-strategy="single-independent"
+  >
     <template v-for="(item, i) in items" :key="i">
       <v-list-group v-if="getChildren(item)" :value="item.title">
         <template #activator="{ props }">
@@ -46,9 +52,6 @@
 
 export default {
   name: "ItemGroup",
-
-  inheritAttrs: false,
-
   props: {
     items: {
       type: Array,
@@ -63,9 +66,36 @@ export default {
       default: false,
     },
   },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(r) {
+        if (r.path.includes("billing")) {
+          this.open.push("Billing");
+        }
+      },
+    },
+    selected(val) {
+      if (this.open.includes("Billing") && !val?.[0]?.title) {
+        return;
+      } else {
+        this.open.pop();
+      }
+    },
+    open(val) {
+      if (this.$route.path.includes("billing") && !val.includes("Billing")) {
+        this.open.push("Billing");
+      }
+
+      if (val.length > 0) {
+        this.selected = [];
+      }
+    },
+  },
   data() {
     return {
       open: [],
+      selected: [],
     };
   },
   computed: {
@@ -73,7 +103,6 @@ export default {
       return this.genGroup(this.items.children);
     },
   },
-  watch: {},
   mounted() {},
   methods: {
     getPrependIcon(item) {

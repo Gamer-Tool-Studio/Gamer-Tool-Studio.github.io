@@ -1,8 +1,8 @@
 <template>
   <v-card id="core-navigation-drawer" class="pa-0" elevation="0">
-    <v-list expand nav class="pa-0" density="compact">
-      <base-item-group :items="computedItems"></base-item-group>
-    </v-list>
+    <!-- <v-list expand nav class="pa-0" density="compact"> -->
+    <base-item-group :items="computedItems"></base-item-group>
+    <!-- </v-list> -->
   </v-card>
 </template>
 
@@ -56,11 +56,11 @@ const items = ref([
         },
         {
           title: "Payment methods",
-          to: "/payment",
+          to: "/payment-methods",
         },
         {
           title: "Billing history",
-          to: "/billing",
+          to: "/history",
         },
       ],
     },
