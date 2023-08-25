@@ -4,7 +4,11 @@
       <ul class="nav-links">
         <li class="nav-left">
           <NuxtLink to="/">
-            <img alt="logo" src="./images/gms-logo.png" class="nav-logo" />
+            <img
+              alt="logo"
+              src="~/assets/images/gms-logo.png"
+              class="nav-logo"
+            />
           </NuxtLink>
         </li>
         <li class="nav-left"><NuxtLink to="/products">Products</NuxtLink></li>
