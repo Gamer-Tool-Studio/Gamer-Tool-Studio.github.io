@@ -19,8 +19,13 @@
         <li class="nav-left"><NuxtLink to="/about">About</NuxtLink></li>
       </ul>
       <ul class="login-section">
-        <li class="nav-right-link" @click="goToRoute('/dashboard')">Log in</li>
-        <li class="nav-right">
+        <li v-if="!authenticated" class="nav-right-link">
+          <NuxtLink to="/login"> Log in</NuxtLink>
+        </li>
+        <li v-if="authenticated" class="nav-right-link">
+          <NuxtLink @click="logout">Logout</NuxtLink>
+        </li>
+        <li v-if="!authenticated" class="nav-right">
           <a href="#register" class="button">Sign up</a>
         </li>
       </ul>
@@ -29,19 +34,27 @@
 </template>
 <script lang="ts" setup>
 import { useUserStore } from "../store/user";
+import { storeToRefs } from "pinia"; // import storeToRefs helper hook from pinia
+import { useAuthStore } from "~/store/auth"; // import the auth store we just created
+
 const userStore = useUserStore();
+
 const route = useRoute();
 
 const router = useRouter();
 
-const goToRoute = (path: string) => {
-  userStore.setLogin(true);
-  console.log(userStore.isUserLoggedIn);
-
-  router.push({ path });
-};
-
 const isLandingPage = computed(() => route.path == "/");
+
+// authentication methods
+
+const { logUserOut } = useAuthStore(); // use authenticateUser action from  auth store
+
+const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+
+const logout = () => {
+  logUserOut();
+  router.push("/");
+};
 </script>
 <style lang="scss">
 @use "sass:selector";
@@ -149,7 +162,7 @@ nav {
     font-family: "Bebas Neue";
   }
   .nav-right-link:hover {
-    text-decoration: underline;
+    // text-decoration: underline;
     cursor: pointer;
   }
   .nav-right:hover {
