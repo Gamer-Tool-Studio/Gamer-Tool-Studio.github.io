@@ -40,12 +40,6 @@
 </template>
 
 <script>
-definePageMeta({
-  middleware: 'auth'
-//   layout: "dashboard-layout",
-});
-
-
 
 export default {
   name: "DashboardDashboard",
