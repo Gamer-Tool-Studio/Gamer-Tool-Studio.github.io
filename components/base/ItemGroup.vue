@@ -1,8 +1,8 @@
 <template>
   <v-list
     density="compact"
-    v-model:opened="open"
-    v-model:selected="selected"
+    v-model:opened="openModel"
+    v-model:selected="selectedModel"
     open-strategy="single"
     select-strategy="single-independent"
   >
@@ -52,6 +52,27 @@
 
 export default {
   name: "ItemGroup",
+  computed: {
+    openModel: {
+      get() {
+        return this.open;
+      },
+      set(value) {
+        this.$emit("update:open", value);
+      },
+    },
+    selectedModel: {
+      get() {
+        return this.selected;
+      },
+      set(value) {
+        console.log("update:selected", value);
+        this.$emit("update:selected", value);
+      },
+    },
+  },
+  emits: ["update:open", "update:selected"],
+
   props: {
     items: {
       type: Array,
@@ -65,44 +86,16 @@ export default {
       type: Boolean,
       default: false,
     },
+    open: {
+      type: Array,
+      default: () => [],
+    },
+    selected: {
+      type: Array,
+      default: () => [],
+    },
   },
-  watch: {
-    $route: {
-      immediate: true,
-      handler(r) {
-        if (r.path.includes("billing")) {
-          this.open.push("Billing");
-        }
-      },
-    },
-    selected(val) {
-      if (this.open.includes("Billing") && !val?.[0]?.title) {
-        return;
-      } else {
-        this.open.pop();
-      }
-    },
-    open(val) {
-      if (this.$route.path.includes("billing") && !val.includes("Billing")) {
-        this.open.push("Billing");
-      }
 
-      if (val.length > 0) {
-        this.selected = [];
-      }
-    },
-  },
-  data() {
-    return {
-      open: [],
-      selected: [],
-    };
-  },
-  computed: {
-    group() {
-      return this.genGroup(this.items.children);
-    },
-  },
   mounted() {},
   methods: {
     getPrependIcon(item) {
@@ -124,21 +117,6 @@ export default {
       });
 
       return text;
-    },
-    genGroup(children) {
-      return children
-        .filter((item) => item.to)
-        .map((item) => {
-          const parent = item.group || this.items.group;
-          let group = `${parent}/${item.to}`;
-
-          if (item.children) {
-            group = `${group}|${this.genGroup(item.children)}`;
-          }
-
-          return group;
-        })
-        .join("|");
     },
   },
 };

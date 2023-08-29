@@ -1,23 +1,58 @@
 <template>
   <v-card id="core-navigation-drawer" class="pa-0" elevation="0">
     <!-- <v-list expand nav class="pa-0" density="compact"> -->
-    <base-item-group :items="computedItems"></base-item-group>
+    <base-item-group
+      :items="computedItems"
+      v-model:open="open"
+      v-model:selected="selected"
+    ></base-item-group>
     <!-- </v-list> -->
   </v-card>
 </template>
 
 <script setup>
-// Utilities
-// import { mapState } from "vuex";
+const route = useRoute();
+const selected = ref([]);
+const open = ref([]);
 
-onMounted(() => {
-  console.log("mounted drawer");
-});
+watch(
+  () => route.name,
+  (r) => {
+    if (r.includes("billing") && !open.value.includes("Billing")) {
+      open.value.push("Billing");
+    } else {
+      open.value.splice(0);
+    }
+  }
+);
+watch(
+  selected,
+  (s) => {
+    if (open.value.includes("Billing") && !s.value?.[0]?.title) {
+      return;
+    } else {
+      open.value.pop();
+    }
+  },
+  { deep: true }
+);
+watch(
+  () => open,
+  (o) => {
+    if (route.path.includes("billing") && !o.value.includes("Billing")) {
+      open.value.push("Billing");
+    }
+
+    if (o.value.length > 0) {
+      selected.value.splice(0);
+    }
+  },
+  { deep: true }
+);
 
 const items = ref([
   {
     title: "Download Plugin",
-    value: 1,
     to: "/dashboard",
     props: {
       prependIcon: "mdi-view-dashboard",
