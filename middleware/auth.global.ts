@@ -1,12 +1,24 @@
+import { storeToRefs } from "pinia";
 
-import { useAuth } from "~~/composables/useAuth"
+export default defineNuxtRouteMiddleware((to) => {
+  const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive
+  const token = useCookie("token"); // get token from cookies
 
-export default defineNuxtRouteMiddleware((to: any, from: any) => {
-    const isAuthenticated = useAuth()// useAuth() is a function that returns a boolean
-    if (!to.path.includes('auth') && to.meta.restricted && !isAuthenticated) {
-        return '/auth/login'
-    }
-    if (to.path.includes('auth') && isAuthenticated) {
-        return '/'
-    }
-})
+  if (token.value) {
+    // check if value exists
+    authenticated.value = true; // update the state to authenticated
+  }
+
+  // if token exists and url is /login redirect to homepage
+  if (token.value && to?.name === "login") {
+    return navigateTo("/dashboard");
+  }
+
+  // if token doesn't exist redirect to log in
+  console.log("to", to);
+
+  if (!token.value && to?.name?.toString().includes("dashboard")) {
+    abortNavigation();
+    return navigateTo("/login");
+  }
+});
