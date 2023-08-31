@@ -1,32 +1,34 @@
 <template>
-  <div>
-    <div class="title">
-      <h2>Login</h2>
-    </div>
-    <div class="container form">
-      <label for="uname"><b>Username</b></label>
-      <input
-        v-model="user.username"
-        type="text"
-        class="input"
-        placeholder="Enter Username"
-        name="uname"
-        required
-      />
+    <v-container class="login-container">
+      <v-row>
+        <v-col cols="12" class="title">
+          <h2>Login</h2>
+          <v-col cols="12" class="container form">
+            <label for="uname"><b>Username</b></label>
+            <input
+              v-model="user.username"
+              type="text"
+              class="input"
+              placeholder="Enter Username"
+              name="uname"
+              required
+            />
 
-      <label for="psw"><b>Password</b></label>
-      <input
-        v-model="user.password"
-        type="password"
-        class="input"
-        placeholder="Enter Password"
-        name="psw"
-        required
-      />
+            <label for="psw"><b>Password</b></label>
+            <input
+              v-model="user.password"
+              type="password"
+              class="input"
+              placeholder="Enter Password"
+              name="psw"
+              required
+            />
 
-      <button @click.prevent="login" class="button">Login</button>
-    </div>
-  </div>
+            <button @click.prevent="login" class="button">Login</button>
+        </v-col> 
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script lang="ts" setup>
 import { storeToRefs } from "pinia"; // import storeToRefs helper hook from pinia
@@ -49,3 +51,7 @@ const login = async () => {
   }
 };
 </script>
+<style lang="scss">
+
+
+</style>
