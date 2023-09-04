@@ -11,11 +11,17 @@
           minutes.
         </p>
       </v-col>
-      <v-col cols="12" class="month-title-section">
+      <v-col cols="8" class="month-title-section">
         <h3> &lt; </h3>
         <h3>September</h3>
         <h3> > </h3>
       </v-col>
+      <v-col cols="4" class="daily-section">
+        <div class="switch-field">
+          <label for="usage-view-radio-daily">Daily</label>
+          <label for="usage-view-radio-cumulative">Cumulative</label>
+        </div>
+      </v-col>      
       <v-col cols="12">
         <h3>Usage this month</h3>
       </v-col>
@@ -49,7 +55,21 @@ useHead({
   display: inline-flex;
 }
 
+.switch-field {
+  background-color: #f7f7f8;
+  border-radius: 3px;
+  display: flex;
+  position: relative;
+}
+
+.switch-field label {
+  width: 50%;
+  text-align: center;
+  padding: 5px;
+}
+
 .progress-section {
   display: inline-flex;
 }
+
 </style>

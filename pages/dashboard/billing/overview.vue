@@ -17,6 +17,7 @@
     </v-row>
     <v-row>
       <v-col cols="6" class="billing-card">
+        <a href="/dashboard/billing/payment-methods">
         <div class="items-container">
           <div class="img-container methods-bcg">
             <img src="~/assets/images/credit-card-icon.jpeg">
@@ -26,41 +27,48 @@
             <p class="billing-desc"> Add or change payment method</p>
           </div>
         </div>
+        </a>
       </v-col>
       <v-col cols="6" class="billing-card">
+        <a href="/dashboard/billing/history">
         <div class="items-container">
-          <div class="img-container history-bcg">
-            <img src="~/assets/images/document-icon.png">
+            <div class="img-container history-bcg">
+              <img src="~/assets/images/document-icon.png">
+            </div>
+            <div class="text-container">
+              <h3>Billing history</h3>
+              <p class="billing-desc"> View past and current invoices</p>
+            </div>
           </div>
-          <div class="text-container">
-            <h3>Billing history</h3>
-            <p class="billing-desc"> View past and current invoices</p>
-          </div>
-        </div>
+        </a>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="6" class="billing-card">
-        <div class="items-container">
-          <div class="img-container pricing-bcg">
-            <img src="~/assets/images/dollar-icon.png">
+        <a href="/pricing">
+          <div class="items-container">
+            <div class="img-container pricing-bcg">
+              <img src="~/assets/images/dollar-icon.png">
+            </div>
+            <div class="text-container">
+              <h3>Pricing</h3>
+              <p class="billing-desc"> View pricing plans</p>
+            </div>
           </div>
-          <div class="text-container">
-            <h3>Pricing</h3>
-            <p class="billing-desc"> View pricing plans</p>
-          </div>
-        </div>
+        </a>
       </v-col>
       <v-col cols="6" class="billing-card">
-        <div class="items-container">
-          <div class="img-container preferences-bcg">
-            <img src="~/assets/images/settings-icon.png">
+        <a href="/dashboard/billing/preferences">
+          <div class="items-container">
+            <div class="img-container preferences-bcg">
+              <img src="~/assets/images/settings-icon.png">
+            </div>
+            <div class="text-container">
+              <h3>Preferences</h3>
+              <p class="billing-desc">Manage company information</p>
+            </div>
           </div>
-          <div class="text-container">
-            <h3>Preferences</h3>
-            <p class="billing-desc">Manage company information</p>
-          </div>
-        </div>
+        </a>
       </v-col>
     </v-row>
   </v-container>
@@ -87,6 +95,17 @@ background-color:gray;
 .billing-card {
   margin-top: 30px;
   display: block;
+}
+
+.billing-card a{
+  color:inherit;
+  text-decoration: none;
+}
+
+.billing-card a:active,
+.billing-card a:hover
+{
+  text-decoration: none;
 }
 
 .items-container {

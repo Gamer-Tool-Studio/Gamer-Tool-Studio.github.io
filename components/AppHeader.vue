@@ -16,7 +16,7 @@
           <NuxtLink to="/documentation">Documentation</NuxtLink>
         </li>
         <li class="nav-left"><NuxtLink to="/pricing">Pricing</NuxtLink></li>
-        <li class="nav-left"><NuxtLink to="/about">About</NuxtLink></li>
+        <li class="nav-left"><NuxtLink to="/download-plugin">Download Plugin</NuxtLink></li>
       </ul>
       <ul class="login-section">
         <li v-if="!authenticated" class="nav-right-link">

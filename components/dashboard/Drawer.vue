@@ -52,15 +52,8 @@ watch(
 
 const items = ref([
   {
-    title: "Download Plugin",
-    to: "/dashboard",
-    props: {
-      prependIcon: "mdi-view-dashboard",
-    },
-  },
-  {
     title: "Settings",
-    to: "/dashboard/settings",
+    to: "/dashboard",
     props: {
       prependIcon: "mdi-cog",
     },
@@ -96,6 +89,10 @@ const items = ref([
         {
           title: "Billing history",
           to: "/history",
+        },
+        {
+          title: "Preferences",
+          to: "/preferences",
         },
       ],
     },
