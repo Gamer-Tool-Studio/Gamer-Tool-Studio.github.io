@@ -34,10 +34,20 @@
       <v-col cols="12" class="progress-section">
         <div class="progress-container">
           <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-fill" id="progressFillInput"></div>
           </div>
           <div class="progress-values">
-            <p><span id="progressText">300000</span> / 1,000,000 input tokens</p>
+            <p><span id="progressTextInput">{{ store.state.progressInput }}</span> / 1,000,000 input tokens</p>
+          </div>
+        </div>
+      </v-col>
+      <v-col cols="12" class="progress-section">
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFillOutput"></div>
+          </div>
+          <div class="progress-values">
+            <p><span id="progressTextOutput">{{ store.state.progressOutput }}</span> / 1,000,000 output tokens</p>
           </div>
         </div>
       </v-col>
@@ -47,22 +57,33 @@
 
 
 <script setup>
-import { onMounted } from 'vue';
-
 useHead({
   title: "Usage",
 });
 
-const progress = 300000;
+import { computed, onMounted } from 'vue';
+import { useStore } from "~/store/tokenCount";
+
+const store = useStore();
+const progressInput = computed(() => store.state.progressInput);
+const progressOutput = computed(() => store.state.progressOutput);
+
+// Calculate the percentages based on the initial values
+const progressInputPercentage = computed(() => `${(store.state.progressInput / 1000000) * 100}%`);
+const progressOutputPercentage = computed(() => `${(store.state.progressOutput / 1000000) * 100}%`);
 
 function updateProgressBar() {
-  const progressFill = document.getElementById("progressFill");
-  const progressText = document.getElementById("progressText");
+  const progressFillInput = document.getElementById("progressFillInput");
+  const progressFillOutput = document.getElementById("progressFillOutput");
 
-  const percentage = (progress / 1000000) * 100; // Corrected calculation
+  const progressTextInput = document.getElementById("progressTextInput");
+  const progressTextOutput = document.getElementById("progressTextOutput");
 
-  progressFill.style.width = `${percentage}%`;
-  progressText.textContent = progress;
+  progressFillInput.style.width = progressInputPercentage.value;
+  progressFillOutput.style.width = progressOutputPercentage.value;
+
+  progressTextInput.textContent = store.state.progressInput;
+  progressTextOutput.textContent = store.state.progressOutput;
 }
 
 // Call the function when the component is mounted
@@ -70,6 +91,7 @@ onMounted(() => {
   updateProgressBar();
 });
 </script>
+
 
 <style lang="scss">
 .usage-page p {

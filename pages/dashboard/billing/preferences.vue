@@ -28,15 +28,17 @@
             <input type="form" placeholder="" class="form_input">
         </v-col>
         <v-col cols="8" class="form1">
-            <h3>Primary business address</h3>
-            <p>This is the physical address of the company purchasing OpenAI services and is 
-                used to calculate any applicable sales taxes.</p>
-            <input type="form" placeholder="Country" class="form_input input2">
-            <input type="form" placeholder="Address line 1" class="form_input input2">
-            <input type="form" placeholder="Address line 2" class="form_input input2">
-            <input type="form" placeholder="Country" class="form_input input3">
-            <input type="form" placeholder="Postal code" class="form_input input3">
-            <input type="form" placeholder="State, country, province or region" class="form_input input2">
+          <h3>Primary business address</h3>
+          <p>This is the physical address of the company purchasing OpenAI services and is used to calculate any applicable sales taxes.</p>
+          <select class="form_input input2" ref="countrySelect">
+            <option value="" disabled selected>Country</option>
+            <option v-for="country in countries" :key="country.code" :value="country.name">{{ country.name }}</option>
+          </select>
+          <input type="form" placeholder="Address line 1" class="form_input input2">
+          <input type="form" placeholder="Address line 2" class="form_input input2">
+          <input type="form" placeholder="City" class="form_input input3">
+          <input type="form" placeholder="Postal code" class="form_input input3">
+          <input type="form" placeholder="State, country, province or region" class="form_input input2">
         </v-col>
         <v-col cols="8" class="form1">
             <h3>Billing tax ID</h3>
@@ -53,9 +55,23 @@
   
   <script setup>
   useHead({
-    title: "Overview ",
+    title: "Overview",
   });
-  </script>
+
+import { ref, onMounted } from 'vue';
+import countriesList from 'countries-list'; 
+
+const countrySelect = ref(null);
+const countries = ref([]);
+
+
+onMounted(() => {
+  countries.value = Object.values(countriesList.countries).map((country) => ({
+    name: country.name,
+    code: country.code,
+  }));
+});
+</script>
   <style lang="scss">
   
   .form1 {
@@ -101,7 +117,5 @@
     margin-bottom: 10px;
     margin-right: 2%;
   }
-
-
 
   </style>
