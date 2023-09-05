@@ -12,9 +12,9 @@
         </p>
       </v-col>
       <v-col cols="8" class="month-title-section">
-        <h3> &lt; </h3>
+        <h3>&lt;</h3>
         <h3>August</h3>
-        <h3> > </h3>
+        <h3>></h3>
       </v-col>
       <v-col cols="4" class="daily-section">
         <div class="switch-field">
@@ -26,7 +26,7 @@
         <h3>Daily usage (tokens)</h3>
       </v-col>
       <v-col cols="12" class="chart-area">
-        <img class="chart" src="~/assets/images/chart.png">
+        <img class="chart" src="~/assets/images/chart.png" />
       </v-col>
       <v-col cols="12">
         <h3>Usage this month</h3>
@@ -34,20 +34,28 @@
       <v-col cols="12" class="progress-section">
         <div class="progress-container">
           <div class="progress-bar">
-            <div class="progress-fill" id="progressFillInput"></div>
+            <div
+              class="progress-fill"
+              id="progressFillInput"
+              :style="{ width: progressInputPercentage }"
+            ></div>
           </div>
           <div class="progress-values">
-            <p><span id="progressTextInput">{{ store.state.progressInput }}</span> / 1,000,000 input tokens</p>
+            <p>{{ progressInput }} / 1,000,000 input tokens</p>
           </div>
         </div>
       </v-col>
       <v-col cols="12" class="progress-section">
         <div class="progress-container">
           <div class="progress-bar">
-            <div class="progress-fill" id="progressFillOutput"></div>
+            <div
+              class="progress-fill"
+              id="progressFillOutput"
+              :style="{ width: progressOutputPercentage }"
+            ></div>
           </div>
           <div class="progress-values">
-            <p><span id="progressTextOutput">{{ store.state.progressOutput }}</span> / 1,000,000 output tokens</p>
+            <p>{{ progressOutput }} / 1,000,000 output tokens</p>
           </div>
         </div>
       </v-col>
@@ -55,43 +63,25 @@
   </v-container>
 </template>
 
-
 <script setup>
 useHead({
   title: "Usage",
 });
 
-import { computed, onMounted } from 'vue';
-import { useStore } from "~/store/tokenCount";
+import { computed, onMounted } from "vue";
+import { useTokenCountStore } from "~/store/tokenCount";
+import { storeToRefs } from "pinia"; // import storeToRefs helper hook from pinia
 
-const store = useStore();
-const progressInput = computed(() => store.state.progressInput);
-const progressOutput = computed(() => store.state.progressOutput);
+const { progressInput, progressOutput } = storeToRefs(useTokenCountStore()); // make authenticated state reactive with storeToRefs
 
 // Calculate the percentages based on the initial values
-const progressInputPercentage = computed(() => `${(store.state.progressInput / 1000000) * 100}%`);
-const progressOutputPercentage = computed(() => `${(store.state.progressOutput / 1000000) * 100}%`);
-
-function updateProgressBar() {
-  const progressFillInput = document.getElementById("progressFillInput");
-  const progressFillOutput = document.getElementById("progressFillOutput");
-
-  const progressTextInput = document.getElementById("progressTextInput");
-  const progressTextOutput = document.getElementById("progressTextOutput");
-
-  progressFillInput.style.width = progressInputPercentage.value;
-  progressFillOutput.style.width = progressOutputPercentage.value;
-
-  progressTextInput.textContent = store.state.progressInput;
-  progressTextOutput.textContent = store.state.progressOutput;
-}
-
-// Call the function when the component is mounted
-onMounted(() => {
-  updateProgressBar();
-});
+const progressInputPercentage = computed(
+  () => `${(progressInput.value / 1000000) * 100}%`
+);
+const progressOutputPercentage = computed(
+  () => `${(progressOutput.value / 1000000) * 100}%`
+);
 </script>
-
 
 <style lang="scss">
 .usage-page p {
@@ -119,7 +109,6 @@ onMounted(() => {
   width: 50%;
   text-align: center;
   padding: 5px;
-
 }
 
 .switch-field label:hover {
@@ -132,13 +121,12 @@ onMounted(() => {
   padding-top: 0 !important;
 }
 
-.chart-title h3{
+.chart-title h3 {
   font-size: 16px;
   font-weight: 600;
 }
 
 .chart-area {
-
 }
 .chart {
   height: 300px;
@@ -146,8 +134,8 @@ onMounted(() => {
 
 .progress-section {
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
 }
 
@@ -162,20 +150,19 @@ onMounted(() => {
   height: 20px;
   border-radius: 10px;
   margin-right: 2%;
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 .progress-fill {
-  background-color: #6200EE;
+  background-color: #6200ee;
   height: 100%;
   transition: width 0.3s ease-in-out;
-  border-radius:10px;
+  border-radius: 10px;
 }
 
 .progress-values p {
   color: #333;
   font-size: 14px;
-  margin: 0; 
+  margin: 0;
 }
-
 </style>
