@@ -3,8 +3,8 @@
 export const useTokenCountStore = defineStore("tokenCount", {
   state: () => {
     return {
-      progressInput: 0,
-      progressOutput: 0,
+      progressInput: 450000,
+      progressOutput: 501000,
     };
   },
   actions: {

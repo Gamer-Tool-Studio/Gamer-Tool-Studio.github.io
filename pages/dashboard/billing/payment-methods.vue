@@ -76,7 +76,6 @@ useHead({
 }
 
 .logo-container {
-  margin-left:1%;
   max-width: 100%;
   display: inline-flex;
   margin-bottom: 7px;

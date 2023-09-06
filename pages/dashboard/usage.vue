@@ -12,9 +12,9 @@
         </p>
       </v-col>
       <v-col cols="8" class="month-title-section">
-        <h3>&lt;</h3>
+        <a href=""><h3 class="switch-month">&lt;</h3></a>
         <h3>August</h3>
-        <h3>></h3>
+        <a href=""><h3 class="switch-month">></h3></a>
       </v-col>
       <v-col cols="4" class="daily-section">
         <div class="switch-field">
@@ -59,6 +59,17 @@
           </div>
         </div>
       </v-col>
+      <v-col cols="12" class="current-subscription">
+        <h3>Active subsciption pack </h3>
+      </v-col>
+      <v-col cols="6" class="current-pack">
+        <div class="current-box">
+          <h4>Free Trial</h4>
+        </div>
+      </v-col>
+      <v-col cols="6" class="upgrade-section">
+        <button class="button">Upgrade account</button>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -96,6 +107,14 @@ const progressOutputPercentage = computed(
 
 .month-title-section h3 {
   margin-right: 10px;
+}
+
+.month-title-section a {
+  text-decoration: none;
+}
+.switch-month:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .switch-field {
@@ -136,20 +155,20 @@ const progressOutputPercentage = computed(
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  padding-bottom: 0 !important;
+  padding-top:0 !important ;
 }
 
 .progress-container {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 90%;
 }
 
 .progress-bar {
   background-color: #ccc;
-  height: 20px;
+  height: 10px;
   border-radius: 10px;
-  margin-right: 2%;
   flex-grow: 1;
 }
 
@@ -157,12 +176,28 @@ const progressOutputPercentage = computed(
   background-color: #6200ee;
   height: 100%;
   transition: width 0.3s ease-in-out;
-  border-radius: 10px;
+  border-radius: 10px 0px 0px 10px;
 }
 
 .progress-values p {
   color: #333;
   font-size: 14px;
-  margin: 0;
+  margin-left: 5px;
+}
+
+.upgrade-section {
+  display:flex;
+  align-items: center;
+}
+
+.current-box {
+  padding: 10px;
+  border: 1px solid #6200ee;
+  border-radius: 7px;
+  text-align: center;
+}
+
+.current-box h4 {
+  color: #6200ee;
 }
 </style>

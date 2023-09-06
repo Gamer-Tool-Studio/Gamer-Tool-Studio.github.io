@@ -30,7 +30,7 @@
         <v-col cols="8" class="form1">
           <h3>Primary business address</h3>
           <p>This is the physical address of the company purchasing OpenAI services and is used to calculate any applicable sales taxes.</p>
-          <select class="form_input input2" ref="countrySelect">
+            <select class="form_input input2" ref="countrySelect">
             <option value="" disabled selected>Country</option>
             <option v-for="country in countries" :key="country.code" :value="country.name">{{ country.name }}</option>
           </select>
@@ -43,8 +43,8 @@
         <v-col cols="8" class="form1">
             <h3>Billing tax ID</h3>
             <p>If you are a business tax registrant, please enter your business tax ID here.</p>
-            <input type="form" placeholder="Select type" class="form_input input3">
-            <input type="form" placeholder="" class="form_input input3">            
+            <input type="form" placeholder="Tax ID" class="form_input input3">  
+            <input type="form" placeholder="Number" class="form_input input3">            
         </v-col>
         <v-col cols="12">
             <button class="button">Save</button>
@@ -55,23 +55,11 @@
   
   <script setup>
   useHead({
-    title: "Overview",
+    title: "preferences",
   });
 
-import { ref, onMounted } from 'vue';
-import countriesList from 'countries-list'; 
-
-const countrySelect = ref(null);
-const countries = ref([]);
-
-
-onMounted(() => {
-  countries.value = Object.values(countriesList.countries).map((country) => ({
-    name: country.name,
-    code: country.code,
-  }));
-});
 </script>
+
   <style lang="scss">
   
   .form1 {
