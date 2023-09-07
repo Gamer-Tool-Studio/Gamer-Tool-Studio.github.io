@@ -24,6 +24,14 @@ export default defineNuxtConfig({
         },
       },
     },
+    optimizeDeps: {
+      esbuildOptions: {
+        // Node.js global to browser globalThis
+        define: {
+          global: "globalThis",
+        },
+      },
+    },
   },
   // plugins: ["@/plugins/chartist.js"],
   modules: [["@pinia/nuxt", { autoImports: ["defineStore"] }]],

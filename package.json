@@ -22,6 +22,7 @@
     "@pinia/nuxt": "^0.4.11",
     "big.js": "^6.2.1",
     "countries-list": "^2.6.1",
+    "dialogcraftgpt-lib": "^1.0.2",
     "pinia": "^2.1.6",
     "sass": "^1.58.0",
     "vat-moss": "^1.0.2",

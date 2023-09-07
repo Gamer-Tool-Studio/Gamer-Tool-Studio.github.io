@@ -23,7 +23,10 @@
         </header>
         <section id="modalDescription" class="modal-body">
           <slot name="body">
-            <v-card flat> Modal Body </v-card>
+            <v-card flat>
+              Modal Body
+              <p>{{ chatGPTText }}</p>
+            </v-card>
           </slot>
         </section>
       </div>
@@ -32,14 +35,43 @@
 </template>
 
 <script>
+import DialogCraftGPTLib from "dialogcraftgpt-lib";
+
 export default {
   name: "BaseModal",
   components: {},
   data() {
-    return {};
+    return { chatGPTText: "" };
   },
   computed: {},
-  mounted() {},
+  async mounted() {
+    const chat = new DialogCraftGPTLib({ apiKey: "my apiKey " });
+    const characterContext = {
+      name: "John Doe",
+      age: 30,
+      personality: {
+        traits: ["friendly", "outgoing"],
+        dialogueStyle: "casual",
+      },
+      "background story": "A character with an interesting backstory.",
+      "game knowledge": "Experienced player",
+      interests: {
+        sports: 5,
+        movies: 4,
+        music: 3,
+      },
+      supportiveness: 7,
+    };
+    const chatInput = {
+      chatHistory: [],
+      userInput: "Hello, GPT!",
+      characterContext,
+      maxOutputTokens: 50,
+    };
+    const { response, chatHistory } = await chat.createChat(chatInput);
+
+    this.chatGPTText = chatHistory.at(-1).content;
+  },
   methods: {
     close() {
       this.$emit("close");
