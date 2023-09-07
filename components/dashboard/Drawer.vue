@@ -74,7 +74,8 @@ const items = ref([
   },
   {
     title: "Billing",
-    to: "/dashboard/billing",
+    to: "/dashboard/billing/overview",
+    path: "/dashboard/billing",
     props: {
       prependIcon: "mdi-wallet-bifold",
       subPages: [

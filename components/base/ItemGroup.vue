@@ -104,7 +104,7 @@ export default {
     getChildren(item) {
       return item?.props?.subPages?.map((i) => ({
         ...i,
-        to: !i.to ? undefined : `${item.to}${i.to}`,
+        to: !i.to ? undefined : `${item.path}${i.to}`,
       }));
     },
     computedText(item) {
@@ -127,3 +127,4 @@ export default {
   margin-bottom: 0;
 }
 </style>
+
