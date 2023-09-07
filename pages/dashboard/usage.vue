@@ -59,15 +59,15 @@
           </div>
         </div>
       </v-col>
-      <v-col cols="12" class="current-subscription">
+      <v-col cols="4" class="current-subscription">
         <h3>Active subsciption pack </h3>
       </v-col>
-      <v-col cols="6" class="current-pack">
+      <v-col cols="4" class="current-pack">
         <div class="current-box">
           <h4>Free Trial</h4>
         </div>
       </v-col>
-      <v-col cols="6" class="upgrade-section">
+      <v-col cols="4" class="upgrade-section">
         <button class="button">Upgrade account</button>
       </v-col>
     </v-row>
@@ -151,6 +151,15 @@ const progressOutputPercentage = computed(
   height: 300px;
 }
 
+.current-subscription {
+  display: flex;
+  align-items:center;
+}
+.current-subscription h3{
+  font-size: 18px;
+  font-weight: 600;
+}
+
 .progress-section {
   display: flex;
   justify-content: space-between;
@@ -189,6 +198,7 @@ const progressOutputPercentage = computed(
   display:flex;
   align-items: center;
 }
+
 
 .current-box {
   padding: 10px;
