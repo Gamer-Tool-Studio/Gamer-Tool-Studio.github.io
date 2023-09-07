@@ -16,14 +16,17 @@
           <NuxtLink to="/documentation">Documentation</NuxtLink>
         </li>
         <li class="nav-left"><NuxtLink to="/pricing">Pricing</NuxtLink></li>
-        <li class="nav-left"><NuxtLink to="/download-plugin">Download Plugin</NuxtLink></li>
+        <li class="nav-left">
+          <NuxtLink to="/download-plugin">Download Plugin</NuxtLink>
+        </li>
       </ul>
       <ul class="login-section">
         <li v-if="!authenticated" class="nav-right-link">
           <NuxtLink to="/login"> Log in</NuxtLink>
         </li>
         <li v-if="authenticated" class="nav-right-link">
-          <NuxtLink @click="logout">Logout</NuxtLink>
+          <DashboardUserMenu></DashboardUserMenu>
+          <!-- <NuxtLink @click="logout">Logout</NuxtLink> -->
         </li>
         <li v-if="!authenticated" class="nav-right">
           <a href="#register" class="button">Sign up</a>
@@ -33,28 +36,16 @@
   </nav>
 </template>
 <script lang="ts" setup>
-import { useUserStore } from "../store/user";
 import { storeToRefs } from "pinia"; // import storeToRefs helper hook from pinia
 import { useAuthStore } from "~/store/auth"; // import the auth store we just created
 
-const userStore = useUserStore();
-
 const route = useRoute();
-
-const router = useRouter();
 
 const isLandingPage = computed(() => route.path == "/");
 
 // authentication methods
 
-const { logUserOut } = useAuthStore(); // use authenticateUser action from  auth store
-
 const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
-
-const logout = () => {
-  logUserOut();
-  router.push("/");
-};
 </script>
 <style lang="scss">
 @use "sass:selector";
