@@ -138,6 +138,7 @@ nav {
   .login-section {
     margin: 0;
     margin-left: auto;
+    margin-right: 50px;
     padding: 0;
     list-style: none;
     display: flex;
@@ -150,7 +151,18 @@ nav {
   }
 
   .nav-right-link {
+    margin-left: 0 !important;
+    margin-right: 10px !important;
+    display: flex;
+    align-items: center;
     font-family: "Bebas Neue";
+    
+  }
+
+  .nav-right-link img {
+    width: 30px;
+    height:30px;
+    border-radius: 50%;
   }
   .nav-right-link:hover {
     // text-decoration: underline;

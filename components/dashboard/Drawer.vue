@@ -52,6 +52,20 @@ watch(
 
 const items = ref([
   {
+    title:"ORGANIZATION",
+    to: "/dashboard",
+    props: {
+      prependIcon:"",
+    },
+  },  
+  {
+    title:"ORG NAME",
+    to: "/dashboard",
+    props: {
+      prependIcon:"mdi-briefcase",
+    },
+  },
+  {
     title: "Settings",
     to: "/dashboard",
     props: {
@@ -98,6 +112,13 @@ const items = ref([
       ],
     },
   },
+  {
+    title:"USER",
+    to: "/dashboard/api-keys",
+    props: {
+      prependIcon:"",
+    },
+  },  
   {
     title: "API keys",
     to: "/dashboard/api-keys",
