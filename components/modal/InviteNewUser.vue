@@ -174,7 +174,6 @@
     }
 
     .footer-section {
-        width:20%;
         display:inline-flex;
         float:right;
         
@@ -195,7 +194,7 @@
     }
     .cancel-button:hover {
         cursor:Pointer;
-        background-color:#d9d9e3;
+        background-color:
 
     }
 

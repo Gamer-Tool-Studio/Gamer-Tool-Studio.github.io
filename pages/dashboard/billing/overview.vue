@@ -12,7 +12,18 @@
            for usage during that month.</p>
       </v-col>
       <v-col cols="12">
-        <button class="cancel-paid">Cancel paid account</button>
+        <modal-cancel-plan
+          v-if="cancelPlan"
+          @close="cancelPlan= false"
+        >
+        </modal-cancel-plan>
+        <button
+          class="cancel-paid"
+          type="submit"
+          @click="cancelPlan = true"
+        >
+        Cancel paid account
+        </button>
       </v-col>
     </v-row>
     <v-row>
@@ -75,9 +86,13 @@
 </template>
 
 <script setup>
+
+const cancelPlan = ref(false);
+
 useHead({
   title: "Overview ",
 });
+
 </script>
 <style lang="scss">
 
