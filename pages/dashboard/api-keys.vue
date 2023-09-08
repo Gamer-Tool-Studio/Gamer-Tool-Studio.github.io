@@ -23,9 +23,18 @@
         />
       </v-col>
       <v-col cols="3" class="new-key-section">
-        <modal-generate-api-key v-if="generateNewKeys"
-          @close="generateNewKeys = false">
-            <button class="cancel-button" type="submit" @click="generateNewKeys = true">+ Create new secret key</button></modal-generate-api-key>
+        <modal-generate-api-key
+          v-if="generateNewKeys"
+          @close="generateNewKeys = false"
+        >
+        </modal-generate-api-key>
+        <button
+          class="cancel-button"
+          type="submit"
+          @click="generateNewKeys = true"
+        >
+          + Create new secret key
+        </button>
       </v-col>
       <v-col v-if="false" cols="12">
         <h3>Default organization</h3>
@@ -38,7 +47,6 @@
     </v-row>
   </v-container>
 </template>
-
 
 <script setup>
 import { storeToRefs } from "pinia";
