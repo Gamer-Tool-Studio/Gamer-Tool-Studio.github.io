@@ -1,67 +1,70 @@
 <template>
-    <transition name="modal-fade">
-      <div class="modal-backdrop" @click="close">
-        <div
-          class="modal"
-          role="dialog"
-          aria-labelledby="modalTitle"
-          aria-describedby="modalDescription"
-          @click.stop
-        >
-          <header class="modal-header">
-            <slot name="header">
-              <h1>Create new secret key</h1>
-              <button
-                type="button"
-                class="btn-close"
-                aria-label="Close modal"
-                @click="close"
-              >
-                <img src="~/assets/icons/close.svg" />
-              </button>
-            </slot>
-          </header>
-          <section id="modalDescription" class="modal-body">
-            <slot name="body">
-             <v-col cols="12" class="header-section">
-                <v-col cols="9" class="header-div">
+  <transition name="modal-fade">
+    <div class="modal-backdrop" @click="close">
+      <div
+        class="modal"
+        role="dialog"
+        aria-labelledby="modalTitle"
+        aria-describedby="modalDescription"
+        @click.stop
+      >
+        <header class="modal-header">
+          <slot name="header">
+            <h1>Create new secret key</h1>
+            <button
+              type="button"
+              class="btn-close"
+              aria-label="Close modal"
+              @click="close"
+            >
+              <img src="~/assets/icons/close.svg" />
+            </button>
+          </slot>
+        </header>
+        <section id="modalDescription" class="modal-body">
+          <slot name="body">
+            <v-col cols="12" class="header-section">
+              <v-col cols="9" class="header-div">
                 <h3 class="modal-subheader">Name</h3>
               </v-col>
-             </v-col>
-             <v-col cols="12" class="forms-section">
-                <v-col cols="12">
-                    <input class="modal-forms" type="form" placeholder="My test key">
+            </v-col>
+            <v-col cols="12" class="forms-section">
+              <v-col cols="12">
+                <input
+                  class="modal-forms"
+                  type="form"
+                  placeholder="My test key"
+                />
               </v-col>
-             </v-col>
-             <v-cols cols="12" class="footer-section">
-                <button class ="cancel-button">Cancel</button>
-                <button class="button">Create Secret Key</button>
-             </v-cols>
-            </slot>            
-          </section>
-        </div>
+            </v-col>
+            <v-cols cols="12" class="footer-section">
+              <button class="cancel-button">Cancel</button>
+              <button class="button">Create Secret Key</button>
+            </v-cols>
+          </slot>
+        </section>
       </div>
-    </transition>
-  </template>
-  
-  <script>
-  import DialogCraftGPTLib from "dialogcraftgpt-lib";
-  
-  export default {
-    name: "GenerateApiKey",
-    components: {},
-    data() {
-      return { chatGPTText: "" };
-    },
+    </div>
+  </transition>
+</template>
 
-    methods: {
+<script>
+import DialogCraftGPTLib from "dialogcraftgpt-lib";
+
+export default {
+  name: "GenerateApiKey",
+  components: {},
+  data() {
+    return { chatGPTText: "" };
+  },
+
+  methods: {
     close() {
       this.$emit("close");
     },
-},
-
-  };
-  </script>
+  },
+};
+</script>
 
 <style lang="scss">
 .modal-fade-enter,
@@ -110,20 +113,18 @@
   }
 
   .modal-header h1 {
-      font-size:18px;
-     
+    font-size: 18px;
   }
 
   .header-section {
-      display: inline-flex;
-      padding-bottom: 0;
+    display: inline-flex;
+    padding-bottom: 0;
   }
 
   .header-div {
-      padding-bottom:0 !important;
-      margin-bottom:0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
   }
-
 
   .modal-body {
     max-width: 858px;
@@ -149,48 +150,42 @@
 }
 
 .modal-subheader {
-  font-size:16px;
-  
+  font-size: 16px;
 }
 
 .modal-forms {
   font-size: 14px;
   min-width: 100%;
   padding: 7px;
-  border: 1px solid #ECECF1;
+  border: 1px solid #ececf1;
   border-radius: 3px;
 }
 
 .forms-section {
-      display: inline-flex;
-      padding-top: 0;
-      
-  }
+  display: inline-flex;
+  padding-top: 0;
+}
 
-  .footer-section {
-      display:inline-flex;
-      float:right;
-      
-  }
+.footer-section {
+  display: inline-flex;
+  float: right;
+}
 
-  .footer-section button {
-      margin:3px;
-  }
+.footer-section button {
+  margin: 3px;
+}
 
-  .cancel-button {
-      background-color: #ECECF1;
-      padding: 5px 15px;
-      color: #353740;
-      border-radius:3px;
-      border: none;
-      font-size:16px;
-      font-family:'Bebas Neue';
-  }
-  .cancel-button:hover {
-      cursor:Pointer;
-      background-color:
-
-  }
-
+.cancel-button {
+  background-color: #ececf1;
+  padding: 5px 15px;
+  color: #353740;
+  border-radius: 3px;
+  border: none;
+  font-size: 16px;
+  font-family: "Bebas Neue";
+}
+.cancel-button:hover {
+  cursor: pointer;
+  background-color: white;
+}
 </style>
-  
