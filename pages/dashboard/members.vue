@@ -5,7 +5,9 @@
         <h1>Members</h1>
       </v-col>
       <v-col cols="2">
-        <button class="button" type="submit">Invite members</button>
+        <modal-invite-new-user v-if="inviteUser"
+          @close="inviteUser = false"> </modal-invite-new-user>
+        <button class="button" type="submit" @click="inviteUser = true">Invite members</button>
       </v-col>
       <v-col v-for="member in members">
         <dashboard-member-card :member="member"> </dashboard-member-card>
@@ -19,6 +21,8 @@ import { useUserStore } from "@/store/user";
 const store = useUserStore();
 
 const { members } = storeToRefs(store);
+
+const inviteUser = ref(false);
 
 useHead({
   title: "Members ",

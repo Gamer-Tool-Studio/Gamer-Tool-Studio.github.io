@@ -89,7 +89,7 @@ useHead({
 }
 
 .cancel-paid:hover {
-background-color:gray; 
+background-color:#d9d9e3; 
 }
 
 .billing-card {

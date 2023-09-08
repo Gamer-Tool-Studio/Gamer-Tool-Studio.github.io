@@ -22,6 +22,11 @@
           @addItem="addItem"
         />
       </v-col>
+      <v-col cols="3" class="new-key-section">
+        <modal-generate-api-key v-if="generateNewKeys"
+          @close="generateNewKeys = false">
+            <button class="cancel-button" type="submit" @click="generateNewKeys = true">+ Create new secret key</button></modal-generate-api-key>
+      </v-col>
       <v-col v-if="false" cols="12">
         <h3>Default organization</h3>
         <p>
@@ -33,12 +38,17 @@
     </v-row>
   </v-container>
 </template>
+
+
 <script setup>
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/store/user";
+
 const store = useUserStore();
 
 const { keys } = storeToRefs(store);
+
+const generateNewKeys = ref(false);
 
 function deleteItem(editedIndex) {
   console.log(editedIndex);
@@ -67,5 +77,9 @@ useHead({
   font-size: 16px;
   margin-bottom: 10px;
   margin-top: 15px;
+}
+
+.new-key-section {
+  display: block;
 }
 </style>
