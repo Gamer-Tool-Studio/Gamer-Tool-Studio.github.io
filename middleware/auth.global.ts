@@ -15,7 +15,6 @@ export default defineNuxtRouteMiddleware((to) => {
   }
 
   // if token doesn't exist redirect to log in
-  console.log("to", to);
 
   if (!token.value && to?.name?.toString().includes("dashboard")) {
     abortNavigation();
