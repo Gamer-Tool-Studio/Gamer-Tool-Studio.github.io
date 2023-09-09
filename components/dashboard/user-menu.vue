@@ -46,8 +46,9 @@ const logout = () => {
 .loggedUserName{
   font-size: 14px;
   font-weight: 750;
-  max-height: 5px !important;
+  min-height: 3px !important;
   padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .loggedEmailAdd {
