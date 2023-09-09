@@ -9,7 +9,7 @@
     <template #item.created="{ item }">
       {{ item.raw.created.toLocaleString() }}
     </template>
-    <template v-slot:bottom>
+    <template v-slot:bottom v-if="false">
       <v-toolbar flat>
         <v-toolbar-title>Create a new key</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
