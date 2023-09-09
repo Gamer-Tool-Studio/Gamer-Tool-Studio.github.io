@@ -72,7 +72,6 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 24px;
     .lp {
       max-width: 1200px;
     }
@@ -83,6 +82,7 @@ nav {
       list-style: none;
       display: inline-flex;
       align-items: center;
+      margin-left:150px;
       a {
         color: #000;
         text-decoration: none;
@@ -138,7 +138,7 @@ nav {
   .login-section {
     margin: 0;
     margin-left: auto;
-    margin-right: 50px;
+    margin-right: 120px;
     padding: 0;
     list-style: none;
     display: flex;
@@ -152,7 +152,7 @@ nav {
 
   .nav-right-link {
     margin-left: 0 !important;
-    margin-right: 10px !important;
+   
     display: flex;
     align-items: center;
     font-family: "Bebas Neue";

@@ -66,7 +66,7 @@
     </v-row>
 
     <section class="contact-us">
-      <h3>Need a tailored solution for your game?</h3>
+      <h3>Need a tailored solution for your project?</h3>
       <button class="button">Contact our Team</button>
     </section>
   </v-container>

@@ -5,7 +5,7 @@
         <h4>Product</h4>
         <ul>
           <li><a href="#documentation">Download Plugin</a></li>
-          <li><a href="https://github.com/yourusername">Documentation</a></li>
+          <li><a href="https://github.com/yourusername">API Reference</a></li>
           <li><a href="https://github.com/yourusername">Github</a></li>
         </ul>
       </div>
@@ -76,6 +76,7 @@ footer p {
 }
 
 .footer-section {
+  display: block;
   flex-basis: 30%;
   margin-bottom: 20px;
 }

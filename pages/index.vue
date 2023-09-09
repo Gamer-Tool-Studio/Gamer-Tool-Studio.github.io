@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" class="intro-section">
         <h1>
-          Dialog Craft GPT - The Plugin To Power Your Game Narratives with AI
+          Dialog Craft GPT - The Tool To Power Your Game Narratives with AI
         </h1>
         <div class="intro-cta">
           <button class="button">Start Free Trial Now</button>
