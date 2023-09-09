@@ -52,17 +52,17 @@ watch(
 
 const items = ref([
   {
-    title:"ORGANIZATION",
-    to: "/dashboard",
+    title: "ORGANIZATION",
+    // to: "/dashboard",
     props: {
-      prependIcon:"",
+      prependIcon: "",
     },
-  },  
+  },
   {
-    title:"ORG NAME",
-    to: "/dashboard",
+    title: "ORG NAME",
+    // to: "/dashboard",
     props: {
-      prependIcon:"mdi-briefcase",
+      prependIcon: "mdi-briefcase",
     },
   },
   {
@@ -113,12 +113,12 @@ const items = ref([
     },
   },
   {
-    title:"USER",
-    to: "/dashboard/api-keys",
+    title: "USER",
+    // to: "/dashboard/api-keys",
     props: {
-      prependIcon:"",
+      prependIcon: "",
     },
-  },  
+  },
   {
     title: "API keys",
     to: "/dashboard/api-keys",

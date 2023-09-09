@@ -36,7 +36,13 @@
         </template>
       </v-list-group>
 
-      <v-list-item v-else :to="item.to" color="primary" :value="item">
+      <v-list-item
+        v-else
+        :to="item.to"
+        color="primary"
+        :value="item"
+        :class="{ 'drawer-title': !item.to }"
+      >
         <v-list-item-title v-text="item.title" :aria-label="item.title">
         </v-list-item-title>
         <template #prepend>
@@ -122,9 +128,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .v-list-group__activator p {
   margin-bottom: 0;
+}
+.drawer-title {
+  pointer-events: none;
+  .v-list-item-title {
+    font-weight: bold;
+  }
+  &:hover {
+  }
 }
 </style>
 
