@@ -194,8 +194,7 @@
     }
     .cancel-button:hover {
         cursor:Pointer;
-        background-color:
-
+        background-color:#d9d9e3;
     }
 
   </style>

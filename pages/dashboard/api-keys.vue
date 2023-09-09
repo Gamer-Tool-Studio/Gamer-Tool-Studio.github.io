@@ -90,4 +90,9 @@ useHead({
 .new-key-section {
   display: block;
 }
+
+.cancel-button:hover {
+        cursor:Pointer;
+        background-color:#d9d9e3;
+    }
 </style>

@@ -169,6 +169,7 @@ export default {
 .footer-section {
   display: inline-flex;
   float: right;
+  padding-right:20px !important;
 }
 
 .footer-section button {

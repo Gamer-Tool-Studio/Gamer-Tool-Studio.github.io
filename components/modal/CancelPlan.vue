@@ -61,10 +61,21 @@
   </script>
   
   <style lang="scss">
-  
+
+.text-section p {
+    font-size: 16px !important;
+}
+
   .red {
-    background-color:red !important;
+    background-color:#EF4146 !important;
+    color:#fff;
   }
+
+  .red:hover {
+    background-color:#c23539 !important;
+    color:#fff;
+  }
+
 
   </style>
   
