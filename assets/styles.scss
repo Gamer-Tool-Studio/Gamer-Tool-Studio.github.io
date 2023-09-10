@@ -59,7 +59,6 @@ h2 {
   font-family: "Titillium Web";
 }
 
-
 .nav-links li {
   padding: 0;
 }
@@ -69,7 +68,6 @@ h2 {
   text-decoration: none;
   font-size: 14px;
   transition: color 0.3s ease;
-  
 }
 
 .nav-links a:hover {
@@ -94,7 +92,7 @@ h2 {
 }
 
 /* Section Styles */
-section {
+section:not(.modal-body) {
   margin-bottom: 30px;
 }
 
@@ -168,11 +166,10 @@ section ol {
   font-family: "Titillium Web", sans-serif;
 }
 
-
 /* Call to Action Button Styles */
 .button {
   display: inline-block;
-  background-color: #6200EE;
+  background-color: #6200ee;
   color: #fff;
   padding: 8px 15px;
   text-decoration: none;
@@ -185,7 +182,7 @@ section ol {
 }
 
 .button:hover {
-  color: #6200EE;
+  color: #6200ee;
 }
 
 /* Media Queries for Responsiveness */

@@ -10,7 +10,7 @@
       >
         <header class="modal-header">
           <slot name="header">
-            <h1>Create new secret key</h1>
+            <h1>{{ formTitle }}</h1>
             <button
               type="button"
               class="btn-close"
@@ -24,23 +24,23 @@
         <section id="modalDescription" class="modal-body">
           <slot name="body">
             <v-col cols="12" class="header-section">
-              <v-col cols="9" class="header-div">
-                <h3 class="modal-subheader">Name</h3>
-              </v-col>
+              <h3 class="modal-subheader">Name</h3>
             </v-col>
             <v-col cols="12" class="forms-section">
-              <v-col cols="12">
-                <input
-                  class="modal-forms"
-                  type="form"
-                  placeholder="My test key"
-                />
-              </v-col>
+              <input
+                class="modal-forms"
+                type="text"
+                placeholder="My test key"
+                :value="name"
+                @input="$emit('update:name', $event.target.value)"
+              />
             </v-col>
-            <v-cols cols="12" class="footer-section">
-              <button class="cancel-button">Cancel</button>
-              <button class="button">Create Secret Key</button>
-            </v-cols>
+            <v-col cols="12" class="footer-section">
+              <button class="cancel-button" @click="close">Cancel</button>
+              <button class="button" @click="$emit('save')">
+                {{ isCreating }}
+              </button>
+            </v-col>
           </slot>
         </section>
       </div>
@@ -49,13 +49,16 @@
 </template>
 
 <script>
-import DialogCraftGPTLib from "dialogcraftgpt-lib";
-
 export default {
   name: "GenerateApiKey",
+  props: ["formTitle", "name"],
   components: {},
+
   data() {
-    return { chatGPTText: "" };
+    return {};
+  },
+  created() {
+    this.isCreating = !this.name ? "Create Secret Key" : "Save";
   },
 
   methods: {
@@ -118,7 +121,7 @@ export default {
 
   .header-section {
     display: inline-flex;
-    padding-bottom: 0;
+    // padding-bottom: 0;
   }
 
   .header-div {
@@ -163,13 +166,13 @@ export default {
 
 .forms-section {
   display: inline-flex;
-  padding-top: 0;
+  // padding-top: 0
 }
 
 .footer-section {
   display: inline-flex;
   float: right;
-  padding-right:20px !important;
+  padding-right: 20px !important;
 }
 
 .footer-section button {

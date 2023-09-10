@@ -22,20 +22,6 @@
           @addItem="addItem"
         />
       </v-col>
-      <v-col cols="3" class="new-key-section">
-        <modal-generate-api-key
-          v-if="generateNewKeys"
-          @close="generateNewKeys = false"
-        >
-        </modal-generate-api-key>
-        <button
-          class="cancel-button"
-          type="submit"
-          @click="generateNewKeys = true"
-        >
-          + Create new secret key
-        </button>
-      </v-col>
       <v-col v-if="false" cols="12">
         <h3>Default organization</h3>
         <p>
@@ -80,19 +66,20 @@ useHead({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .keys-page p {
   font-size: 16px;
   margin-bottom: 10px;
   margin-top: 15px;
 }
-
+</style>
+<style lang="scss">
 .new-key-section {
   display: block;
 }
 
 .cancel-button:hover {
-        cursor:Pointer;
-        background-color:#d9d9e3;
-    }
+  cursor: pointer;
+  background-color: #d9d9e3;
+}
 </style>

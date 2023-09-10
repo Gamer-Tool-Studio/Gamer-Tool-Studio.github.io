@@ -43,10 +43,10 @@
                 <input class="modal-forms" type="form" placeholder="Admin" />
               </v-col>
             </v-col>
-            <v-cols cols="12" class="footer-section">
-              <button class="cancel-button">Cancel</button>
+            <v-col cols="12" class="footer-section">
+              <button class="cancel-button" @click="close">Cancel</button>
               <button class="button">Invite</button>
-            </v-cols>
+            </v-col>
           </slot>
         </section>
       </div>
@@ -55,13 +55,11 @@
 </template>
 
 <script>
-import DialogCraftGPTLib from "dialogcraftgpt-lib";
-
 export default {
   name: "InviteNewUser",
   components: {},
   data() {
-    return { chatGPTText: "" };
+    return {};
   },
 
   methods: {

@@ -9,66 +9,26 @@
     <template #item.created="{ item }">
       {{ item.raw.created.toLocaleString() }}
     </template>
-    <template v-slot:bottom v-if="false">
-      <v-toolbar flat>
-        <v-toolbar-title>Create a new key</v-toolbar-title>
-        <v-divider class="mx-4" inset vertical></v-divider>
-        <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ props }">
-            <v-btn color="primary" dark class="mb-2" v-bind="props">
-              + Create
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="text-h5">{{ formTitle }}</span>
-            </v-card-title>
-
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12">
-                    <v-text-field
-                      v-model="editedItem.name"
-                      label="Key name"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue-darken-1" variant="text" @click="close">
-                Cancel
-              </v-btn>
-              <v-btn color="blue-darken-1" variant="text" @click="save">
-                Save
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="dialogDelete" max-width="500px">
-          <v-card>
-            <v-card-title class="text-h5"
-              >Are you sure you want to delete this item?</v-card-title
-            >
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue-darken-1" variant="text" @click="closeDelete"
-                >Cancel</v-btn
-              >
-              <v-btn
-                color="blue-darken-1"
-                variant="text"
-                @click="deleteItemConfirm"
-                >OK</v-btn
-              >
-              <v-spacer></v-spacer>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+    <template v-slot:bottom>
+      <v-toolbar flat color="transparent" height="84" class="table-toolbar">
+        <modal-generate-api-key
+          v-if="generateNewKeys"
+          v-model:name="editedItem.name"
+          :formTitle="formTitle"
+          @close="close(), (generateNewKeys = false)"
+          @save="save"
+        >
+        </modal-generate-api-key>
+        <modal-revoke-key
+          v-if="revokeKey"
+          :name="editedItem.name"
+          @close="closeDelete()"
+          @delete="deleteItemConfirm"
+        >
+        </modal-revoke-key>
+        <button class="cancel-button" @click="generateNewKeys = true">
+          + Create new secret key
+        </button>
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
@@ -78,7 +38,7 @@
       <v-icon size="small" @click="deleteItem(item.raw)"> mdi-delete </v-icon>
     </template>
     <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize"> Reset </v-btn>
+      <v-btn color="primary"> Reset </v-btn>
     </template>
   </v-data-table>
 </template>
@@ -86,7 +46,7 @@
 <script setup>
 import { VDataTable } from "vuetify/labs/VDataTable";
 
-const emit = defineEmits(["delete", "addItem", "editItem"]);
+const emit = defineEmits(["deleteItem", "addItem", "editItem"]);
 
 const headers = [
   {
@@ -102,7 +62,7 @@ const headers = [
 const { keys } = defineProps(["keys"]);
 
 const formTitle = computed(() =>
-  editedIndex === -1 ? "Create new key" : "Edit Item"
+  editedIndex.value === -1 ? "Create new secret key" : "Edit key name"
 );
 const editedIndex = ref(-1),
   editedItem = ref({
@@ -117,34 +77,36 @@ const editedIndex = ref(-1),
     created: null,
     used: "Never",
   },
-  dialog = ref(false),
-  dialogDelete = ref(false);
+  generateNewKeys = ref(false),
+  revokeKey = ref(false);
 
 // methods
 const editItem = (item) => {
     console.log(item);
     editedIndex.value = keys.indexOf(item);
     editedItem.value = Object.assign({}, item);
-    dialog.value = true;
+    console.log(editedItem.value);
+
+    generateNewKeys.value = true;
   },
   deleteItem = (item) => {
     editedIndex.value = keys.indexOf(item);
     editedItem.value = Object.assign({}, item);
-    dialogDelete.value = true;
+    revokeKey.value = true;
   },
   deleteItemConfirm = () => {
-    emit("delete", editedIndex.value);
+    emit("deleteItem", editedIndex.value);
     closeDelete();
   },
   close = () => {
-    dialog.value = false;
+    generateNewKeys.value = false;
     nextTick(() => {
       editedItem.value = Object.assign({}, defaultItem);
       editedIndex.value = -1;
     });
   },
   closeDelete = () => {
-    dialogDelete.value = false;
+    revokeKey.value = false;
     nextTick(() => {
       editedItem.value = Object.assign({}, defaultItem);
       editedIndex.value = -1;
@@ -161,4 +123,11 @@ const editItem = (item) => {
     close();
   };
 </script>
+<style lang="scss">
+.table-toolbar {
+  .v-toolbar__content {
+    align-items: end;
+  }
+}
+</style>
 
