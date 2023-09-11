@@ -4,14 +4,22 @@
       <ul class="nav-links">
         <li class="nav-left">
           <NuxtLink to="/">
-            <img
-              alt="logo"
-              src="~/assets/images/gms-logo.png"
-              class="nav-logo"
-            />
+            <img alt="logo" src="~/assets/images/gms-logo.png" class="nav-logo" />
           </NuxtLink>
         </li>
-        <li class="nav-left"><NuxtLink to="/products">Products</NuxtLink></li>
+        <li class="nav-left">
+          <!-- <NuxtLink to="/products">Products</NuxtLink> -->
+          <NuxtLink>
+            Products
+            <v-menu activator="parent" v-model:model-value="open">
+              <v-list class="dropDownMenu">
+                <v-list-item class="dropDownItem"> Plugin</v-list-item>
+                <v-list-item class="dropDownItem"> API</v-list-item>
+                <v-list-item class="dropDownItem"> Web3Bazaar</v-list-item>
+              </v-list>
+            </v-menu>
+          </NuxtLink>
+        </li>
         <li class="nav-left">
           <NuxtLink to="/documentation">Documentation</NuxtLink>
         </li>
@@ -36,19 +44,20 @@
   </nav>
 </template>
 <script lang="ts" setup>
-import { storeToRefs } from "pinia"; // import storeToRefs helper hook from pinia
-import { useAuthStore } from "~/store/auth"; // import the auth store we just created
+import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
+import { useAuthStore } from '~/store/auth'; // import the auth store we just created
 
 const route = useRoute();
 
-const isLandingPage = computed(() => route.path == "/");
+const isLandingPage = computed(() => route.path == '/');
+const open = ref(false);
 
 // authentication methods
 
 const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
 </script>
 <style lang="scss">
-@use "sass:selector";
+@use 'sass:selector';
 
 nav {
   width: 100%;
@@ -97,7 +106,7 @@ nav {
     a {
       color: black;
       text-decoration: none;
-      font-family: "Bebas Neue";
+      font-family: 'Bebas Neue';
     }
     .nav-logo {
       margin-right: 10px;
@@ -143,7 +152,7 @@ nav {
     list-style: none;
     display: flex;
     align-items: center;
-    font-family: "Bebas Neue";
+    font-family: 'Bebas Neue';
   }
 
   .nav-right a {
@@ -155,7 +164,7 @@ nav {
 
     display: flex;
     align-items: center;
-    font-family: "Bebas Neue";
+    font-family: 'Bebas Neue';
   }
 
   .nav-right-link img {
