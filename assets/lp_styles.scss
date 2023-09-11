@@ -42,7 +42,7 @@ section {
 }
 
 .intro-cta p:hover {
-  text-decoration-color: #6e6e80;
+  text-decoration-color: #fff;
   cursor: pointer;
 }
 
@@ -65,7 +65,7 @@ section {
 /* Features Section */
 
 .features {
-  border-top: 1px solid #fff;
+  border-top: 1px solid #6e6e80;
   margin-top: 60px;
 }
 
@@ -91,7 +91,7 @@ section {
   margin: 20px;
   padding: 20px;
   background-color: black;
-  border: 1px solid #fff;
+  border: 1px solid #6e6e80;
   border-radius: 5px;
   text-align: center;
 }
@@ -116,7 +116,7 @@ section {
 
 .button-display {
   text-align: center !important;
-  border-bottom: 1px solid #FFF; 
+  border-bottom: 1px solid #6e6e80; 
   
 }
 
@@ -129,7 +129,7 @@ section {
 
 .get-started {
   margin-top: 60px;
-  border-top: 1px solid #fff;
+  border-top: 1px solid #6e6e80;
 }
 
 .started-grid {
@@ -232,7 +232,7 @@ section {
 
 .start-trial {
   display: block;
-  border-top: 1px solid #fff;
+  border-top: 1px solid #6e6e80;
   text-align: center;
 }
 
@@ -253,7 +253,7 @@ section {
 /* Footer Styles */
 footer {
   background-color: black;
-  color: #fff;
+  color: #6e6e80;
   text-align: center;
   padding: 20px;
 }

@@ -68,10 +68,10 @@
         </div>
       </div>
     </v-row>
-    <v-row class="get-started">
+    <v-row class="get-started" id="sectionToLinkToApi">
       <v-col cols="12" class="code-section">
         <h2 class="page-headers">
-          Create powerful AI characters to interact with players and users from any Frontend environment with Dialog Craft GPT library</h2>
+          Create seamless AI characters to interact with players and users from any Frontend environment with Dialog Craft GPT library</h2>
         <pre>
           <code class="code-display">
             npm install dialogcrafgpt
@@ -98,10 +98,10 @@
       <v-col cols="12" class="button-display">
         <button class="button">View API Reference</button>
       </v-col>
-      <v-col>
+      <v-col id="sectionToLinkToPlugin">
         <h2 class="page-headers">
           Add Dialog Craft GPT Plugin to your favourite game engine today and
-          start harnessing the power of AI-generated dialogs
+          start harnessing the power of AI-generated dialogs with ease
         </h2>
       </v-col>
       <v-col cols="12" class="started-grid">
@@ -110,7 +110,7 @@
             Sign up for a trial account or select a suitable paid plan.
           </li>
           <li>
-            Install the DialogCraftGPT plugin in your preferred game engine. <a href="/download-plugin">Download Plugin file.</a>
+            Install the DialogCraftGPT plugin in your preferred game engine. <a href="/download-plugin">Download Plugin file</a>.
           </li>
           <li>
             Define personality traits, provide context about game events and

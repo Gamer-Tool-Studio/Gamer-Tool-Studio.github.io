@@ -65,7 +65,7 @@
 
     <section class="contact-us">
       <h3>Need a tailored solution for your project?</h3>
-      <button class="button">Contact our Team</button>
+      <button class="button no-hover-button">Contact our Team</button>
     </section>
   </v-container>
 </template>
@@ -76,32 +76,44 @@ definePageMeta({
 
 import { ref, onMounted } from "vue";
 
-// Ref to track whether the light-boxes are being hovered
 const isLightBoxHovered = ref(false);
 
-// Function to toggle the bold-boxes.hovered class based on light-boxes hover state
-function toggleBoldBoxHovered() {
+const toggleBoldBoxHovered = () => {
   const boldBoxes = document.querySelectorAll(".bold-boxes");
-  boldBoxes.forEach(box => {
+  boldBoxes.forEach((box) => {
     if (isLightBoxHovered.value) {
       box.classList.add("hovered");
     } else {
       box.classList.remove("hovered");
     }
   });
-}
+};
 
-// Hook to listen for hover events on light-boxes
+const toggleButtonStyles = () => {
+  const buttons = document.querySelectorAll(".button");
+  buttons.forEach((button) => {
+    if (isLightBoxHovered.value) {
+      button.style.backgroundColor = "#fff";
+      button.style.color = "#6200ee";
+    } else {
+      button.style.backgroundColor = "#6200ee";
+      button.style.color = "#fff";
+    }
+  });
+};
+
 onMounted(() => {
   const lightBoxes = document.querySelectorAll(".light-boxes");
-  lightBoxes.forEach(box => {
+  lightBoxes.forEach((box) => {
     box.addEventListener("mouseenter", () => {
       isLightBoxHovered.value = true;
       toggleBoldBoxHovered();
+      toggleButtonStyles();
     });
     box.addEventListener("mouseleave", () => {
       isLightBoxHovered.value = false;
       toggleBoldBoxHovered();
+      toggleButtonStyles();
     });
   });
 });

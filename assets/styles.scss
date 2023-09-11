@@ -149,9 +149,8 @@ section ol {
   width: 250px;
   margin: 20px;
   padding: 20px;
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid #6e6e80;
+  border-radius: 7px;
   text-align: center;
 }
 
@@ -164,6 +163,28 @@ section ol {
   font-size: 18px;
   text-align: left;
   font-family: "Titillium Web", sans-serif;
+}
+
+.bold-boxes.hovered button {
+  border: 1px solid #6200ee; 
+}
+
+.bold-boxes.hovered {
+  border-color: #ececf1;
+  button {
+    background-color: #fff;
+    color: #6200ee;
+  }
+}
+
+.light-button {
+  background-color: #fff !important;
+  color: #6200ee !important;
+  border: 1px solid #6200ee !important;
+}
+.no-hover-button {
+  background-color: #6200ee !important;
+  color: #fff !important;
 }
 
 /* Call to Action Button Styles */
@@ -182,8 +203,12 @@ section ol {
 }
 
 .button:hover {
-  color: #6200ee;
+  background-color: #6200ee !important; /* Change background color to #6200ee when hovered */
+  color: #6200ee !important; /* Change text color to #fff when hovered */
 }
+
+
+
 
 /* Media Queries for Responsiveness */
 @media (min-width: 768px) {

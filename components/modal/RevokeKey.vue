@@ -88,6 +88,6 @@ export default {
 
 .red:hover {
   background-color: #c23539 !important;
-  color: #fff;
+  color: #fff !important;
 }
 </style>
