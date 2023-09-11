@@ -8,8 +8,8 @@
         <h2> Pay as you go</h2>
       </v-col>
       <v-col cols="12">
-        <p> You'll be billed at the end of each calendar month
-           for usage during that month.</p>
+        <p> You'll be billed at the beginning of each cycle 
+           for token credits during the following year.</p>
       </v-col>
       <v-col cols="12">
         <modal-cancel-plan
