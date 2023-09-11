@@ -93,6 +93,7 @@ nav {
       align-items: center;
       margin-left: 150px;
       a {
+        cursor: pointer;
         color: #000;
         text-decoration: none;
         font-size: 22px;
@@ -125,6 +126,7 @@ nav {
 
   .nav-links .nav-link:hover {
     text-decoration: underline;
+    cursor: pointer;
   }
 
   .login-section .nav-link:hover {
