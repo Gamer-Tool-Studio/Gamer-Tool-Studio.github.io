@@ -180,6 +180,8 @@ section {
   padding: 0 !important;
 }
 
+
+
 .typed-display {
   display: block;
   max-width: 100%;
@@ -188,6 +190,9 @@ section {
   margin-right: 10%;
   font-family: monospace;
   font-size: 16px;
+  border: 1px solid #6e6e80;
+  border-radius: 7px;
+  padding: 5px;
 }
 .typed-message {
   background-color: rgba(98, 0, 238, 0.6);

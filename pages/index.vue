@@ -84,14 +84,14 @@
               "personalityTraits": ["friendly","enigmatic", "picky","observant"],
               "dialogStyle":"mysterious"
               "backgroundStory" :"GPT Wizard is a character in Heavens Beneath, a fantasy RPG game. 
-              "eventsKnowledge": "",
+              "eventsKnowledge": "how to make potions", "game map locations", "villain's aliby",
               "interests": ["astrology":"10", "herbology":"9", "chemistry":"9", "craftsmanship":"7" ],
               "support":"10",
               "maxOutputWords":"400",
               "userInput": "Hey there, where am i?,
               "chatHistory": []
             }'
-            <div class="typed-display">"GPT response": <span class="typed-message" ref="textElement"></span></div>
+            <div class="typed-display">"GPT Wizard response": <span class="typed-message" ref="textElement"></span></div>
           </code>
         </pre>
       </v-col>
