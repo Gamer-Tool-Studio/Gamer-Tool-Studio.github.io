@@ -66,6 +66,10 @@
     font-size: 16px !important;
 }
 
+.cancel-button:hover {
+  background-color: #d9d9e3;
+}
+
   .red {
     background-color:#EF4146 !important;
     color:#fff;

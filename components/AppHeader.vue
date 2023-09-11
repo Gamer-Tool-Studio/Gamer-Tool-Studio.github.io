@@ -13,9 +13,9 @@
             Products
             <v-menu activator="parent" v-model:model-value="open">
               <v-list class="dropDownMenu">
-                <v-list-item class="dropDownItem"> Plugin</v-list-item>
-                <v-list-item class="dropDownItem"> API</v-list-item>
-                <v-list-item class="dropDownItem"> Web3Bazaar</v-list-item>
+                <a class="dropLink" href="/#sectionToLinkToApi"><v-list-item class="dropDownItem"> API</v-list-item></a>
+                <a class="dropLink" href="/#sectionToLinkToPlugin"><v-list-item class="dropDownItem"> Plugin</v-list-item></a>
+                <a class="dropLink" href="https://web3bazaar.org"><v-list-item class="dropDownItem"> Blockchain Marketplace</v-list-item></a>
               </v-list>
             </v-menu>
           </NuxtLink>
@@ -93,6 +93,7 @@ nav {
       align-items: center;
       margin-left: 150px;
       a {
+        cursor: pointer;
         color: #000;
         text-decoration: none;
         font-size: 22px;
@@ -125,6 +126,7 @@ nav {
 
   .nav-links .nav-link:hover {
     text-decoration: underline;
+    cursor: pointer;
   }
 
   .login-section .nav-link:hover {

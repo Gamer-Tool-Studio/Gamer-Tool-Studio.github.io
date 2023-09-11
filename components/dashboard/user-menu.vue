@@ -10,12 +10,12 @@
         <v-list-item class="loggedUserName">User Name</v-list-item>
         <v-list-item class="loggedEmailAdd">email@gmail.com</v-list-item>
         <div class="sepration-line"></div>
-        <v-list-item class="dropDownItem"> Manage account</v-list-item>
-        <v-list-item class="dropDownItem"> Check monthly usage</v-list-item>
-        <v-list-item class="dropDownItem"> View API Keys</v-list-item>
+        <a class="dropLink" href="/dashboard"><v-list-item class="dropDownItem"> Manage account</v-list-item></a>
+        <a class="dropLink" href="/dashboard/usage"><v-list-item class="dropDownItem"> Check monthly usage</v-list-item></a>
+        <a class="dropLink" href="/dashboard/api-keys"><v-list-item class="dropDownItem"> View API Keys</v-list-item></a>
         <div class="sepration-line"></div>
-        <v-list-item class="dropDownItem"> Pricing</v-list-item>
-        <v-list-item class="dropDownItem"> Privacy Policy</v-list-item>
+        <a class="dropLink" href="/pricing"><v-list-item class="dropDownItem"> Pricing</v-list-item></a>
+        <a class="dropLink" href="/dashboard/"><v-list-item class="dropDownItem"> Privacy Policy</v-list-item></a>
         <v-list-item class="dropDownItem" @click="logout">Logout</v-list-item>
       </v-list>
     </v-menu>
@@ -60,6 +60,12 @@ const logout = () => {
   min-width: 200px;
   border: 1px solid #ececf1;
   border-radius: 3px;
+}
+
+.dropLink {
+  text-decoration: none;
+  color: inherit;
+  
 }
 
 .sepration-line {

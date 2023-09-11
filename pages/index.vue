@@ -22,7 +22,6 @@
             allowfullscreen
           ></iframe>
         </div>
-        <!-- Add Image or Video Showcase Here -->
       </v-col>
     </v-row>
 
@@ -69,12 +68,12 @@
         </div>
       </div>
     </v-row>
-    <v-row class="get-started">
-      <v-col cols="12">
+    <v-row class="get-started" id="sectionToLinkToApi">
+      <v-col cols="12" class="code-section">
         <h2 class="page-headers">
-          Create powerful AI characters to interact with players and users from any Frontend environment with Dialog Craft GPT library</h2>
+          Create seamless AI characters to interact with players and users from any Frontend environment with Dialog Craft GPT library</h2>
         <pre>
-          <code>
+          <code class="code-display">
             npm install dialogcrafgpt
             curl https://api.gamertoolstudio.com/dialogcraftgpt/v1/ 
             -H "Content-Type: application/json" \
@@ -85,37 +84,38 @@
               "personalityTraits": ["friendly","enigmatic", "picky","observant"],
               "dialogStyle":"mysterious"
               "backgroundStory" :"GPT Wizard is a character in Heavens Beneath, a fantasy RPG game. 
-              "eventsKnowledge": "",
+              "eventsKnowledge": "how to make potions", "game map locations", "villain's aliby",
               "interests": ["astrology":"10", "herbology":"9", "chemistry":"9", "craftsmanship":"7" ],
               "support":"10",
               "maxOutputWords":"400",
               "userInput": "Hey there, where am i?,
               "chatHistory": []
             }'
+            <div class="typed-display">"GPT Wizard response": <span class="typed-message" ref="textElement"></span></div>
           </code>
         </pre>
       </v-col>
       <v-col cols="12" class="button-display">
         <button class="button">View API Reference</button>
       </v-col>
-      <v-col>
+      <v-col id="sectionToLinkToPlugin">
         <h2 class="page-headers">
           Add Dialog Craft GPT Plugin to your favourite game engine today and
-          start harnessing the power of AI-generated dialogs
+          start harnessing the power of AI-generated dialogs with ease
         </h2>
       </v-col>
       <v-col cols="12" class="started-grid">
         <ol class="how-to-start">
           <li>
-            Sign up for a trial account or select a suitable premium plan.
+            Sign up for a trial account or select a suitable paid plan.
           </li>
           <li>
-            Install the DialogCraftGPT plugin in your preferred game engine.
+            Install the DialogCraftGPT plugin in your preferred game engine. <a href="/download-plugin">Download Plugin file</a>.
           </li>
           <li>
-            Define personality traits, provide context about the game and
+            Define personality traits, provide context about game events and
             establish guidelines for your character dialogues with seamless
-            plugin commands
+            plugin commands.
           </li>
           <li>
             Harness the power of Chat GPT AI to generate dynamic and immersive
@@ -142,6 +142,45 @@
   </v-container>
 </template>
 <script lang="ts" setup>
+import { ref, onMounted } from "vue";
+
+const typedMessage = ref(""); // Initialize an empty message
+const messageToType =
+  "Hey there, you seem kinda lost huh? you're exactly where you should be but soon to be the worst of the places to ever been. The beginning may be the end but for you still both.";
+const textElement = ref(null); // Reference to the text element
+
+// Function to simulate typing animation
+const typeMessage = async () => {
+  let shouldRestart = true;
+  let currentMessage = ""; // Store the current message
+
+  while (true) {
+    for (let i = 0; i < messageToType.length; i++) {
+      currentMessage += messageToType[i];
+      textElement.value.textContent = currentMessage; // Update the text element
+      await new Promise((resolve) => setTimeout(resolve, 50)); // Adjust typing speed here
+    }
+
+    // Wait for 2 seconds before restarting
+    if (shouldRestart) {
+      shouldRestart = false;
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // 2 seconds delay
+      currentMessage = ""; // Clear the current message
+      textElement.value.textContent = ""; // Clear the text element
+    } else {
+      // Clear the typed message and start over
+      currentMessage = "";
+      textElement.value.textContent = "";
+      shouldRestart = true;
+    }
+  }
+};
+
+// Start typing animation when the component is mounted
+onMounted(() => {
+  typeMessage();
+});
+
 definePageMeta({
   layout: "default",
 });
@@ -150,6 +189,7 @@ useHead({
   title: "Home Page",
 });
 </script>
+
 <style lang="scss" scoped>
 @import "../assets/lp_styles.scss";
 </style>

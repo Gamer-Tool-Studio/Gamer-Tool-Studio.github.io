@@ -142,7 +142,7 @@ const chartOptions = ref({
 
 .switch-field label:hover {
   cursor: pointer;
-  background-color: grey;
+  background-color: #d9d9e3;
 }
 
 .chart-title {
