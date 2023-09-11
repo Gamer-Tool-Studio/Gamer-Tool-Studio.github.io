@@ -69,8 +69,35 @@
         </div>
       </div>
     </v-row>
-
     <v-row class="get-started">
+      <v-col cols="12">
+        <h2 class="page-headers">
+          Create powerful AI characters to interact with players and users from any Frontend environment with Dialog Craft GPT library</h2>
+        <pre>
+          <code>
+            npm install dialogcrafgpt
+            curl https://api.gamertoolstudio.com/dialogcraftgpt/v1/ 
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $DIALOGCRAFTGPT_API_KEY" \
+            -d '{
+              "role": "system",
+              "name": "GPT Wizard",
+              "personalityTraits": ["friendly","enigmatic", "picky","observant"],
+              "dialogStyle":"mysterious"
+              "backgroundStory" :"GPT Wizard is a character in Heavens Beneath, a fantasy RPG game. 
+              "eventsKnowledge": "",
+              "interests": ["astrology":"10", "herbology":"9", "chemistry":"9", "craftsmanship":"7" ],
+              "support":"10",
+              "maxOutputWords":"400",
+              "userInput": "Hey there, where am i?,
+              "chatHistory": []
+            }'
+          </code>
+        </pre>
+      </v-col>
+      <v-col cols="12" class="button-display">
+        <button class="button">View API Reference</button>
+      </v-col>
       <v-col>
         <h2 class="page-headers">
           Add Dialog Craft GPT Plugin to your favourite game engine today and
@@ -102,7 +129,7 @@
         </div>
       </v-col>
     </v-row>
-    <section>
+      <section>
       <div class="start-trial">
         <h2 class="page-headers">
           Are you ready to take your game development to the next level with the

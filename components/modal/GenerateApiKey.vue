@@ -36,10 +36,12 @@
               />
             </v-col>
             <v-col cols="12" class="footer-section">
-              <button class="cancel-button" @click="close">Cancel</button>
-              <button class="button" @click="$emit('save')">
-                {{ isCreating }}
-              </button>
+                <div class="button-container">
+                  <button class="cancel-button" @click="close">Cancel</button>
+                  <button class="button" @click="$emit('save')">
+                    {{ isCreating }}
+                  </button>
+                </div>
             </v-col>
           </slot>
         </section>
@@ -171,7 +173,6 @@ export default {
 
 .footer-section {
   display: inline-flex;
-  float: right;
   padding-right: 20px !important;
 }
 
@@ -179,6 +180,10 @@ export default {
   margin: 3px;
 }
 
+.button-container{
+  display: inline-flex;
+  float: right;
+}
 .cancel-button {
   background-color: #ececf1;
   padding: 5px 15px;
