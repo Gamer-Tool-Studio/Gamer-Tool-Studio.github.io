@@ -82,7 +82,7 @@ nav {
       list-style: none;
       display: inline-flex;
       align-items: center;
-      margin-left:150px;
+      margin-left: 150px;
       a {
         color: #000;
         text-decoration: none;
@@ -152,16 +152,15 @@ nav {
 
   .nav-right-link {
     margin-left: 0 !important;
-   
+
     display: flex;
     align-items: center;
     font-family: "Bebas Neue";
-    
   }
 
   .nav-right-link img {
     width: 30px;
-    height:30px;
+    height: 30px;
     border-radius: 50%;
   }
   .nav-right-link:hover {

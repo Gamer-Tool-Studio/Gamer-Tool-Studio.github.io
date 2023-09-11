@@ -73,6 +73,7 @@ useHead({
   margin-top: 15px;
 }
 </style>
+
 <style lang="scss">
 .new-key-section {
   display: block;

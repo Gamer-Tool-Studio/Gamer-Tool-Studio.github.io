@@ -1,7 +1,7 @@
 <template>
   <v-btn class="nav-right-link">
-    <img src="~/assets/images/ghn.jpeg">
-    <p class="logged-orgName">Org Name</p> 
+    <img src="~/assets/images/ghn.jpeg" />
+    <p class="logged-orgName">Org Name</p>
     <v-menu activator="parent" v-model:model-value="open">
       <v-list class="dropDownMenu">
         <v-list-item v-for="(item, index) in items" :key="index" :value="index">
@@ -16,15 +16,15 @@
         <div class="sepration-line"></div>
         <v-list-item class="dropDownItem"> Pricing</v-list-item>
         <v-list-item class="dropDownItem"> Privacy Policy</v-list-item>
-        <v-list-item class="dropDownItem"><NuxtLink @click="logout">Logout</NuxtLink></v-list-item>
-        
+        <v-list-item class="dropDownItem" @click="logout">Logout</v-list-item>
       </v-list>
     </v-menu>
   </v-btn>
 </template>
 
 <script setup>
-import { useAuthStore } from "~/store/auth"; // import the auth store 
+// Component: UserMenu
+import { useAuthStore } from "~/store/auth"; // import the auth store
 const router = useRouter();
 const { logUserOut } = useAuthStore(); // use authenticateUser action from  auth store
 
@@ -38,12 +38,11 @@ const logout = () => {
 </script>
 
 <style lang="scss">
-
-.logged-orgName{
+.logged-orgName {
   margin-left: 10px;
 }
 
-.loggedUserName{
+.loggedUserName {
   font-size: 14px;
   font-weight: 750;
   min-height: 3px !important;
@@ -58,13 +57,13 @@ const logout = () => {
 }
 
 .dropDownMenu {
-  min-width:200px;
-  border: 1px solid #ECECF1;
+  min-width: 200px;
+  border: 1px solid #ececf1;
   border-radius: 3px;
 }
 
 .sepration-line {
-  border-bottom: 1px solid #ECECF1;
+  border-bottom: 1px solid #ececf1;
 }
 
 .dropDownItem {
