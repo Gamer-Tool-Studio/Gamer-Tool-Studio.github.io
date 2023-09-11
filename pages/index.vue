@@ -149,7 +149,7 @@ const messageToType =
   "Hey there, you seem kinda lost huh? you're exactly where you should be but soon to be the worst of the places to ever been. The beginning may be the end but for you still both.";
 const textElement = ref(null); // Reference to the text element
 
-// Function to simulate typing animation
+// Typing animation
 const typeMessage = async () => {
   let shouldRestart = true;
   let currentMessage = ""; // Store the current message

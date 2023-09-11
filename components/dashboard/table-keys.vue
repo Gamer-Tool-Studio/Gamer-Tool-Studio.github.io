@@ -127,6 +127,7 @@ const editItem = (item) => {
 .table-toolbar {
   .v-toolbar__content {
     align-items: end;
+    height: 40px !important;
   }
 }
 </style>

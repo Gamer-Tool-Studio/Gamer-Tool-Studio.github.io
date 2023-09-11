@@ -12,7 +12,7 @@
       </v-col>
       <v-col cols="8" class="month-title-section">
         <v-btn flat class="switch-month" v-if="hasPreviousMonth" @click="changeMonth(currentMonth - 1)">&lt;</v-btn>
-        <v-btn flat width="120">{{ currentMonthName }}</v-btn>
+        <v-btn flat class="month-title" width="120">{{ currentMonthName }}</v-btn>
         <v-btn flat class="switch-month" v-if="hasNextMonth" @click="changeMonth(currentMonth + 1)">&gt;</v-btn>
       </v-col>
       <v-col cols="4" class="daily-section">
@@ -27,7 +27,6 @@
       <v-col cols="12" class="chart-area">
         <Bar :data="chartData" :options="chartOptions" />
       </v-col>
-      <img class="chart" src="~/assets/images/chart.png" />
       <v-col cols="12">
         <h3>Usage this month</h3>
       </v-col>
@@ -125,6 +124,10 @@ const chartOptions = ref({
 
 .month-title-section a {
   text-decoration: none;
+}
+
+.v-btn_content{
+  font-weight: 900 !important;
 }
 
 .switch-field {

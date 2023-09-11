@@ -83,4 +83,5 @@ useHead({
   cursor: pointer;
   background-color: #d9d9e3;
 }
+
 </style>
