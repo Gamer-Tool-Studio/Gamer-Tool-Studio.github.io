@@ -19,8 +19,8 @@
             <li>Output tokens</li>
             <li></li>
             <li>Users</li>
-            <li class="align-right">1K</li>
-            <li class="align-right">1K</li>
+            <li class="align-right">1M</li>
+            <li class="align-right">2M</li>
             <li class="align-right">1</li>
           </ul>
           <div class="price-display-free">
@@ -35,13 +35,12 @@
             <li>Output tokens</li>
             <li></li>
             <li>Users</li>
-            <li class="align-right">2M</li>
-            <li class="align-right">1.5M</li>
+            <li class="align-right">10M</li>
+            <li class="align-right">20M</li>
             <li class="align-right">1</li>
           </ul>
-          <div class="price-display">
+          <div class="price-display-free">
             <h4 class="bold-header">$99,00</h4>
-            <h5 class="bold-month">/month</h5>
           </div>
           <button class="button">Subscribe</button>
         </div>
@@ -52,13 +51,12 @@
             <li>Output tokens</li>
             <li></li>
             <li>Users</li>
+            <li class="align-right">50M</li>
             <li class="align-right">100M</li>
-            <li class="align-right">75M</li>
             <li class="align-right">10</li>
           </ul>
-          <div class="price-display">
-            <h4 class="light-header">$199,00</h4>
-            <h5 class="light-month">/month</h5>
+          <div class="price-display-free">
+            <h4 class="light-header">$399,00</h4>
           </div>
           <button class="button light-button">Subscribe</button>
         </div>
