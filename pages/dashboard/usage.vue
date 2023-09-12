@@ -22,13 +22,13 @@
         </div>
       </v-col>
       <v-col cols="12" class="chart-title">
-        <h3>Daily usage (tokens)</h3>
+        <h3>Daily usage (1,000 tokens)</h3>
       </v-col>
       <v-col cols="12" class="chart-area">
         <Bar :data="chartData" :options="chartOptions" />
       </v-col>
       <v-col cols="12">
-        <h3>Usage this month</h3>
+        <h3>Token usage count</h3>
       </v-col>
       <v-col cols="12" class="progress-section">
         <div class="progress-container">
@@ -96,7 +96,7 @@ const chartData = computed(() => ({
   datasets: [
     {
       label: 'Tokens used',
-      backgroundColor: '#d900ee ',
+      backgroundColor: '#6200EE',
       data: isCumulative.value ? getCumulativeTokens(monthTokensDaily.value) : monthTokensDaily.value,
     },
   ],
@@ -121,13 +121,13 @@ const chartOptions = ref({
 .month-title-section h3 {
   margin-right: 10px;
 }
-
-.month-title-section a {
+x .month-title-section a {
   text-decoration: none;
 }
 
 .month-title .v-btn__content {
-  font-weight: 900;
+  font-size: 18px;
+  font-weight: 800;
 }
 
 .switch-field {
@@ -140,7 +140,9 @@ const chartOptions = ref({
 .switch-field label {
   width: 50%;
   text-align: center;
-  padding: 5px;
+  padding: 3px;
+  font-size: 18px;
+  font-family: 'Bebas Neue';
 }
 
 .switch-field label:hover {
@@ -148,17 +150,24 @@ const chartOptions = ref({
   background-color: #d9d9e3;
 }
 
+.switch-month {
+  padding-right: 0;
+  padding-left: 0;
+  font-weight: 600;
+  font-size: 20px;
+}
+
 .chart-title {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .chart-title h3 {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.chart {
+.chart-area {
   height: 300px;
 }
 
@@ -182,7 +191,7 @@ const chartOptions = ref({
 .progress-container {
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 100%;
 }
 
 .progress-bar {
@@ -193,14 +202,14 @@ const chartOptions = ref({
     background-image: linear-gradient(
       90deg,
       rgba(98, 0, 238, 1) v-bind(progressInputPercentage),
-      #ccc v-bind(progressInputPercentage)
+      #ececf1 v-bind(progressInputPercentage)
     );
   }
   &.output {
     background-image: linear-gradient(
       90deg,
       rgba(98, 0, 238, 1) v-bind(progressOutputPercentage),
-      #ccc v-bind(progressOutputPercentage)
+      #ececf1 v-bind(progressOutputPercentage)
     );
   }
 }
