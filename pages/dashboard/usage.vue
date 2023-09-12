@@ -4,7 +4,7 @@
       <v-col cols="12">
         <h1>Usage</h1>
       </v-col>
-      <v-col cols="12">
+      <v-col cols="12" class="intro-text">
         <p>
           Below you'll find a summary of API usage for your organization. All dates and times are UTC-based, and data
           may be delayed up to 5 minutes.
@@ -220,6 +220,9 @@ const chartOptions = ref({
 
   border-radius: 10px 0px 0px 10px;
 }
+.progress-values {
+  min-width: 30%;
+}
 
 .progress-values p {
   color: #333;
@@ -242,4 +245,9 @@ const chartOptions = ref({
 .current-box h4 {
   color: #6200ee;
 }
+
+/* Media Queries for Responsiveness */
+
+
+
 </style>

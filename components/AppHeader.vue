@@ -7,7 +7,7 @@
             <img alt="logo" src="~/assets/images/robot-icon-logo.png" class="nav-logo" />
           </NuxtLink>
         </li>
-        <li class="nav-left">
+        <li class="nav-left mobile-display">
           <!-- <NuxtLink to="/products">Products</NuxtLink> -->
           <NuxtLink>
             Products
@@ -20,11 +20,11 @@
             </v-menu>
           </NuxtLink>
         </li>
-        <li class="nav-left">
+        <li class="nav-left mobile-display">
           <NuxtLink to="/documentation">Documentation</NuxtLink>
         </li>
-        <li class="nav-left"><NuxtLink to="/pricing">Pricing</NuxtLink></li>
-        <li class="nav-left">
+        <li class="nav-left mobile-display"><NuxtLink to="/pricing">Pricing</NuxtLink></li>
+        <li class="nav-left mobile-display">
           <NuxtLink to="/download-plugin">Download Plugin</NuxtLink>
         </li>
       </ul>
@@ -38,6 +38,9 @@
         </li>
         <li v-if="!authenticated" class="nav-right">
           <a href="#register" class="button">Sign up</a>
+        </li>
+        <li class="mobile-menu">&#9776;
+          <DashboardUserMenu></DashboardUserMenu>
         </li>
       </ul>
     </div>
@@ -84,6 +87,7 @@ nav {
     .lp {
       max-width: 1200px;
     }
+
     .login-section li {
       margin: 0 12px;
     }
@@ -184,6 +188,10 @@ nav {
   }
 }
 
+.mobile-menu {
+  display: none;
+}
+
 nav.lp {
   background-color: black;
   * {
@@ -210,4 +218,40 @@ nav.lp {
     }
   }
 }
+
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+ .mobile-display {
+  display: none !important;
+}
+.login-section li{
+  display: flex !important;
+  align-items: center !important;
+}
+
+.mobile-menu {
+  display: flex;
+  align-items: center;
+  font-size: 50px;
+  padding-bottom: 8px;
+}
+
+.mobile-menu:hover {
+  cursor: pointer;
+}
+
+.nav-logo {
+  height: 30px !important;
+  width: 30px;
+}
+
+.nav-right-link {
+  display: none !important;
+}
+ 
+
+}
+
+
 </style>
