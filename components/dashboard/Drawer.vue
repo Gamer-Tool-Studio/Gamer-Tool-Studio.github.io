@@ -53,6 +53,7 @@ watch(
 const items = ref([
   {
     title: "ORGANIZATION",
+    class: "drawer-title",
     // to: "/dashboard",
     props: {
       prependIcon: "",
@@ -115,6 +116,7 @@ const items = ref([
   {
     title: "USER",
     // to: "/dashboard/api-keys",
+    class: "drawer-title",
     props: {
       prependIcon: "",
     },
@@ -147,7 +149,10 @@ const mapItem = (item) => {
 };
 </script>
 <style lang="scss">
+
+
 #core-navigation-drawer {
+  padding-top: 32px !important;
   height: 100%;
   max-width: 300px;
   flex: 0 0 15%;
@@ -158,7 +163,8 @@ const mapItem = (item) => {
 
   .v-list-item {
     padding-inline-start: 24px;
-    padding-inline-end: 24px;
+    padding-inline-end: 14px;
+    font-size: 14px !important;
 
     &__prepend {
       .v-icon {
@@ -180,6 +186,8 @@ const mapItem = (item) => {
 
     .v-list-item-title {
       text-transform: capitalize;
+      font-size: 14px !important;
+    
     }
   }
 }
