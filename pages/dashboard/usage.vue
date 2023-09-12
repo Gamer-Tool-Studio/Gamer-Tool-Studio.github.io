@@ -126,8 +126,8 @@ const chartOptions = ref({
   text-decoration: none;
 }
 
-.v-btn_content{
-  font-weight: 900 !important;
+.month-title .v-btn__content {
+  font-weight: 900;
 }
 
 .switch-field {
