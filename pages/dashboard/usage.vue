@@ -121,7 +121,8 @@ const chartOptions = ref({
 .month-title-section h3 {
   margin-right: 10px;
 }
-x .month-title-section a {
+
+.month-title-section a {
   text-decoration: none;
 }
 
