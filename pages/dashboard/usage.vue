@@ -249,5 +249,4 @@ const chartOptions = ref({
 /* Media Queries for Responsiveness */
 
 
-
 </style>

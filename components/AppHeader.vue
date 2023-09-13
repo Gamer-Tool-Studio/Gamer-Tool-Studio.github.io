@@ -39,9 +39,7 @@
         <li v-if="!authenticated" class="nav-right">
           <a href="#register" class="button">Sign up</a>
         </li>
-        <li class="mobile-menu">&#9776;
-          <DashboardUserMenu></DashboardUserMenu>
-        </li>
+        <li class="mobile-menu">&#9776;</li>
       </ul>
     </div>
   </nav>
@@ -79,14 +77,14 @@ nav {
 
   .navbar {
     max-height: 55px;
+    margin-left: auto;
+    margin-right: auto;
     width: 100%;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    .lp {
-      max-width: 1200px;
-    }
+    max-width: 1200px !important;
+    
 
     .login-section li {
       margin: 0 12px;
@@ -95,7 +93,6 @@ nav {
       list-style: none;
       display: inline-flex;
       align-items: center;
-      margin-left: 150px;
       a {
         cursor: pointer;
         color: #000;
@@ -123,7 +120,8 @@ nav {
 
     img.nav-logo {
       display: block;
-      max-height: 50px;
+      max-height: 30px;
+      max-width: 30px;
       // margin-bottom: 15px;
     }
   }
@@ -153,7 +151,6 @@ nav {
   .login-section {
     margin: 0;
     margin-left: auto;
-    margin-right: 120px;
     padding: 0;
     list-style: none;
     display: flex;
@@ -221,7 +218,7 @@ nav.lp {
 
 
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 820px) {
  .mobile-display {
   display: none !important;
 }
@@ -241,15 +238,20 @@ nav.lp {
   cursor: pointer;
 }
 
-.nav-logo {
-  height: 30px !important;
-  width: 30px;
-}
+
 
 .nav-right-link {
   display: none !important;
 }
  
+
+}
+
+
+@media (max-width: 930px) {
+  .nav-links a{
+    font-size: 16px !important;
+  }
 
 }
 

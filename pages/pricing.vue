@@ -19,8 +19,8 @@
             <li>Output tokens</li>
             <li></li>
             <li>Users</li>
-            <li class="align-right">250K</li>
-            <li class="align-right">500K</li>
+            <li class="align-right">200K</li>
+            <li class="align-right">200K</li>
             <li class="align-right">1</li>
           </ul>
           <div class="price-display-free">
