@@ -21,23 +21,23 @@ export const useAuthStore = defineStore('auth', {
       // useFetch from nuxt 3
       // dummy before our API
 
-      const res: any = await axios(BASE_URL + '/auth/local/login', {
+      const { data, pending }: any = await useFetch(BASE_URL + '/auth/local/login', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        data: credentials,
-        withCredentials: true,
+        body: credentials,
+        credentials: 'include', // fetch
+        // withCredentials: true, // axios
         // onResponse({ request, response, options }) {
         //   // Process the response data
         //   console.log('getSetCookie', response.headers.getSetCookie());
         // },
       });
-      console.log('res', res);
-      // this.loading = pending;
-      console.log('data', res.data);
+      this.loading = pending;
+      console.log('data', data);
 
-      if (res.data.value) {
+      if (data.value) {
         const token = useCookie('token'); // useCookie new hook in nuxt 3
-        token.value = res.data?.value?.token; // set token to cookie
+        token.value = data?.value?.token || data?.value?.user?.password; // set token to cookie
         this.authenticated = true; // set authenticated  state value to true
       }
     },
