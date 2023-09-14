@@ -69,11 +69,12 @@
       </div>
     </v-row>
     <v-row class="get-started" id="sectionToLinkToApi">
-      <v-col cols="12" class="code-section">
+      <v-col>
         <h2 class="page-headers">
           Create seamless AI characters to interact with players and users from any Frontend environment with Dialog Craft GPT library</h2>
-        <pre>
-          <code class="code-display">
+        <pre class="code-display">
+          <code>
+            <div class="code-style">
             npm install dialogcrafgpt
             curl https://api.gamertoolstudio.com/dialogcraftgpt/v1/ 
             -H "Content-Type: application/json" \
@@ -83,8 +84,8 @@
               "name": "GPT Wizard",
               "personalityTraits": ["friendly","enigmatic", "picky","observant"],
               "dialogStyle":"mysterious"
-              "backgroundStory" :"GPT Wizard is a character in Heavens Beneath, a fantasy RPG game. 
-              "eventsKnowledge": "how to make potions", "game map locations", "villain's aliby",
+              "backgroundStory" :"you are a character in Heavens Beneath, a fantasy RPG game.", 
+              "eventsKnowledge": "make potions", "game map locations", "villain's aliby.",
               "interests": ["astrology":"10", "herbology":"9", "chemistry":"9", "craftsmanship":"7" ],
               "support":"10",
               "maxOutputWords":"400",
@@ -92,42 +93,48 @@
               "chatHistory": []
             }'
             <div class="typed-display">"GPT Wizard response": <span class="typed-message" ref="textElement"></span></div>
+          </div>
           </code>
         </pre>
       </v-col>
       <v-col cols="12" class="button-display">
         <button class="button">View API Reference</button>
       </v-col>
-      <v-col id="sectionToLinkToPlugin">
+      <v-col cols="12" id="sectionToLinkToPlugin">
         <h2 class="page-headers">
           Add Dialog Craft GPT Plugin to your favourite game engine today and
           start harnessing the power of AI-generated dialogs with ease
         </h2>
       </v-col>
-      <v-col cols="12" class="started-grid">
-        <ol class="how-to-start">
-          <li>
-            Sign up for a trial account or select a suitable paid plan.
-          </li>
-          <li>
-            Install the DialogCraftGPT plugin in your preferred game engine. <a href="/download-plugin">Download Plugin file</a>.
-          </li>
-          <li>
-            Define personality traits, provide context about game events and
-            establish guidelines for your character dialogues with seamless
-            plugin commands.
-          </li>
-          <li>
-            Harness the power of Chat GPT AI to generate dynamic and immersive
-            conversations.
-          </li>
-          <li>Integrate the generated dialogues into your game seamlessly.</li>
-        </ol>
-        <div class="engines-available">
-          <img class="engine-logo" src="images/RMMZ.png" />
-          <img class="engine-logo" src="images/RMMV.png" />
-        </div>
-      </v-col>
+        <v-col class="plugin-explain">
+          <ol class="how-to-start">
+            <li>
+              Sign up for a trial account or select a suitable paid plan.
+            </li>
+            <li>
+              Install the DialogCraftGPT plugin in your preferred game engine. <a href="/download-plugin">Download Plugin file</a>.
+            </li>
+            <li>
+              Define personality traits, provide context about game events and
+              establish guidelines for your character dialogues with seamless
+              plugin commands.
+            </li>
+            <li>
+              Harness the power of Chat GPT AI to generate dynamic and immersive
+              conversations.
+            </li>
+            <li>Integrate the generated dialogues into your game seamlessly.</li>
+          </ol>
+        </v-col>
+        <v-col cols="6" class="engines-available">
+          <div class="engine-logo-container">
+            <img class="engine-logo" src="images/RMMZ.png" />
+          </div>
+          <div class="engine-logo-container">
+            <img class="engine-logo" src="images/RMMV.png" />
+          </div>
+        </v-col>
+
     </v-row>
       <section>
       <div class="start-trial">

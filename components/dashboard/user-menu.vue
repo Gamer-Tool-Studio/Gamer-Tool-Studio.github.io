@@ -80,4 +80,7 @@ const logout = () => {
   background-color: rgba(98, 0, 238, 0.5);
   cursor: pointer;
 }
+
 </style>
+
+

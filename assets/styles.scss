@@ -59,6 +59,11 @@ h2 {
   font-family: "Titillium Web";
 }
 
+.nav-logo {
+  height: 40px;
+  width:40px;
+}
+
 .nav-links li {
   padding: 0;
 }
@@ -211,6 +216,34 @@ section ol {
 
 
 /* Media Queries for Responsiveness */
+@media (max-width: 900px) {
+  .feature-boxes {
+  display: inline-block;
+  align-items: center;
+  }
+
+  .feature-box {
+    width: 100%;
+  }
+
+  .contact-us {
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 1280px) {
+  .feature-boxes {
+    flex-direction: row; 
+  }
+
+  .feature-box {
+    margin: auto !important;
+    margin-bottom: 50px !important;
+  }
+
+}
+
 @media (min-width: 768px) {
   .nav-links {
     flex-direction: row;
@@ -226,13 +259,4 @@ section ol {
     justify-content: flex-end;
   }
 
-  @media (max-width: 768px) {
-    .feature-boxes {
-      flex-direction: column;
-    }
-
-    .feature-box {
-      width: 100%;
-    }
-  }
 }
