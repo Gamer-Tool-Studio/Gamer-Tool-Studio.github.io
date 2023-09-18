@@ -32,8 +32,8 @@
       </v-col>
       <v-col cols="12">
         <div class="auth-card">
-          <button @click.prevent="loginGoogle"><img src="images/RPGM-icon.png"></button>
-          <p>Google</p>
+          <button @click.prevent="loginGoogle"><img src="images/google-logo.png"></button>
+          <p>Continue with Google</p>
         </div>
         
       </v-col>
@@ -134,7 +134,25 @@ const register = async () => {
 
 .auth-card {
   width: 250px;
-  border: 1px solid #6200ee;
-  display: inline-block;
+  border: 1px solid #c2c8d0;
+  border-radius: 3px;
+  display: inline-flex;
+  padding: 15px;
 }
+
+.auth-card:hover {
+  cursor: pointer;
+  background-color:#d9d9e3;
+}
+
+.auh.card img {
+  max-width: 30px;
+}
+
+.auth-card p {
+  margin-left: 20px;
+  font-weight: 400;
+}
+
+
 </style>
