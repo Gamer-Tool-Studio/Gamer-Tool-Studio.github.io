@@ -5,24 +5,37 @@
         <h1>Login</h1>
       </v-col>
       <v-col cols="12" class="container-form">
-        <label for="uname"><b>Username</b></label>
-        <input
-          v-model="user.username"
-          type="text"
-          class="input"
-          placeholder="Enter Username or Email"
-          name="uname"
-          required
-        />
-
-        <label for="psw"><b class="pass-text">Password</b></label>
-        <input v-model="user.password" type="password" class="input" placeholder="Enter Password" name="psw" required />
-        <button @click.prevent="login" class="button">Login</button>
-        <button @click.prevent="register" class="button">Register</button>
-        <button @click.prevent="loginGoogle" class="button">Login Google</button>
+        <div class="login-box">
+          <label for="uname" class="pass-text"><b>Username</b></label><br>
+          <input
+            v-model="user.username"
+            type="text"
+            class="input"
+            placeholder="Enter Username or Email"
+            name="uname"
+            required
+          />
+        </div>
+        <div class="login-box">
+          <label for="psw" class="pass-text"><b>Password</b></label><br>
+          <input v-model="user.password" type="password" class="input" placeholder="Enter Password" name="psw" required />
+          <v-col cols="12">
+            <button @click.prevent="login" class="button loginBtn">Continue</button>
+          </v-col>
+        </div>
       </v-col>
       <v-col cols="12" class="register-link">
-        <p>Don't have an account yet? Register <a href="#">here</a>.</p>
+        <p>Don't have an account? <a href="#">Sign up</a>.</p>
+      </v-col>
+      <v-col cols="12">
+        <p>----------- Or ------------</p>
+      </v-col>
+      <v-col cols="12">
+        <div class="auth-card">
+          <button @click.prevent="loginGoogle"><img src="images/RPGM-icon.png"></button>
+          <p>Google</p>
+        </div>
+        
       </v-col>
     </v-row>
   </v-container>
@@ -67,31 +80,35 @@ const register = async () => {
 };
 </script>
 <style lang="scss">
+.title {
+  text-align: center;
+}
+.login-container {
+  text-align: center;
+}
 .input {
-  border: 1px solid #6e6e80;
-  margin-right: 5px;
-  border-radius: 5px;
-  margin-left: 10px;
+  border: 1px solid #6200ee;
+  border-radius: 3px;
   padding: 10px;
   width: 250px;
 }
-.input:focus {
-  border: 1px solid #6200ee;
-}
-
-.pass-text {
-  margin-left: 30px;
-}
 
 .container-form {
-  margin-top: 20px;
+  padding-bottom: 0;
+  padding-top: 0;
 }
 
+
 .container-form button {
-  margin-left: 10px;
   font-size: 18px;
 }
 
+
+.pass-text {
+ font-size: 1px;
+ display: none;
+
+}
 .container-form p {
   margin-top: 10px;
 }
@@ -103,5 +120,21 @@ const register = async () => {
 
 .login-container a:hover {
   text-decoration: underline;
+}
+
+.register-link {
+  padding-top: 0;
+  text-align: center;
+}
+
+.loginBtn {
+  padding: 15px;
+  width: 250px !important;
+}
+
+.auth-card {
+  width: 250px;
+  border: 1px solid #6200ee;
+  display: inline-block;
 }
 </style>
