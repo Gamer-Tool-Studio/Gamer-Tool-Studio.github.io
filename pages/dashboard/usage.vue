@@ -104,6 +104,7 @@ const chartData = computed(() => ({
 const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
+  plugins: { legend: { display: false } },
 });
 </script>
 
