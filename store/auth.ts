@@ -2,6 +2,10 @@ import axios from 'axios';
 import { defineStore } from 'pinia';
 
 const BASE_URL = 'http://127.0.0.1:3002/api/v1'; // "https://dummyjson.com/auth/login";
+const LOCAL_LOGIN = '/auth/local/login'; // "https://dummyjson.com/auth/login";
+const LOCAL_REGISTER = '/auth/local/register'; // "https://dummyjson.com/auth/login";
+const GOOGLE_LOGIN = '/auth/google/login'; // "https://dummyjson.com/auth/login";
+// const GOOGLE_REGISTER = '/auth/google/register'; // "https://dummyjson.com/auth/login";
 
 interface LoginUserPayload {
   username: string;
@@ -17,20 +21,42 @@ export const useAuthStore = defineStore('auth', {
     loading: false,
   }),
   actions: {
-    async authenticateUser(credentials: LoginUserPayload) {
-      // useFetch from nuxt 3
-      // dummy before our API
+    async authenticateGoogleUser() {
+      window.open(BASE_URL + GOOGLE_LOGIN, '_blank');
+      // const { data, pending }: any = await useFetch(BASE_URL + GOOGLE_LOGIN, {
+      //   method: 'get',
+      // });
+      // this.loading = pending;
 
-      const { data, pending }: any = await useFetch(BASE_URL + '/auth/local/login', {
+      // if (data.value) {
+      //   const token = useCookie('token'); // useCookie new hook in nuxt 3
+      //   token.value = data?.value?.password; // set token to cookie
+      //   this.authenticated = true; // set authenticated  state value to true
+      // }
+    },
+
+    async registerGoogleUser(newUser: RegisterUserPayload) {
+      const { data, pending }: any = await useFetch(BASE_URL + GOOGLE_REGISTER, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: newUser,
+      });
+      this.loading = pending;
+
+      if (data.value) {
+        const token = useCookie('token'); // useCookie new hook in nuxt 3
+        token.value = data?.value?.password; // set token to cookie
+        this.authenticated = true; // set authenticated  state value to true
+      }
+    },
+
+    // LOCAL STRATEGY API
+    async authenticateUser(credentials: LoginUserPayload) {
+      const { data, pending }: any = await useFetch(BASE_URL + LOCAL_LOGIN, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: credentials,
         credentials: 'include', // fetch
-        // withCredentials: true, // axios
-        // onResponse({ request, response, options }) {
-        //   // Process the response data
-        //   console.log('getSetCookie', response.headers.getSetCookie());
-        // },
       });
       this.loading = pending;
       console.log('data', data);
@@ -42,9 +68,7 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async registerUser(newUser: RegisterUserPayload) {
-      // useFetch from nuxt 3
-      // dummy before our API
-      const { data, pending }: any = await useFetch(BASE_URL + '/auth/local/register', {
+      const { data, pending }: any = await useFetch(BASE_URL + LOCAL_REGISTER, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: newUser,

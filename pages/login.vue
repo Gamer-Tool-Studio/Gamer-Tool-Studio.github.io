@@ -19,6 +19,7 @@
         <input v-model="user.password" type="password" class="input" placeholder="Enter Password" name="psw" required />
         <button @click.prevent="login" class="button">Login</button>
         <button @click.prevent="register" class="button">Register</button>
+        <button @click.prevent="loginGoogle" class="button">Login Google</button>
       </v-col>
       <v-col cols="12" class="register-link">
         <p>Don't have an account yet? Register <a href="#">here</a>.</p>
@@ -30,7 +31,7 @@
 import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
 import { useAuthStore } from '~/store/auth'; // import the auth store we just created
 
-const { authenticateUser, registerUser } = useAuthStore(); // use authenticateUser action from  auth store
+const { authenticateUser, registerUser, authenticateGoogleUser } = useAuthStore(); // use authenticateUser action from  auth store
 
 const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
 
@@ -39,6 +40,15 @@ const user = ref({
   password: '0lelplR',
 });
 const router = useRouter();
+const loginGoogle = async () => {
+  await authenticateGoogleUser(); // call authenticateUser and pass the user object
+  // redirect to homepage if user is authenticated
+
+  if (authenticated.value) {
+    console.log('authenticated', authenticated.value);
+    router.push({ path: '/dashboard' });
+  }
+};
 const login = async () => {
   await authenticateUser(user.value); // call authenticateUser and pass the user object
   // redirect to homepage if user is authenticated
