@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { defineStore } from 'pinia';
 
-const BASE_URL = 'http://127.0.0.1:3002/api/v1'; // "https://dummyjson.com/auth/login";
-const LOCAL_LOGIN = '/auth/local/login'; // "https://dummyjson.com/auth/login";
-const LOCAL_REGISTER = '/auth/local/register'; // "https://dummyjson.com/auth/login";
-const GOOGLE_LOGIN = '/auth/google/login'; // "https://dummyjson.com/auth/login";
-// const GOOGLE_REGISTER = '/auth/google/register'; // "https://dummyjson.com/auth/login";
+const BASE_URL = 'http://127.0.0.1:3002/api/v1'; //"https://dummyjson.com/auth/login";
+const LOCAL_LOGIN = '/auth/local/login'; //
+const LOCAL_REGISTER = '/auth/local/register'; //
+const GOOGLE_LOGIN = '/auth/google/login'; //
+const GOOGLE_REGISTER = '/auth/google/register'; //
+const CHECK_AUTH = '/auth/check'; //
 
 interface LoginUserPayload {
   username: string;
@@ -21,8 +22,20 @@ export const useAuthStore = defineStore('auth', {
     loading: false,
   }),
   actions: {
+    async isAuthenticated(): Promise<Boolean> {
+      const { data, pending }: any = await useFetch(BASE_URL + CHECK_AUTH, {
+        method: 'get',
+      });
+      this.loading = pending;
+
+      if (data.value) {
+        this.authenticated = data.value.isAuthenticated;
+        return this.authenticated;
+      }
+      return false;
+    },
     async authenticateGoogleUser() {
-      window.open(BASE_URL + GOOGLE_LOGIN, '_blank');
+      window.location.href = BASE_URL + GOOGLE_LOGIN;
       // const { data, pending }: any = await useFetch(BASE_URL + GOOGLE_LOGIN, {
       //   method: 'get',
       // });
