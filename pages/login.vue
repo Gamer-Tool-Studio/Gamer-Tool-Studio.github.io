@@ -31,8 +31,8 @@
         <p>----------- Or ------------</p>
       </v-col>
       <v-col cols="12">
-        <div class="auth-card">
-          <button @click.prevent="loginGoogle"><img src="images/google-logo.png"></button>
+        <div class="auth-card" @click.prevent="loginGoogle">
+          <img src="images/google-logo.png">
           <p>Continue with Google</p>
         </div>
         
