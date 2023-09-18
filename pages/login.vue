@@ -2,7 +2,7 @@
   <v-container class="login-container">
     <v-row>
       <v-col cols="12" class="title">
-        <h1>Login</h1>
+        <h1>Welcome back</h1>
       </v-col>
       <v-col cols="12" class="container-form">
         <div class="login-box">
@@ -35,7 +35,6 @@
           <img src="images/google-logo.png">
           <p>Continue with Google</p>
         </div>
-        
       </v-col>
     </v-row>
   </v-container>
@@ -138,6 +137,7 @@ const register = async () => {
   border-radius: 3px;
   display: inline-flex;
   padding: 15px;
+  margin-bottom: 50px;
 }
 
 .auth-card:hover {
