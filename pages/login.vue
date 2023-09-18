@@ -2,7 +2,7 @@
   <v-container class="login-container">
     <v-row>
       <v-col cols="12" class="title">
-        <h2>Login</h2>
+        <h1>Login</h1>
       </v-col>
       <v-col cols="12" class="container-form">
         <label for="uname"><b>Username</b></label>
@@ -72,9 +72,10 @@ const register = async () => {
   margin-right: 5px;
   border-radius: 5px;
   margin-left: 10px;
-  padding: 5px;
+  padding: 10px;
+  width: 250px;
 }
-.input:active {
+.input:focus {
   border: 1px solid #6200ee;
 }
 
@@ -90,16 +91,17 @@ const register = async () => {
   margin-left: 10px;
   font-size: 18px;
 }
-.register-link {
-  margin-top: 50px;
+
+.container-form p {
+  margin-top: 10px;
 }
 
-.register-link a {
+.login-container a {
   color: #6200ee;
   text-decoration: none;
 }
 
-.register-link a:hover {
+.login-container a:hover {
   text-decoration: underline;
 }
 </style>
