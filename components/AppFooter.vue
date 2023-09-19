@@ -66,7 +66,10 @@ footer p {
   color: #6e6e80;
   font-family: "Bebas Neue";
 }
-
+footer a {
+  color: #6e6e80;
+  text-decoration: none;
+}
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -107,5 +110,24 @@ footer p {
 
 footer a {
   font-size: 14px;
+}
+
+
+@media (max-width: 768px) {
+  .footer-content {
+    display: inline-block;
+  }
+  
+  .footer-row {
+    width: 100%;
+  }
+
+  .footer-row a {
+    font-size: 18px;
+  }
+
+  .footer-row h4 {
+    font-size: 22px;
+  }
 }
 </style>

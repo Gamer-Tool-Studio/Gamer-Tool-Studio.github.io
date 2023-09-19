@@ -77,21 +77,17 @@ nav {
   padding: 10px 0;
 
   /* Navigation Bar Styles */
-
   .navbar {
     max-height: 55px;
-    margin-left: auto;
-    margin-right: auto;
     width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    max-width: 1200px !important;
 
     .login-section li {
       margin: 0 12px;
     }
     .nav-links {
+      padding-left: 16px;
       list-style: none;
       display: inline-flex;
       align-items: center;
