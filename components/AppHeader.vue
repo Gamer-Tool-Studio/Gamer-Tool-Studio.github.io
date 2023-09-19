@@ -14,8 +14,12 @@
             <v-menu activator="parent" v-model:model-value="open">
               <v-list class="dropDownMenu">
                 <a class="dropLink" href="/#sectionToLinkToApi"><v-list-item class="dropDownItem"> API</v-list-item></a>
-                <a class="dropLink" href="/#sectionToLinkToPlugin"><v-list-item class="dropDownItem"> Plugin</v-list-item></a>
-                <a class="dropLink" href="https://web3bazaar.org"><v-list-item class="dropDownItem"> Web3 Marketplace</v-list-item></a>
+                <a class="dropLink" href="/#sectionToLinkToPlugin"
+                  ><v-list-item class="dropDownItem"> Plugin</v-list-item></a
+                >
+                <a class="dropLink" href="https://web3bazaar.org"
+                  ><v-list-item class="dropDownItem"> Web3 Marketplace</v-list-item></a
+                >
               </v-list>
             </v-menu>
           </NuxtLink>
@@ -32,14 +36,13 @@
         <li v-if="!authenticated" class="nav-right-link">
           <NuxtLink to="/login"> Log in</NuxtLink>
         </li>
-        <li v-if="authenticated" class="nav-right-link">
+        <li v-if="authenticated" class="nav-right-link user-menu">
           <DashboardUserMenu></DashboardUserMenu>
           <!-- <NuxtLink @click="logout">Logout</NuxtLink> -->
         </li>
         <li v-if="!authenticated" class="nav-right">
           <a href="#register" class="button">Sign up</a>
         </li>
-        <li class="mobile-menu">&#9776;</li>
       </ul>
     </div>
   </nav>
@@ -84,7 +87,6 @@ nav {
     align-items: center;
     justify-content: center;
     max-width: 1200px !important;
-    
 
     .login-section li {
       margin: 0 12px;
@@ -175,6 +177,7 @@ nav {
     height: 30px;
     border-radius: 50%;
   }
+
   .nav-right-link:hover {
     // text-decoration: underline;
     cursor: pointer;
@@ -216,44 +219,35 @@ nav.lp {
   }
 }
 
-
 /* Media Queries for Responsiveness */
 @media (max-width: 820px) {
- .mobile-display {
-  display: none !important;
-}
-.login-section li{
-  display: flex !important;
-  align-items: center !important;
-}
-
-.mobile-menu {
-  display: flex;
-  align-items: center;
-  font-size: 50px;
-  padding-bottom: 8px;
-}
-
-.mobile-menu:hover {
-  cursor: pointer;
-}
-
-
-
-.nav-right-link {
-  display: none !important;
-}
- 
-
-}
-
-
-@media (max-width: 930px) {
-  .nav-links a{
-    font-size: 16px !important;
+  .mobile-display {
+    display: none !important;
+  }
+  .login-section li {
+    display: flex !important;
+    align-items: center !important;
   }
 
+  .mobile-menu {
+    display: flex;
+    align-items: center;
+    font-size: 50px;
+    padding-bottom: 8px;
+  }
+
+  .mobile-menu:hover {
+    cursor: pointer;
+  }
+
+  .nav-right-link:not(.user-menu) {
+    display: none !important;
+  }
 }
 
-
+@media (max-width: 930px) {
+  .nav-links a {
+    font-size: 16px !important;
+  }
+}
 </style>
