@@ -74,22 +74,23 @@ nav {
   padding: 10px 0;
 
   /* Navigation Bar Styles */
+  &.lp {
+         max-width: 1200px !important;
+         margin: 0 auto;
+        }
 
   .navbar {
     max-height: 55px;
-    margin-left: auto;
-    margin-right: auto;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 1200px !important;
-    
 
     .login-section li {
       margin: 0 12px;
     }
     .nav-links {
+      padding-left:16px;
       list-style: none;
       display: inline-flex;
       align-items: center;
@@ -125,6 +126,7 @@ nav {
       // margin-bottom: 15px;
     }
   }
+
 
   .nav-links .nav-link:hover {
     text-decoration: underline;
