@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { defineStore } from 'pinia';
+import { useUserStore } from './user';
 
 const BASE_URL = 'http://127.0.0.1:3002/api/v1'; //"https://dummyjson.com/auth/login";
 const LOCAL_LOGIN = '/auth/local/login'; //
@@ -7,6 +8,7 @@ const LOCAL_REGISTER = '/auth/local/register'; //
 const GOOGLE_LOGIN = '/auth/google/login'; //
 const GOOGLE_REGISTER = '/auth/google/register'; //
 const CHECK_AUTH = '/auth/check'; //
+const USER_PROFILE = '/user/profile'; //
 
 interface LoginUserPayload {
   username: string;
@@ -20,16 +22,43 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     authenticated: false,
     loading: false,
+    userProfile: {},
   }),
   actions: {
-    async isAuthenticated(): Promise<Boolean> {
-      const { data, pending }: any = await useFetch(BASE_URL + CHECK_AUTH, {
+    async getUserProfile(): Promise<any> {
+      const user = useUserStore();
+
+      const { data, pending }: any = await useFetch(BASE_URL + USER_PROFILE, {
         method: 'get',
+        credentials: 'include', // fetch
       });
       this.loading = pending;
 
       if (data.value) {
+        this.userProfile = data.value.userProfile;
+        console.log(data.value.user);
+
+        user.setUser(data.value.user);
+        return this.userProfile;
+      }
+    },
+
+    async isAuthenticated(): Promise<Boolean> {
+      const user = useUserStore();
+
+      const { data, pending }: any = await useFetch(BASE_URL + CHECK_AUTH, {
+        method: 'get',
+        credentials: 'include', // fetch
+      });
+      this.loading = pending;
+
+      if (data.value) {
+        const token = useCookie('token'); // useCookie new hook in nuxt 3
+        token.value = data?.value?.token; // set token to cookie
         this.authenticated = data.value.isAuthenticated;
+        console.log(data.value.user);
+
+        user.setUser(data.value.user);
         return this.authenticated;
       }
       return false;

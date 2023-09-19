@@ -22,14 +22,17 @@
   </v-layout>
 </template>
 <script setup>
-import { useTheme } from "vuetify";
+import { useTheme } from 'vuetify';
 
+const { getUserProfile } = useAuthStore();
 const cssVars = {};
 
 const theme = useTheme();
 
-theme.global.name.value = "light";
-cssVars["--background"] = "white";
+getUserProfile();
+
+theme.global.name.value = 'light';
+cssVars['--background'] = 'white';
 </script>
 <style lang="scss">
 :root {

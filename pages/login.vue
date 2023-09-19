@@ -6,7 +6,8 @@
       </v-col>
       <v-col cols="12" class="container-form">
         <div class="login-box">
-          <label for="uname" class="pass-text"><b>Username</b></label><br>
+          <label for="uname" class="pass-text"><b>Username</b></label
+          ><br />
           <input
             v-model="user.username"
             type="text"
@@ -17,8 +18,16 @@
           />
         </div>
         <div class="login-box">
-          <label for="psw" class="pass-text"><b>Password</b></label><br>
-          <input v-model="user.password" type="password" class="input" placeholder="Enter Password" name="psw" required />
+          <label for="psw" class="pass-text"><b>Password</b></label
+          ><br />
+          <input
+            v-model="user.password"
+            type="password"
+            class="input"
+            placeholder="Enter Password"
+            name="psw"
+            required
+          />
           <v-col cols="12">
             <button @click.prevent="login" class="button loginBtn">Continue</button>
           </v-col>
@@ -32,7 +41,7 @@
       </v-col>
       <v-col cols="12">
         <div class="auth-card" @click.prevent="loginGoogle">
-          <img src="images/google-logo.png">
+          <img src="~/assets/images/google-logo.png" style="width: 30px" />
           <p>Continue with Google</p>
         </div>
       </v-col>
@@ -97,16 +106,13 @@ const register = async () => {
   padding-top: 0;
 }
 
-
 .container-form button {
   font-size: 18px;
 }
 
-
 .pass-text {
- font-size: 1px;
- display: none;
-
+  font-size: 1px;
+  display: none;
 }
 .container-form p {
   margin-top: 10px;
@@ -142,7 +148,7 @@ const register = async () => {
 
 .auth-card:hover {
   cursor: pointer;
-  background-color:#d9d9e3;
+  background-color: #d9d9e3;
 }
 
 .auh.card img {
@@ -153,6 +159,4 @@ const register = async () => {
   margin-left: 20px;
   font-weight: 400;
 }
-
-
 </style>

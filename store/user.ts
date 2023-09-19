@@ -1,5 +1,4 @@
-import { defineStore } from "pinia";
-
+import { defineStore } from 'pinia';
 interface MemberInfo {
   name: string;
   email: string;
@@ -22,26 +21,27 @@ interface State {
   keys: Array<KeysInfo>;
 }
 interface UserInfo {
-  full_name?: string | "Full name";
+  full_name?: string | 'Full name';
+  username: string;
   email: string;
   password?: string;
 }
 
-export const useUserStore = defineStore("user", {
+export const useUserStore = defineStore('user', {
   state: (): State => {
     return {
       userList: [],
       user: null,
       isLoggedIn: false,
-      orgName: "MyOgrName",
-      orgId: "MyOrgId",
-      members: [{ name: "John Doe", email: "johndoe@mail.com", role: "admin" }],
+      orgName: 'MyOgrName',
+      orgId: 'MyOrgId',
+      members: [{ name: 'John Doe', email: 'johndoe@mail.com', role: 'admin' }],
       keys: [
         {
-          name: "query-game-test",
-          key: "sk-...1nF6",
+          name: 'query-game-test',
+          key: 'sk-...1nF6',
           created: new Date(Date.now()),
-          used: "Never",
+          used: 'Never',
         },
       ],
     };
@@ -49,6 +49,8 @@ export const useUserStore = defineStore("user", {
   getters: {
     // Computed property to get the login status
     isUserLoggedIn: (state) => state.isLoggedIn,
+    username: (state) => state.user?.username,
+    userEmail: (state) => state.user?.email,
   },
   actions: {
     setLogin(val: boolean) {
@@ -59,7 +61,7 @@ export const useUserStore = defineStore("user", {
     },
     logout() {
       this.user = null;
-      navigateTo("/");
+      navigateTo('/');
     },
   },
 });
