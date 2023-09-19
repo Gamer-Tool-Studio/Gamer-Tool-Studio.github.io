@@ -74,16 +74,10 @@ nav {
   padding: 10px 0;
 
   /* Navigation Bar Styles */
-  &.lp {
-         max-width: 1200px !important;
-         margin: 0 auto;
-        }
-
   .navbar {
     max-height: 55px;
     width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
 
     .login-section li {

@@ -111,4 +111,23 @@ footer a {
 footer a {
   font-size: 14px;
 }
+
+
+@media (max-width: 768px) {
+  .footer-content {
+    display: inline-block;
+  }
+  
+  .footer-row {
+    width: 100%;
+  }
+
+  .footer-row a {
+    font-size: 18px;
+  }
+
+  .footer-row h4 {
+    font-size: 22px;
+  }
+}
 </style>
