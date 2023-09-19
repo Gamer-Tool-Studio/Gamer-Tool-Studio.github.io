@@ -32,7 +32,7 @@
       </v-col>
       <v-col cols="12" class="progress-section">
         <div class="progress-container">
-          <div class="progress-bar input"></div>
+          <div class="progress-bar input-tokens"></div>
           <div class="progress-values">
             <p>{{ consumedTokens }} / {{ maxTokens }} input tokens</p>
           </div>
@@ -40,7 +40,7 @@
       </v-col>
       <v-col cols="12" class="progress-section">
         <div class="progress-container">
-          <div class="progress-bar output"></div>
+          <div class="progress-bar output-tokens"></div>
           <div class="progress-values">
             <p>{{ consumedTokens }} / {{ maxTokens }} output tokens</p>
           </div>
@@ -200,14 +200,14 @@ const chartOptions = ref({
   height: 10px;
   border-radius: 10px;
   flex-grow: 1;
-  &.input {
+  &.input-tokens {
     background-image: linear-gradient(
       90deg,
       rgba(98, 0, 238, 1) v-bind(progressInputPercentage),
       #ececf1 v-bind(progressInputPercentage)
     );
   }
-  &.output {
+  &.output-tokens {
     background-image: linear-gradient(
       90deg,
       rgba(98, 0, 238, 1) v-bind(progressOutputPercentage),

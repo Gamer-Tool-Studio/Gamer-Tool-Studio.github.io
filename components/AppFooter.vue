@@ -1,7 +1,7 @@
 <template>
   <footer :class="{ lp: isLandingPage }" class="comp-footer">
     <div class="footer-content">
-      <div class="footer-section">
+      <div class="footer-row">
         <h4>Product</h4>
         <ul>
           <li><a href="#documentation">Download Plugin</a></li>
@@ -9,7 +9,7 @@
           <li><a href="https://github.com/yourusername">Github</a></li>
         </ul>
       </div>
-      <div class="footer-section">
+      <div class="footer-row">
         <h4>Company</h4>
         <ul>
           <li><a href="#/pricing">Pricing</a></li>
@@ -17,7 +17,7 @@
           <li><a href="#privacy-policy">Privacy Policy</a></li>
         </ul>
       </div>
-      <div class="footer-section">
+      <div class="footer-row">
         <h4>Community</h4>
         <ul>
           <li><a href="https://discord.com/yourserver">Discord</a></li>
@@ -75,19 +75,19 @@ footer p {
   flex-wrap: wrap;
 }
 
-.footer-section {
+.footer-row {
   display: block;
   flex-basis: 30%;
   margin-bottom: 20px;
 }
 
-.footer-section h4 {
+.footer-row h4 {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 15px;
 }
 
-.footer-section ul {
+.footer-row ul {
   list-style: none;
   padding: 0;
 }

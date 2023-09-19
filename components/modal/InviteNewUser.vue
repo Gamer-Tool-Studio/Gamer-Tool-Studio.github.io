@@ -171,12 +171,19 @@ export default {
 }
 
 .footer-section {
-  display: inline-flex;
-  float: right;
+  display: flex;
+  justify-content:end;
 }
 
 .footer-section button {
   margin: 3px;
+}
+
+.button-container{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  
 }
 
 .cancel-button {
