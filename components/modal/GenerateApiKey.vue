@@ -173,7 +173,6 @@ export default {
 
 .footer-section {
   display: inline-flex;
-  padding-right: 20px !important;
 }
 
 .footer-section button {
@@ -181,8 +180,10 @@ export default {
 }
 
 .button-container{
-  display: inline-flex;
-  float: right;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  
 }
 .cancel-button {
   background-color: #ececf1;
