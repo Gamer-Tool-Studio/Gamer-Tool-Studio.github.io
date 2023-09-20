@@ -44,7 +44,7 @@ cssVars['--background'] = 'white';
 }
 .dashboard-content {
   padding: var(--content-v-padding) var(--content-h-padding);
-  width: 872px;
+  max-width: 872px;
   @media (min-width: 1372px) {
     margin-left: calc(50vw - 686px);
   }

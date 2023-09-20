@@ -1,25 +1,29 @@
 <template>
   <v-btn flat :ripple="false" class="">
-    <div class="d-none d-sm-flex align-center">
+    <div v-if="authenticated" class="d-none d-sm-flex align-center">
       <img class="profile-img" src="~/assets/images/ghn.jpeg" />
       <p class="logged-orgName">Org Name</p>
     </div>
     <li class="d-flex d-sm-none">&#9776;</li>
-    <v-menu activator="parent" v-model:model-value="open">
+    <v-menu activator="parent" v-model:model-value="open" :content-class="{ lp: isLandingPage }">
       <v-list class="dropDownMenu pb-0">
         <v-list-item v-for="(item, index) in items" :key="index" :value="index">
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
-        <div class="menu-group d-flex d-sm-none pa-2 pt-0 flex-row">
+        <div v-if="authenticated" class="menu-group d-flex d-sm-none pa-2 pt-0 flex-row">
           <img class="profile-img" src="~/assets/images/ghn.jpeg" width="30" />
           <p class="logged-orgName">Org Name</p>
         </div>
+        <div v-if="!authenticated" class="menu-group">
+          <NuxtLink to="/login">Log in</NuxtLink>
+          <NuxtLink to="/login#register">Sign up</NuxtLink>
+        </div>
 
-        <div class="menu-group">
+        <div v-if="authenticated" class="menu-group">
           <v-list-item class="loggedUserName">{{ username }}</v-list-item>
           <v-list-item class="loggedEmailAdd">{{ userEmail }}</v-list-item>
         </div>
-        <div class="menu-group">
+        <div v-if="authenticated" class="menu-group">
           <NuxtLink to="/dashboard"> Manage account</NuxtLink>
           <NuxtLink to="/dashboard/usage"> Check monthly usage</NuxtLink>
           <NuxtLink to="/dashboard/api-keys"> View API Keys</NuxtLink>
@@ -32,7 +36,7 @@
           <NuxtLink to="/dashboard/api-keys">Pricing</NuxtLink>
           <NuxtLink to="/dashboard/">Privacy Policy</NuxtLink>
         </div>
-        <div class="menu-group">
+        <div v-if="authenticated" class="menu-group">
           <NuxtLink @click="logout">Logout</NuxtLink>
         </div>
       </v-list>
@@ -44,6 +48,10 @@
 // Component: UserMenu
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '~/store/user'; // import the auth store
+const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+
+const { isLandingPage } = defineProps(['isLandingPage']);
+
 const router = useRouter();
 const { logUserOut } = useAuthStore(); // use authenticateUser action from  auth store
 
@@ -93,13 +101,19 @@ const logout = () => {
   color: inherit;
 }
 
+.lp .menu-group {
+  a {
+    color: white;
+  }
+}
 .menu-group {
   border-bottom: 1px solid #ececf1;
   display: flex;
   flex-direction: column;
   a {
     cursor: pointer;
-    color: white;
+    color: black;
+
     text-decoration: none;
     font-size: 14px;
     font-weight: 100;

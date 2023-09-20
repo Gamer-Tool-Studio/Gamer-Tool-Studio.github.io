@@ -33,15 +33,15 @@
         </li>
       </ul>
       <ul class="login-section">
-        <li v-if="!authenticated" class="nav-right-link">
+        <li v-if="!authenticated" class="nav-right-link d-none d-sm-flex">
           <NuxtLink to="/login"> Log in</NuxtLink>
         </li>
-        <li v-if="authenticated" class="nav-right-link user-menu">
-          <DashboardUserMenu></DashboardUserMenu>
-          <!-- <NuxtLink @click="logout">Logout</NuxtLink> -->
-        </li>
-        <li v-if="!authenticated" class="nav-right">
+        <li v-if="!authenticated" class="nav-right d-none d-sm-flex">
           <a href="#register" class="button">Sign up</a>
+        </li>
+        <li class="user-menu" :class="{ 'd-sm-none': !authenticated }">
+          <DashboardUserMenu :isLandingPage="isLandingPage"></DashboardUserMenu>
+          <!-- <NuxtLink @click="logout">Logout</NuxtLink> -->
         </li>
       </ul>
     </div>
@@ -220,10 +220,10 @@ nav.lp {
   .mobile-display {
     display: none !important;
   }
-  .login-section li {
-    display: flex !important;
-    align-items: center !important;
-  }
+  // .login-section li {
+  //   display: flex !important;
+  //   align-items: center !important;
+  // }
 
   .mobile-menu {
     display: flex;
@@ -236,9 +236,9 @@ nav.lp {
     cursor: pointer;
   }
 
-  .nav-right-link:not(.user-menu) {
-    display: none !important;
-  }
+  // .nav-right-link:not(.user-menu) {
+  //   display: none !important;
+  // }
 }
 
 @media (max-width: 930px) {
