@@ -190,6 +190,10 @@ nav {
 
 nav.lp {
   background-color: black;
+  .navbar {
+    max-width: 1200px;
+  }
+
   * {
     color: white;
   }

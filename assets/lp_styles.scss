@@ -15,16 +15,13 @@ section {
   margin-bottom: 30px;
 }
 
-
 .lp footer {
   color: black;
 }
 /* Intro Section Styles */
 
-
-
 .intro-section h1 {
-  margin-right:2%; 
+  margin-right: 2%;
   line-height: 100px;
   margin-bottom: 60px;
 }
@@ -39,7 +36,7 @@ section {
   padding: 0;
   margin-left: 20px;
   text-decoration: underline;
-  font-family: "Bebas Neue";
+  font-family: 'Bebas Neue';
   font-size: 20px;
   font-weight: 100;
 }
@@ -51,11 +48,11 @@ section {
 
 .intro-cta button {
   font-size: 18px;
-  font-family: "Bebas Neue";
+  font-family: 'Bebas Neue';
 }
 
-.intro-cta button:hover{
-  color: #6200EE;
+.intro-cta button:hover {
+  color: #6200ee;
 }
 
 /*Demo Video */
@@ -116,15 +113,13 @@ section {
   color: #fff;
 }
 
-
 .button-display {
   text-align: center !important;
-  border-bottom: 1px solid #6e6e80; 
-  
+  border-bottom: 1px solid #6e6e80;
 }
 
 .button-display button {
-  font-size:20px !important;
+  font-size: 20px !important;
   height: 60px;
   margin-bottom: 30px;
 }
@@ -134,7 +129,6 @@ section {
   margin-top: 60px;
   border-top: 1px solid #6e6e80;
 }
-
 
 .how-to-start {
   display: block;
@@ -154,16 +148,15 @@ section {
   min-width: 120%; /* Make the list items fill the full width */
 }
 .engines-available {
-padding: 5px;
+  padding: 5px;
 }
 
 .engine-logo-container {
- display: block;
+  display: block;
 }
 .engine-logo {
   max-width: 100%;
   object-fit: contain;
-
 }
 
 .started-hs {
@@ -175,26 +168,24 @@ padding: 5px;
 .code-section {
   padding: 0;
   margin: 0;
-
 }
-
 
 .code-display {
   max-width: 100%;
-  overflow-x: auto; 
+  overflow-x: auto;
 }
 
 .code-style {
   font-family: monospace;
   font-size: 16px;
-  white-space: pre-wrap; 
+  white-space: pre-wrap;
 }
 
 .typed-display {
   display: block;
   max-width: 100%;
   margin-top: 0;
-  margin-left:10%;
+  margin-left: 10%;
   margin-right: 10%;
   font-family: monospace;
   font-size: 16px;
@@ -205,7 +196,7 @@ padding: 5px;
 .typed-message {
   background-color: rgba(98, 0, 238, 0.6);
   padding: 3px;
-  white-space: pre-wrap; 
+  white-space: pre-wrap;
   max-width: 100px !important;
   font-family: inherit;
   font-size: inherit;
@@ -215,20 +206,20 @@ padding: 5px;
   display: inline-block;
   width: 8px;
   height: 20px;
-  background-color: #6200EE;
+  background-color: #6200ee;
   margin-left: 4px; /* Adjust the margin as needed */
   animation: blink 1s infinite;
 }
 
 @keyframes blink {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
     opacity: 0;
   }
 }
-
 
 /* Call to Action Button Styles */
 
@@ -251,11 +242,11 @@ padding: 5px;
 .start-trial button {
   height: 60px;
   font-size: 20px;
-  font-family: "Bebas Neue";
+  font-family: 'Bebas Neue';
 }
 
 .start-trial button:hover {
-  color:#6200EE;
+  color: #6200ee;
 }
 
 /* Footer Styles */
@@ -299,7 +290,7 @@ footer {
   .demo-video {
     margin-left: 20px;
   }
- 
+
   .intro-section h1 {
     font-size: 400%;
     line-height: 80px;
@@ -344,39 +335,34 @@ footer {
     font-size: 20px;
   }
 }
-@media (max-width:1280px) {
+@media (max-width: 1280px) {
   .feature-boxes {
     flex-wrap: wrap !important;
   }
 
   .feature-box {
-    max-width: 50% calc(50% - 400px) !important; 
+    max-width: 50% calc(50% - 400px) !important;
     margin: 24px !important;
   }
 }
-
-
 
 @media (max-width: 820px) {
   .get-started .started-grid {
     flex-direction: column;
   }
 
-
   .plugin-explain {
-    cols:12 !important;
+    cols: 12 !important;
     min-width: 100% !important;
-
   }
   .how-to-start {
     margin-top: 10%;
-    margin-right:20%;
+    margin-right: 20%;
     margin-left: 10%;
   }
   .how-to-start li {
     text-align: center;
     font-size: 22px;
-
   }
 
   .engines-available {
@@ -390,11 +376,10 @@ footer {
   margin-top: 30px;
 }
 
-
 @media (max-width: 768px) {
-.page-headers{
-  text-align: center;
-}
+  .page-headers {
+    text-align: center;
+  }
 
   .start-trial h2 {
     text-align: center;

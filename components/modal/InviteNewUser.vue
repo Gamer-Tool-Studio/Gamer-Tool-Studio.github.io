@@ -1,22 +1,11 @@
 <template>
   <transition name="modal-fade">
     <div class="modal-backdrop" @click="close">
-      <div
-        class="modal"
-        role="dialog"
-        aria-labelledby="modalTitle"
-        aria-describedby="modalDescription"
-        @click.stop
-      >
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" @click.stop>
         <header class="modal-header">
           <slot name="header">
             <h1>Invite team members</h1>
-            <button
-              type="button"
-              class="btn-close"
-              aria-label="Close modal"
-              @click="close"
-            >
+            <button type="button" class="btn-close" aria-label="Close modal" @click="close">
               <img src="~/assets/icons/close.svg" />
             </button>
           </slot>
@@ -33,11 +22,7 @@
             </v-col>
             <v-col cols="12" class="forms-section">
               <v-col cols="9">
-                <input
-                  class="modal-forms"
-                  type="form"
-                  placeholder="john@example.com, jane@example.com"
-                />
+                <input class="modal-forms" type="form" placeholder="john@example.com, jane@example.com" />
               </v-col>
               <v-col cols="3">
                 <input class="modal-forms" type="form" placeholder="Admin" />
@@ -56,7 +41,7 @@
 
 <script>
 export default {
-  name: "InviteNewUser",
+  name: 'InviteNewUser',
   components: {},
   data() {
     return {};
@@ -64,7 +49,7 @@ export default {
 
   methods: {
     close() {
-      this.$emit("close");
+      this.$emit('close');
     },
   },
 };
@@ -172,18 +157,17 @@ export default {
 
 .footer-section {
   display: flex;
-  justify-content:end;
+  justify-content: end;
 }
 
 .footer-section button {
   margin: 3px;
 }
 
-.button-container{
+.button-container {
   width: 100%;
   display: flex;
-  justify-content: end;
-  
+  justify-content: flex-end;
 }
 
 .cancel-button {
@@ -193,7 +177,7 @@ export default {
   border-radius: 3px;
   border: none;
   font-size: 16px;
-  font-family: "Bebas Neue";
+  font-family: 'Bebas Neue';
 }
 .cancel-button:hover {
   cursor: pointer;

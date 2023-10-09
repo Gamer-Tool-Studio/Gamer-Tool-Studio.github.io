@@ -1,22 +1,11 @@
 <template>
   <transition name="modal-fade">
     <div class="modal-backdrop" @click="close">
-      <div
-        class="modal"
-        role="dialog"
-        aria-labelledby="modalTitle"
-        aria-describedby="modalDescription"
-        @click.stop
-      >
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" @click.stop>
         <header class="modal-header">
           <slot name="header">
             <h1>{{ formTitle }}</h1>
-            <button
-              type="button"
-              class="btn-close"
-              aria-label="Close modal"
-              @click="close"
-            >
+            <button type="button" class="btn-close" aria-label="Close modal" @click="close">
               <img src="~/assets/icons/close.svg" />
             </button>
           </slot>
@@ -36,12 +25,12 @@
               />
             </v-col>
             <v-col cols="12" class="footer-section">
-                <div class="button-container">
-                  <button class="cancel-button" @click="close">Cancel</button>
-                  <button class="button" @click="$emit('save')">
-                    {{ isCreating }}
-                  </button>
-                </div>
+              <div class="button-container">
+                <button class="cancel-button" @click="close">Cancel</button>
+                <button class="button" @click="$emit('save')">
+                  {{ isCreating }}
+                </button>
+              </div>
             </v-col>
           </slot>
         </section>
@@ -52,20 +41,20 @@
 
 <script>
 export default {
-  name: "GenerateApiKey",
-  props: ["formTitle", "name"],
+  name: 'GenerateApiKey',
+  props: ['formTitle', 'name'],
   components: {},
 
   data() {
     return {};
   },
   created() {
-    this.isCreating = !this.name ? "Create Secret Key" : "Save";
+    this.isCreating = !this.name ? 'Create Secret Key' : 'Save';
   },
 
   methods: {
     close() {
-      this.$emit("close");
+      this.$emit('close');
     },
   },
 };
@@ -179,11 +168,10 @@ export default {
   margin: 3px;
 }
 
-.button-container{
+.button-container {
   width: 100%;
   display: flex;
-  justify-content: end;
-  
+  justify-content: flex-end;
 }
 .cancel-button {
   background-color: #ececf1;
@@ -192,7 +180,7 @@ export default {
   border-radius: 3px;
   border: none;
   font-size: 16px;
-  font-family: "Bebas Neue";
+  font-family: 'Bebas Neue';
 }
 .cancel-button:hover {
   cursor: pointer;
