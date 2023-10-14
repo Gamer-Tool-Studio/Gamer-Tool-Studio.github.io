@@ -87,7 +87,7 @@ export const useAuthStore = defineStore('auth', {
 
       if (data.value) {
         const token = useCookie('token'); // useCookie new hook in nuxt 3
-        token.value = data?.value?.password; // set token to cookie
+        token.value = data?.value?.token; // set token to cookie
         this.authenticated = true; // set authenticated  state value to true
       }
     },
@@ -105,7 +105,7 @@ export const useAuthStore = defineStore('auth', {
 
       if (data.value) {
         const token = useCookie('token'); // useCookie new hook in nuxt 3
-        token.value = data?.value?.token || data?.value?.user?.username; // set token to cookie
+        token.value = data?.value?.token; // set token to cookie
         this.authenticated = true; // set authenticated  state value to true
       }
     },
@@ -119,7 +119,7 @@ export const useAuthStore = defineStore('auth', {
 
       if (data.value) {
         const token = useCookie('token'); // useCookie new hook in nuxt 3
-        token.value = data?.value?.password; // set token to cookie
+        token.value = data?.value?.token; // set token to cookie
         this.authenticated = true; // set authenticated  state value to true
       }
     },

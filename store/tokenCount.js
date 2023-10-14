@@ -36,7 +36,7 @@ export const useTokenCountStore = defineStore('tokenCount', {
         this.currentYear += 1;
       }
       try {
-        const { data, pending } = await useFetch(BASE_URL + '/usage/month', {
+        const { data, pending } = await useFetch(BASE_URL + '/usage/perMonth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: {
