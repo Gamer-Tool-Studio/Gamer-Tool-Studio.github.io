@@ -74,6 +74,7 @@ definePageMeta({
   layout: "default",
 });
 
+
 import { ref, onMounted } from "vue";
 
 const isLightBoxHovered = ref(false);

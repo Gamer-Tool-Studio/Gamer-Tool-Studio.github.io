@@ -1,27 +1,28 @@
 <template>
   <v-container class="download-plugin-page">
-    <v-row>
-      <v-col cols="12">
-        <h1>Download Plugin</h1>
-      </v-col>
+    <v-row class="intro-section">
       <v-col>
+        <h1>Download Plugin</h1>
         <p>
           Download the Plugin file compatible with your game engine. Check out 
           <a href="">our user guide </a>to learn how to install and set it up.
         </p>
       </v-col>
       <v-col cols="12" class="engine-cards">
-        <h2>RPG Maker</h2>
+        <v-col cols="12" class="card-header-section">
+          <img src="images/RPGM-logo.png"/>
+          <h2>RPG Maker</h2>
+        </v-col>
         <div class="cards-container">
-          <v-col cols="6" class="download-cards">
-            <v-col cols="6" class="card-icon-name">
+          <v-col cols="6" class="download-cards left-card">
+            <v-col cols="12" class="card-icon-name">
               <img class="download-logo" src="images/RPGM-icon.png"/>
               <h3>RPG Maker MZ</h3>
             </v-col>
             <p>&#8595Download</p>
           </v-col>
-          <v-col cols="6" class="download-cards">
-            <v-col cols="6" class="card-icon-name">
+          <v-col cols="6" class="download-cards right-card">
+            <v-col cols="12" class="card-icon-name">
               <img class="download-logo" src="images/MV-icon.png"/>
               <h3>RPG Maker MV</h3>
             </v-col>
@@ -42,36 +43,63 @@
 useHead({
   title: "Download Plugin",
 });
+
 </script>
 
 <style lang="scss">
+
+.download-plugin-page {
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+
 .download-plugin-page h1 {
-  font-size: 32px;
+  font-size: 40px;
+  line-height: 88px;
+  margin-bottom: 15px;
 }
 
 .download-plugin-page p {
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 10px;
   margin-top: 15px;
+  font-weight: 100;
 }
 
 .engine-cards{
-  border-radius: 7%;
+  border-radius: 7px;
   display: block;
 }
 
+.card-header-section{
+  align-self: center;
+  text-align: center;
+  background-image: url('/assets/images/RPGM-banner-transp.png');
+  background-size: cover;
+  padding-left: 5%;
+  padding-right: 5%;
+  min-width: 100% !important;
+  border: 1px solid #ECECF1;
+  border-radius: 7px;
+
+}
+
+.card-header-section h2 {
+  font-size: 40px;
+}
+
 .cards-container {
-  width: 80%;
+  width: 100%;
   display: inline-flex;
-  text-align: left;
-  
+  text-align: center;
 }
 
 .download-cards {
-  margin-top: 30px;
-  margin-right: 20px;
+  margin-top: 3px;
   border: 1px solid #ECECF1;
   padding: 0;
+  border-radius: 7px;  
 }
 
 .download-cards:hover {
@@ -80,6 +108,7 @@ useHead({
 }
 
 .card-icon-name {
+  text-align: center;
   min-width: 100% !important;
   display: inline-flex;
   align-items: center;
