@@ -1,5 +1,5 @@
 <template>
-  <nav :class="{ lp: isLandingPage }">
+  <nav :class="{ lp: isLandingPage, small: isSmallHeader }">
     <div class="navbar">
       <ul class="nav-links">
         <li class="nav-left">
@@ -54,6 +54,11 @@ import { useAuthStore } from '~/store/auth'; // import the auth store we just cr
 const route = useRoute();
 
 const isLandingPage = computed(() => route.path == '/');
+
+const smallHeaderPages = ['/', '/pricing', '/download-plugin'];
+
+const isSmallHeader = computed(() => smallHeaderPages.includes(route.path));
+
 const open = ref(false);
 
 // authentication methods
@@ -188,11 +193,14 @@ nav {
   display: none;
 }
 
-nav.lp {
-  background-color: black;
+nav.small {
   .navbar {
     max-width: 1200px;
   }
+}
+
+nav.lp {
+  background-color: black;
 
   * {
     color: white;

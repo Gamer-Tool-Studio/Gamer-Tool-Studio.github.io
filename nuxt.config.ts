@@ -1,21 +1,21 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
-    pageTransition: { name: "page", mode: "out-in" },
-    layoutTransition: { name: "layout", mode: "out-in" },
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
   },
   css: [
-    "vuetify/lib/styles/main.sass",
-    "@mdi/font/css/materialdesignicons.min.css",
-    "@/assets/styles/main.scss",
+    'vuetify/lib/styles/main.sass',
+    '@mdi/font/css/materialdesignicons.min.css',
+    '@/assets/styles/main.scss',
     `assets/styles.scss`,
   ],
   build: {
-    transpile: ["vuetify"],
+    transpile: ['vuetify'],
   },
   vite: {
     define: {
-      "process.env.DEBUG": false,
+      'process.env.DEBUG': false,
     },
     css: {
       preprocessorOptions: {
@@ -28,14 +28,16 @@ export default defineNuxtConfig({
       esbuildOptions: {
         // Node.js global to browser globalThis
         define: {
-          global: "globalThis",
+          global: 'globalThis',
         },
       },
     },
   },
   // plugins: ["@/plugins/chartist.js"],
-  modules: [["@pinia/nuxt", { autoImports: ["defineStore"] }]],
+  modules: [['@pinia/nuxt', { autoImports: ['defineStore'] }]],
   imports: {
-    dirs: ["store"],
+    dirs: ['store'],
   },
+
+  ssr: false,
 });
