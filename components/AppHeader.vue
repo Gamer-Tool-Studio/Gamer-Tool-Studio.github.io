@@ -55,7 +55,7 @@ const route = useRoute();
 
 const isLandingPage = computed(() => route.path == '/');
 
-const smallHeaderPages = ['/', '/pricing', '/download-plugin'];
+const smallHeaderPages = ['/', '/pricing', '/download-plugin', '/login'];
 
 const isSmallHeader = computed(() => smallHeaderPages.includes(route.path));
 

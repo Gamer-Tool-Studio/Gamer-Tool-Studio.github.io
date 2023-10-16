@@ -2,7 +2,7 @@
   <v-container class="lp">
     <v-row>
       <v-col cols="12" class="intro-section">
-        <h1>Dialog Craft GPT - The Tool To Power Your Game Narratives with AI</h1>
+        <h1>Dialog Craft GPT - The Game Development tool To Create AI-powered NPCs </h1>
         <div class="intro-cta">
           <button class="button">Start Free Trial Now</button>
           <p>View our documentation</p>
@@ -13,7 +13,7 @@
           <iframe
             width="100%"
             height="515"
-            src="https://www.youtube.com/embed/oxiW8g_uXh4"
+            src="https://www.youtube.com/embed/2SUfiiPxiXQ?si=SWlFk97Zvwx179AW"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -26,21 +26,20 @@
     <v-row class="features">
       <v-col>
         <h2 class="page-headers">
-          Take your storytelling to new heights with a game development tool to revolutionize the way you create
-          character dialogues for your games. Craft immersive conversations efortlessly with the power of Chat GPT AI
-          technology
+          Unlock entirely new gaming experiences and create unscripted scenarios with the assistance of AI-driven NPCs.
+          Effortlessly craft immersive conversations by harnessing the power of Chat GPT AI
         </h2>
       </v-col>
       <div class="feature-boxes">
         <div class="feature-box">
-          <h3>Open interactions</h3>
+          <h3>Open world building</h3>
           <p>
-            Leverage the capabilities of GPT-3 and enable players to input their own text to interact with characters
+            Leverage the capabilities of GPT-4 and enable players to input their own text to interact with characters
             and open the possibilities within to your game to the maximum.
           </p>
         </div>
         <div class="feature-box">
-          <h3>AI-Powered Characters</h3>
+          <h3>AI-Powered NPCs</h3>
           <p>
             Build immersive character backstories and customize the way they respond to players. Make chat GPT a friend
             or a foe in your game quests.
