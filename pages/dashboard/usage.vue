@@ -179,7 +179,7 @@ const chartOptions = ref({
 }
 .current-subscription h3 {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .progress-section {
@@ -223,6 +223,7 @@ const chartOptions = ref({
 }
 .progress-values {
   min-width: 30%;
+  
 }
 
 .progress-values p {
@@ -236,6 +237,11 @@ const chartOptions = ref({
   align-items: center;
 }
 
+.upgrade-section button {
+  padding: 15px;
+  font-size: 16px;
+}
+
 .current-box {
   padding: 10px;
   border: 1px solid #6200ee;
@@ -247,5 +253,37 @@ const chartOptions = ref({
   color: #6200ee;
 }
 
+
 /* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .month-title-section{
+    min-width: 100%;
+    padding-bottom: 0;
+  }
+
+  .daily-section {
+    min-width: 80%;
+  }
+  .current-subscription {
+    min-width: 100%;
+  }
+  .current-pack{
+    min-width: 50%;
+  }
+
+  .upgrade-section {
+    min-width: 50% !important;
+  }
+
+  .upgrade-section button {
+    min-width: 100% !important;
+  }
+  .progress-container {
+    display: block;
+  }
+  .progress-bar {
+    min-width: 100%;
+  }
+
+}
 </style>

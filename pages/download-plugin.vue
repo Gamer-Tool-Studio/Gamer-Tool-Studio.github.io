@@ -4,8 +4,8 @@
       <v-col>
         <h1>Download Plugin</h1>
         <p>
-          Download the Plugin file compatible with your game engine. Check out 
-          <a href="">our user guide </a>to learn how to install and set it up.
+          Use DialogCraft GPT from your favourite development environment and create seamless AI-pwered NPCs. Download the Plugin file compatible with your game engine. Check out 
+          <a href="">our user guide </a>to learn how to install and use it.
         </p>
       </v-col>
       <v-col cols="12" class="engine-cards">

@@ -54,7 +54,7 @@
         <input type="form" placeholder="Tax ID" class="form_input input3" />
         <input type="form" placeholder="Number" class="form_input input3" />
       </v-col>
-      <v-col cols="12">
+      <v-col cols="12" class="save-section">
         <button class="button">Save</button>
       </v-col>
     </v-row>
@@ -109,5 +109,27 @@ useHead({
   width: 48%;
   margin-bottom: 10px;
   margin-right: 2%;
+}
+
+.save-section button {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 16px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .form1 {
+    min-width: 100%;
+  }
+
+  .form_input {
+    min-width: 100%;
+  }
+  .save-section button {
+    min-width: 100%;
+  }
 }
 </style>

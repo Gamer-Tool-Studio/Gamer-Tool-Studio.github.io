@@ -47,6 +47,7 @@ useHead({
   padding: 5px;
   width: 80%;
   text-align: left;
+  
 }
 .billing-table thead{
   display: table-header-group;
@@ -54,14 +55,21 @@ useHead({
 }
 
 .billing-table th {
-  padding-right: 20px;
-
+  padding: 5px;
 }
 
 .billing-table td {
   font-size: 14px;
-  padding-top: 10px;
+  padding: 5px;
 }
 
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .billing-table {
+    text-align: center;
+    align-items: center;
+    align-content: center;
+  }
+}
 
 </style>

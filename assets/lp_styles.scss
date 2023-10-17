@@ -169,9 +169,12 @@ section {
 }
 
 .code-display {
-  max-width: 100%;
+  max-width: 92%;
   overflow-x: auto;
- 
+}
+
+.code-block {
+  text-align: left;
 }
 
 .code-style {
