@@ -55,7 +55,7 @@ const route = useRoute();
 
 const isLandingPage = computed(() => route.path == '/');
 
-const smallHeaderPages = ['/', '/pricing', '/download-plugin'];
+const smallHeaderPages = ['/', '/pricing', '/download-plugin', '/login'];
 
 const isSmallHeader = computed(() => smallHeaderPages.includes(route.path));
 
@@ -240,13 +240,13 @@ nav.lp {
   .mobile-menu {
     display: flex;
     align-items: center;
-    font-size: 50px;
-    padding-bottom: 8px;
+    font-size: 50px !important;
   }
 
   .mobile-menu:hover {
     cursor: pointer;
   }
+
 
   // .nav-right-link:not(.user-menu) {
   //   display: none !important;
@@ -256,6 +256,13 @@ nav.lp {
 @media (max-width: 930px) {
   .nav-links a {
     font-size: 16px !important;
+  }
+}
+
+@media (max-width: 600px) {
+.user-menu button{
+  padding-bottom: 55px;
+  font-size: 35px !important;
   }
 }
 </style>

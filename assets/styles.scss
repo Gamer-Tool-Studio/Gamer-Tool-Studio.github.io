@@ -114,6 +114,7 @@ section ol {
 /* Intro Section */
 .intro-section {
   display: block;
+  margin: auto !important;
 }
 
 .intro-section h1 {
@@ -124,6 +125,8 @@ section ol {
 @media (max-width: 768px) {
   .intro-section {
     margin-left: 20px;
+    margin-right: 20px
+    ;
   }
 
   .intro-section h1 {

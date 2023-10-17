@@ -62,17 +62,17 @@
         </div>
       </div>
     </v-row>
-
-    <section class="contact-us">
+    <v-col cols="12" class="contact-us">
       <h3>Need a tailored solution for your project?</h3>
       <button class="button no-hover-button">Contact our Team</button>
-    </section>
+    </v-col>
   </v-container>
 </template>
 <script lang="ts" setup>
 definePageMeta({
   layout: "default",
 });
+
 
 import { ref, onMounted } from "vue";
 
@@ -301,4 +301,14 @@ font-weight: 500;
   border: 1px solid #fff !important;
   color: #FFF !important;
 }
+
+@media (max-width: 900px) {
+  .contact-us button {
+    padding: 15px;
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}
+
 </style>

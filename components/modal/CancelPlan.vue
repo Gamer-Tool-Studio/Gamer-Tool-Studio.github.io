@@ -31,7 +31,7 @@
                     after which we'll send you a final invoice and begin rejecting your API requests.</p>
               </v-col>
              <v-col cols="12" class="footer-section">
-                <button class ="cancel-button">Nevermind</button>
+                <button class ="cancel-button" @click="close">Nevermind</button>
                 <button class="button red">Cancel Plan</button>
              </v-col>
             </slot>            

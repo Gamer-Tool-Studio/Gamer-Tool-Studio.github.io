@@ -174,4 +174,14 @@ background-color:#d9d9e3;
 .billing-desc{
   font-size: 14px;
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .billing-card{
+    min-width: 100%;
+  }
+
+}
+
+
 </style>

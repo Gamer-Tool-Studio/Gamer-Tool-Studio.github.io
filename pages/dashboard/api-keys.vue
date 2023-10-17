@@ -84,4 +84,10 @@ useHead({
   background-color: #d9d9e3;
 }
 
+@media (max-width: 768px) {
+  .cancel-button {
+    margin-top: 30px;
+  }
+}
+
 </style>

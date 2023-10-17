@@ -6,11 +6,11 @@
           {{ member?.name[0] }}
         </div>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="4">
         {{ member.name }}
         {{ member.mail }}
       </v-col>
-      <v-col cols="2">
+      <v-col cols="3">
         <v-select
           v-model="select"
           density="compact"
@@ -18,6 +18,15 @@
           hide-details
           :items="[member.role]"
         ></v-select>
+      </v-col>
+      <v-col cols="4" class="remove-user-button">
+        <button
+          class="cancel-paid"
+          type="submit"
+          @click="removeUser = true"
+        >
+        Remove
+        </button>
       </v-col>
     </v-row>
   </v-container>
@@ -42,5 +51,9 @@ const select = member.role;
     line-height: 20px;
     width: 28px;
   }
+}
+
+.remove-user-button button{
+  margin-left: 2%;
 }
 </style>
