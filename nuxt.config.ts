@@ -1,5 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      backendURL: process.env.BACKEND_URL,
+    },
+  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
@@ -16,6 +21,7 @@ export default defineNuxtConfig({
   vite: {
     define: {
       'process.env.DEBUG': false,
+      BACKEND_URL: JSON.stringify(process.env.BACKEND_URL),
     },
     css: {
       preprocessorOptions: {
@@ -39,5 +45,5 @@ export default defineNuxtConfig({
     dirs: ['store'],
   },
 
-  ssr: false,
+  // ssr: false,
 });

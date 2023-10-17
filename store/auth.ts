@@ -2,12 +2,12 @@ import axios from 'axios';
 import { defineStore } from 'pinia';
 import { useUserStore } from './user';
 
-const BASE_URL = 'http://127.0.0.1:3002/api/v1'; //"https://dummyjson.com/auth/login";
+const BASE_URL = BACKEND_URL + '/api/v1'; //"https://dummyjson.com/auth/login";
 const LOCAL_LOGIN = '/auth/local/login'; //
 const LOCAL_REGISTER = '/auth/local/register'; //
 const GOOGLE_LOGIN = '/auth/google/login'; //
 const GOOGLE_REGISTER = '/auth/google/register'; //
-const CHECK_AUTH = '/auth/check'; //
+const AUTH_CHECK = '/auth/check'; //
 const USER_PROFILE = '/user/profile'; //
 
 interface LoginUserPayload {
@@ -46,7 +46,7 @@ export const useAuthStore = defineStore('auth', {
     async isAuthenticated(): Promise<Boolean> {
       const user = useUserStore();
 
-      const { data, pending }: any = await useFetch(BASE_URL + CHECK_AUTH, {
+      const { data, pending }: any = await useFetch(BASE_URL + AUTH_CHECK, {
         method: 'get',
         credentials: 'include', // fetch
       });

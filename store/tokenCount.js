@@ -1,4 +1,7 @@
 // store/tokenCount.js
+
+// import { useAuthAPI } from '~/services/api';
+
 // import { BASE_URL } from 'constants';
 const apiVersion = 'v1'; // process.env.API_VERSION;
 
@@ -36,16 +39,13 @@ export const useTokenCountStore = defineStore('tokenCount', {
         this.currentYear += 1;
       }
       try {
-        const { data, pending } = await useFetch(BASE_URL + '/usage/perMonth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: {
-            month: this.currentMonth,
-            year: this.currentYear,
-          },
-          credentials: 'include', // fetch
+        const { data, pending, error } = await useAuthAPI('/usage/perMonth', 'POST', {
+          month: this.currentMonth,
+          year: this.currentYear,
         });
-
+        if (error.value) {
+          throw error.value;
+        }
         this.monthTokensDaily = data?.value.month || [];
       } catch (error) {
         console.error(error);

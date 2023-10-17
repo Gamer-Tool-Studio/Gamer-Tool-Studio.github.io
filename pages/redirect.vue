@@ -7,5 +7,7 @@ const { isAuthenticated } = useAuthStore();
 
 if (await isAuthenticated()) {
   router.push({ path: '/dashboard' });
+} else {
+  router.push({ path: '/login' });
 }
 </script>
