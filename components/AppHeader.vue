@@ -240,13 +240,13 @@ nav.lp {
   .mobile-menu {
     display: flex;
     align-items: center;
-    font-size: 50px;
-    padding-bottom: 8px;
+    font-size: 500px !important;
   }
 
   .mobile-menu:hover {
     cursor: pointer;
   }
+
 
   // .nav-right-link:not(.user-menu) {
   //   display: none !important;

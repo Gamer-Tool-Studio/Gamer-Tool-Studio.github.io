@@ -10,8 +10,7 @@
       </v-col>
       <v-col cols="12" class="engine-cards">
         <v-col cols="12" class="card-header-section">
-          <img src="images/RPGM-logo.png"/>
-          <h2>RPG Maker</h2>
+          <img src="images/RPGM-text.png"/>
         </v-col>
         <div class="cards-container">
           <v-col cols="6" class="download-cards left-card">
@@ -53,7 +52,6 @@ useHead({
   padding-top: 0px;
 }
 
-
 .download-plugin-page h1 {
   font-size: 40px;
   line-height: 88px;
@@ -85,8 +83,9 @@ useHead({
 
 }
 
-.card-header-section h2 {
-  font-size: 40px;
+.card-header-section img {
+  text-align: center;
+  max-width: 30%;
 }
 
 .cards-container {
@@ -100,6 +99,7 @@ useHead({
   border: 1px solid #ECECF1;
   padding: 0;
   border-radius: 7px;  
+
 }
 
 .download-cards:hover {
@@ -140,5 +140,17 @@ useHead({
 .reference_link {
   padding:0;
   margin-top:0;
+}
+
+@media (max-width: 600px) {
+  .card-header-section img {
+    min-width: 70% !important;
+  }
+  .cards-container {
+    display: block;
+  }
+  .download-cards{
+    min-width: 100%;
+  }
 }
 </style>

@@ -22,7 +22,6 @@
         </div>
       </v-col>
     </v-row>
-
     <v-row class="features">
       <v-col>
         <h2 class="page-headers">
@@ -106,7 +105,7 @@
           dialogs with ease
         </h2>
       </v-col>
-      <v-col class="plugin-explain">
+      <v-col cols="6" class="plugin-explain">
         <ol class="how-to-start">
           <li>Sign up for a trial account or select a suitable paid plan.</li>
           <li>
@@ -130,16 +129,16 @@
         </div>
       </v-col>
     </v-row>
-    <section>
-      <div class="start-trial">
+
+      <v-col cols="12" class="start-trial">
         <h2 class="page-headers">
           Are you ready to take your game development to the next level with the ultimate AI-Powered character building
           tool?
         </h2>
         <br />
         <button class="button">Start Free Trial Now</button>
-      </div>
-    </section>
+      </v-col>
+
   </v-container>
 </template>
 <script lang="ts" setup>

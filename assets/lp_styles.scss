@@ -7,13 +7,14 @@ h2,
 main.lp {
   > div {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto;
   }
 }
 /* Section Styles */
 section {
   margin-bottom: 30px;
 }
+
 
 .lp footer {
   color: black;
@@ -67,6 +68,7 @@ section {
 .features {
   border-top: 1px solid #6e6e80;
   margin-top: 60px;
+  margin: auto;
 }
 
 .page-headers {
@@ -128,6 +130,7 @@ section {
 .get-started {
   margin-top: 60px;
   border-top: 1px solid #6e6e80;
+  margin: auto;
 }
 
 .how-to-start {
@@ -136,11 +139,6 @@ section {
   line-height: 30px;
   font-size: 19px;
   margin-top: 30px;
-}
-
-.how-to-start ul {
-  padding: 0;
-  margin: 0;
 }
 
 .how-to-start li {
@@ -173,6 +171,7 @@ section {
 .code-display {
   max-width: 100%;
   overflow-x: auto;
+ 
 }
 
 .code-style {
@@ -228,6 +227,7 @@ section {
 }
 
 /*Start Trial Section */
+
 
 .start-trial {
   display: block;
@@ -352,6 +352,7 @@ footer {
   }
 
   .plugin-explain {
+    margin: auto;
     cols: 12 !important;
     min-width: 100% !important;
   }
@@ -366,10 +367,10 @@ footer {
   }
 
   .engines-available {
-    margin-top: 30px;
-    margin-bottom: 30px;
     min-width: 100% !important;
+    margin: auto !important;
   }
+ 
 }
 
 .start-trial .button {
@@ -380,6 +381,9 @@ footer {
   .page-headers {
     text-align: center;
   }
+  .start-trial {
+    margin: auto !important;
+  }
 
   .start-trial h2 {
     text-align: center;
@@ -389,6 +393,7 @@ footer {
     width: 100%;
     margin-top: 10px;
   }
+
 }
 
 @media (min-width: 768px) {
@@ -415,4 +420,6 @@ footer {
     flex-wrap: wrap;
     align-items: center;
   }
+  
+
 }
