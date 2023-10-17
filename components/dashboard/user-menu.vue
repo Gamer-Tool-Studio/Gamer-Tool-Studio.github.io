@@ -33,7 +33,7 @@
           <NuxtLink to="/download-plugin">Download Plugin</NuxtLink>
         </div>
         <div class="menu-group">
-          <NuxtLink to="/dashboard/api-keys">Pricing</NuxtLink>
+          <NuxtLink to="/pricing">Pricing</NuxtLink>
           <NuxtLink to="/dashboard/">Privacy Policy</NuxtLink>
         </div>
         <div v-if="authenticated" class="menu-group">

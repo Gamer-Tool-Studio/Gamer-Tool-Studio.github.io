@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-row class="align-center">
-      <v-col cols="10">
+      <v-col cols="8">
         <h1>Members</h1>
       </v-col>
-      <v-col cols="2">
+      <v-col cols="4">
         <modal-invite-new-user v-if="inviteUser"
           @close="inviteUser = false"> </modal-invite-new-user>
         <button class="button" type="submit" @click="inviteUser = true">Invite members</button>
@@ -28,3 +28,8 @@ useHead({
   title: "Members ",
 });
 </script>
+
+<style lang="scss">
+
+
+</style>

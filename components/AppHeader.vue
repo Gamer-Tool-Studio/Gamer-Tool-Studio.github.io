@@ -240,7 +240,7 @@ nav.lp {
   .mobile-menu {
     display: flex;
     align-items: center;
-    font-size: 500px !important;
+    font-size: 50px !important;
   }
 
   .mobile-menu:hover {
@@ -256,6 +256,13 @@ nav.lp {
 @media (max-width: 930px) {
   .nav-links a {
     font-size: 16px !important;
+  }
+}
+
+@media (max-width: 600px) {
+.user-menu button{
+  padding-bottom: 55px;
+  font-size: 35px !important;
   }
 }
 </style>
