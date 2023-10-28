@@ -14,9 +14,8 @@ export const useTokenCountStore = defineStore('tokenCount', {
   state: () => {
     return {
       maxTokens: 100_000,
-      monthTokensDaily: [
-        12, 19, 3, 5, 2, 3, 8, 10, 15, 6, 12, 9, 16, 8, 5, 7, 20, 14, 11, 10, 15, 9, 6, 11, 8, 7, 14, 12, 18, 10,
-      ],
+      monthlyInput: [],
+      monthlyOutput: [],
       currentMonth: new Date().getMonth(),
       currentYear: new Date().getFullYear(),
     };
@@ -39,14 +38,15 @@ export const useTokenCountStore = defineStore('tokenCount', {
         this.currentYear += 1;
       }
       try {
-        const { data, pending, error } = await useAuthAPI('/usage/perMonth', 'POST', {
+        const { data, pending, error } = await useAuthAPI('/usage/perDay', 'POST', {
           month: this.currentMonth,
           year: this.currentYear,
         });
         if (error.value) {
           throw error.value;
         }
-        this.monthTokensDaily = data?.value.month || [];
+        this.monthlyInput = data?.value.monthly?.input || [];
+        this.monthlyOutput = data?.value.monthly?.output || [];
       } catch (error) {
         console.error(error);
       }

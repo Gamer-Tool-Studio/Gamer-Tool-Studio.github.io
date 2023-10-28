@@ -157,7 +157,7 @@ export default {
 
 .footer-section {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .footer-section button {

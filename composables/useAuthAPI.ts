@@ -24,7 +24,6 @@ export default function (
 ) {
   const config = useRuntimeConfig();
   const BASE_URL = config.public.backendURL + '/api/v1';
-
   return useFetch(BASE_URL + endpoint, {
     method,
     headers: { 'Content-Type': 'application/json' },

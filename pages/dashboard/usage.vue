@@ -34,7 +34,7 @@
         <div class="progress-container">
           <div class="progress-bar input-tokens"></div>
           <div class="progress-values">
-            <p>{{ consumedTokens }} / {{ maxTokens }} input tokens</p>
+            <p>{{ consumedInputTokens }} / {{ maxTokens }} input tokens</p>
           </div>
         </div>
       </v-col>
@@ -42,7 +42,7 @@
         <div class="progress-container">
           <div class="progress-bar output-tokens"></div>
           <div class="progress-values">
-            <p>{{ consumedTokens }} / {{ maxTokens }} output tokens</p>
+            <p>{{ consumedOutputTokens }} / {{ maxTokens }} output tokens</p>
           </div>
         </div>
       </v-col>
@@ -69,18 +69,18 @@ useHead({
 import { useTokenCountStore } from '~/store/tokenCount';
 import { getMonthDays, getMonthName, getCumulativeTokens } from '~/util/chart';
 import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
+// Chart
+import { Bar } from 'vue-chartjs';
 
 const tokenStore = useTokenCountStore();
 
-const { monthTokensDaily, currentMonth, maxTokens } = storeToRefs(tokenStore); // make authenticated state reactive with storeToRefs
+const { monthlyInput, monthlyOutput, currentMonth, maxTokens } = storeToRefs(tokenStore); // make authenticated state reactive with storeToRefs
 // Calculate the percentages based on the initial values
 
-const consumedTokens = computed(() => monthTokensDaily.value.reduce((a, b) => a + b, 0));
-const progressInputPercentage = computed(() => `${(consumedTokens.value / maxTokens.value) * 100}%`);
-const progressOutputPercentage = computed(() => `${(consumedTokens.value / maxTokens.value) * 100}%`);
-
-// Chart
-import { Bar } from 'vue-chartjs';
+const consumedInputTokens = computed(() => monthlyInput.value.reduce((a, b) => a + b, 0));
+const consumedOutputTokens = computed(() => monthlyOutput.value.reduce((a, b) => a + b, 0));
+const progressInputPercentage = computed(() => `${(consumedInputTokens.value / maxTokens.value) * 100}%`);
+const progressOutputPercentage = computed(() => `${(consumedOutputTokens.value / maxTokens.value) * 100}%`);
 
 const changeMonth = tokenStore.changeMonth;
 
@@ -91,13 +91,20 @@ const isCumulative = ref(false);
 const currentMonthName = computed(() => getMonthName(currentMonth.value));
 const labels = computed(() => getMonthDays(currentMonth.value));
 
+changeMonth(currentMonth);
+
 const chartData = computed(() => ({
   labels: labels.value,
   datasets: [
     {
-      label: 'Tokens used',
+      label: 'Input tokens',
       backgroundColor: '#6200EE',
-      data: isCumulative.value ? getCumulativeTokens(monthTokensDaily.value) : monthTokensDaily.value,
+      data: isCumulative.value ? getCumulativeTokens(monthlyInput.value) : monthlyInput.value,
+    },
+    {
+      label: 'Output tokens',
+      backgroundColor: '#C834A4',
+      data: isCumulative.value ? getCumulativeTokens(monthlyOutput.value) : monthlyOutput.value,
     },
   ],
 }));
@@ -223,7 +230,6 @@ const chartOptions = ref({
 }
 .progress-values {
   min-width: 30%;
-  
 }
 
 .progress-values p {
@@ -253,10 +259,9 @@ const chartOptions = ref({
   color: #6200ee;
 }
 
-
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
-  .month-title-section{
+  .month-title-section {
     min-width: 100%;
     padding-bottom: 0;
   }
@@ -267,7 +272,7 @@ const chartOptions = ref({
   .current-subscription {
     min-width: 100%;
   }
-  .current-pack{
+  .current-pack {
     min-width: 50%;
   }
 
@@ -284,6 +289,5 @@ const chartOptions = ref({
   .progress-bar {
     min-width: 100%;
   }
-
 }
 </style>
