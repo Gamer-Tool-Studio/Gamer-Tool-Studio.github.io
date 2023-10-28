@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia';
+import { USER_PROFILE } from '@/util/urls';
+
 interface MemberInfo {
   name: string;
   email: string;
@@ -53,6 +55,20 @@ export const useUserStore = defineStore('user', {
     userEmail: (state) => state.user?.email,
   },
   actions: {
+    async getUserProfile(): Promise<any> {
+      const { data, pending }: any = await useFetch(USER_PROFILE, {
+        method: 'get',
+        credentials: 'include', // fetch
+      });
+
+      if (data.value) {
+        this.user = data.value;
+        console.log(data.value);
+
+        this.setUser(data.value);
+        return this.user;
+      }
+    },
     setLogin(val: boolean) {
       this.isLoggedIn = val;
     },

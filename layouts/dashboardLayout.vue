@@ -24,7 +24,7 @@
 <script setup>
 import { useTheme } from 'vuetify';
 
-const { getUserProfile } = useAuthStore();
+const { getUserProfile } = useUserStore();
 const cssVars = {};
 
 const theme = useTheme();

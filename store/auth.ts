@@ -8,7 +8,6 @@ const LOCAL_REGISTER = '/auth/local/register'; //
 const GOOGLE_LOGIN = '/auth/google/login'; //
 const GOOGLE_REGISTER = '/auth/google/register'; //
 const AUTH_CHECK = '/auth/check'; //
-const USER_PROFILE = '/user/profile'; //
 
 interface LoginUserPayload {
   username: string;
@@ -25,24 +24,6 @@ export const useAuthStore = defineStore('auth', {
     userProfile: {},
   }),
   actions: {
-    async getUserProfile(): Promise<any> {
-      const user = useUserStore();
-
-      const { data, pending }: any = await useFetch(BASE_URL + USER_PROFILE, {
-        method: 'get',
-        credentials: 'include', // fetch
-      });
-      this.loading = pending;
-
-      if (data.value) {
-        this.userProfile = data.value.userProfile;
-        console.log(data.value.user);
-
-        user.setUser(data.value.user);
-        return this.userProfile;
-      }
-    },
-
     async isAuthenticated(): Promise<Boolean> {
       const user = useUserStore();
 
