@@ -38,9 +38,11 @@ export const useTokenCountStore = defineStore('tokenCount', {
         this.currentYear += 1;
       }
       try {
+        const user = useUserStore();
         const { data, pending, error } = await useAuthAPI('/usage/perDay', 'POST', {
           month: this.currentMonth,
           year: this.currentYear,
+          accountId: user.username,
         });
         if (error.value) {
           throw error.value;
