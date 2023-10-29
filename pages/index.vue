@@ -2,7 +2,7 @@
   <v-container class="lp">
     <v-row>
       <v-col cols="12" class="intro-section">
-        <h1>Dialog Craft GPT - The Game Development tool To Create AI-powered NPCs </h1>
+        <h1>Dialog Craft GPT - The Game Development Tool To Create AI-Powered NPCs </h1>
         <div class="intro-cta">
           <button class="button">Start Free Trial Now</button>
           <p>View our documentation</p>
@@ -38,7 +38,7 @@
           </p>
         </div>
         <div class="feature-box">
-          <h3>AI-Powered NPCs</h3>
+          <h3>Unscripted NPCs</h3>
           <p>
             Build immersive character backstories and customize the way they respond to players. Make chat GPT a friend
             or a foe in your game quests.
