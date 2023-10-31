@@ -2,7 +2,7 @@
   <v-container class="pricing">
     <v-row class="intro-section">
       <v-col>
-        <h1>Dialog Craft GPT Pricing Plans</h1>
+        <h1>NPC-GPT Pricing Plans</h1>
         <p>
           Simple and flexible pricing plans adapted to the development stage of
           your game. Pay per volume of requests made to our API only.<br> Only Developer packs are available at the moment. Production packs for games published will be available soon.

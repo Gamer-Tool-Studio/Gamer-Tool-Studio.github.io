@@ -2,7 +2,7 @@
   <v-container class="lp">
     <v-row>
       <v-col cols="12" class="intro-section">
-        <h1>Dialog Craft GPT - The Game Development Tool To Create AI-Powered NPCs </h1>
+        <h1>NPC-GPT - Real-time AI chats for your game characters </h1>
         <div class="intro-cta">
           <button class="button">Start Free Trial Now</button>
           <p>View our documentation</p>
@@ -26,14 +26,14 @@
       <v-col>
         <h2 class="page-headers">
           Unlock entirely new gaming experiences and create unscripted scenarios with the assistance of AI-driven NPCs.
-          Effortlessly craft immersive conversations by harnessing the power of Chat GPT AI
+          Effortlessly craft immersive conversations by integrating with GPT-4 model.
         </h2>
       </v-col>
       <div class="feature-boxes">
         <div class="feature-box">
           <h3>Open world building</h3>
           <p>
-            Leverage the capabilities of GPT-4 and enable players to input their own text to interact with characters
+            Leverage the capabilities of AI and enable players to input their own text to interact with characters
             and open the possibilities within to your game to the maximum.
           </p>
         </div>
@@ -47,7 +47,7 @@
         <div class="feature-box">
           <h3>Intuitive Interface</h3>
           <p>
-            DialogCraftGPT plugin requires no programming experience to setup and use from within your favourite game
+            NPC-GPT plugin requires no programming experience to setup and use from within your favourite game
             engine.
           </p>
         </div>
@@ -63,16 +63,16 @@
     <v-row class="get-started" id="sectionToLinkToApi">
       <v-col>
         <h2 class="page-headers">
-          Create seamless AI characters to interact with players and users from any Frontend environment with Dialog
-          Craft GPT library
+          Create seamless AI characters to interact with players and users from any Frontend environment with
+           NPC-GPT library
         </h2>
         <div class="code-style">
           <pre class="code-display">
           <code>
-            npm install dialogcrafgpt
-            curl https://api.gamertoolstudio.com/dialogcraftgpt/v1/ 
+            npm install npcgpt
+            curl https://api.gamertoolstudio.com/npcgpt/v1/ 
             -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $DIALOGCRAFTGPT_API_KEY" \
+            -H "Authorization: Bearer $NPCGPT_API_KEY" \
             -d '{
               "role": "system",
               "name": "GPT Wizard",
@@ -101,23 +101,23 @@
       </v-col>
       <v-col cols="12" id="sectionToLinkToPlugin">
         <h2 class="page-headers">
-          Add Dialog Craft GPT Plugin to your favourite game engine today and start harnessing the power of AI-generated
-          dialogs with ease
+          Add NPC-GPT Plugin to your favourite game engine today and start harnessing the power of AI-generated
+          conversations with ease
         </h2>
       </v-col>
       <v-col cols="6" class="plugin-explain">
         <ol class="how-to-start">
           <li>Sign up for a trial account or select a suitable paid plan.</li>
           <li>
-            Install the DialogCraftGPT plugin in your preferred game engine.
+            Install the NPC-GPT plugin in your preferred game engine.
             <a href="/download-plugin">Download Plugin file</a>.
           </li>
           <li>
-            Define personality traits, provide context about game events and establish guidelines for your character
-            dialogues with seamless plugin commands.
+            Define personality traits, provide context about game events and establish guidelines for your NPC
+            speech with seamless plugin commands.
           </li>
           <li>Harness the power of Chat GPT AI to generate dynamic and immersive conversations.</li>
-          <li>Integrate the generated dialogues into your game seamlessly.</li>
+          <li>Integrate the generated responses into your game seamlessly.</li>
         </ol>
       </v-col>
       <v-col cols="6" class="engines-available">

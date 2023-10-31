@@ -4,7 +4,7 @@
       <v-col>
         <h1>Download Plugin</h1>
         <p>
-          Use DialogCraft GPT from your favourite development environment and create seamless AI-pwered NPCs. Download the Plugin file compatible with your game engine. Check out 
+          Use NPC-GPT from your favourite development environment and create seamless AI-pwered NPCs. Download the Plugin file compatible with your game engine. Check out 
           <a href="">our user guide </a>to learn how to install and use it.
         </p>
       </v-col>
@@ -30,7 +30,7 @@
         </div>
       </v-col>
       <v-col cols="12" class="api-link">
-        <h3>Want to use Dialog Craft GPT in another environment?</h3>
+        <h3>Want to use NPC-GPT in another environment?</h3>
         <p class="reference_link">
           Check our <a href="">API reference here.</a>
         </p>
