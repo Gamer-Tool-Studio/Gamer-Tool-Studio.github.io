@@ -27,7 +27,7 @@
             <v-col cols="12" class="footer-section">
               <div class="button-container">
                 <button class="cancel-button" @click="close">Cancel</button>
-                <button class="button" @click="$emit('save')">
+                <button class="button" @click="generateKey">
                   {{ isCreating }}
                 </button>
               </div>
@@ -40,27 +40,43 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'GenerateApiKey',
   props: ['formTitle', 'name'],
-  components: {},
-
   data() {
-    return {};
+    return {
+      isCreating: !this.name ? 'Create Secret Key' : 'Save',
+      inviteUser: false,
+      key: '', // Store the generated key
+    };
   },
-  created() {
-    this.isCreating = !this.name ? 'Create Secret Key' : 'Save';
-  },
-
   methods: {
     close() {
       this.$emit('close');
+    },
+    generateKey() {
+      // Make a POST request to generate the key
+      axios
+        .post('http://localhost:3002/api/v1/auth/gen-key', {}, {credentials: true})
+        .then((response) => {
+          this.key = response.data.token; // Store the key from the response
+          console.log('Generated Key:', this.key);
+          // Show the "invite user" modal after generating the key
+          this.inviteUser = true;
+        })
+        .catch((error) => {
+          console.error('Error generating key:', error);
+        });
     },
   },
 };
 </script>
 
+
 <style lang="scss">
+
 .modal-fade-enter,
 .modal-fade-leave-active {
   opacity: 0;
