@@ -4,7 +4,7 @@
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" @click.stop>
         <header class="modal-header">
           <slot name="header">
-            <h1>{{ apiKey ? 'Your new API key' : formTitle }}</h1>
+            <h1>{{ apiKey ? 'Create new secret key' : formTitle }}</h1>
             <button type="button" class="btn-close" aria-label="Close modal" @click="close">
               <img src="~/assets/icons/close.svg" />
             </button>
@@ -36,10 +36,14 @@
             </div>
             <!-- TODO: change layout when key is created -->
             <div v-else>
-              <v-col cols="12" class="header-section">
-                <h3 class="modal-subheader">Name</h3>
+              <v-col cols="12" class="text-section">
+                <p>Please save this secret key somewhere safe and accessible. 
+                   For security reasons, <b>you won't be able to view it again</b> 
+                   through your Gamer Tools Studio account. If you lose this secret key, you'll need to generate a new one.
+                </p>
               </v-col>
-              <v-col cols="12" class="forms-section">
+              <v-col cols="12" class="copy-key-section">
+                <v-col cols="11" class="forms-section">
                 <input
                   class="modal-forms"
                   type="text"
@@ -48,10 +52,15 @@
                   disabled
                   @input="$emit('update:name', $event.target.value)"
                 />
+                </v-col>
+                <v-col cols="2" class="copy-button-section">
+                  <div class="img-container methods-bcg" @click="copyToClipboard">
+                    <img src="~/assets/images/white-copy-icon.png">
+                  </div>
+                </v-col>
               </v-col>
               <v-col cols="12" class="footer-section">
                 <div class="button-container">
-                  <button class="cancel-button" @click="close">Cancel</button>
                   <button class="button" @click="generateKey">
                     {{ isCreating }}
                   </button>
@@ -83,12 +92,20 @@ export default {
     async generateKey() {
       // Make a POST request to generate the key
       const keysStore = useKeysStore();
-
       const { token: apiKey } = await keysStore.createApiToken(this.name);
       console.log(apiKey);
-
       this.apiKey = apiKey;
     },
+    async copyToClipboard() {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(this.apiKey);
+      console.log('API key copied to clipboard');
+    }
+  } catch (err) {
+    console.error('Error copying API key to clipboard:', err);
+  }
+}
   },
 };
 </script>
@@ -193,6 +210,42 @@ export default {
   // padding-top: 0
 }
 
+.copy-key-section {
+  display: inline-flex;
+}
+
+.copy-button-section {
+  float: right;
+}
+
+.copy-button-section:hover {
+  cursor: pointer;
+}
+
+.img-container {
+  padding: 10px;
+  border-radius: 7px;
+  max-width: 40px;
+  max-height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  vertical-align: middle;
+}
+
+.img-container img {
+  max-width: 100%;
+}
+
+.methods-bcg {
+  background-color: #19c37d;
+  margin:0;
+}
+
+.methods-bcg:hover {
+  background-color: #10a37f;
+}
+
+
 .footer-section {
   display: inline-flex;
 }
@@ -200,6 +253,7 @@ export default {
 .footer-section button {
   margin: 3px;
 }
+
 
 .button-container {
   width: 100%;

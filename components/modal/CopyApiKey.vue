@@ -29,7 +29,7 @@
                     <p>
                         Please save this secret key somewhere safe and accessible. 
                         For security reasons, <b>you won't be able to view it again</b> 
-                        through your OpenAI account. If you lose this secret key, you'll need to generate a new one.
+                        through your Gamer Tools Studio account. If you lose this secret key, you'll need to generate a new one.
                     </p>
                   </v-col>
                   <v-col cols="10" class="key-display">
@@ -56,7 +56,7 @@
   
   <script>
   export default {
-    name: "RevokeKey",
+    name: "CopyKey",
     components: {},
     props: ["name"],
     data() {
