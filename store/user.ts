@@ -66,7 +66,7 @@ export const useUserStore = defineStore('user', {
         console.log(data.value);
 
         this.setUser(data.value);
-        this.setKeys (data.keys);
+        this.setKeys (data.value.keys);
         return this.user;
       }
     },
