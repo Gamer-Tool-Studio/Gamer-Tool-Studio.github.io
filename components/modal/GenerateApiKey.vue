@@ -61,8 +61,8 @@
               </v-col>
               <v-col cols="12" class="footer-section">
                 <div class="button-container">
-                  <button class="button" @click="generateKey">
-                    {{ isCreating }}
+                  <button class="button" @click="keyGenerated ? close() : generateKey">
+                    {{ keyGenerated ? 'Done' : isCreating }}
                   </button>
                 </div>
               </v-col>
@@ -83,6 +83,7 @@ export default {
       isCreating: !this.name ? 'Create Secret Key' : 'Save',
       inviteUser: false,
       apiKey: '', // Store the generated key
+      keyGenerated: false, // Add this property
     };
   },
   methods: {
@@ -90,11 +91,11 @@ export default {
       this.$emit('close');
     },
     async generateKey() {
-      // Make a POST request to generate the key
       const keysStore = useKeysStore();
       const { token: apiKey } = await keysStore.createApiToken(this.name);
       console.log(apiKey);
       this.apiKey = apiKey;
+      this.keyGenerated = true; // Set keyGenerated to true
     },
     async copyToClipboard() {
   try {

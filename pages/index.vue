@@ -12,8 +12,8 @@
         <div class="demo-video">
           <iframe
             width="100%"
-            height="515"
-            src="https://www.youtube.com/embed/2SUfiiPxiXQ?si=SWlFk97Zvwx179AW"
+            height="600"
+            src="https://www.youtube.com/embed/p-2NLT5jpcA?si=9KDx8_A2xNvWzh2C"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -69,23 +69,40 @@
         <div class="code-style">
           <pre class="code-display">
           <code>
-            npm install npcgpt
             curl https://api.gamertoolstudio.com/npcgpt/v1/ 
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $NPCGPT_API_KEY" \
             -d '{
-              "role": "system",
-              "name": "GPT Wizard",
-              "personalityTraits": ["friendly","enigmatic", "picky","observant"],
-              "dialogStyle":"mysterious"
-              "backgroundStory" :"you are a character in Heavens Beneath, a fantasy RPG game.", 
-              "eventsKnowledge": "make potions", "game map locations", "villain's aliby.",
-              "interests": ["astrology":"10", "herbology":"9", "chemistry":"9", "craftsmanship":"7" ],
-              "support":"10",
-              "maxOutputWords":"400",
-              "userInput": "Hey there, where am i?,
-              "chatHistory": []
-            }'
+              "userInput": "I've heard about a secret map?!",
+              "chatHistory": [],
+              "characterContext": {
+              "name": "GPTWizard",
+              "age": 35,
+              "personality": {
+                  "traits": [
+                      "shy",
+                      "mystic",
+                      "adventurous"
+                  ],
+              "dialogueStyle": "casual"
+              },
+              "backgroundStory": "GPT WIzard is a Mage who lives in Mystery Foster. 
+              She was brought up by witches and mages after being found as a baby 
+              wondering in the forest. She belongs to this tribe that remains 
+              undiscovered by most humans but learned the ways of the past and future
+              and is able to interpret signs and energies.",
+              "enventsKnowledge": "Knows there is a secret map at the entrance of the 
+              big cave under a yellow flower and  knows the player harduous future
+              in the forest with many enemies and challenges",
+              "interests": {
+                  "Astrology": 7,
+                  "Herbology": 9,
+                  "History": 8
+              },
+              "supportiveness": 8,
+              "maxOutputWords": 50
+            }
+          }'
           </code>
         </pre>
           <div class="typed-display">
@@ -145,8 +162,7 @@
 import { ref, onMounted } from 'vue';
 
 const messageToType =
-  "Hey there, you seem kinda lost huh? you're exactly where you should be but soon to be the worst of the places to ever been. The beginning may be the end but for you still both.";
-
+"Ah, greetings, traveler! You've stumbled upon some intriguing information indeed. Yes, there is indeed a secret map hidden within the depths of the big cave, tucked away beneath a vibrant yellow flower. It's said to hold the key to unlocking hidden treasures and revealing the path to untold secrets.";
 // Typing animation
 let intervalTypeMessage: any;
 const responseGPT = ref('');
