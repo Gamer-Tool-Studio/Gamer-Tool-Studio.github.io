@@ -44,6 +44,8 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['store'],
   },
-
+  routeRules: {
+    '/redirect': { ssr: false },
+  },
   // ssr: false,
 });

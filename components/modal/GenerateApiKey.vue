@@ -4,7 +4,7 @@
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" @click.stop>
         <header class="modal-header">
           <slot name="header">
-            <h1>{{ formTitle }}</h1>
+            <h1>{{ apiKey ? 'Your new API key' : formTitle }}</h1>
             <button type="button" class="btn-close" aria-label="Close modal" @click="close">
               <img src="~/assets/icons/close.svg" />
             </button>
@@ -12,26 +12,52 @@
         </header>
         <section id="modalDescription" class="modal-body">
           <slot name="body">
-            <v-col cols="12" class="header-section">
-              <h3 class="modal-subheader">Name</h3>
-            </v-col>
-            <v-col cols="12" class="forms-section">
-              <input
-                class="modal-forms"
-                type="text"
-                placeholder="My test key"
-                :value="name"
-                @input="$emit('update:name', $event.target.value)"
-              />
-            </v-col>
-            <v-col cols="12" class="footer-section">
-              <div class="button-container">
-                <button class="cancel-button" @click="close">Cancel</button>
-                <button class="button" @click="generateKey">
-                  {{ isCreating }}
-                </button>
-              </div>
-            </v-col>
+            <div v-if="!apiKey">
+              <v-col cols="12" class="header-section">
+                <h3 class="modal-subheader">Name</h3>
+              </v-col>
+              <v-col cols="12" class="forms-section">
+                <input
+                  class="modal-forms"
+                  type="text"
+                  placeholder="My test key"
+                  :value="name"
+                  @input="$emit('update:name', $event.target.value)"
+                />
+              </v-col>
+              <v-col cols="12" class="footer-section">
+                <div class="button-container">
+                  <button class="cancel-button" @click="close">Cancel</button>
+                  <button class="button" @click="generateKey">
+                    {{ isCreating }}
+                  </button>
+                </div>
+              </v-col>
+            </div>
+            <!-- TODO: change layout when key is created -->
+            <div v-else>
+              <v-col cols="12" class="header-section">
+                <h3 class="modal-subheader">Name</h3>
+              </v-col>
+              <v-col cols="12" class="forms-section">
+                <input
+                  class="modal-forms"
+                  type="text"
+                  placeholder="My test key"
+                  :value="apiKey"
+                  disabled
+                  @input="$emit('update:name', $event.target.value)"
+                />
+              </v-col>
+              <v-col cols="12" class="footer-section">
+                <div class="button-container">
+                  <button class="cancel-button" @click="close">Cancel</button>
+                  <button class="button" @click="generateKey">
+                    {{ isCreating }}
+                  </button>
+                </div>
+              </v-col>
+            </div>
           </slot>
         </section>
       </div>
@@ -40,8 +66,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: 'GenerateApiKey',
   props: ['formTitle', 'name'],
@@ -49,34 +73,27 @@ export default {
     return {
       isCreating: !this.name ? 'Create Secret Key' : 'Save',
       inviteUser: false,
-      key: '', // Store the generated key
+      apiKey: '', // Store the generated key
     };
   },
   methods: {
     close() {
       this.$emit('close');
     },
-    generateKey() {
+    async generateKey() {
       // Make a POST request to generate the key
-      axios
-        .post('http://localhost:3002/api/v1/auth/gen-key', {}, {credentials: true})
-        .then((response) => {
-          this.key = response.data.token; // Store the key from the response
-          console.log('Generated Key:', this.key);
-          // Show the "invite user" modal after generating the key
-          this.inviteUser = true;
-        })
-        .catch((error) => {
-          console.error('Error generating key:', error);
-        });
+      const keysStore = useKeysStore();
+
+      const { token: apiKey } = await keysStore.createApiToken(this.name);
+      console.log(apiKey);
+
+      this.apiKey = apiKey;
     },
   },
 };
 </script>
 
-
 <style lang="scss">
-
 .modal-fade-enter,
 .modal-fade-leave-active {
   opacity: 0;
