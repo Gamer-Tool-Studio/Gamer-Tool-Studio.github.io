@@ -5,7 +5,7 @@
         <h1>NPC-GPT - Real-time AI chats for your game characters </h1>
         <div class="intro-cta">
           <button class="button">Start Free Trial Now</button>
-          <p>View our documentation</p>
+          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>View our documentation</p></a>
         </div>
       </v-col>
       <v-col>
@@ -114,7 +114,7 @@
         </div>
       </v-col>
       <v-col cols="12" class="button-display">
-        <button class="button">View API Reference</button>
+        <a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction"><button class="button">View API Reference</button></a>
       </v-col>
       <v-col cols="12" id="sectionToLinkToPlugin">
         <h2 class="page-headers">

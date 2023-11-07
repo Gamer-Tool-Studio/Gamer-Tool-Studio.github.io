@@ -25,7 +25,7 @@
           </NuxtLink>
         </li>
         <li class="nav-left mobile-display">
-          <NuxtLink to="/documentation">Documentation</NuxtLink>
+          <NuxtLink to="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction">Documentation</NuxtLink>
         </li>
         <li class="nav-left mobile-display"><NuxtLink to="/pricing">Pricing</NuxtLink></li>
         <li class="nav-left mobile-display">
