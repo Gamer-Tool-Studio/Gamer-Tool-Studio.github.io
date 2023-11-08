@@ -56,10 +56,16 @@ export const useUserStore = defineStore('user', {
   },
   actions: {
     async getUserProfile(): Promise<any> {
+      console.log('Call getUserProfile ');
+      const headers = useRequestHeaders(['cookie']);
+      console.log('headers ', headers);
+
       const { data, pending }: any = await useFetch(USER_PROFILE, {
         method: 'get',
         credentials: 'include', // fetch
+        headers,
       });
+      console.log(data.value, pending.value);
 
       if (data.value) {
         this.user = data.value;
