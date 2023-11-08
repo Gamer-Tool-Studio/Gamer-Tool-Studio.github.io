@@ -72,8 +72,12 @@ export const useUserStore = defineStore('user', {
         console.log(data.value);
 
         this.setUser(data.value);
+        this.setKeys (data.value.keys);
         return this.user;
       }
+    },
+    setKeys(keys: KeysInfo[]) {
+      this.keys = keys;
     },
     setLogin(val: boolean) {
       this.isLoggedIn = val;

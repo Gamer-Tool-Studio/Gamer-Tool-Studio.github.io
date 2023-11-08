@@ -217,7 +217,7 @@ const chartOptions = ref({
   &.output-tokens {
     background-image: linear-gradient(
       90deg,
-      rgba(98, 0, 238, 1) v-bind(progressOutputPercentage),
+      rgba(184, 65, 160, 1) v-bind(progressOutputPercentage),
       #ececf1 v-bind(progressOutputPercentage)
     );
   }

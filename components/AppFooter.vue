@@ -5,8 +5,8 @@
         <h4>Product</h4>
         <ul>
           <li><a href="#documentation">Download Plugin</a></li>
-          <li><a href="https://github.com/yourusername">API Reference</a></li>
-          <li><a href="https://github.com/yourusername">Github</a></li>
+          <li><a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction">API Reference</a></li>
+          <li><a href="https://github.com/Gamer-Tool-Studio">Github</a></li>
         </ul>
       </div>
       <div class="footer-row">
@@ -22,7 +22,7 @@
         <ul>
           <li><a href="https://discord.com/yourserver">Discord</a></li>
           <li><a href="https://twitter.com/yourusername">Twitter</a></li>
-          <li><a href="https://www.youtube.com/yourchannel">Youtube</a></li>
+          <li><a href="https://www.youtube.com/@gamertoolstudio">Youtube</a></li>
         </ul>
       </div>
     </div>

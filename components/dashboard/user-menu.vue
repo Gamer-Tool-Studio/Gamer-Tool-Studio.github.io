@@ -29,7 +29,7 @@
           <NuxtLink to="/dashboard/api-keys"> View API Keys</NuxtLink>
         </div>
         <div class="menu-group d-flex d-sm-none">
-          <NuxtLink to="/documentation">Documentation</NuxtLink>
+          <NuxtLink to="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction">Documentation</NuxtLink>
           <NuxtLink to="/download-plugin">Download Plugin</NuxtLink>
         </div>
         <div class="menu-group">
