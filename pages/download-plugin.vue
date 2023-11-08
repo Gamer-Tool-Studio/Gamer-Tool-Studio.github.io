@@ -4,7 +4,7 @@
       <v-col>
         <h1>Download Plugin</h1>
         <p>
-          Use NPC-GPT from your favourite development environment and create seamless AI-pwered NPCs. Download the Plugin file compatible with your game engine. Check out 
+          Use NPC-GPT from your favourite development environment and create seamless AI-powered NPCs. Download the Plugin file compatible with your game engine. Check out 
           <a href="https://gamertoolstudio.gitbook.io/npc-gpt/plugin-user-guide/getting-started">our user guide </a>to learn how to install and use it.
         </p>
       </v-col>

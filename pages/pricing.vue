@@ -19,14 +19,14 @@
             <li>Output tokens</li>
             <li></li>
             <li>Users</li>
-            <li class="align-right">25K</li>
             <li class="align-right">50K</li>
+            <li class="align-right">20K</li>
             <li class="align-right">1</li>
           </ul>
           <div class="price-display-free">
             <h4 class="light-header">Free</h4>
           </div>
-          <button class="button light-button">Subscribe</button>
+          <a href=""><button class="button light-button">Subscribe</button></a>
         </div>
         <div class="feature-box bold-boxes">
           <h3>Solo Developer</h3>
@@ -35,14 +35,14 @@
             <li>Output tokens</li>
             <li></li>
             <li>Users</li>
-            <li class="align-right">5M</li>
             <li class="align-right">10M</li>
+            <li class="align-right">5M</li>
             <li class="align-right">1</li>
           </ul>
           <div class="price-display-free">
             <h4 class="bold-header">$59,00</h4>
           </div>
-          <button class="button">Subscribe</button>
+          <a href="https://buy.stripe.com/aEUaGd0lbgvv8BafYY"><button class="button">Subscribe</button></a>
         </div>
         <div class="feature-box light-boxes">
           <h3 class="light-title">Indie Studio</h3>
@@ -51,14 +51,14 @@
             <li>Output tokens</li>
             <li></li>
             <li>Users</li>
-            <li class="align-right">30M</li>
             <li class="align-right">50M</li>
+            <li class="align-right">30M</li>
             <li class="align-right">10</li>
           </ul>
           <div class="price-display-free">
             <h4 class="light-header">$259,00</h4>
           </div>
-          <button class="button light-button">Subscribe</button>
+          <a href="https://buy.stripe.com/fZebKhc3Ta77eZy5kl"><button class="button light-button">Subscribe</button></a>
         </div>
       </div>
     </v-row>
