@@ -8,10 +8,20 @@
         <h2> Pay as you go</h2>
       </v-col>
       <v-col cols="12">
-        <p> You'll be billed at the beginning of each cycle 
-           for token credits during the following year.</p>
+        <p> You are billed at the moment you acquire token credits. 
+            Check the <NuxtLink to="/dashboard/usage" class="internal-link">Usage page</NuxtLink> to confirm detailed token usage.</p>
       </v-col>
-      <v-col cols="12">
+      <v-col cols="3" class="addTokensSection">
+        <NuxtLink to="/pricing">
+          <button
+          class="cancel-paid"
+          type="submit"
+        >
+          Add token credits
+          </button>
+        </NuxtLink>
+      </v-col>
+      <v-col cols="3" class="addTokensSection">
         <modal-cancel-plan
           v-if="cancelPlan"
           @close="cancelPlan= false"
@@ -22,12 +32,12 @@
           type="submit"
           @click="cancelPlan = true"
         >
-        Cancel paid account
+        Cancel plan
         </button>
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="6" class="billing-card">
+      <!-- <v-col cols="12" class="billing-card">
         <a href="/dashboard/billing/payment-methods">
         <div class="items-container">
           <div class="img-container methods-bcg">
@@ -39,8 +49,8 @@
           </div>
         </div>
         </a>
-      </v-col>
-      <v-col cols="6" class="billing-card">
+      </v-col> -->
+      <v-col cols="12" class="billing-card">
         <a href="/dashboard/billing/history">
         <div class="items-container">
             <div class="img-container history-bcg">
@@ -55,7 +65,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="6" class="billing-card">
+      <v-col cols="12" class="billing-card">
         <a href="/pricing">
           <div class="items-container">
             <div class="img-container pricing-bcg">
@@ -68,7 +78,7 @@
           </div>
         </a>
       </v-col>
-      <v-col cols="6" class="billing-card">
+      <v-col cols="12" class="billing-card">
         <a href="/dashboard/billing/preferences">
           <div class="items-container">
             <div class="img-container preferences-bcg">
@@ -95,12 +105,22 @@ useHead({
 
 </script>
 <style lang="scss">
+.internal-link {
+  color: #000000;
+}
+
+.addTokensSection {
+  max-width:160px;
+  min-width:160px;
+  margin-bottom: 20px;
+}
 
 .cancel-paid {
   background-color: #ececf1;
   border-radius: 7px;
   padding: 6px 12px;
   font-size:14px;
+  color: #000000DE;
 }
 
 .cancel-paid:hover {
@@ -108,7 +128,7 @@ background-color:#d9d9e3;
 }
 
 .billing-card {
-  margin-top: 30px;
+  margin-top: 20px;
   display: block;
 }
 
