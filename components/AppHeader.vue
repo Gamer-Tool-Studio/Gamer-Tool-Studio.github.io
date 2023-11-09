@@ -164,6 +164,13 @@ nav {
   .nav-right a {
     font-size: 22px;
   }
+  .nav-right:hover {
+    cursor: pointer;
+  }
+
+  .nav-right a:hover {
+    color: #fff !important;
+  }
 
   .nav-right-link {
     margin-left: 0 !important;
@@ -182,10 +189,7 @@ nav {
   .nav-right-link:hover {
     // text-decoration: underline;
     cursor: pointer;
-  }
-  .nav-right:hover {
     text-decoration: underline;
-    cursor: pointer;
   }
 }
 
