@@ -4,8 +4,8 @@
       <v-col>
         <h1>Download Plugin</h1>
         <p>
-          Use NPC-GPT from your favourite development environment and create seamless AI-pwered NPCs. Download the Plugin file compatible with your game engine. Check out 
-          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/plugin-user-guide/getting-started">our user guide </a>to learn how to install and use it.
+          Use NPC-GPT from your favourite development environment and create seamless AI-powered NPCs. Download the Plugin file compatible with your game engine. Check out our
+          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/plugin-user-guide/getting-started" class="internal-link">user guide </a>to learn how to install and use it.
         </p>
       </v-col>
       <v-col cols="12" class="engine-cards">
@@ -32,7 +32,7 @@
       <v-col cols="12" class="api-link">
         <h3>Want to use NPC-GPT in another environment?</h3>
         <p class="reference_link">
-          Check our <a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction">API reference here.</a>
+          Check our <a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction" class="internal-link">API reference here.</a>
         </p>
       </v-col>
     </v-row>
@@ -140,6 +140,10 @@ useHead({
 .reference_link {
   padding:0;
   margin-top:0;
+}
+
+.reference-link a{
+  color: #000000
 }
 
 @media (max-width: 600px) {

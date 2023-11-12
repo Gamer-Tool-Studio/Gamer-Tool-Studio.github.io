@@ -94,13 +94,17 @@ const items = ref([
           title: 'Overview',
           to: '/overview',
         },
-        {
+        /* {
           title: 'Payment methods',
           to: '/payment-methods',
-        },
+        }, */
         {
           title: 'Billing history',
           to: '/history',
+        },
+        {
+          title: 'Pricing',
+          to: '/pricing',
         },
         {
           title: 'Preferences',

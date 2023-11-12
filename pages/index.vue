@@ -69,40 +69,50 @@
         <div class="code-style">
           <pre class="code-display">
           <code>
-            curl https://api.gamertoolstudio.com/npcgpt/v1/ 
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $NPCGPT_API_KEY" \
-            -d '{
+            const { Configuration, NpcGptApi } = require("NpcGPt");
+
+            const configuration = new Configuration({
+              apiKey: process.env.NPCGPT_API_KEY,
+            });
+            
+            const NpcGpt = new NpcGptApi(configuration);
+
+            const chat = await NpcGpt.createChat({
               "userInput": "I've heard about a secret map?!",
               "chatHistory": [],
               "characterContext": {
-              "name": "GPTWizard",
-              "age": 35,
-              "personality": {
+                 "name": "GPTWizard",
+                 "age": 35,
+                  "personality": {
                   "traits": [
                       "shy",
                       "mystic",
                       "adventurous"
                   ],
-              "dialogueStyle": "casual"
-              },
+              "dialogueStyle": "mysterious"
+               },
+
               "backgroundStory": "GPT WIzard is a Mage who lives in Mystery Foster. 
-              She was brought up by witches and mages after being found as a baby 
-              wondering in the forest. She belongs to this tribe that remains 
-              undiscovered by most humans but learned the ways of the past and future
-              and is able to interpret signs and energies.",
-              "enventsKnowledge": "Knows there is a secret map at the entrance of the 
-              big cave under a yellow flower and  knows the player harduous future
-              in the forest with many enemies and challenges",
-              "interests": {
-                  "Astrology": 7,
-                  "Herbology": 9,
-                  "History": 8
-              },
-              "supportiveness": 8,
-              "maxOutputWords": 50
+            She was brought up by witches and mages after being found as a baby 
+            wondering in the forest. She belongs to this tribe that remains 
+            undiscovered by most humans but learned the ways of the past and future 
+            and is able to interpret signs and energies.",
+              
+              "eventsKnowledge": "Knows there is a secret map at the entrance of the
+            big cave under a yellow flower and  knows the player harduous future in 
+            the forest with many enemies and challenges",
+            
+            "interests": {
+              "Astrology": 7,
+              "Herbology": 9,
+              "History": 8
+            },
+            "supportiveness": 8,
+            "maxOutputWords": 50
             }
-          }'
+          });
+
+         console.log(completion.data.choices[0].message);
           </code>
         </pre>
           <div class="typed-display">

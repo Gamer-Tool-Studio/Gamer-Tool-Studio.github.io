@@ -7,7 +7,7 @@
       <v-col cols="12">
         <p>
           Changes to these preferences will apply to future invoices only. If you need a past invoice reissued, please
-          contact bil@gamertoolsstudio.com.
+          contact bill@gamertoolsstudio.com.
         </p>
       </v-col>
     </v-row>
