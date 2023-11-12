@@ -57,14 +57,8 @@ export const useUserStore = defineStore('user', {
   actions: {
     async getUserProfile(): Promise<any> {
       console.log('Call getUserProfile ');
-      const headers = useRequestHeaders(['cookie']);
-      console.log('headers ', headers);
 
-      const { data, pending }: any = await useFetch(USER_PROFILE, {
-        method: 'get',
-        credentials: 'include', // fetch
-        headers,
-      });
+      const { data, pending }: any = await useAuthAPI(USER_PROFILE, 'GET');
       console.log(data.value, pending.value);
 
       if (data.value) {
@@ -72,7 +66,7 @@ export const useUserStore = defineStore('user', {
         console.log(data.value);
 
         this.setUser(data.value);
-        this.setKeys (data.value.keys);
+        this.setKeys(data.value.keys);
         return this.user;
       }
     },

@@ -1,6 +1,6 @@
 // store/tokenCount.js
 
-// import { useAuthAPI } from '~/services/api';
+import { USAGE_PER_DAY } from 'util/urls';
 
 // import { BASE_URL } from 'constants';
 const apiVersion = 'v1'; // process.env.API_VERSION;
@@ -39,7 +39,7 @@ export const useTokenCountStore = defineStore('tokenCount', {
       }
       try {
         const user = useUserStore();
-        const { data, pending, error } = await useAuthAPI('/usage/perDay', 'POST', {
+        const { data, pending, error } = await useAuthAPI(USAGE_PER_DAY, 'POST', {
           month: this.currentMonth,
           year: this.currentYear,
           accountId: user.username,

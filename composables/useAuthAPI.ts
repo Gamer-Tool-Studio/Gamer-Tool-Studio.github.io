@@ -20,13 +20,15 @@ export default function (
     | 'options'
     | 'trace'
     | undefined,
-  body: any,
+  body?: any,
 ) {
   const config = useRuntimeConfig();
   const BASE_URL = config.public.backendURL + '/api/v1';
+  const token = useCookie('token'); // get token from cookies
+
   return useFetch(BASE_URL + endpoint, {
     method,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token.value}` },
     body,
     credentials: 'include', // fetch
 
