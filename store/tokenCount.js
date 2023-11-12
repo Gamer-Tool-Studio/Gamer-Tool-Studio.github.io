@@ -1,6 +1,6 @@
 // store/tokenCount.js
 
-import { USAGE_PER_DAY } from 'util/urls';
+import { USAGE_PER_DAY } from '@/util/urls';
 
 // import { BASE_URL } from 'constants';
 const apiVersion = 'v1'; // process.env.API_VERSION;
