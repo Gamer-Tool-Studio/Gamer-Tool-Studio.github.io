@@ -1,13 +1,21 @@
 <template>
-  <v-data-table :items-per-page="5" :headers="headers" :items="keys" item-value="name" class="elevation-0">
-    <template #item.created="{ item }">
-      {{ item.raw.created.toLocaleString() }}
+  <v-data-table :headers="headers" :items="keys" item-value="name" class="elevation-0" density="compact">
+    <template #[`item.dateCreated`]="{ item }">
+      {{ formatDate(item.raw.dateCreated) }}
+    </template>
+    <template #[`item.lastUsed`]="{ item }">
+      {{ formatDate(item.raw.lastUsed) }}
+    </template>
+    <template #[`item.actions`]="{ item }">
+      <v-icon size="small" class="me-2" @click="editItem(item.raw)"> mdi-pencil </v-icon>
+      <v-icon size="small" @click="deleteItem(item.raw)"> mdi-delete </v-icon>
     </template>
     <template v-slot:bottom>
       <v-toolbar flat color="transparent" height="40" class="table-toolbar">
         <modal-generate-api-key
           v-if="generateNewKeys"
           v-model:name="editedItem.name"
+          v-model:id="editedItem.id"
           :formTitle="formTitle"
           @close="close(), (generateNewKeys = false)"
           @save="save"
@@ -18,10 +26,7 @@
         <button class="cancel-button" @click="generateNewKeys = true">+ Create new secret key</button>
       </v-toolbar>
     </template>
-    <template v-slot:item.actions="{ item }">
-      <v-icon size="small" class="me-2" @click="editItem(item.raw)"> mdi-pencil </v-icon>
-      <v-icon size="small" @click="deleteItem(item.raw)"> mdi-delete </v-icon>
-    </template>
+
     <template v-slot:no-data>
       <v-btn color="primary"> Reset </v-btn>
     </template>
@@ -40,11 +45,12 @@ const headers = [
     key: 'name',
   },
   { title: 'Key', align: 'end', key: 'key' },
-  { title: 'Created', align: 'end', key: 'created' },
-  { title: 'Last Used', align: 'end', key: 'used' },
+  { title: 'Created', align: 'end', key: 'dateCreated' },
+  { title: 'Last Used', align: 'end', key: 'lastUsed' },
   { title: 'Actions', key: 'actions', sortable: false },
 ];
 const { keys } = defineProps(['keys']);
+console.log(keys);
 
 const formTitle = computed(() => (editedIndex.value === -1 ? 'Create new secret key' : 'Edit key name'));
 const editedIndex = ref(-1),
@@ -105,6 +111,21 @@ const editItem = (item) => {
     }
     close();
   };
+
+function formatDate(time) {
+  const date = new Date(time);
+  if (isNaN(date.getTime())) {
+    return time;
+  }
+
+  const year = date.toLocaleString('default', { year: 'numeric' });
+  const month = date.toLocaleString('default', { month: '2-digit' });
+  const day = date.toLocaleString('default', { day: '2-digit' });
+  const hour = date.toLocaleString('default', { hour: '2-digit' });
+  const minute = date.toLocaleString('default', { minute: '2-digit' });
+
+  return `${year}/${month}/${day} ${hour}:${minute}`;
+}
 </script>
 <style lang="scss">
 .table-toolbar {

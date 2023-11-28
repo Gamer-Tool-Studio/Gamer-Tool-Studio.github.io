@@ -21,6 +21,7 @@ export default function (
     | 'trace'
     | undefined,
   body?: any,
+  query?:any
 ) {
   const config = useRuntimeConfig();
   const BASE_URL = config.public.backendURL + '/api/v1';
@@ -30,6 +31,7 @@ export default function (
     method,
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token.value}` },
     body,
+    query,
     credentials: 'include', // fetch
 
     onResponseError({ request, response, options }) {

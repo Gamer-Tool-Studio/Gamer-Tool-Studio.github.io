@@ -28,8 +28,22 @@ export const useKeysStore = defineStore('keys', {
   },
   actions: {
     async createApiToken(name: string) {
-      const { data, pending, error } = await useAuthAPI('/auth/gen-key', 'POST', {
+      const { data, pending, error } = await useAuthAPI('/auth/gen-key', 'GET', undefined, {
         name,
+      });
+      console.log(data.value);
+
+      if (error.value) {
+        throw error.value;
+      }
+      return data.value;
+    },
+    async editApiToken(name: string, id: string) {
+      console.log(name, id);
+
+      const { data, pending, error } = await useAuthAPI('/auth/edit-token', 'PATCH', undefined, {
+        name,
+        id,
       });
       console.log(data.value);
 

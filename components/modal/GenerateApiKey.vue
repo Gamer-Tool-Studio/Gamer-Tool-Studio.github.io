@@ -28,7 +28,7 @@
               <v-col cols="12" class="footer-section">
                 <div class="button-container">
                   <button class="cancel-button" @click="close">Cancel</button>
-                  <button class="button" @click="generateKey">
+                  <button class="button" @click="id ? editKey() : generateKey()">
                     {{ isCreating }}
                   </button>
                 </div>
@@ -37,31 +37,33 @@
             <!-- TODO: change layout when key is created -->
             <div v-else>
               <v-col cols="12" class="text-section">
-                <p>Please save this secret key somewhere safe and accessible. 
-                   For security reasons, <b>you won't be able to view it again</b> 
-                   through your Gamer Tools Studio account. If you lose this secret key, you'll need to generate a new one.
+                <p>
+                  Please save this secret key somewhere safe and accessible. For security reasons,
+                  <b>you won't be able to view it again</b>
+                  through your Gamer Tools Studio account. If you lose this secret key, you'll need to generate a new
+                  one.
                 </p>
               </v-col>
               <v-col cols="12" class="copy-key-section">
                 <v-col cols="11" class="forms-section">
-                <input
-                  class="modal-forms"
-                  type="text"
-                  placeholder="My test key"
-                  :value="apiKey"
-                  disabled
-                  @input="$emit('update:name', $event.target.value)"
-                />
+                  <input
+                    class="modal-forms"
+                    type="text"
+                    placeholder="My test key"
+                    :value="apiKey"
+                    disabled
+                    @input="$emit('update:name', $event.target.value)"
+                  />
                 </v-col>
                 <v-col cols="2" class="copy-button-section">
                   <div class="img-container methods-bcg" @click="copyToClipboard">
-                    <img src="~/assets/images/white-copy-icon.png">
+                    <img src="~/assets/images/white-copy-icon.png" />
                   </div>
                 </v-col>
               </v-col>
               <v-col cols="12" class="footer-section">
                 <div class="button-container">
-                  <button class="button" @click="keyGenerated ? close() : generateKey">
+                  <button class="button" @click="close()">
                     {{ keyGenerated ? 'Done' : isCreating }}
                   </button>
                 </div>
@@ -77,7 +79,7 @@
 <script>
 export default {
   name: 'GenerateApiKey',
-  props: ['formTitle', 'name'],
+  props: ['formTitle', 'name', 'id'],
   data() {
     return {
       isCreating: !this.name ? 'Create Secret Key' : 'Save',
@@ -90,23 +92,31 @@ export default {
     close() {
       this.$emit('close');
     },
-    async generateKey() {
+    async editKey() {
+      console.log('editKey');
+
       const keysStore = useKeysStore();
-      const { token: apiKey } = await keysStore.createApiToken(this.name);
-      console.log(apiKey);
-      this.apiKey = apiKey;
+      await keysStore.editApiToken(this.name, this.id);
       this.keyGenerated = true; // Set keyGenerated to true
     },
+    async generateKey() {
+      console.log('generateKey');
+      // const keysStore = useKeysStore();
+      // // const { token: apiKey } = await keysStore.createApiToken(this.name);
+      // // console.log(apiKey);
+      // // this.apiKey = apiKey;
+      // // this.keyGenerated = true; // Set keyGenerated to true
+    },
     async copyToClipboard() {
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(this.apiKey);
-      console.log('API key copied to clipboard');
-    }
-  } catch (err) {
-    console.error('Error copying API key to clipboard:', err);
-  }
-}
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(this.apiKey);
+          console.log('API key copied to clipboard');
+        }
+      } catch (err) {
+        console.error('Error copying API key to clipboard:', err);
+      }
+    },
   },
 };
 </script>
@@ -239,13 +249,12 @@ export default {
 
 .methods-bcg {
   background-color: #19c37d;
-  margin:0;
+  margin: 0;
 }
 
 .methods-bcg:hover {
   background-color: #10a37f;
 }
-
 
 .footer-section {
   display: inline-flex;
@@ -254,7 +263,6 @@ export default {
 .footer-section button {
   margin: 3px;
 }
-
 
 .button-container {
   width: 100%;
