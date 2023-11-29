@@ -101,11 +101,11 @@ export default {
     },
     async generateKey() {
       console.log('generateKey');
-      // const keysStore = useKeysStore();
-      // // const { token: apiKey } = await keysStore.createApiToken(this.name);
-      // // console.log(apiKey);
-      // // this.apiKey = apiKey;
-      // // this.keyGenerated = true; // Set keyGenerated to true
+      const keysStore = useKeysStore();
+      const { token: apiKey } = await keysStore.createApiToken(this.name);
+      console.log(apiKey);
+      this.apiKey = apiKey;
+      this.keyGenerated = true; // Set keyGenerated to true
     },
     async copyToClipboard() {
       try {
