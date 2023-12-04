@@ -8,9 +8,9 @@
   </v-layout>
 </template>
 <script setup>
-import { useTheme } from "vuetify";
-import { useRoute } from "vue-router";
-import { computed } from "vue";
+import { useTheme } from 'vuetify';
+import { useRoute } from 'vue-router';
+import { computed } from 'vue';
 
 const cssVars = {};
 
@@ -20,13 +20,14 @@ const path = computed(() => route.path);
 
 const theme = useTheme();
 
-theme.global.name.value = path.value == "/" ? "myDarkTheme" : "light";
-cssVars["--background"] = path.value == "/" ? "black" : "white";
-
-watch(path, () => {
-  theme.global.name.value = path.value == "/" ? "myDarkTheme" : "light";
-  cssVars["--background"] = path.value == "/" ? "black" : "white";
-});
+watch(
+  path,
+  () => {
+    theme.global.name.value = ['/', '/gameDemo'].includes(path.value) ? 'myDarkTheme' : 'light';
+    cssVars['--background'] = ['/', '/gameDemo'].includes(path.value) ? 'black' : 'white';
+  },
+  { immediate: true },
+);
 </script>
 
 <style lang="scss" scoped>
