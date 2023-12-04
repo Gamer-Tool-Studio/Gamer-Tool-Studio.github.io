@@ -50,14 +50,16 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
 import { useAuthStore } from '~/store/auth'; // import the auth store we just created
+import { getWordPattern } from '~/util';
 
 const route = useRoute();
 
 const isLandingPage = computed(() => ['/', '/demo-game'].includes(route.path));
 
-const smallHeaderPages = ['/', '/pricing', '/download-plugin', '/login'];
+const pattern = /^(\/[^\/]+)/;
+const smallHeaderPages = ['/dashboard'];
 
-const isSmallHeader = computed(() => smallHeaderPages.includes(route.path));
+const isSmallHeader = computed(() => !smallHeaderPages.includes(getWordPattern(route?.path || '', pattern)));
 
 const open = ref(false);
 

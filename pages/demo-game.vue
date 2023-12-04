@@ -1,128 +1,121 @@
 <template>
-    <v-container class="lp">
-      <v-row>
-        <v-col cols="12" class="intro-section">
-          <h1>CLUAIDO - Play a detective game with AI characters. </h1>
-        </v-col>
-        <v-col cols="12">
-          <h2 class="page-headers">
-            Who Killed MR.Hamilton?
-          </h2>
-          <h3 class="game-desc">You were called to the victim's house to solve his misterious death. There are seven suspects in the mansion. Talk to them and unveil the clues that will lead you to the cuplrit.
-          </h3>
+  <v-container class="lp">
+    <v-row>
+      <v-col cols="12" class="intro-section">
+        <h1>CLUAIDO - Play a detective game with AI characters.</h1>
       </v-col>
-        <v-col cols="12">
-          <div class="demo-video">
-            <iframe
-              width="100%"
-              height="600"
-              src="https://www.youtube.com/embed/p-2NLT5jpcA?si=9KDx8_A2xNvWzh2C"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </v-col>
-      </v-row>
-      <v-row class="get-started">
-        <v-col cols="6">
-          <h2 class="page-headers">
-            Game Rules
-          </h2>
-        </v-col>
-        <v-col cols="6">
-          <h2 class="page-headers">
-            How To Play
-          </h2>
-        </v-col>
-        <v-col cols="6" class="plugin-explain">
-          <ul class="how-to-start">
-            <li>There are 7 suspects and one culprit only inside the house.</li>
-            <li>
-              You can interact freely with the characters and ask them questions with up to 50 words-lenght.
-            </li>
-            <li>
-              All characters will tell you the truth except for the culprit.
-            </li>
-            <li>You can make 20 questions before the culprit runs away.</li>
-            <li>Clues are concieled within the characters and all over the house. </li>
-            <li>You have only one shot to indentify the culprit and you can make your accusation at any time, at the entry of the mansion.</li>
-          </ul>
-        </v-col>
-        <v-col cols="6" class="engines-available">
-          <div class="engine-logo-container">
-            <img class="engine-logo" src="images/RMMZ.png" />
-          </div>
-        </v-col>
-        <v-col cols="12">
-          <h2 class="page-headers">
-            Note: In order to play this game you will need an account with Gamer Tool Studio and to connect with your API key
-          </h2>
-          <div class="intro-cta">
+      <v-col cols="12">
+        <h2 class="page-headers">Who Killed MR.Hamilton?</h2>
+        <h3 class="game-desc">
+          You were called to the victim's house to solve his misterious death. There are seven suspects in the mansion.
+          Talk to them and unveil the clues that will lead you to the cuplrit.
+        </h3>
+      </v-col>
+      <v-col cols="12">
+        <div class="demo-video">
+          <iframe
+            width="100%"
+            height="600"
+            src="https://www.youtube.com/embed/p-2NLT5jpcA?si=9KDx8_A2xNvWzh2C"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </v-col>
+    </v-row>
+    <v-row class="get-started">
+      <v-col cols="6">
+        <h2 class="page-headers">Game Rules</h2>
+      </v-col>
+      <v-col cols="6">
+        <h2 class="page-headers">How To Play</h2>
+      </v-col>
+      <v-col cols="6" class="plugin-explain">
+        <ul class="how-to-start">
+          <li>There are 7 suspects and one culprit only inside the house.</li>
+          <li>You can interact freely with the characters and ask them questions with up to 50 words-lenght.</li>
+          <li>All characters will tell you the truth except for the culprit.</li>
+          <li>You can make 20 questions before the culprit runs away.</li>
+          <li>Clues are concieled within the characters and all over the house.</li>
+          <li>
+            You have only one shot to indentify the culprit and you can make your accusation at any time, at the entry
+            of the mansion.
+          </li>
+        </ul>
+      </v-col>
+      <v-col cols="6" class="engines-available">
+        <div class="engine-logo-container">
+          <img class="engine-logo" src="images/RMMZ.png" />
+        </div>
+      </v-col>
+      <v-col cols="12">
+        <h2 class="page-headers">
+          Note: In order to play this game you will need an account with Gamer Tool Studio and to connect with your API
+          key
+        </h2>
+        <div class="intro-cta">
           <button class="button">Create Account</button>
-          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>Read the full user guide.</p></a>
+          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"
+            ><p>Read the full user guide.</p></a
+          >
         </div>
-        </v-col>
-      </v-row>
-      <v-row class="features">
-        <div class="feature-boxes">
-          <div class="feature-box">
-            <h3>Open world building</h3>
-            <p>
-              Leverage the capabilities of AI and enable players to input their own text to interact with characters
-              and open the possibilities within to your game to the maximum.
-            </p>
-          </div>
-          <div class="feature-box">
-            <h3>Unscripted NPCs</h3>
-            <p>
-              Build immersive character backstories and customize the way they respond to players. Make chat GPT a friend
-              or a foe in your game quests.
-            </p>
-          </div>
-          <div class="feature-box">
-            <h3>Intuitive Interface</h3>
-            <p>
-              NPC-GPT plugin requires no programming experience to setup and use from within your favourite game
-              engine.
-            </p>
-          </div>
-          <div class="feature-box">
-            <h3>Secure and Private</h3>
-            <p>
-              Rest assured that your sensitive game content and storylines are safeguarded. We follow strict privacy
-              standards to protect your intellectual property.
-            </p>
-          </div>
+      </v-col>
+    </v-row>
+    <v-row class="features">
+      <div class="feature-boxes">
+        <div class="feature-box">
+          <h3>Open world building</h3>
+          <p>
+            Leverage the capabilities of AI and enable players to input their own text to interact with characters and
+            open the possibilities within to your game to the maximum.
+          </p>
         </div>
-      </v-row>
-      
-  
-        <v-col cols="12" class="start-trial">
-          <h2 class="page-headers">
-            Are you ready to take your game development to the next level with the ultimate AI-Powered character building
-            tool?
-          </h2>
-          <br />
-          <button class="button">Start Free Trial Now</button>
-        </v-col>
-  
-    </v-container>
-  </template>
-  <script lang="ts" setup>
+        <div class="feature-box">
+          <h3>Unscripted NPCs</h3>
+          <p>
+            Build immersive character backstories and customize the way they respond to players. Make chat GPT a friend
+            or a foe in your game quests.
+          </p>
+        </div>
+        <div class="feature-box">
+          <h3>Intuitive Interface</h3>
+          <p>
+            NPC-GPT plugin requires no programming experience to setup and use from within your favourite game engine.
+          </p>
+        </div>
+        <div class="feature-box">
+          <h3>Secure and Private</h3>
+          <p>
+            Rest assured that your sensitive game content and storylines are safeguarded. We follow strict privacy
+            standards to protect your intellectual property.
+          </p>
+        </div>
+      </div>
+    </v-row>
 
-  definePageMeta({
-    layout: 'default',
-  });
-  
-  useHead({
-    title: 'Demo Game',
-  });
+    <v-col cols="12" class="start-trial">
+      <h2 class="page-headers">
+        Are you ready to take your game development to the next level with the ultimate AI-Powered character building
+        tool?
+      </h2>
+      <br />
+      <button class="button">Start Free Trial Now</button>
+    </v-col>
+  </v-container>
+</template>
+<script lang="ts" setup>
+definePageMeta({
+  layout: 'default',
+});
 
-  </script>
-  
-  <style lang="scss" scoped>
+useHead({
+  title: 'Demo Game',
+});
+</script>
+
+<style lang="scss" scoped>
 h1,
 h2,
 * {
@@ -132,7 +125,7 @@ h2,
 main.lp {
   > div {
     max-width: 1200px;
-    margin: auto;  
+    margin: auto;
   }
 }
 
@@ -140,7 +133,6 @@ main.lp {
 section {
   margin-bottom: 30px;
 }
-
 
 .lp footer {
   color: black;
@@ -173,7 +165,6 @@ section {
   flex-wrap: wrap;
   align-content: center;
   min-width: 100%;
-  
 }
 
 .intro-cta p {
@@ -362,7 +353,6 @@ section {
 
 /*Start Trial Section */
 
-
 .start-trial {
   display: block;
   border-top: 1px solid #6e6e80;
@@ -487,7 +477,6 @@ footer {
 
   .plugin-explain {
     margin: auto;
-    cols: 12 !important;
     min-width: 100% !important;
   }
   .how-to-start {
@@ -504,7 +493,6 @@ footer {
     min-width: 100% !important;
     margin: auto !important;
   }
- 
 }
 
 .start-trial .button {
@@ -527,7 +515,6 @@ footer {
     width: 100%;
     margin-top: 10px;
   }
-
 }
 
 @media (min-width: 768px) {
@@ -554,9 +541,5 @@ footer {
     flex-wrap: wrap;
     align-items: center;
   }
-  
-
 }
-
-  </style>
-  
+</style>
