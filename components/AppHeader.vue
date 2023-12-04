@@ -53,7 +53,7 @@ import { useAuthStore } from '~/store/auth'; // import the auth store we just cr
 
 const route = useRoute();
 
-const isLandingPage = computed(() => route.path == '/');
+const isLandingPage = computed(() => ['/', '/demo-game'].includes(route.path));
 
 const smallHeaderPages = ['/', '/pricing', '/download-plugin', '/login'];
 
@@ -251,7 +251,6 @@ nav.lp {
     cursor: pointer;
   }
 
-
   // .nav-right-link:not(.user-menu) {
   //   display: none !important;
   // }
@@ -264,9 +263,9 @@ nav.lp {
 }
 
 @media (max-width: 600px) {
-.user-menu button{
-  padding-bottom: 55px;
-  font-size: 35px !important;
+  .user-menu button {
+    padding-bottom: 55px;
+    font-size: 35px !important;
   }
 }
 </style>

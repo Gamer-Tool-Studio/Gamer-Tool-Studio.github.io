@@ -23,8 +23,8 @@ const theme = useTheme();
 watch(
   path,
   () => {
-    theme.global.name.value = ['/', '/gameDemo'].includes(path.value) ? 'myDarkTheme' : 'light';
-    cssVars['--background'] = ['/', '/gameDemo'].includes(path.value) ? 'black' : 'white';
+    theme.global.name.value = ['/', '/demo-game'].includes(path.value) ? 'myDarkTheme' : 'light';
+    cssVars['--background'] = ['/', '/demo-game'].includes(path.value) ? 'black' : 'white';
   },
   { immediate: true },
 );
