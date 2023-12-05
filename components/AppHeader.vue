@@ -143,12 +143,12 @@ nav {
     margin-left: auto;
     font-size: 22px;
 
-    .button {
-      @at-root #{selector.unify(&, a)} {
-        color: white;
-        // padding-bottom: 1px;
-      }
-    }
+    // .button {
+    //   @at-root #{selector.unify(&, a)} {
+    //     color: white;
+    //     // padding-bottom: 1px;
+    //   }
+    // }
   }
 
   .login-section {
