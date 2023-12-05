@@ -8,7 +8,7 @@
         <div class="demo-video">
           <iframe
            width="100%"
-            height="600"
+            height="800"
             src="/cluaido/index.html"  
             title="RPG Maker Game"
             frameborder="0"
