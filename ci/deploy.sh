@@ -8,7 +8,7 @@
 echo " `date` : Build Project!"
 
 line="\n#######################################################################\n";
-build_folder=dist
+build_folder=.output/public
 
 
 echo " `date` : Create Branch gh-pages"
@@ -25,7 +25,7 @@ npm install
 npm run generate
 
 # add CNAME file to dist/
-mv CNAME dist/
+# mv CNAME dist/
 
 echo " `date` : Copy CNAME file"
 

@@ -4,7 +4,7 @@ const express = require('express');
 let log = console;
 
 const app = new express();
-app.use(express.static('./dist'));
+app.use(express.static('./.output/public'));
 
 app.use(function (request, res, next) {
   console.log('[CALL_ROUTE] [', request.originalUrl, '] ', ' METHOD [', request.method, '] ');
