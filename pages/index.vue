@@ -2,10 +2,12 @@
   <v-container class="lp">
     <v-row>
       <v-col cols="12" class="intro-section">
-        <h1>NPC-GPT - Real-time AI chats for your game characters </h1>
+        <h1>NPC-GPT - Real-time AI chats for your game characters</h1>
         <div class="intro-cta">
           <button class="button">Start Free Trial Now</button>
-          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>View our documentation</p></a>
+          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"
+            ><p>View our documentation</p></a
+          >
         </div>
       </v-col>
       <v-col>
@@ -33,8 +35,8 @@
         <div class="feature-box">
           <h3>Open world building</h3>
           <p>
-            Leverage the capabilities of AI and enable players to input their own text to interact with characters
-            and open the possibilities within to your game to the maximum.
+            Leverage the capabilities of AI and enable players to input their own text to interact with characters and
+            open the possibilities within to your game to the maximum.
           </p>
         </div>
         <div class="feature-box">
@@ -47,8 +49,7 @@
         <div class="feature-box">
           <h3>Intuitive Interface</h3>
           <p>
-            NPC-GPT plugin requires no programming experience to setup and use from within your favourite game
-            engine.
+            NPC-GPT plugin requires no programming experience to setup and use from within your favourite game engine.
           </p>
         </div>
         <div class="feature-box">
@@ -63,8 +64,8 @@
     <v-row class="get-started" id="sectionToLinkToApi">
       <v-col>
         <h2 class="page-headers">
-          Create seamless AI characters to interact with players and users from any Frontend environment with
-           NPC-GPT library
+          Create seamless AI characters to interact with players and users from any Frontend environment with NPC-GPT
+          library
         </h2>
         <div class="code-style">
           <pre class="code-display">
@@ -124,7 +125,9 @@
         </div>
       </v-col>
       <v-col cols="12" class="button-display">
-        <a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction"><button class="button">View API Reference</button></a>
+        <a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction"
+          ><button class="button">View API Reference</button></a
+        >
       </v-col>
       <v-col cols="12" id="sectionToLinkToPlugin">
         <h2 class="page-headers">
@@ -140,8 +143,8 @@
             <a href="/download-plugin">Download Plugin file</a>.
           </li>
           <li>
-            Define personality traits, provide context about game events and establish guidelines for your NPC
-            speech with seamless plugin commands.
+            Define personality traits, provide context about game events and establish guidelines for your NPC speech
+            with seamless plugin commands.
           </li>
           <li>Harness the power of Chat GPT AI to generate dynamic and immersive conversations.</li>
           <li>Integrate the generated responses into your game seamlessly.</li>
@@ -149,30 +152,29 @@
       </v-col>
       <v-col cols="6" class="engines-available">
         <div class="engine-logo-container">
-          <img class="engine-logo" src="images/RMMZ.png" />
+          <img class="engine-logo" src="/images/RMMZ.png" />
         </div>
         <div class="engine-logo-container">
-          <img class="engine-logo" src="images/RMMV.png" />
+          <img class="engine-logo" src="/images/RMMV.png" />
         </div>
       </v-col>
     </v-row>
 
-      <v-col cols="12" class="start-trial">
-        <h2 class="page-headers">
-          Are you ready to take your game development to the next level with the ultimate AI-Powered character building
-          tool?
-        </h2>
-        <br />
-        <button class="button">Start Free Trial Now</button>
-      </v-col>
-
+    <v-col cols="12" class="start-trial">
+      <h2 class="page-headers">
+        Are you ready to take your game development to the next level with the ultimate AI-Powered character building
+        tool?
+      </h2>
+      <br />
+      <button class="button">Start Free Trial Now</button>
+    </v-col>
   </v-container>
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
 
 const messageToType =
-"Ah, greetings, traveler! You've stumbled upon some intriguing information indeed. Yes, there is indeed a secret map hidden within the depths of the big cave, tucked away beneath a vibrant yellow flower. It's said to hold the key to unlocking hidden treasures and revealing the path to untold secrets.";
+  "Ah, greetings, traveler! You've stumbled upon some intriguing information indeed. Yes, there is indeed a secret map hidden within the depths of the big cave, tucked away beneath a vibrant yellow flower. It's said to hold the key to unlocking hidden treasures and revealing the path to untold secrets.";
 // Typing animation
 let intervalTypeMessage: any;
 const responseGPT = ref('');
