@@ -50,5 +50,5 @@ export default defineNuxtConfig({
   routeRules: {
     '/redirect': { ssr: false },
   },
-  // ssr: false,
+  ssr: false,
 });
