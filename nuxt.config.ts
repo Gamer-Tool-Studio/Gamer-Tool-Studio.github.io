@@ -5,7 +5,9 @@ export default defineNuxtConfig({
       backendURL: process.env.BACKEND_URL,
     },
   },
-
+  generate: {
+    dir: 'dist',
+  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
