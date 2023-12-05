@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     'vuetify/lib/styles/main.sass',
     '@mdi/font/css/materialdesignicons.min.css',
     '@/assets/styles/main.scss',
-    `assets/styles.scss`,
+    `@/assets/styles.scss`,
   ],
   build: {
     transpile: ['vuetify'],
@@ -27,7 +27,8 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/assets/styles/_variables.scss" as *;',
+          additionalData:
+            '@use "sass:selector";@import "@/assets/styles/_variables.scss";@import "@/assets/styles/_transitions.scss";',
         },
       },
     },
