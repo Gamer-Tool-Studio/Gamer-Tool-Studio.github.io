@@ -5,106 +5,107 @@
         <h1>CLUAIDO - Play a detective game with AI characters.</h1>
       </v-col>
       <v-col cols="12">
-        <h2 class="page-headers">Who Killed MR.Hamilton?</h2>
-        <h3 class="game-desc">
-          You were called to the victim's house to solve his misterious death. There are seven suspects in the mansion.
-          Talk to them and unveil the clues that will lead you to the cuplrit.
-        </h3>
-      </v-col>
-      <v-col cols="12">
         <div class="demo-video">
           <iframe
-            width="100%"
+           width="100%"
             height="600"
-            src="https://www.youtube.com/embed/p-2NLT5jpcA?si=9KDx8_A2xNvWzh2C"
-            title="YouTube video player"
+            src="/cluaido/index.html"  
+            title="RPG Maker Game"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
-          ></iframe>
-        </div>
-      </v-col>
-    </v-row>
-    <v-row class="get-started">
-      <v-col cols="6">
-        <h2 class="page-headers">Game Rules</h2>
-      </v-col>
-      <v-col cols="6">
-        <h2 class="page-headers">How To Play</h2>
-      </v-col>
-      <v-col cols="6" class="plugin-explain">
-        <ul class="how-to-start">
-          <li>There are 7 suspects and one culprit only inside the house.</li>
-          <li>You can interact freely with the characters and ask them questions with up to 50 words-lenght.</li>
-          <li>All characters will tell you the truth except for the culprit.</li>
-          <li>You can make 20 questions before the culprit runs away.</li>
-          <li>Clues are concieled within the characters and all over the house.</li>
-          <li>
-            You have only one shot to indentify the culprit and you can make your accusation at any time, at the entry
-            of the mansion.
-          </li>
-        </ul>
-      </v-col>
-      <v-col cols="6" class="engines-available">
-        <div class="engine-logo-container">
-          <img class="engine-logo" src="images/RMMZ.png" />
-        </div>
-      </v-col>
-      <v-col cols="12">
-        <h2 class="page-headers">
-          Note: In order to play this game you will need an account with Gamer Tool Studio and to connect with your API
-          key
-        </h2>
-        <div class="intro-cta">
-          <button class="button">Create Account</button>
-          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"
-            ><p>Read the full user guide.</p></a
-          >
-        </div>
-      </v-col>
-    </v-row>
-    <v-row class="features">
-      <div class="feature-boxes">
-        <div class="feature-box">
-          <h3>Open world building</h3>
-          <p>
-            Leverage the capabilities of AI and enable players to input their own text to interact with characters and
-            open the possibilities within to your game to the maximum.
-          </p>
-        </div>
-        <div class="feature-box">
-          <h3>Unscripted NPCs</h3>
-          <p>
-            Build immersive character backstories and customize the way they respond to players. Make chat GPT a friend
-            or a foe in your game quests.
-          </p>
-        </div>
-        <div class="feature-box">
-          <h3>Intuitive Interface</h3>
-          <p>
-            NPC-GPT plugin requires no programming experience to setup and use from within your favourite game engine.
-          </p>
-        </div>
-        <div class="feature-box">
-          <h3>Secure and Private</h3>
-          <p>
-            Rest assured that your sensitive game content and storylines are safeguarded. We follow strict privacy
-            standards to protect your intellectual property.
-          </p>
-        </div>
+        ></iframe>
       </div>
-    </v-row>
-
-    <v-col cols="12" class="start-trial">
-      <h2 class="page-headers">
-        Are you ready to take your game development to the next level with the ultimate AI-Powered character building
-        tool?
-      </h2>
-      <br />
-      <button class="button">Start Free Trial Now</button>
     </v-col>
-  </v-container>
-</template>
+      </v-row>
+      <v-row class="get-started">
+        <v-col cols="6">
+          <h2 class="page-headers">
+            Game Rules
+          </h2>
+        </v-col>
+        <v-col cols="6">
+          <h2 class="page-headers">
+            How To Play
+          </h2>
+        </v-col>
+        <v-col cols="6" class="plugin-explain">
+          <ul class="how-to-start">
+            <li>There are 7 suspects and one culprit only inside the house.</li>
+            <li>
+              You can interact freely with the characters and ask them questions with up to 50 words-lenght.
+            </li>
+            <li>
+              All characters will tell you the truth except for the culprit.
+            </li>
+            <li>You can make 20 questions before the culprit runs away.</li>
+            <li>Clues are concieled within the characters and all over the house. </li>
+            <li>You have only one shot to indentify the culprit and you can make your accusation at any time, at the entry of the mansion.</li>
+          </ul>
+        </v-col>
+        <v-col cols="6" class="controllers-section">
+          <v-col cols="12" class="controller-container">
+            <div class="keyboard-control">&#11014;</div> <!-- Up arrow -->
+            <div class="keyboard-control">&#11015;</div> <!-- Down arrow -->
+            <div class="keyboard-control">&#10132;</div> <!-- Right arrow -->
+            <div class="keyboard-control">&#11013;</div> <!-- Left arrow -->
+            <p class="controller-type">Move Player</p>
+          </v-col>
+          <v-col cols="12" class="controller-container">
+            <div class="keyboard-control">Enter</div>
+            <p class="controller-type">Action Button</p>
+          </v-col>
+          <v-col cols="12" class="controller-container">
+            <div class="keyboard-control">Esc</div>
+            <p class="controller-type">Open Menu /Cancel Action</p>
+          </v-col>
+          <div class="intro-cta">
+            <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>Read the full user guide.</p></a>
+          </div>
+        </v-col>
+        <v-col cols="12" class="create-account-cta">
+          <h2 class="page-headers">
+            In order to play this game you will need an account with Gamer Tool Studio and to connect with your API key.
+          </h2>
+          <br />
+          <button class="button">Create Account</button>
+        </v-col>
+      </v-row>
+      <v-row class="features">
+        <div class="feature-boxes">
+          <div class="feature-box">
+            <h3>Open world building</h3>
+            <p>
+              Leverage the capabilities of AI and enable players to input their own text to interact with characters
+              and open the possibilities within to your game to the maximum.
+            </p>
+          </div>
+          <div class="feature-box">
+            <h3>Unscripted NPCs</h3>
+            <p>
+              Build immersive character backstories and customize the way they respond to players. Make chat GPT a friend
+              or a foe in your game quests.
+            </p>
+          </div>
+          <div class="feature-box">
+            <h3>Intuitive Interface</h3>
+            <p>
+              NPC-GPT plugin requires no programming experience to setup and use from within your favourite game
+              engine.
+            </p>
+          </div>
+          <div class="feature-box">
+            <h3>Secure and Private</h3>
+            <p>
+              Rest assured that your sensitive game content and storylines are safeguarded. We follow strict privacy
+              standards to protect your intellectual property.
+            </p>
+          </div>
+        </div>
+      </v-row>
+    </v-container>
+  </template>
+ 
 <script lang="ts" setup>
 definePageMeta({
   layout: 'default',
@@ -191,6 +192,31 @@ section {
   color: #6200ee;
 }
 
+.controllers-section{
+  padding-top: 35px;
+}
+.controller-container {
+  display: inline-flex;
+  align-items: center;
+  
+}
+.keyboard-control{
+  padding: 10px 15px;
+  border: 1px solid #6e6e80;
+  font-weight: 900;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.controller-type {
+  vertical-align: middle;
+  font-size: 20px;
+  margin-left: 20px;
+  
+}
 /* Features Section */
 
 .features {
@@ -271,75 +297,44 @@ section {
 
 .how-to-start li {
   margin-bottom: 25px;
-  min-width: 150%; /* Make the list items fill the full width */
-}
-.engines-available {
-  padding: 5px;
+  min-width: 150%; 
 }
 
-.engine-logo-container {
+.controller-container {
+  display: inline-flex;
+}
+.keyboard-control{
+  margin-right:10px;
+  border-radius:7px;
+}
+.controller-type {
+  vertical-align: middle;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+/*Create Account Section */
+
+.create-account-cta {
   display: block;
-}
-.engine-logo {
-  max-width: 100%;
-  object-fit: contain;
+  text-align: center;
 }
 
-.started-hs {
-  color: #fff;
-  font-weight: 200;
-  font-size: 25px;
-}
-
-.code-section {
-  padding: 0;
-  margin: 0;
-}
-
-.code-display {
-  max-width: 92%;
-  overflow-x: auto;
-}
-
-.code-block {
+.create-account-cta h2 {
   text-align: left;
 }
 
-.code-style {
-  font-family: monospace;
-  font-size: 16px;
-  white-space: pre-wrap;
+.create-account-cta button {
+  height: 60px;
+  font-size: 20px;
+  font-family: 'Bebas Neue';
+  margin-top: 0 !important;
 }
 
-.typed-display {
-  display: block;
-  max-width: 100%;
-  margin-top: 0;
-  margin-left: 10%;
-  margin-right: 10%;
-  font-family: monospace;
-  font-size: 16px;
-  border: 1px solid #6e6e80;
-  border-radius: 7px;
-  padding: 5px;
-}
-.typed-message {
-  background-color: rgba(98, 0, 238, 0.6);
-  padding: 3px;
-  white-space: pre-wrap;
-  max-width: 100px !important;
-  font-family: inherit;
-  font-size: inherit;
+.create-account-cta button:hover {
+  color: #6200ee;
 }
 
-.typed-cursor {
-  display: inline-block;
-  width: 8px;
-  height: 20px;
-  background-color: #6200ee;
-  margin-left: 4px; /* Adjust the margin as needed */
-  animation: blink 1s infinite;
-}
 
 @keyframes blink {
   0%,
@@ -349,28 +344,6 @@ section {
   50% {
     opacity: 0;
   }
-}
-
-/*Start Trial Section */
-
-.start-trial {
-  display: block;
-  border-top: 1px solid #6e6e80;
-  text-align: center;
-}
-
-.start-trial h2 {
-  text-align: left;
-}
-
-.start-trial button {
-  height: 60px;
-  font-size: 20px;
-  font-family: 'Bebas Neue';
-}
-
-.start-trial button:hover {
-  color: #6200ee;
 }
 
 /* Footer Styles */
@@ -489,13 +462,11 @@ footer {
     font-size: 22px;
   }
 
-  .engines-available {
-    min-width: 100% !important;
-    margin: auto !important;
-  }
+
+ 
 }
 
-.start-trial .button {
+.create-account-cta .button {
   margin-top: 30px;
 }
 
@@ -503,15 +474,15 @@ footer {
   .page-headers {
     text-align: center;
   }
-  .start-trial {
+  .create-account-cta {
     margin: auto !important;
   }
 
-  .start-trial h2 {
+  .create-account-cta h2 {
     text-align: center;
   }
 
-  .start-trial button {
+  .create-account-cta button {
     width: 100%;
     margin-top: 10px;
   }
@@ -536,10 +507,5 @@ footer {
     width: 60%;
   }
 
-  .engines-available {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
 }
 </style>
