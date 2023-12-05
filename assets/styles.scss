@@ -1,15 +1,15 @@
 @font-face {
-  font-family: "Bebas Neue";
-  src: url("fonts/BebasNeue-Regular.ttf") format("truetype");
+  font-family: 'Bebas Neue';
+  src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
 }
 @font-face {
-  font-family: "Titillium Web";
-  src: url("fonts/TitilliumWeb-Regular.ttf") format("truetype");
+  font-family: 'Titillium Web';
+  src: url('/fonts/TitilliumWeb-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "NunitoSans";
-  src: url("fonts/NunitoSans-Regular.ttf") format("truetype");
+  font-family: 'NunitoSans';
+  src: url('/fonts/NunitoSans-Regular.ttf') format('truetype');
 }
 
 html {
@@ -28,7 +28,7 @@ body {
   overflow-y: scroll;
 }
 * {
-  font-family: "NunitoSans";
+  font-family: 'NunitoSans';
   // color: #fff;
 }
 /* Global Styles */
@@ -56,12 +56,12 @@ main.lp {
 h1,
 h2 {
   color: #333;
-  font-family: "Titillium Web";
+  font-family: 'Titillium Web';
 }
 
 .nav-logo {
   height: 40px;
-  width:40px;
+  width: 40px;
 }
 
 .nav-links li {
@@ -93,7 +93,7 @@ h2 {
   padding: 5px 10px;
   font-size: 14px;
   transition: color 0.3s ease;
-  font-family: "Bebas Neue";
+  font-family: 'Bebas Neue';
 }
 
 /* Section Styles */
@@ -125,8 +125,7 @@ section ol {
 @media (max-width: 768px) {
   .intro-section {
     margin-left: 20px;
-    margin-right: 20px
-    ;
+    margin-right: 20px;
   }
 
   .intro-section h1 {
@@ -170,11 +169,11 @@ section ol {
 .feature-box h3 {
   font-size: 18px;
   text-align: left;
-  font-family: "Titillium Web", sans-serif;
+  font-family: 'Titillium Web', sans-serif;
 }
 
 .bold-boxes.hovered button {
-  border: 1px solid #6200ee; 
+  border: 1px solid #6200ee;
 }
 
 .bold-boxes.hovered {
@@ -207,7 +206,7 @@ section ol {
   transition: background-color 0.3s ease;
   line-height: normal;
   cursor: pointer;
-  font-family: "Bebas Neue";
+  font-family: 'Bebas Neue';
 }
 
 .button:hover {
@@ -215,14 +214,11 @@ section ol {
   color: #6200ee !important; /* Change text color to #fff when hovered */
 }
 
-
-
-
 /* Media Queries for Responsiveness */
 @media (max-width: 900px) {
   .feature-boxes {
-  display: inline-block;
-  align-items: center;
+    display: inline-block;
+    align-items: center;
   }
 
   .feature-box {
@@ -234,17 +230,15 @@ section ol {
   }
 }
 
-
 @media (max-width: 1280px) {
   .feature-boxes {
-    flex-direction: row; 
+    flex-direction: row;
   }
 
   .feature-box {
     margin: auto !important;
     margin-bottom: 50px !important;
   }
-
 }
 
 @media (min-width: 768px) {
@@ -261,5 +255,4 @@ section ol {
     display: flex;
     justify-content: flex-end;
   }
-
 }
