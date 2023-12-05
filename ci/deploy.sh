@@ -27,7 +27,7 @@ npm run generate
 # add CNAME file to dist/
 # mv CNAME dist/
 
-echo " `date` : Copy CNAME file"
+# echo " `date` : Copy CNAME file"
 
 # commit changes on branch gh-pages
 git --work-tree $build_folder add --all
