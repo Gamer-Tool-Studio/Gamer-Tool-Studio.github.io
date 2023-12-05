@@ -8,7 +8,7 @@
 echo " `date` : Build Project!"
 
 line="\n#######################################################################\n";
-build_folder=.output/public
+build_folder=.output/public/
 
 
 echo " `date` : Create Branch gh-pages"
@@ -27,18 +27,18 @@ npm run generate
 # add CNAME file to dist/
 # mv CNAME dist/
 
-# echo " `date` : Copy CNAME file"
+echo " `date` : Copy CNAME file"
 
 # commit changes on branch gh-pages
-git --work-tree $build_folder add --all
-git --work-tree $build_folder commit -m gh-pages
+git --work-tree "$build_folder" add --all
+git --work-tree "$build_folder" commit -m gh-pages
 
 echo " `date` : push project  "
 
 # push branch gh-pages
 git push origin HEAD:gh-pages --force
 
-rm -f $build_folder
+rm -f "$build_folder"
 
 #git checkout -f master
 #git branch -D gh-pages
