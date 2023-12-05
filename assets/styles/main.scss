@@ -1,12 +1,12 @@
 // variables not needed in this file, It's already imported in the project globally
-@import "transitions";
-@import "variables";
+@import 'transitions';
+@import 'variables';
 
 html,
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 h1 {
-    color: lighten($blue, 8);
+  color: lighten($blue, 8);
 }

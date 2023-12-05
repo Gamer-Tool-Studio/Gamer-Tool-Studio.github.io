@@ -68,8 +68,6 @@ const open = ref(false);
 const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
 </script>
 <style lang="scss">
-@use 'sass:selector';
-
 nav {
   width: 100%;
   height: 100%;
