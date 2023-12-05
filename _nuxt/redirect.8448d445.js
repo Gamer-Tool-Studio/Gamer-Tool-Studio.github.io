@@ -1,0 +1,1 @@
+import{an as o,am as n,aq as r,c,o as _,a as u}from"./entry.3ee9c555.js";const i=u("h1",null,"Loading",-1),h=[i],f={__name:"redirect",async setup(l){let e,t;const s=o(),{isAuthenticated:a}=n();return[e,t]=r(()=>a()),e=await e,t(),e?s.push({path:"/dashboard"}):s.push({path:"/login"}),(p,d)=>(_(),c("div",null,h))}};export{f as default};
