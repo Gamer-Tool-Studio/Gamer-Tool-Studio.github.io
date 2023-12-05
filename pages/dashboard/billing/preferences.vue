@@ -62,7 +62,8 @@
 </template>
 
 <script setup>
-import { countries } from 'countries-list';
+import countriesList from 'countries-list';
+const { countries } = countriesList;
 useHead({
   title: 'preferences',
 });

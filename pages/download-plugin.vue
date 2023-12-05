@@ -10,19 +10,19 @@
       </v-col>
       <v-col cols="12" class="engine-cards">
         <v-col cols="12" class="card-header-section">
-          <img src="images/RPGM-text.png"/>
+          <img src="/images/RPGM-text.png"/>
         </v-col>
         <div class="cards-container">
           <v-col cols="6" class="download-cards left-card">
             <v-col cols="12" class="card-icon-name">
-              <img class="download-logo" src="images/RPGM-icon.png"/>
+              <img class="download-logo" src="/images/RPGM-icon.png"/>
               <h3>RPG Maker MZ</h3>
             </v-col>
             <p>&#8595Download</p>
           </v-col>
           <v-col cols="6" class="download-cards right-card">
             <v-col cols="12" class="card-icon-name">
-              <img class="download-logo" src="images/MV-icon.png"/>
+              <img class="download-logo" src="/images/MV-icon.png"/>
               <h3>RPG Maker MV</h3>
             </v-col>
             <p>&#8595Download</p>
