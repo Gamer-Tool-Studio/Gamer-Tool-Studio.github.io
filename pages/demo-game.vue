@@ -87,7 +87,7 @@
         <h3 class="counter-text">Prize Money</h3>
       </v-col>
       <v-row class="features">
-        <h2>Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.</h2>
+        <h2 class="bet-ttle"> Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.</h2>
         <div class="feature-boxes">
           <div class="feature-box">
             <h2>The Wife</h2>
@@ -167,6 +167,23 @@
             <button class="button">Accuse</button>
           </div>
         </div>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <h2 class="bet-ttle">Want to know more about the game?</h2>
+        </v-col>
+        <v-col cols="4" class="join-section">
+         <img src="~/assets/images/document-icon.png">
+          <h3> Betting Game Rules</h3>
+        </v-col>
+        <v-col cols="4" class="join-section">
+          <img src="/images/discord-logo.png">
+          <h3> Join the Community</h3>
+        </v-col>
+        <v-col cols="4" class="join-section">
+          <img src="/images/twitter-white-logo.png">
+          <h3> Follow us on Twitter</h3>
+        </v-col>
       </v-row>
     </v-container>
   </template>
@@ -289,31 +306,28 @@ section {
 .controller-type {
   vertical-align: middle;
   font-size: 20px;
-  margin-left: 20px;
-  
+  margin-left: 20px;  
 }
 
 /* Cunter Section */
 
-
 .vote-count{
-  
   display: inline-flex;
   text-align: center;
   align-items:center ;
-  background-color: #6200ee;
-  border-radius: 17px;
-  width: 49%;
-  
+  border-radius: 57px;
+  max-width: 49%;
 }
 .votes {
   margin: auto;
   margin-right: 10px;
+  background: linear-gradient(45deg, #FFD700, #FF8C00);
 }
 
 .bets {
   margin: auto;
   margin-left:10px;
+  background: linear-gradient(45deg, #8e44ad, #e74c3c);
 }
 .vote-count h3 {
   padding-left: 10px;
@@ -343,7 +357,7 @@ section {
 
 /* Plugin Features Box Styles */
 .feature-boxes {
-  margin-top: 60px;
+  margin-top: 40px;
   width: 100%;
   padding: 0;
   display: inline-flex;
@@ -354,6 +368,12 @@ section {
 .features h2 {
   font-size: 26px;
   margin-top:20px;
+}
+.bet-ttle {
+  margin-top: 50px !important;
+  font-size: 30px !important;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #6e6e80;
 }
 
 .feature-box {
@@ -390,12 +410,13 @@ section {
   display: inline-flex;
   width:100%;
   text-align: center;
+  align-items: baseline;
   
 }
 
 .vote-perc p{
   margin-right: auto;
-  vertical-align: bottom !important;
+  
   padding-left: 5px;
 }
 
@@ -475,8 +496,20 @@ section {
   color: #6200ee;
 }
 
+/* Join Section */
 
+.join-section{
+  margin-top: 40px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.join-section h3 {
+  font-size: 30px;
+}
 
+.join-section img {
+  max-width: 100px;
+}
 @keyframes blink {
   0%,
   100% {
