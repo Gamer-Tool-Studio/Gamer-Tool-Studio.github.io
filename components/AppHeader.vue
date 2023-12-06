@@ -54,7 +54,7 @@ import { getWordPattern } from '~/util';
 
 const route = useRoute();
 
-const isLandingPage = computed(() => ['/', '/demo-game'].includes(route.path));
+const isLandingPage = computed(() => ['/', '/demo-game', '/demo-game/'].includes(route.path));
 
 const pattern = /^(\/[^\/]+)/;
 const smallHeaderPages = ['/dashboard'];

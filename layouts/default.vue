@@ -16,15 +16,16 @@ const cssVars = {};
 
 const route = useRoute();
 
-const path = computed(() => route.path);
+const name = computed(() => route.name);
 
 const theme = useTheme();
+const darkThemePAges = ['index', 'demo-game'];
 
 watch(
-  path,
+  name,
   () => {
-    theme.global.name.value = ['/', '/demo-game'].includes(path.value) ? 'myDarkTheme' : 'light';
-    cssVars['--background'] = ['/', '/demo-game'].includes(path.value) ? 'black' : 'white';
+    theme.global.name.value = darkThemePAges.includes(name.value || '') ? 'myDarkTheme' : 'light';
+    cssVars['--background'] = darkThemePAges.includes(name.value || '') ? 'black' : 'white';
   },
   { immediate: true },
 );
