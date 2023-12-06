@@ -5,45 +5,28 @@
         <h1>CLUAIDO - Play a detective game with AI characters.</h1>
       </v-col>
       <v-col cols="12">
-        <div class="demo-video">
+        <h2 class="hamilton-title"> Who Killed Mr. Hamilton?</h2>
+        <p class="game-desc">You were called to the victims' house to solve his misterious death. Talk to the people inside and unveil the clues that will lead you to the culprit. </p>
+      </v-col>
+      <v-col cols="12">
+        <div class="demo-game">
           <iframe
-           width="100%"
-            height="800"
-            src="/cluaido/index.html"  
-            title="RPG Maker Game"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
+           width="818"
+           height="626"
+           src="/cluaido/index.html"  
+           title="CLUAIDO"
+           frameborder="0"
+           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+           allowfullscreen
         ></iframe>
       </div>
     </v-col>
       </v-row>
       <v-row class="get-started">
-        <v-col cols="6">
-          <h2 class="page-headers">
-            Game Rules
-          </h2>
-        </v-col>
-        <v-col cols="6">
+        <v-col cols="6" class="controllers-section">
           <h2 class="page-headers">
             How To Play
           </h2>
-        </v-col>
-        <v-col cols="6" class="plugin-explain">
-          <ul class="how-to-start">
-            <li>There are 7 suspects and one culprit only inside the house.</li>
-            <li>
-              You can interact freely with the characters and ask them questions with up to 50 words-lenght.
-            </li>
-            <li>
-              All characters will tell you the truth except for the culprit.
-            </li>
-            <li>You can make 20 questions before the culprit runs away.</li>
-            <li>Clues are concieled within the characters and all over the house. </li>
-            <li>You have only one shot to indentify the culprit and you can make your accusation at any time, at the entry of the mansion.</li>
-          </ul>
-        </v-col>
-        <v-col cols="6" class="controllers-section">
           <v-col cols="12" class="controller-container">
             <div class="keyboard-control">&#11014;</div> <!-- Up arrow -->
             <div class="keyboard-control">&#11015;</div> <!-- Down arrow -->
@@ -59,9 +42,28 @@
             <div class="keyboard-control">Esc</div>
             <p class="controller-type">Open Menu /Cancel Action</p>
           </v-col>
-          <div class="intro-cta">
+          <v-col cols="12" class="controller-container">
+            <div class="guide-link">
             <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>Read the full user guide.</p></a>
           </div>
+          </v-col>
+        </v-col>
+        <v-col cols="6" class="plugin-explain">
+          <h2 class="page-headers">
+            Game Rules
+          </h2>
+          <ul class="game-rules">
+            <li>There are 7 suspects and only one culprit inside the house.</li>
+            <li>
+              You can ask whatever you want to the characters.
+            </li>
+            <li>
+              All characters will tell you the truth except for the culprit.
+            </li>
+            <li>You can make 20 questions before the culprit runs away.</li>
+            <li>Clues are concieled within the characters and all over the house. </li>
+            <li>You have only one shot to indentify the culprit.</li>
+          </ul>
         </v-col>
         <v-col cols="12" class="create-account-cta">
           <h2 class="page-headers">
@@ -71,35 +73,98 @@
           <button class="button">Create Account</button>
         </v-col>
       </v-row>
+      <v-col cols="12" class="intro-section">
+        <h1> Can you really crack this case, detective?</h1>
+      </v-col>
+      <v-col cols="6" class="vote-count">
+        <img src="~/assets/images/document-icon.png"  class="vote-icon">
+        <h3 class="prize-money">15,134</h3>
+        <h3 class="counter-text">Accusations Made</h3>
+      </v-col>
+      <v-col cols="6" class="vote-count">
+        <img src="~/assets/images/dollar-icon.png" class="vote-icon">
+        <h3 class="prize-money">150,565$</h3>
+        <h3 class="counter-text">Prize Money</h3>
+      </v-col>
       <v-row class="features">
+        <h2>Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.</h2>
         <div class="feature-boxes">
           <div class="feature-box">
-            <h3>Open world building</h3>
+            <h2>The Wife</h2>
+            <img src="/images/wife.png">
+            <v-col cols="12" class="vote-perc">
+              <h3>23%</h3><p>votes</p>
+            </v-col>
             <p>
-              Leverage the capabilities of AI and enable players to input their own text to interact with characters
-              and open the possibilities within to your game to the maximum.
+              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
             </p>
+            <button class="button">Accuse</button>
           </div>
           <div class="feature-box">
-            <h3>Unscripted NPCs</h3>
+            <h2>The Butler</h2>
+            <img src="/images/butler.png">
+            <v-col cols="12" class="vote-perc">
+              <h3>16%</h3><p>votes</p>
+            </v-col>
             <p>
-              Build immersive character backstories and customize the way they respond to players. Make chat GPT a friend
-              or a foe in your game quests.
+              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
             </p>
+            <button class="button">Accuse</button>
           </div>
           <div class="feature-box">
-            <h3>Intuitive Interface</h3>
+            <h2>The Maid</h2>
+            <img src="/images/maid.png">
+            <v-col cols="12" class="vote-perc">
+              <h3>11%</h3><p>votes</p>
+            </v-col>
             <p>
-              NPC-GPT plugin requires no programming experience to setup and use from within your favourite game
-              engine.
+              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
             </p>
+            <button class="button">Accuse</button>
           </div>
           <div class="feature-box">
-            <h3>Secure and Private</h3>
+            <h2>The Gardener</h2>
+            <img src="/images/gardener.png">
+            <v-col cols="12" class="vote-perc">
+              <h3>7%</h3><p>votes</p>
+            </v-col>
             <p>
-              Rest assured that your sensitive game content and storylines are safeguarded. We follow strict privacy
-              standards to protect your intellectual property.
+              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
             </p>
+            <button class="button">Accuse</button>
+          </div>
+          <div class="feature-box">
+            <h2>The Cook</h2>
+            <img src="/images/cook.png">
+            <v-col cols="12" class="vote-perc">
+              <h3>2%</h3><p>votes</p>
+            </v-col>
+            <p>
+              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
+            </p>
+            <button class="button">Accuse</button>
+          </div>
+          <div class="feature-box">
+            <h2>The Journalist</h2>
+            <img src="/images/journalist.png">
+            <v-col cols="12" class="vote-perc">
+              <h3>8%</h3><p>votes</p>
+            </v-col>
+            <p>
+              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
+            </p>
+            <button class="button">Accuse</button>
+          </div>
+          <div class="feature-box">
+            <h2>The Businessman</h2>
+            <img src="/images/businessman.png">
+            <v-col cols="12" class="vote-perc">
+              <h3>18%</h3><p>votes</p>
+            </v-col>
+            <p>
+              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
+            </p>
+            <button class="button">Accuse</button>
           </div>
         </div>
       </v-row>
@@ -125,7 +190,7 @@ h2,
 
 main.lp {
   > div {
-    max-width: 1200px;
+    max-width: 1200px !important;
     margin: auto;
   }
 }
@@ -145,22 +210,34 @@ section {
   line-height: 100px;
   margin-bottom: 60px;
 }
-
+.hamilton-title {
+  border-bottom: 1px solid #6e6e80;
+}
 /*Demo Video */
 
-.demo-video {
+.demo-game {
   display: block;
   margin-top: 40px;
+  padding: 0;
+  text-align: center;
+  
+}
+.demo-game iframe {
+  border: 1px solid #6e6e80;
+  
 }
 
+.demo-game video {
+  padding: 0;
+  margin: 0;
+} 
 .game-desc {
   margin-top: 20px;
   font-size: 26px;
   font-weight: 300;
 }
 
-.intro-cta {
-  margin-top: 40px;
+.guide-link {
   display: inline-flex;
   align-items: flex-end;
   flex-wrap: wrap;
@@ -168,36 +245,34 @@ section {
   min-width: 100%;
 }
 
-.intro-cta p {
+.guide-link p {
   margin: 0;
   padding: 0;
-  margin-left: 20px;
   text-decoration: underline;
   font-family: 'Bebas Neue';
   font-size: 20px;
   font-weight: 100;
 }
 
-.intro-cta p:hover {
+.iguide-link  p:hover {
   text-decoration-color: #fff;
   cursor: pointer;
 }
 
-.intro-cta button {
+.guide-link  button {
   font-size: 18px;
   font-family: 'Bebas Neue';
 }
 
-.intro-cta button:hover {
-  color: #6200ee;
-}
-
 .controllers-section{
-  padding-top: 35px;
+  align-items: flex-end;
+  
 }
 .controller-container {
   display: inline-flex;
   align-items: center;
+  padding-left: 0;
+  
   
 }
 .keyboard-control{
@@ -217,6 +292,24 @@ section {
   margin-left: 20px;
   
 }
+
+/* Cunter Section */
+
+
+.vote-count{
+  display: inline-flex;
+}
+
+.vote-count h3 {
+  vertical-align: bottom;
+}
+.vote-icon {
+  width:60px;
+  height: 60px;
+  
+}
+
+
 /* Features Section */
 
 .features {
@@ -230,6 +323,7 @@ section {
   font-size: 30px;
   font-weight: 200;
   line-height: 40px;
+  margin-bottom: 17px;
 }
 
 /* Plugin Features Box Styles */
@@ -240,6 +334,11 @@ section {
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.features h2 {
+  font-size: 26px;
+  margin-top:20px;
 }
 
 .feature-box {
@@ -254,53 +353,75 @@ section {
 
 .feature-box img {
   max-width: 100px;
-  margin-bottom: 15px;
+  margin-bottom: 0;
 }
-
+.feature-box h2 {
+  font-size:24px;
+  margin-bottom: 20px;
+  margin-top: 0
+}
 .feature-box h3 {
   font-size: 21px;
   font-weight: 600;
   color: #fff;
-  margin-bottom: 30px;
   text-align: center;
 }
 .feature-box p {
-  font-size: 20px;
+  font-size: 16px;
   color: #fff;
 }
 
-.button-display {
-  text-align: center !important;
-  border-bottom: 1px solid #6e6e80;
+.vote-perc {
+  display: inline-flex;
+  width:100%;
+  text-align: center;
+  
 }
 
-.button-display button {
-  font-size: 20px !important;
-  height: 60px;
-  margin-bottom: 30px;
+.vote-perc p{
+  margin-right: auto;
+  vertical-align: bottom !important;
+}
+
+.vote-perc h3 {
+  margin-left: auto;
+  
+}
+
+.feature-box button {
+  margin-top: 10px;
+  width: 100%;
+  font-size: 22px;
 }
 /* Get started Section */
 
 .get-started {
   margin-top: 60px;
-  border-top: 1px solid #6e6e80;
+  padding-top: 50px;
   margin: auto;
+  margin-bottom: 50px;
 }
 
-.how-to-start {
+.get-started h2 {
+  border-bottom: 1px solid #6e6e80;
+}
+
+.game-rules {
   display: block;
   margin: 0;
   line-height: 30px;
   font-size: 19px;
-  margin-top: 30px;
+  margin-top: 40px;
+  max-width: 750px !important;
 }
 
-.how-to-start li {
+.game-rules li {
   margin-bottom: 25px;
-  min-width: 150%; 
+  
 }
 
 .controller-container {
+  margin-top: 20px;
   display: inline-flex;
 }
 .keyboard-control{
@@ -318,10 +439,12 @@ section {
 .create-account-cta {
   display: block;
   text-align: center;
+  border-bottom: 1px solid #6e6e80;
 }
 
 .create-account-cta h2 {
-  text-align: left;
+  font-size: 25px;
+  border-bottom: none !important;
 }
 
 .create-account-cta button {
@@ -329,11 +452,13 @@ section {
   font-size: 20px;
   font-family: 'Bebas Neue';
   margin-top: 0 !important;
+  margin-bottom: 20px;
 }
 
 .create-account-cta button:hover {
   color: #6200ee;
 }
+
 
 
 @keyframes blink {
@@ -384,7 +509,7 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .demo-video {
+  .demo-game {
     margin-left: 20px;
   }
 
@@ -393,18 +518,13 @@ footer {
     line-height: 80px;
   }
 
-  .intro-cta {
+  .guide-link  {
     width: 100% !important;
     align-items: center !important;
   }
 
-  .intro-cta button {
-    font-size: 22px !important;
-    padding: 20px;
-    width: 45% !important;
-  }
-
-  .intro-cta p {
+ 
+  .guide-link p {
     font-size: 22px !important;
     padding: 15px;
     border: 1px solid #fff;
@@ -412,10 +532,13 @@ footer {
     text-decoration: none;
   }
 
-  .intro-cta p:hover {
+  .guide-link p:hover {
     cursor: pointer;
     text-decoration: underline;
   }
+  .create-account-cta h2 {
+  font-size: 23px;
+}
 }
 
 @media (max-width: 960px) {
@@ -446,24 +569,26 @@ footer {
 @media (max-width: 820px) {
   .get-started .started-grid {
     flex-direction: column;
+    
   }
 
   .plugin-explain {
     margin: auto;
+    text-align: left ;
     min-width: 100% !important;
+    text-align: center;
+    margin-top: 20px;
+
   }
-  .how-to-start {
-    margin-top: 10%;
-    margin-right: 20%;
-    margin-left: 10%;
+
+  .guide-link{
+    margin: auto;
   }
-  .how-to-start li {
+  .game-rules li {
     text-align: center;
     font-size: 22px;
+    list-style:none;
   }
-
-
- 
 }
 
 .create-account-cta .button {
@@ -486,7 +611,23 @@ footer {
     width: 100%;
     margin-top: 10px;
   }
+  .get-started {
+    padding-top: 0 !important;
+
+  }
+  .controllers-section{
+    min-width: 100%;
+    margin: auto;
+  }
+  .controller-container{
+
+  }
+  .keyboard-control{
+ 
+  }
 }
+
+
 
 @media (min-width: 768px) {
   .nav-links {
@@ -501,10 +642,6 @@ footer {
     flex: 1;
     display: flex;
     justify-content: flex-end;
-  }
-
-  .how-to-start {
-    width: 60%;
   }
 
 }
