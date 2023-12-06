@@ -25,7 +25,7 @@
       <v-row class="get-started">
         <v-col cols="6" class="controllers-section">
           <h2 class="page-headers">
-            How To Play
+            Controllers
           </h2>
           <v-col cols="12" class="controller-container">
             <div class="keyboard-control">&#11014;</div> <!-- Up arrow -->
@@ -76,12 +76,12 @@
       <v-col cols="12" class="intro-section">
         <h1> Can you really crack this case, detective?</h1>
       </v-col>
-      <v-col cols="6" class="vote-count">
+      <v-col cols="6" class="vote-count votes">
         <img src="~/assets/images/document-icon.png"  class="vote-icon">
         <h3 class="prize-money">15,134</h3>
         <h3 class="counter-text">Accusations Made</h3>
       </v-col>
-      <v-col cols="6" class="vote-count">
+      <v-col cols="6" class="vote-count bets">
         <img src="~/assets/images/dollar-icon.png" class="vote-icon">
         <h3 class="prize-money">150,565$</h3>
         <h3 class="counter-text">Prize Money</h3>
@@ -297,15 +297,31 @@ section {
 
 
 .vote-count{
+  
   display: inline-flex;
+  text-align: center;
+  align-items:center ;
+  background-color: #6200ee;
+  border-radius: 17px;
+  width: 49%;
+  
+}
+.votes {
+  margin: auto;
+  margin-right: 10px;
 }
 
+.bets {
+  margin: auto;
+  margin-left:10px;
+}
 .vote-count h3 {
-  vertical-align: bottom;
+  padding-left: 10px;
+  font-size: 36px;
 }
 .vote-icon {
-  width:60px;
-  height: 60px;
+  width:80px;
+  height: 80px;
   
 }
 
@@ -313,7 +329,6 @@ section {
 /* Features Section */
 
 .features {
-  border-top: 1px solid #6e6e80;
   margin-top: 60px;
   margin: auto;
 }
@@ -381,6 +396,7 @@ section {
 .vote-perc p{
   margin-right: auto;
   vertical-align: bottom !important;
+  padding-left: 5px;
 }
 
 .vote-perc h3 {
