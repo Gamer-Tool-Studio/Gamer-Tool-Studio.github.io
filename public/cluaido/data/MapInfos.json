@@ -1,7 +1,7 @@
 [
 null,
 {"id":1,"expanded":true,"name":"Living Room","order":3,"parentId":3,"scrollX":571,"scrollY":338.5,"quick":false},
-{"id":2,"expanded":true,"name":"Garden","order":1,"parentId":0,"scrollX":572,"scrollY":813.5,"quick":false},
+{"id":2,"expanded":true,"name":"Garden","order":1,"parentId":0,"scrollX":575,"scrollY":813.5,"quick":false},
 {"id":3,"expanded":true,"name":"Entrance Hall","order":2,"parentId":2,"scrollX":571,"scrollY":338.5,"quick":false},
 {"id":4,"expanded":true,"name":"Master Room","order":5,"parentId":1,"scrollX":578.5,"scrollY":412.5,"quick":false},
 {"id":5,"expanded":false,"name":"WC Suite","order":6,"parentId":4,"scrollX":571,"scrollY":338.5,"quick":false},

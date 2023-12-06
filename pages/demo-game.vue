@@ -77,17 +77,21 @@
         <h1> Can you really crack this case, detective?</h1>
       </v-col>
       <v-col cols="6" class="vote-count votes">
-        <img src="~/assets/images/document-icon.png"  class="vote-icon">
-        <h3 class="prize-money">15,134</h3>
-        <h3 class="counter-text">Accusations Made</h3>
+        <div class="results-container">
+          <img src="~/assets/images/document-icon.png"  class="vote-icon">
+          <h3 class="prize-money">15,134</h3>
+          <h3 class="counter-text">Accusations Made</h3>
+        </div>
       </v-col>
       <v-col cols="6" class="vote-count bets">
-        <img src="~/assets/images/dollar-icon.png" class="vote-icon">
-        <h3 class="prize-money">150,565$</h3>
-        <h3 class="counter-text">Prize Money</h3>
+        <div class="results-container">
+          <img src="~/assets/images/dollar-icon.png" class="vote-icon">
+          <h3 class="prize-money">150,565$</h3>
+          <h3 class="counter-text">Prize Money</h3>
+        </div>
       </v-col>
       <v-row class="features">
-        <h2 class="bet-ttle"> Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.</h2>
+        <h2 class="bet-title"> Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.</h2>
         <div class="feature-boxes">
           <div class="feature-box">
             <h2>The Wife</h2>
@@ -309,8 +313,13 @@ section {
   margin-left: 20px;  
 }
 
-/* Cunter Section */
-
+/* Counter Section */
+.results-container {
+  margin: auto;
+  display: inline-flex;
+  text-align: center;
+  align-items:center ;
+}
 .vote-count{
   display: inline-flex;
   text-align: center;
@@ -331,7 +340,7 @@ section {
 }
 .vote-count h3 {
   padding-left: 10px;
-  font-size: 36px;
+  font-size: 32px;
 }
 .vote-icon {
   width:80px;
@@ -369,7 +378,7 @@ section {
   font-size: 26px;
   margin-top:20px;
 }
-.bet-ttle {
+.bet-title {
   margin-top: 50px !important;
   font-size: 30px !important;
   padding-bottom: 20px;
@@ -529,6 +538,19 @@ footer {
 }
 
 /* Media Queries for Responsiveness */
+@media (max-width: 1290px) {
+  .vote-count {
+    min-width: 100%;
+    text-align: center !important;
+    
+  }
+  .bets {
+    margin-top: 20px;
+    margin-left: 0 !important;
+   
+  }
+}
+
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -643,6 +665,7 @@ footer {
 .create-account-cta .button {
   margin-top: 30px;
 }
+
 
 @media (max-width: 768px) {
   .page-headers {
