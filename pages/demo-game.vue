@@ -74,7 +74,8 @@
       <v-col cols="12" class="intro-section">
         <h1> Can you really crack this case, detective?</h1>
       </v-col>
-      <v-col cols="6" class="vote-count votes">
+      <v-col cols="12">
+        <v-col cols="6" class="vote-count votes">
         <div class="results-container">
           <img src="~/assets/images/document-icon.png"  class="vote-icon">
           <h3 class="prize-money">15,134</h3>
@@ -87,6 +88,7 @@
           <h3 class="prize-money">150,565$</h3>
           <h3 class="counter-text">Prize Money</h3>
         </div>
+      </v-col>
       </v-col>
       <v-row class="features">
         <h2 class="bet-title"> Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.</h2>
@@ -382,7 +384,7 @@ section {
   font-size: 26px;
   margin-top:20px;
 }
-.bet-title {
+.bet-ttle {
   margin-top: 50px !important;
   font-size: 30px !important;
   padding-bottom: 20px;
@@ -460,13 +462,13 @@ section {
   display: block;
   margin: 0;
   line-height: 30px;
-  font-size: 19px;
   margin-top: 40px;
   max-width: 750px !important;
 }
 
 .game-rules li {
   margin-bottom: 25px;
+  font-size: 20px;
   
 }
 
@@ -543,7 +545,10 @@ footer {
 
 /* Media Queries for Responsiveness */
 @media (max-width: 1290px) {
+
+
   .vote-count {
+    margin:auto;
     min-width: 100%;
     text-align: center !important;
     
@@ -552,6 +557,9 @@ footer {
     margin-top: 20px;
     margin-left: 0 !important;
    
+  }
+  .bet-ttle {
+    text-align: center;
   }
 }
 
@@ -584,6 +592,14 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .hamilton-title {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .game-desc{
+    text-align: center;
+  }
   .demo-game {
     margin-left: 20px;
     margin-right: 20px;
@@ -620,6 +636,14 @@ footer {
   .create-account-cta h2 {
   font-size: 23px;
 }
+
+.bet-ttle {
+  text-align: center;
+}
+  .join-section {
+    min-width: 100%;
+  }
+
 }
 
 @media (max-width: 960px) {
@@ -722,8 +746,11 @@ footer {
   .controllers-section{
     min-width: 100%;
     margin: auto;
+
+    
   }
   .controller-container{
+    
 
   }
   .keyboard-control{
