@@ -11,13 +11,11 @@
       <v-col cols="12">
         <div class="demo-game">
           <iframe
-           width="816"
-           height="624"
-           src="/cluaido/index.html"  
-           title="CLUAIDO"
-           frameborder="0"
-           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-           allowfullscreen
+            src="/cluaido/index.html"  
+            title="CLUAIDO"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
         ></iframe>
       </div>
     </v-col>
@@ -238,21 +236,26 @@ section {
 /*Demo Video */
 
 .demo-game {
-  display: block;
   margin-top: 40px;
   padding: 0;
   text-align: center;
-  
+  position: relative;
+  padding-bottom: 76.47%; /* Adjust based on your game's aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 816px; /* Set the maximum width to maintain game size */
+  margin: auto; 
 }
 .demo-game iframe {
-  border: 1px solid #6e6e80;
-  
+  position: absolute;
+  max-width: 816px; /* Set the maximum width for scaling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
-.demo-game video {
-  padding: 0;
-  margin: 0;
-} 
 .game-desc {
   margin-top: 20px;
   font-size: 26px;
@@ -583,6 +586,12 @@ footer {
 @media (max-width: 768px) {
   .demo-game {
     margin-left: 20px;
+    margin-right: 20px;
+    
+  }
+
+  .demo-game iframe {
+
   }
 
   .intro-section h1 {
