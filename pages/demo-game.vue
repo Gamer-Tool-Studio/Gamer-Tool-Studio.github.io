@@ -11,8 +11,8 @@
       <v-col cols="12">
         <div class="demo-game">
           <iframe
-           width="818"
-           height="626"
+           width="816"
+           height="624"
            src="/cluaido/index.html"  
            title="CLUAIDO"
            frameborder="0"
@@ -233,6 +233,7 @@ section {
 }
 .hamilton-title {
   border-bottom: 1px solid #6e6e80;
+  font-size: 36px;
 }
 /*Demo Video */
 
@@ -618,8 +619,29 @@ footer {
     align-items: center;
   }
 
+  .feature-boxes h2 {
+    font-size: 35px;
+  }
+  .feature-boxes img{
+    margin-top: 10px !important;
+    min-width: 150px !important;
+  }
+
+  .feature-boxes p {
+    margin-bottom: 20px;
+  }
+
+  .vote-perc p {
+    margin-bottom: 5px;
+    font-size:28px !important;
+  }
+
+  .feature-boxes button {
+    font-size: 35px;
+  }
   .feature-box {
     margin: 20px 0;
+    min-width:400px;
   }
 
   .feature-box p {
@@ -629,6 +651,7 @@ footer {
 @media (max-width: 1280px) {
   .feature-boxes {
     flex-wrap: wrap !important;
+    
   }
 
   .feature-box {
