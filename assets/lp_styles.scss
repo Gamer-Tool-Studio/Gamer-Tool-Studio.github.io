@@ -61,6 +61,7 @@ section {
 .demo-video {
   display: block;
   margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 
@@ -426,4 +427,36 @@ footer {
   }
   
 
+}
+@media (max-width: 600px) {
+ .intro-cta {
+  text-align: center;
+  align-items: center;
+  display: block;
+ }
+
+  .cta-button-section{
+    min-width:100% !important;
+    text-align: center;
+    margin: auto !important;
+  }
+  .cta-doc-section{
+    min-width: 100% !important;
+    text-align: center;
+    margin: auto !important;
+  }
+
+  .intro-cta button {
+    min-width: 100%;
+    margin-bottom: 20px;
+  }
+  .intro-cta p {
+    margin-left: 0 !important;
+  }
+
+  .feature-box {
+    max-width: 280px;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
 }
