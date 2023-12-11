@@ -203,6 +203,16 @@ useHead({
 </script>
 
 <style lang="scss" scoped>
+/* CSS Reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 h1,
 h2,
 * {
@@ -242,15 +252,15 @@ section {
   padding: 0;
   text-align: center;
   position: relative;
-  padding-bottom: 76.47%; /* Adjust based on your game's aspect ratio */
+  padding-bottom: 76.47%; 
   height: 0;
   overflow: hidden;
-  max-width: 816px; /* Set the maximum width to maintain game size */
+  max-width: 816px; 
   margin: auto; 
 }
 .demo-game iframe {
   position: absolute;
-  max-width: 816px; /* Set the maximum width for scaling */
+  max-width: 816px;
   top: 0;
   left: 0;
   width: 100%;
@@ -786,5 +796,36 @@ footer {
     margin-right: auto !important;
   }
 
+}
+
+/* Add this media query at the end of your existing styles */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  
+  .demo-game{
+    align-items: center;
+  }
+  .demo-game iframe {
+    max-height: 300px !important;
+  }
+}
+
+@media screen and (min-height: 401px) and (max-height: 550px) and (orientation: landscape) {
+  
+  .demo-game{
+    align-items: center;
+  }
+  .demo-game iframe {
+    max-height: 400px !important;
+  }
+}
+
+@media screen and (min-height: 551px) and (max-height: 700px) and (orientation: landscape) {
+  
+  .demo-game{
+    align-items: center;
+  }
+  .demo-game iframe {
+    max-height: 500px !important;
+  }
 }
 </style>

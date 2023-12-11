@@ -1,10 +1,13 @@
 (function() {
     'use strict';
+
     Graphics._stretchHeight = function() {
         if (Utils.isMobileDevice()) {
-            return document.documentElement.clientHeight;
-    } else {
-        return window.innerHeight;
-    }
-};
+            // Adjust for any additional elements or margins
+            const additionalHeight =0; // Change this value as needed
+            return window.innerHeight - additionalHeight;
+        } else {
+            return window.innerHeight;
+        }
+    };
 })();
