@@ -3,18 +3,17 @@
     <v-row>
       <v-col cols="12" class="intro-section">
         <h1>NPC-GPT - Real-time AI chats for your game characters</h1>
-        <div class="intro-cta">
-          <button class="button">Start Free Trial Now</button>
+      </v-col>
+      <v-col cols="12" class="intro-cta">
+          <button class="button">Start Trial Now</button>
           <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"
             ><p>View our documentation</p></a
           >
-        </div>
       </v-col>
-      <v-col>
-        <div class="demo-video">
+      <v-col cols="12" class="demo-video">
+        <div style="position: relative; padding-bottom: 56.25%; /* 16:9 aspect ratio */">
           <iframe
-            width="100%"
-            height="600"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
             src="https://www.youtube.com/embed/p-2NLT5jpcA?si=9KDx8_A2xNvWzh2C"
             title="YouTube video player"
             frameborder="0"
@@ -23,12 +22,13 @@
           ></iframe>
         </div>
       </v-col>
+
     </v-row>
     <v-row class="features">
       <v-col>
         <h2 class="page-headers">
-          Unlock entirely new gaming experiences and create unscripted scenarios with the assistance of AI-driven NPCs.
-          Effortlessly craft immersive conversations by integrating with GPT-4 model.
+          Unlock entirely new gaming experiences and create autonomous worlds with the assistance of AI-driven NPCs.
+          Effortlessly add unscripted conversations to your game by integrating with the GPT-4 model.
         </h2>
       </v-col>
       <div class="feature-boxes">
@@ -62,7 +62,7 @@
       </div>
     </v-row>
     <v-row class="get-started" id="sectionToLinkToApi">
-      <v-col>
+      <v-col cols="12">
         <h2 class="page-headers">
           Create seamless AI characters to interact with players and users from any Frontend environment with NPC-GPT
           library
@@ -70,50 +70,50 @@
         <div class="code-style">
           <pre class="code-display">
           <code>
-            const { Configuration, NpcGptApi } = require("NpcGPt");
 
-            const configuration = new Configuration({
-              apiKey: process.env.NPCGPT_API_KEY,
+const { Configuration, NpcGptApi } = require("NpcGPt");
+
+const configuration = new Configuration({
+  apiKey: process.env.NPCGPT_API_KEY,
             });
             
-            const NpcGpt = new NpcGptApi(configuration);
+const NpcGpt = new NpcGptApi(configuration);
 
-            const chat = await NpcGpt.createChat({
-              "userInput": "I've heard about a secret map?!",
-              "chatHistory": [],
-              "characterContext": {
-                 "name": "GPTWizard",
-                 "age": 35,
-                  "personality": {
-                  "traits": [
-                      "shy",
-                      "mystic",
-                      "adventurous"
-                  ],
-              "dialogueStyle": "mysterious"
-               },
+const chat = await NpcGpt.createChat({
+  "userInput": "I've heard about a secret map?!",
+  "chatHistory": [],
+  "characterContext": {
+    "name": "GPTWizard",
+    "age": 35,
+    "personality": {
+    "traits": [
+      "shy",
+      "mystic",
+      "adventurous"
+    ],
+    "dialogueStyle": "mysterious"
+    },
 
-              "backgroundStory": "GPT WIzard is a Mage who lives in Mystery Foster. 
-            She was brought up by witches and mages after being found as a baby 
-            wondering in the forest. She belongs to this tribe that remains 
-            undiscovered by most humans but learned the ways of the past and future 
-            and is able to interpret signs and energies.",
+    "backgroundStory": "GPT WIzard is a Mage who lives in Mystery Foster. 
+      She was brought up by witches and mages after being found as a baby 
+      wondering in the forest. She belongs to this tribe that remains 
+      undiscovered by most humans but learned the ways of the past and future 
+      and is able to interpret signs and energies.",
               
-              "eventsKnowledge": "Knows there is a secret map at the entrance of the
-            big cave under a yellow flower and  knows the player harduous future in 
-            the forest with many enemies and challenges",
+    "eventsKnowledge": "Knows there is a secret map at the entrance of the
+      big cave under a yellow flower and  knows the player harduous future in 
+      the forest with many enemies and challenges",
             
-            "interests": {
-              "Astrology": 7,
-              "Herbology": 9,
-              "History": 8
-            },
-            "supportiveness": 8,
-            "maxOutputWords": 50
-            }
-          });
-
-         console.log(completion.data.choices[0].message);
+    "interests": {
+      "Astrology": 7,
+      "Herbology": 9,
+      "History": 8
+    },
+    "supportiveness": 8,
+    "maxOutputWords": 50
+  }
+});
+console.log(completion.data.choices[0].message);
           </code>
         </pre>
           <div class="typed-display">

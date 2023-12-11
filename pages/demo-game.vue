@@ -32,7 +32,7 @@
             <div class="keyboard-control">&#11013;</div> <!-- Left arrow -->
             <p class="controller-type">Move Player</p>
           </v-col>
-          <v-col cols="12" class="controller-container">
+          <v-col cols="12" class="controller-container enter-com">
             <div class="keyboard-control">Enter</div>
             <p class="controller-type">Action Button</p>
           </v-col>
@@ -242,15 +242,15 @@ section {
   padding: 0;
   text-align: center;
   position: relative;
-  padding-bottom: 76.47%; /* Adjust based on your game's aspect ratio */
+  padding-bottom: 76.47%; 
   height: 0;
   overflow: hidden;
-  max-width: 816px; /* Set the maximum width to maintain game size */
+  max-width: 816px; 
   margin: auto; 
 }
 .demo-game iframe {
   position: absolute;
-  max-width: 816px; /* Set the maximum width for scaling */
+  max-width: 816px;
   top: 0;
   left: 0;
   width: 100%;
@@ -393,7 +393,8 @@ section {
 
 .feature-box {
   max-width: 300px;
-  margin: 20px;
+  margin-left: auto !important;
+  margin-right: auto !important;
   padding: 20px;
   background-color: black;
   border: 1px solid #6e6e80;
@@ -545,8 +546,6 @@ footer {
 
 /* Media Queries for Responsiveness */
 @media (max-width: 1290px) {
-
-
   .vote-count {
     margin:auto;
     min-width: 100%;
@@ -614,10 +613,19 @@ footer {
     font-size: 400%;
     line-height: 80px;
   }
+  .controller-container{
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    text-align: center;
+
+  }
 
   .guide-link  {
-    width: 100% !important;
-    align-items: center !important;
+    min-width: 100% !important;
+    justify-content: center;
+    text-align: center;
+
   }
 
  
@@ -627,6 +635,7 @@ footer {
     border: 1px solid #fff;
     border-radius: 7px;
     text-decoration: none;
+    text-align: center !important;
   }
 
   .guide-link p:hover {
@@ -688,7 +697,7 @@ footer {
   }
 
   .feature-box {
-    max-width: 50% calc(50% - 400px) !important;
+    max-width: 50% calc(50% - 400px);
     margin: 24px !important;
   }
 }
@@ -758,22 +767,64 @@ footer {
   }
 }
 
-
-
-@media (min-width: 768px) {
-  .nav-links {
-    flex-direction: row;
+@media (max-width: 600px) {
+  .demo-game{
+    margin-right: 1px !important;
+    margin-left: 1px !important;
   }
 
-  .nav-links li {
-    margin: 0 10px;
+  .vote-count{
+    min-width:100%;
+    text-align: center;
+  }
+  .vote-count h3{
+    font-size:20px;
+  }
+  .vote-count img{
+    max-width: 40px !important;
+    max-height: 40px !important;
+  }
+  .bet-title{
+  text-align: center !important;
+  font-size: 22px;
+  }
+  .feature-box{
+    min-width: 250px !important;
+    max-width:350px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
-  .nav-buttons {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-  }
+}
 
+/* Add this media query at the end of your existing styles */
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  
+  .demo-game{
+    align-items: center;
+  }
+  .demo-game iframe {
+    max-height: 300px !important;
+  }
+}
+
+@media screen and (min-height: 401px) and (max-height: 550px) and (orientation: landscape) {
+  
+  .demo-game{
+    align-items: center;
+  }
+  .demo-game iframe {
+    max-height: 400px !important;
+  }
+}
+
+@media screen and (min-height: 551px) and (max-height: 700px) and (orientation: landscape) {
+  
+  .demo-game{
+    align-items: center;
+  }
+  .demo-game iframe {
+    max-height: 500px !important;
+  }
 }
 </style>
