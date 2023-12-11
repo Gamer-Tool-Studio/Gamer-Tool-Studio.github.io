@@ -621,6 +621,12 @@ footer {
 
   }
 
+  .enter-com{
+    justify-content: left !important;
+  }
+    
+  
+
   .guide-link  {
     min-width: 100% !important;
     justify-content: center;
@@ -644,11 +650,11 @@ footer {
   }
   .create-account-cta h2 {
   font-size: 23px;
-}
+  }
 
-.bet-ttle {
-  text-align: center;
-}
+  .bet-ttle {
+    text-align: center;
+  }
   .join-section {
     min-width: 100%;
   }
