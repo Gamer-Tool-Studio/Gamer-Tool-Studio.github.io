@@ -203,16 +203,6 @@ useHead({
 </script>
 
 <style lang="scss" scoped>
-/* CSS Reset */
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
 h1,
 h2,
 * {
