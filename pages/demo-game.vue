@@ -32,7 +32,7 @@
             <div class="keyboard-control">&#11013;</div> <!-- Left arrow -->
             <p class="controller-type">Move Player</p>
           </v-col>
-          <v-col cols="12" class="controller-container">
+          <v-col cols="12" class="controller-container enter-com">
             <div class="keyboard-control">Enter</div>
             <p class="controller-type">Action Button</p>
           </v-col>
@@ -613,10 +613,18 @@ footer {
     font-size: 400%;
     line-height: 80px;
   }
+  .controller-container{
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    text-align: center;
+
+  }
 
   .guide-link  {
-    width: 100% !important;
-    align-items: center !important;
+    min-width: 100% !important;
+    justify-content: center;
+    text-align: center;
 
   }
 
@@ -627,6 +635,7 @@ footer {
     border: 1px solid #fff;
     border-radius: 7px;
     text-decoration: none;
+    text-align: center !important;
   }
 
   .guide-link p:hover {
