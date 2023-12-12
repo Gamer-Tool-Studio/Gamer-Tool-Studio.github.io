@@ -530,7 +530,7 @@
 	   	console.log("Sending request to the server...");
 
 	   	// Get the response from the Server
-	   	fetch("http://localhost:3002/api/v1/chat/send-message", requestOptions)
+	   	fetch("https://npc-gpt-api-04c6279a15ad.herokuapp.com/api/v1/chat/send-message", requestOptions)
   		.then(function (response) {
     		if (response.ok) {
       		return response.json();
