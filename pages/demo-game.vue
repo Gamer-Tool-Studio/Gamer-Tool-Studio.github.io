@@ -16,58 +16,60 @@
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
-        ></iframe>
-      </div>
-    </v-col>
-      </v-row>
-      <v-row class="get-started">
-        <v-col cols="6" class="controllers-section">
-          <h2 class="page-headers">
-            Controllers
-          </h2>
-          <v-col cols="12" class="controller-container">
-            <div class="keyboard-control">&#11014;</div> <!-- Up arrow -->
-            <div class="keyboard-control">&#11015;</div> <!-- Down arrow -->
-            <div class="keyboard-control">&#10132;</div> <!-- Right arrow -->
-            <div class="keyboard-control">&#11013;</div> <!-- Left arrow -->
-            <p class="controller-type">Move Player</p>
-          </v-col>
-          <v-col cols="12" class="controller-container enter-com">
-            <div class="keyboard-control">Enter</div>
-            <p class="controller-type">Action Button</p>
-          </v-col>
-          <v-col cols="12" class="controller-container">
-            <div class="keyboard-control">Esc</div>
-            <p class="controller-type">Open Menu /Cancel Action</p>
+          ></iframe>
+        </div>
+      </v-col>
+    </v-row>
+    <v-row class="get-started">
+      <v-col cols="6" class="controllers-section">
+        <v-col cols="12">
+          <h2 class="page-headers">Controllers</h2>
+        </v-col>
+        <v-col cols="12" class="controller-container">
+          <div class="keyboard-control">&#11014;</div> <!-- Up arrow -->
+          <div class="keyboard-control">&#11015;</div> <!-- Down arrow -->
+          <div class="keyboard-control">&#10132;</div> <!-- Right arrow -->
+          <div class="keyboard-control">&#11013;</div> <!-- Left arrow -->
+          <p class="controller-type">Move Player</p>
+        </v-col>
+        <v-col cols="12" class="controller-container enter-com">              
+          <div class="keyboard-control">Enter</div>
+          <p class="controller-type">Action Button/ Confirm Action</p>
+        </v-col>
+        <v-col cols="12" class="controller-container">
+          <div class="keyboard-control">Esc</div>
+          <p class="controller-type">Open Menu/ Cancel Action</p>
           </v-col>
           <v-col cols="12" class="controller-container">
             <div class="guide-link">
-            <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>Read the full user guide.</p></a>
-          </div>
+              <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>Read the full user guide.</p></a>
+            </div>
           </v-col>
         </v-col>
         <v-col cols="6" class="plugin-explain">
-          <h2 class="page-headers">
-            Game Rules
-          </h2>
-          <ul class="game-rules">
-            <li>There are 7 suspects and only one culprit inside the house.</li>
-            <li>
-              You can ask whatever you want to the characters.
-            </li>
-            <li>
-              All characters will tell you the truth except for the culprit.
-            </li>
-            <li>You can make 20 questions before the culprit runs away.</li>
-            <li>Clues are concieled within the characters and all over the house. </li>
-            <li>You have only one shot to indentify the culprit.</li>
-          </ul>
+          <v-col cols="12">
+            <h2 class="page-headers">Game Rules</h2>
+          </v-col>
+          <v-col cols="12">
+            <ul class="game-rules">
+              <li>There are 7 suspects and only one culprit inside the house.</li>
+              <li>
+                You can ask whatever you want to the characters.
+              </li>
+              <li>
+                All characters will tell you the truth except for the culprit.
+              </li>
+              <li>You can make 20 questions before the culprit runs away.</li>
+              <li>Clues are concieled within the characters and all over the house. </li>
+              <li>You have only one shot to indentify the culprit.</li>
+            </ul>
+          </v-col>
         </v-col>
         <v-col cols="12" class="create-account-cta">
           <h2 class="page-headers">
             In order to play this game you will need an account with Gamer Tool Studio and to connect with your API key.
           </h2>
-          <br />
+          <br/>
           <button class="button">Create Account</button>
         </v-col>
       </v-row>
@@ -76,19 +78,19 @@
       </v-col>
       <v-col cols="12">
         <v-col cols="6" class="vote-count votes">
-        <div class="results-container">
-          <img src="~/assets/images/document-icon.png"  class="vote-icon">
-          <h3 class="prize-money">15,134</h3>
-          <h3 class="counter-text">Accusations Made</h3>
-        </div>
-      </v-col>
-      <v-col cols="6" class="vote-count bets">
-        <div class="results-container">
-          <img src="~/assets/images/dollar-icon.png" class="vote-icon">
-          <h3 class="prize-money">150,565$</h3>
-          <h3 class="counter-text">Prize Money</h3>
-        </div>
-      </v-col>
+          <div class="results-container">
+           <img src="~/assets/images/document-icon.png"  class="vote-icon">
+            <h3 class="prize-money">15,134</h3>
+            <h3 class="counter-text">Accusations Made</h3>
+          </div>
+        </v-col>
+        <v-col cols="6" class="vote-count bets">
+          <div class="results-container">
+            <img src="~/assets/images/dollar-icon.png" class="vote-icon">
+            <h3 class="prize-money">150,565$</h3>
+            <h3 class="counter-text">Prize Money</h3>
+          </div>
+        </v-col>
       </v-col>
       <v-row class="features">
         <h2 class="bet-title"> Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.</h2>
@@ -274,6 +276,7 @@ section {
 
 .guide-link p {
   margin: 0;
+  margin-top: 20px !important;
   padding: 0;
   text-decoration: underline;
   font-family: 'Bebas Neue';
@@ -622,7 +625,7 @@ footer {
   }
 
   .enter-com{
-    justify-content: left !important;
+    
   }
     
   
@@ -803,34 +806,53 @@ footer {
 
 }
 
+
 /* Add this media query at the end of your existing styles */
 @media screen and (max-height: 400px) and (orientation: landscape) {
-  
-  .demo-game{
-    align-items: center;
+  .demo-game {
+    position: relative;
+    height: auto;
   }
+
   .demo-game iframe {
-    max-height: 300px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Use 100% of the viewport height */
+    border: 0;
   }
 }
 
 @media screen and (min-height: 401px) and (max-height: 550px) and (orientation: landscape) {
-  
-  .demo-game{
-    align-items: center;
+  .demo-game {
+    position: relative;
+    height: auto;
   }
+
   .demo-game iframe {
-    max-height: 400px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Use 100% of the viewport height */
+    border: 0;
   }
 }
 
 @media screen and (min-height: 551px) and (max-height: 700px) and (orientation: landscape) {
-  
-  .demo-game{
-    align-items: center;
+  .demo-game {
+    position: relative;
+    height: auto;
   }
+
   .demo-game iframe {
-    max-height: 500px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Use 100% of the viewport height */
+    border: 0;
   }
 }
 </style>
