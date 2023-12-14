@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <link rel="icon" href="icon/icon.png" type="image/png">
     <link rel="apple-touch-icon" href="icon/icon.png">
     <link rel="stylesheet" type="text/css" href="css/game.css">
     <title>CLUAIDO</title>
     <style>
-      /* Game Window styles */
+      /* Add the following styles for the full-screen button */
       #fullscreen-button {
         position: fixed;
-        bottom: 3%;
-        right: 3%;
+        bottom: 2%;
+        right: 2%;
         z-index: 999 !important; 
         cursor: pointer;
         font-size: 30px;
@@ -25,11 +25,12 @@
         outline: none;
       }
       #gameVideo{
-        margin:auto;
+        margin-top:0 !important;
+        margin-bottom: 0 !important;
         z-index: 4 !important; 
       }
       #gameCanvas{
-        margin:auto;
+        margin:auto !important;
         z-index:3 !important; 
       }
       /* Media Queries for Responsiveness */
@@ -37,7 +38,7 @@
         #fullscreen-button {
           position: fixed;
           bottom: 9% !important;
-          right: 2% !important;
+          right: 3% !important;
           z-index: 999 !important; 
         }
       }
