@@ -114,7 +114,7 @@
               <h3>16%</h3><p>votes</p>
             </v-col>
             <p>
-              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
+              A refined gentleman in whom Mr. Hamilton placed the highest trust. Does this long history conceal any secrets?
             </p>
             <button class="button">Accuse</button>
           </div>

@@ -18,7 +18,7 @@
         z-index: 999 !important; 
         cursor: pointer;
         font-size: 30px;
-        font-family: 900;
+        font-weight: 900;
         color: white;
         background-color: transparent;
         border: none;
@@ -38,7 +38,7 @@
         #fullscreen-button {
           position: fixed;
           bottom: 9% !important;
-          right: 3% !important;
+          right: 1% !important;
           z-index: 999 !important; 
         }
       }
@@ -47,44 +47,26 @@
   <body style="background-color: black">
     <button id="fullscreen-button" ontouchstart="toggleFullscreen(event)" onclick="toggleFullscreen(event)">&#9974;</button>
     <script type="text/javascript">
-      function toggleFullscreen(event) {
+      async function toggleFullscreen(event) {
         event.preventDefault(); // Prevent the default action
         var elem = document.documentElement;
 
-        if (/Mobi|Android/i.test(navigator.userAgent)) {
+        try {
+          if (/Mobi|Android/i.test(navigator.userAgent)) {
             // For mobile devices, use the Fullscreen API with user gesture
-            if (elem.requestFullscreen || elem.webkitRequestFullscreen || elem.mozRequestFullScreen || elem.msRequestFullscreen) {
-                elem.requestFullscreen().catch((error) => {
-                    console.error('Fullscreen request failed:', error);
-                });
-            } else {
-                window.open(window.location.href, '_blank');
-            }
-        } else {
+            await elem.requestFullscreen();
+          } else {
             // For non-mobile devices, use the standard approach
             if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
               console.log("Entering fullscreen mode");
-              if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-              } else if (elem.msRequestFullscreen) {
-                elem.msRequestFullscreen();
-              } else if (elem.mozRequestFullScreen) {
-                elem.mozRequestFullScreen();
-              } else if (elem.webkitRequestFullscreen) {
-                elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
-              }
+              await elem.requestFullscreen();
             } else {
               console.log("Exiting fullscreen mode");
-              if (document.exitFullscreen) {
-                document.exitFullscreen();
-              } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-              } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-              } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-              }
+              await document.exitFullscreen();
             }
+          }
+        } catch (error) {
+          console.error('Fullscreen request failed:', error);
         }
       }
     </script>
