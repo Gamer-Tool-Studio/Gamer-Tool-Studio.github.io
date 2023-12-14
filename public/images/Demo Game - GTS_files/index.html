@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)http://127.0.0.1:3000/cluaido/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="http://127.0.0.1:3000/cluaido/icon/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="http://127.0.0.1:3000/cluaido/icon/icon.png">
+    <link rel="stylesheet" type="text/css" href="./game.css">
+    <title>CLUAIDO</title>
+    <style>
+      /* Add the following styles for the full-screen button */
+      #fullscreen-button {
+        position: fixed;
+        bottom: 3%;
+        right: 3%;
+        z-index: 999 !important; 
+        cursor: pointer;
+        font-size: 30px;
+        font-family: 900;
+        color: white;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+    #gameVideo{
+        margin-top:0 !important;
+        margin-bottom: 0 !important;
+        z-index: 4 !important; 
+    }
+    #gameCanvas{
+        margin-top:0 !important;
+        z-index:3 !important; 
+    }
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+        #fullscreen-button {
+            position: fixed;
+            bottom: 9% !important;
+            right: 3% !important;
+            z-index: 999 !important; 
+        }
+    }
+    </style>
+  </head>
+  <body style="background-color: black">
+    <button id="fullscreen-button" onclick="toggleFullscreen()">⛶</button>
+    <script type="text/javascript">
+        function toggleFullscreen() {
+          var elem = document.documentElement;
+
+          if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+              console.log("Entering fullscreen mode");
+              if (elem.requestFullscreen) {
+                  elem.requestFullscreen();
+              } else if (elem.msRequestFullscreen) {
+                  elem.msRequestFullscreen();
+              } else if (elem.mozRequestFullScreen) {
+                  elem.mozRequestFullScreen();
+              } else if (elem.webkitRequestFullscreen) {
+                  elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+              }
+          } else {
+              console.log("Exiting fullscreen mode");
+              if (document.exitFullscreen) {
+                  document.exitFullscreen();
+              } else if (document.msExitFullscreen) {
+                  document.msExitFullscreen();
+              } else if (document.mozCancelFullScreen) {
+                  document.mozCancelFullScreen();
+              } else if (document.webkitExitFullscreen) {
+                  document.webkitExitFullscreen();
+              }
+          }
+      }
+    </script>
+    <script type="text/javascript" src="./main.js" defer=""></script>
+  
+
+<script type="text/javascript" src="./pixi.js" defer=""></script><script type="text/javascript" src="./pako.min.js" defer=""></script><script type="text/javascript" src="./localforage.min.js" defer=""></script><script type="text/javascript" src="./effekseer.min.js" defer=""></script><script type="text/javascript" src="./vorbisdecoder.js" defer=""></script><script type="text/javascript" src="./rmmz_core.js" defer=""></script><script type="text/javascript" src="./rmmz_managers.js" defer=""></script><script type="text/javascript" src="./rmmz_objects.js" defer=""></script><script type="text/javascript" src="./rmmz_scenes.js" defer=""></script><script type="text/javascript" src="./rmmz_sprites.js" defer=""></script><script type="text/javascript" src="./rmmz_windows.js" defer=""></script><script type="text/javascript" src="./plugins.js" defer=""></script><script type="text/javascript" src="./VisuMZ_1_MessageCore.js" defer=""></script><script type="text/javascript" src="./NPC-GPT-Plugin.js" defer=""></script><script type="text/javascript" src="./SimplestMainMenu .js" defer=""></script><script type="text/javascript" src="./TextPicture.js" defer=""></script><div id="errorPrinter" style="width: 633.6px; height: 97.0588px;"><div id="errorName"></div><div id="errorMessage"></div></div><canvas id="gameCanvas" width="816" height="624" style="z-index: 1; position: absolute; margin: auto; inset: 0px; width: 792px; height: 605.647px; touch-action: none; cursor: inherit;"></canvas><div id="fpsCounterBox" style="display: none;"><div id="fpsCounterLabel">FPS</div><div id="fpsCounterNumber">30</div></div><button title="select to enable accessability for this content" style="width: 1px; height: 1px; position: absolute; top: -1000px; left: -1000px; z-index: 2; background-color: rgb(255, 0, 0);"></button><video id="gameVideo" playsinline="" style="position: absolute; margin: auto; inset: 0px; opacity: 0; z-index: 2; width: 792px; height: 605.647px;"></video></body></html>

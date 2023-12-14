@@ -241,8 +241,7 @@ section {
 }
 /*Demo Video */
 .demo-section{
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   max-width: 816px; 
   max-height: 624px;
 }
