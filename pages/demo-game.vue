@@ -242,7 +242,7 @@ section {
 /*Demo Video */
 .demo-section{
   margin: auto;
-  max-width: 816px; 
+  max-width: 850px; 
   max-height: 100%;
 }
 
@@ -253,9 +253,7 @@ section {
   position: relative;
   padding-bottom: 76.47%; 
   height: 0;
-  overflow: hidden;
   margin: auto;
-  z-index: 1 !important;
 }
 .demo-game iframe {
   position: absolute;
