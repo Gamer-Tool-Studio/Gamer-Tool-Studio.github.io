@@ -13,8 +13,8 @@
       /* Add the following styles for the full-screen button */
       #fullscreen-button {
         position: fixed;
-        bottom: 5%;
-        right: 5%;
+        bottom: 3%;
+        right: 3%;
         z-index: 999 !important; 
         cursor: pointer;
         font-size: 30px;
@@ -33,7 +33,15 @@
         margin-top:0 !important;
         z-index:3 !important; 
     }
-
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+        #fullscreen-button {
+            position: fixed;
+            bottom: 9% !important;
+            right: 4% !important;
+            z-index: 999 !important; 
+        }
+    }
     </style>
   </head>
   <body style="background-color: black">

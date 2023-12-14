@@ -260,8 +260,6 @@ section {
 }
 .demo-game iframe {
   position: absolute;
-  max-width: 816px;
-  max-height: 624px;
   top: 0;
   left: 0;
   min-width: 100%;
