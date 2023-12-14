@@ -8,9 +8,10 @@
         <h2 class="hamilton-title"> Who Killed Mr. Hamilton?</h2>
         <p class="game-desc">You were called to the victims' house to solve his misterious death. Talk to the people inside and unveil the clues that will lead you to the culprit. </p>
       </v-col>
-      <v-col cols="12">
+      <v-col cols="12" class="demo-section">
         <div class="demo-game">
           <iframe
+            id="gameIframe"
             src="/cluaido/index.html"  
             title="CLUAIDO"
             frameborder="0"
@@ -202,6 +203,7 @@ definePageMeta({
 useHead({
   title: 'Demo Game',
 });
+
 </script>
 
 <style lang="scss" scoped>
@@ -238,6 +240,12 @@ section {
   font-size: 36px;
 }
 /*Demo Video */
+.demo-section{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 816px; 
+  max-height: 624px;
+}
 
 .demo-game {
   margin-top: 40px;
@@ -247,19 +255,23 @@ section {
   padding-bottom: 76.47%; 
   height: 0;
   overflow: hidden;
-  max-width: 816px; 
-  margin: auto; 
+  margin: auto;
+  z-index: 1 !important;
 }
 .demo-game iframe {
   position: absolute;
   max-width: 816px;
+  max-height: 624px;
   top: 0;
   left: 0;
-  width: 100%;
+  min-width: 100%;
   height: 100%;
   border: 0;
+  z-index: 2 !important;
 }
-
+#fullscreen-button {
+  z-index: 999 !important;
+}
 .game-desc {
   margin-top: 20px;
   font-size: 26px;
@@ -565,6 +577,7 @@ footer {
   }
 }
 
+
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -608,10 +621,6 @@ footer {
     
   }
 
-  .demo-game iframe {
-
-  }
-
   .intro-section h1 {
     font-size: 400%;
     line-height: 80px;
@@ -624,21 +633,14 @@ footer {
 
   }
 
-  .enter-com{
-    
-  }
-    
-  
-
-  .guide-link  {
+    .guide-link  {
     min-width: 100% !important;
     justify-content: center;
     text-align: center;
 
   }
-
  
-  .guide-link p {
+   .guide-link p {
     font-size: 22px !important;
     padding: 15px;
     border: 1px solid #fff;
@@ -699,7 +701,7 @@ footer {
     font-size: 20px;
   }
 }
-@media (max-width: 1280px) {
+@media (max-width: 1290px) {
   .feature-boxes {
     flex-wrap: wrap !important;
     
@@ -767,13 +769,6 @@ footer {
 
     
   }
-  .controller-container{
-    
-
-  }
-  .keyboard-control{
- 
-  }
 }
 
 @media (max-width: 600px) {
@@ -802,57 +797,6 @@ footer {
     max-width:350px !important;
     margin-left: auto !important;
     margin-right: auto !important;
-  }
-
-}
-
-
-/* Add this media query at the end of your existing styles */
-@media screen and (max-height: 400px) and (orientation: landscape) {
-  .demo-game {
-    position: relative;
-    height: auto;
-  }
-
-  .demo-game iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh; /* Use 100% of the viewport height */
-    border: 0;
-  }
-}
-
-@media screen and (min-height: 401px) and (max-height: 550px) and (orientation: landscape) {
-  .demo-game {
-    position: relative;
-    height: auto;
-  }
-
-  .demo-game iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh; /* Use 100% of the viewport height */
-    border: 0;
-  }
-}
-
-@media screen and (min-height: 551px) and (max-height: 700px) and (orientation: landscape) {
-  .demo-game {
-    position: relative;
-    height: auto;
-  }
-
-  .demo-game iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh; /* Use 100% of the viewport height */
-    border: 0;
   }
 }
 </style>

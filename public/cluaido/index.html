@@ -1,16 +1,72 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-        <meta name="viewport" content="user-scalable=no">
-        <link rel="icon" href="icon/icon.png" type="image/png">
-        <link rel="apple-touch-icon" href="icon/icon.png">
-        <link rel="stylesheet" type="text/css" href="css/game.css">
-        <title>CLUAIDO</title>
-    </head>
-    <body style="background-color: black">
-        <script type="text/javascript" src="js/main.js"></script>
-    </body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="icon/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="icon/icon.png">
+    <link rel="stylesheet" type="text/css" href="css/game.css">
+    <title>CLUAIDO</title>
+    <style>
+      /* Add the following styles for the full-screen button */
+      #fullscreen-button {
+        position: fixed;
+        bottom: 5%;
+        right: 5%;
+        z-index: 999 !important; 
+        cursor: pointer;
+        font-size: 30px;
+        font-family: 900;
+        color: white;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+    #gameVideo{
+        margin-top:0 !important;
+        margin-bottom: 0 !important;
+        z-index: 4 !important; 
+    }
+    #gameCanvas{
+        margin-top:0 !important;
+        z-index:3 !important; 
+    }
+
+    </style>
+  </head>
+  <body style="background-color: black">
+    <button id="fullscreen-button" onclick="toggleFullscreen()">&#9974;</button>
+    <script type="text/javascript">
+        function toggleFullscreen() {
+          var elem = document.documentElement;
+
+          if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+              console.log("Entering fullscreen mode");
+              if (elem.requestFullscreen) {
+                  elem.requestFullscreen();
+              } else if (elem.msRequestFullscreen) {
+                  elem.msRequestFullscreen();
+              } else if (elem.mozRequestFullScreen) {
+                  elem.mozRequestFullScreen();
+              } else if (elem.webkitRequestFullscreen) {
+                  elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+              }
+          } else {
+              console.log("Exiting fullscreen mode");
+              if (document.exitFullscreen) {
+                  document.exitFullscreen();
+              } else if (document.msExitFullscreen) {
+                  document.msExitFullscreen();
+              } else if (document.mozCancelFullScreen) {
+                  document.mozCancelFullScreen();
+              } else if (document.webkitExitFullscreen) {
+                  document.webkitExitFullscreen();
+              }
+          }
+      }
+    </script>
+    <script type="text/javascript" src="js/main.js" defer></script>
+  </body>
 </html>
