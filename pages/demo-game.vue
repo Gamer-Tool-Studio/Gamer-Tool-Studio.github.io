@@ -243,7 +243,7 @@ section {
 .demo-section{
   margin: auto;
   max-width: 816px; 
-  max-height: 624px;
+  max-height: 100%;
 }
 
 .demo-game {
@@ -293,7 +293,7 @@ section {
   font-weight: 100;
 }
 
-.iguide-link  p:hover {
+.guide-link  p:hover {
   text-decoration-color: #fff;
   cursor: pointer;
 }
