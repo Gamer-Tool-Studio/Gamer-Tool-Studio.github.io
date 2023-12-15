@@ -24,46 +24,40 @@
       
       }
     
-      /* Full-screen button styles */
-      #fullscreen-button {
-        position: fixed;
-        bottom: 15px; 
-        right: 2%;  
-        z-index: 999 !important; 
-        cursor: pointer;
-        font-size: 30px;
-        font-weight: 900;
-        color: white;
-        background-color: transparent;
-        border: none;
-        outline: none;
-        padding: 10px; 
-        border-radius: 50%; 
-        background-color: rgba(0, 0, 0, 0.5);
-      }
+     /* Fullscreen Button Styles */
+        #fullscreen-button {
+            position: fixed;
+            bottom: 10px; /* Adjust the position as necessary */
+            right: 10px; /* Adjust the position as necessary */
+            z-index: 999; /* Keep it above other elements */
+            cursor: pointer;
+            font-size: 24px; /* Smaller size for mobile */
+            font-weight: 900;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            border: none;
+            outline: none;
+            padding: 8px; /* Adjust padding as needed */
+            border-radius: 50%; /* Circular shape */
+        }
 
-
-        @media (max-width: 768px) {
+        /* Responsive Adjustments for Fullscreen Button */
+        @media screen and (max-width: 768px) {
             #fullscreen-button {
-            bottom: 10px;
-            right: 3% !important; 
-            font-size: 25px; 
+                font-size: 20px; /* Even smaller size for very small screens */
+                padding: 6px; /* Less padding */
+                bottom: 5px; /* Closer to the edge */
+                right: 5px; /* Closer to the edge */
             }
         }
-        @media (max-width: 450px) {
-            #fullscreen-button {
-            bottom: 15px;
-            right: 1%; 
-            font-size: 12px; 
-            }
-        }
-        /* Responsive Adjustments for gameVideo */
+
+        /* Additional styles to ensure button doesn't block the game */
         @media screen and (orientation: landscape) {
-            #gameVideo {
-                width: auto; /* Adjust width based on height */
-                height: 90vh; /* Full height of the viewport */
+            #fullscreen-button {
+                top: 5px; /* Move to the top in landscape mode */
+                right: 5px; /* Adjust position as needed */
+                bottom: auto; /* Disable bottom positioning */
             }
-           
         }
     </style>
   </head>
