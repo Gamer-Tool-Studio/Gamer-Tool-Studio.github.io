@@ -264,27 +264,27 @@ section {
   font-size: 36px;
 }
 /*Demo Video */
-.demo-section{
-  position: relative;
-  width: 100%;
-  max-height: 624px;
-  aspect-ratio: 16 / 9; /* Adjust the ratio as per your game's design */
-}
-
 .demo-game {
   position: relative;
-  width: 100%; // Takes the full width of the parent
-  max-width: 1200px; // Adjust this as needed
-  margin: auto; // Centers the container
-  aspect-ratio: 16 / 9; // Adjust the ratio as per your game's design
+  width: 100%;
+  max-width: 816px; /* Adjust if needed */
+  max-height: 624px !important;
+  margin: auto;
+  overflow: hidden; /* Hide overflow to prevent scrollbars */
+}
+
+.demo-section {
+  position: relative;
+  width: 100%;
+  margin: auto;
+  max-height: 624px !important;
+  
 }
 
 #gameIframe {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
   height: 100%;
 }
@@ -484,8 +484,7 @@ section {
 /* Get started Section */
 
 .get-started {
-  margin-top: 60px;
-  padding-top: 50px;
+  margin-top: -5% !important;
   margin: auto;
   margin-bottom: 50px;
 }
@@ -630,6 +629,10 @@ footer {
   .hamilton-title {
     text-align: center;
     font-size: 30px;
+  }
+  .demo-game {
+    padding-bottom: 0; /* Remove padding-bottom if it causes issues */
+    height: auto; /* Adjust height automatically */
   }
 
   .game-desc{
@@ -808,28 +811,19 @@ footer {
     margin-right: auto !important;
   }
 }
-
-/* Media Queries for Landscape Orientation */
 @media screen and (orientation: landscape) {
   .demo-game {
-    width: 100vw; /* Full width of the viewport */
-    height: auto; /* Height is adjusted automatically */
-    max-height: 100vh; /* Max height is set to 100% of the viewport height */
-    position: relative;
-    margin: auto; /* Center the game container */
-  }
-
-  #gameIframe {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 100%; /* Set max width to 100% of the parent */
-    max-height: 100vh; /* Set max height to 100% of the viewport height */
-    width: auto; /* Width is adjusted automatically */
-    height: auto; /* Height is adjusted automatically */
+    width: auto; /* Adjust width based on height */
+    height: 90vh; /* Full height of the viewport */
+    padding-top: 0; /* Remove padding-top */
   }
 }
 
-
+@media screen and (orientation: portrait) {
+  .demo-game {
+    width: 100%; /* Full width of the viewport */
+    height: auto; /* Adjust height based on width */
+    padding-top: 76.47%; /* Maintain aspect ratio */
+  }
+}
 </style>

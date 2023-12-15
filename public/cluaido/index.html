@@ -13,16 +13,20 @@
       /* Add the following styles for the full-screen button */
       #gameVideo{
         z-index: 4 !important;
+        min-height: 100% !important;
+        min-width: 100% !important;
       }
       #gameCanvas{
         z-index:3 !important;
+        min-height: 100% !important;
+        min-width: 100% !important;
       }
     
       /* Full-screen button styles */
       #fullscreen-button {
         position: fixed;
         bottom: 15px; 
-        right: 22%;  
+        right: 2%;  
         z-index: 999 !important; 
         cursor: pointer;
         font-size: 30px;
@@ -36,42 +40,12 @@
         background-color: rgba(0, 0, 0, 0.5);
       }
 
-        /* Adjustments for smaller screens */
-        @media (min-width: 961px) and (max-width: 1280px) {
-            #gameVideo{
-            z-index: 4 !important;
-            }
-            #gameCanvas{
-            margin-left: 10% !important;
-            margin-right: 20% !important;
-            z-index:3 !important;
-            }
-        }    
-        @media (max-width: 957px) {
-            #fullscreen-button {
-            bottom: 15px;
-            right: 18% !important; 
-            font-size: 25px; 
-            }
-            
-        }
+
         @media (max-width: 768px) {
             #fullscreen-button {
             bottom: 10px;
             right: 3% !important; 
             font-size: 25px; 
-            }
-            #gameVideo{
-            width: 99% !important;
-            z-index: 4 !important;
-            margin-left: 1px !important;
-            margin-right: 1px !important; 
-            }
-            #gameCanvas{
-            width: 99% !important;
-            z-index:3 !important;
-            margin-left: 1px !important;
-            margin-right: 1px !important; 
             }
         }
         @media (max-width: 450px) {
@@ -79,6 +53,13 @@
             bottom: 15px;
             right: 1%; 
             font-size: 12px; 
+            }
+        }
+        /* Responsive Adjustments for gameVideo */
+        @media screen and (orientation: landscape) {
+            #gameVideo {
+                width: auto; /* Adjust width based on height */
+                height: 90vh; /* Full height of the viewport */
             }
         }
     </style>
