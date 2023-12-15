@@ -11,10 +11,18 @@
     <title>CLUAIDO</title>
     <style>
       /* Add the following styles for the full-screen button */
+      #gameVideo{
+        z-index: 4 !important;
+      }
+      #gameCanvas{
+        z-index:3 !important;
+      }
+    
+      /* Full-screen button styles */
       #fullscreen-button {
         position: fixed;
-        bottom: 3%;
-        right: 3%;
+        bottom: 15px; 
+        right: 22%;  
         z-index: 999 !important; 
         cursor: pointer;
         font-size: 30px;
@@ -23,52 +31,74 @@
         background-color: transparent;
         border: none;
         outline: none;
+        padding: 10px; 
+        border-radius: 50%; 
+        background-color: rgba(0, 0, 0, 0.5);
       }
-      #gameVideo{
-        margin-top:0 !important;
-        margin-bottom: 0 !important;
-        z-index: 4 !important; 
-      }
-      #gameCanvas{
-        margin:auto !important;
-        z-index:3 !important; 
-      }
-      /* Media Queries for Responsiveness */
-      @media (max-width: 768px) {
-        #fullscreen-button {
-          position: fixed;
-          bottom: 9% !important;
-          right: 1% !important;
-          z-index: 999 !important; 
+
+        /* Adjustments for smaller screens */
+        @media (min-width: 961px) and (max-width: 1280px) {
+            #gameVideo{
+            z-index: 4 !important;
+            }
+            #gameCanvas{
+            margin-left: 10% !important;
+            margin-right: 20% !important;
+            z-index:3 !important;
+            }
+        }    
+        @media (max-width: 957px) {
+            #fullscreen-button {
+            bottom: 15px;
+            right: 18% !important; 
+            font-size: 25px; 
+            }
+            
         }
-      }
+        @media (max-width: 768px) {
+            #fullscreen-button {
+            bottom: 10px;
+            right: 3% !important; 
+            font-size: 25px; 
+            }
+            #gameVideo{
+            width: 99% !important;
+            z-index: 4 !important;
+            margin-left: 1px !important;
+            margin-right: 1px !important; 
+            }
+            #gameCanvas{
+            width: 99% !important;
+            z-index:3 !important;
+            margin-left: 1px !important;
+            margin-right: 1px !important; 
+            }
+        }
+        @media (max-width: 450px) {
+            #fullscreen-button {
+            bottom: 15px;
+            right: 1%; 
+            font-size: 12px; 
+            }
+        }
     </style>
   </head>
   <body style="background-color: black">
-    <button id="fullscreen-button" ontouchstart="toggleFullscreen(event)" onclick="toggleFullscreen(event)">&#9974;</button>
+    <button id="fullscreen-button" onclick="toggleFullscreen(event)">&#9974;</button>
     <script type="text/javascript">
-      async function toggleFullscreen(event) {
-        event.preventDefault(); // Prevent the default action
-        var elem = document.documentElement;
-
+    async function toggleFullscreen() {
         try {
-          if (/Mobi|Android/i.test(navigator.userAgent)) {
-            // For mobile devices, use the Fullscreen API with user gesture
-            await elem.requestFullscreen();
-          } else {
-            // For non-mobile devices, use the standard approach
-            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-              console.log("Entering fullscreen mode");
-              await elem.requestFullscreen();
+            if (!document.fullscreenElement) {
+            await document.documentElement.requestFullscreen();
+            console.log("Entering fullscreen mode");
             } else {
-              console.log("Exiting fullscreen mode");
-              await document.exitFullscreen();
+            await document.exitFullscreen();
+            console.log("Exiting fullscreen mode");
             }
-          }
         } catch (error) {
-          console.error('Fullscreen request failed:', error);
+            console.error('Fullscreen request failed:', error);
         }
-      }
+    }
     </script>
     <script type="text/javascript" src="js/main.js" defer></script>
   </body>

@@ -103,7 +103,7 @@
               <h3>23%</h3><p>votes</p>
             </v-col>
             <p>
-              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
+              The outspoken wife of Mr.Hamilton. Does the victim's life partner conceal his darkest secrets?
             </p>
             <button class="button">Accuse</button>
           </div>
@@ -114,7 +114,7 @@
               <h3>16%</h3><p>votes</p>
             </v-col>
             <p>
-              A refined gentleman in whom Mr. Hamilton placed the highest trust. Does this long history conceal any secrets?
+              A refined gentleman in whom Mr. Hamilton placed the highest trust. Was it misplaced?
             </p>
             <button class="button">Accuse</button>
           </div>
@@ -194,18 +194,42 @@
       </v-row>
     </v-container>
   </template>
- 
-<script lang="ts" setup>
-definePageMeta({
-  layout: 'default',
-});
+<script lang="ts">
+import { defineComponent, onMounted, onBeforeUnmount } from 'vue';
 
-useHead({
-  title: 'Demo Game',
-});
+export default defineComponent({
+  name: 'YourComponentName', // replace with your component name
+  setup() {
+    const adjustGameIframeSize = () => {
+      const gameIframe = document.getElementById('gameIframe') as HTMLIFrameElement;
+      const container = document.querySelector('.demo-game') as HTMLElement;
 
+      if (container && gameIframe) {
+        // Calculate the aspect ratio
+        const aspectRatio = 16 / 9;
+        const containerWidth = container.offsetWidth;
+        const containerHeight = containerWidth / aspectRatio;
+
+        // Set iframe size
+        gameIframe.style.width = `${containerWidth}px`;
+        gameIframe.style.height = `${containerHeight}px`;
+      }
+    };
+
+    onMounted(() => {
+      adjustGameIframeSize();
+      window.addEventListener('resize', adjustGameIframeSize);
+      window.addEventListener('orientationchange', adjustGameIframeSize);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener('resize', adjustGameIframeSize);
+      window.removeEventListener('orientationchange', adjustGameIframeSize);
+    });
+  },
+});
 </script>
-
+ 
 <style lang="scss" scoped>
 h1,
 h2,
@@ -241,29 +265,30 @@ section {
 }
 /*Demo Video */
 .demo-section{
-  margin: auto;
-  max-width: 850px; 
-  max-height: 100%;
+  position: relative;
+  width: 100%;
+  max-height: 624px;
+  aspect-ratio: 16 / 9; /* Adjust the ratio as per your game's design */
 }
 
 .demo-game {
-  margin-top: 40px;
-  padding: 0;
-  text-align: center;
   position: relative;
-  padding-bottom: 76.47%; 
-  height: 0;
-  margin: auto;
+  width: 100%; // Takes the full width of the parent
+  max-width: 1200px; // Adjust this as needed
+  margin: auto; // Centers the container
+  aspect-ratio: 16 / 9; // Adjust the ratio as per your game's design
 }
-.demo-game iframe {
+
+#gameIframe {
   position: absolute;
   top: 0;
   left: 0;
-  min-width: 100%;
+  right: 0;
+  bottom: 0;
+  width: 100%;
   height: 100%;
-  border: 0;
-  z-index: 2 !important;
 }
+
 #fullscreen-button {
   z-index: 999 !important;
 }
@@ -610,11 +635,6 @@ footer {
   .game-desc{
     text-align: center;
   }
-  .demo-game {
-    margin-left: 20px;
-    margin-right: 20px;
-    
-  }
 
   .intro-section h1 {
     font-size: 400%;
@@ -765,14 +785,8 @@ footer {
     
   }
 }
-
 @media (max-width: 600px) {
-  .demo-game{
-    margin-right: 1px !important;
-    margin-left: 1px !important;
-  }
-
-  .vote-count{
+    .vote-count{
     min-width:100%;
     text-align: center;
   }
@@ -794,4 +808,28 @@ footer {
     margin-right: auto !important;
   }
 }
+
+/* Media Queries for Landscape Orientation */
+@media screen and (orientation: landscape) {
+  .demo-game {
+    width: 100vw; /* Full width of the viewport */
+    height: auto; /* Height is adjusted automatically */
+    max-height: 100vh; /* Max height is set to 100% of the viewport height */
+    position: relative;
+    margin: auto; /* Center the game container */
+  }
+
+  #gameIframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%; /* Set max width to 100% of the parent */
+    max-height: 100vh; /* Set max height to 100% of the viewport height */
+    width: auto; /* Width is adjusted automatically */
+    height: auto; /* Height is adjusted automatically */
+  }
+}
+
+
 </style>
