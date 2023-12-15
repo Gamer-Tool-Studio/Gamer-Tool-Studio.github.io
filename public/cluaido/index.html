@@ -13,13 +13,15 @@
       /* Add the following styles for the full-screen button */
       #gameVideo{
         z-index: 4 !important;
-        min-height: 100% !important;
-        min-width: 100% !important;
+        height: 100% !important;
+        max-height: 624px !important;
+        
       }
       #gameCanvas{
         z-index:3 !important;
-        min-height: 100% !important;
-        min-width: 100% !important;
+        height: 100% !important;
+        max-height: 624px !important;
+      
       }
     
       /* Full-screen button styles */
@@ -60,6 +62,11 @@
             #gameVideo {
                 width: auto; /* Adjust width based on height */
                 height: 90vh; /* Full height of the viewport */
+            }
+            #fullscreen-button {
+                bottom: 15px;
+                right: 20%; 
+                font-size: 25px; 
             }
         }
     </style>
