@@ -1,81 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <link rel="icon" href="icon/icon.png" type="image/png">
-    <link rel="apple-touch-icon" href="icon/icon.png">
-    <link rel="stylesheet" type="text/css" href="css/game.css">
-    <title>CLUAIDO</title>
-    <style>
-      /* Add the following styles for the full-screen button */
-      #gameVideo{
-        
-        height: 100% !important;
-        max-height: 624px !important;
-      }
-      #gameCanvas{
-        
-        height: 100% !important;
-        max-height: 624px !important;
-      }
-    
-     /* Fullscreen Button Styles */
-        #fullscreen-button {
-            position: fixed;
-            bottom: 10px; /* Adjust the position as necessary */
-            right: 10px; /* Adjust the position as necessary */
-            z-index: 999; /* Keep it above other elements */
-            cursor: pointer;
-            font-size: 24px; /* Smaller size for mobile */
-            font-weight: 900;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            border: none;
-            outline: none;
-            padding: 8px; /* Adjust padding as needed */
-            border-radius: 50%; /* Circular shape */
-        }
-
-        /* Responsive Adjustments for Fullscreen Button */
-        @media screen and (max-width: 768px) {
-            #fullscreen-button {
-                font-size: 20px; /* Even smaller size for very small screens */
-                padding: 6px; /* Less padding */
-                bottom: 5px; /* Closer to the edge */
-                right: 5px; /* Closer to the edge */
-            }
-        }
-
-        /* Additional styles to ensure button doesn't block the game */
-        @media screen and (orientation: landscape) {
-            #fullscreen-button {
-                top: 5px; /* Move to the top in landscape mode */
-                right: 5px;
-                bottom: auto; /* Disable bottom positioning */
-                }
-         }
-    </style>
-  </head>
-  <body style="background-color: black">
-    <button id="fullscreen-button" onclick="toggleFullscreen(event)">&#9974;</button>
-    <script type="text/javascript">
-    async function toggleFullscreen() {
-        try {
-            if (!document.fullscreenElement) {
-            await document.documentElement.requestFullscreen();
-            console.log("Entering fullscreen mode");
-            } else {
-            await document.exitFullscreen();
-            console.log("Exiting fullscreen mode");
-            }
-        } catch (error) {
-            console.error('Fullscreen request failed:', error);
-        }
-    }
-    </script>
-    <script type="text/javascript" src="js/main.js" defer></script>
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="viewport" content="user-scalable=no">
+        <link rel="icon" href="icon/icon.png" type="image/png">
+        <link rel="apple-touch-icon" href="icon/icon.png">
+        <link rel="stylesheet" type="text/css" href="css/game.css">
+        <title>CLUAIDO</title>
+    </head>
+    <body style="background-color: black">
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
 </html>

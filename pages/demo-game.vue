@@ -630,10 +630,7 @@ footer {
     text-align: center;
     font-size: 30px;
   }
-  .demo-game {
-    padding-bottom: 0; /* Remove padding-bottom if it causes issues */
-    height: auto; /* Adjust height automatically */
-  }
+
 
   .game-desc{
     text-align: center;
