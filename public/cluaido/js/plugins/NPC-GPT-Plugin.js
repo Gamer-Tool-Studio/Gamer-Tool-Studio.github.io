@@ -69,7 +69,7 @@
  * You need to have an account with Gamer Tools Studio and an active API KEY
  * to be able to connect and send requests to NPC-GPT API. You can
  * create an account and activate a FREE TRIAL to get your key at
- * https://gamertoolstudio.com. 
+ * https://gamertoolstudio.com 
  * 
  * =============================================================================
  * 1. Plugin Parameters

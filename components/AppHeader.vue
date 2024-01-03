@@ -13,9 +13,9 @@
             Products
             <v-menu activator="parent" v-model:model-value="open">
               <v-list class="dropDownMenu">
-                <a class="dropLink" href="/#sectionToLinkToApi"><v-list-item class="dropDownItem"> API</v-list-item></a>
+                <a class="dropLink" href="/#sectionToLinkToApi"><v-list-item class="dropDownItem"> SDK</v-list-item></a>
                 <a class="dropLink" href="/#sectionToLinkToPlugin"
-                  ><v-list-item class="dropDownItem"> Plugin</v-list-item></a
+                  ><v-list-item class="dropDownItem"> Plugins</v-list-item></a
                 >
                 <a class="dropLink" href="https://web3bazaar.org"
                   ><v-list-item class="dropDownItem"> Web3 Marketplace</v-list-item></a
@@ -123,8 +123,8 @@ nav {
 
     img.nav-logo {
       display: block;
-      max-height: 30px;
-      max-width: 30px;
+      max-height: 40px;
+      max-width: 40px;
       // margin-bottom: 15px;
     }
   }

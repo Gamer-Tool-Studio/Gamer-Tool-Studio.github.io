@@ -7,8 +7,7 @@
       <v-col cols="12" class="intro-cta">
           <button class="button">Start Trial Now</button>
           <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"
-            ><p>View our documentation</p></a
-          >
+            ><p>View our documentation</p></a>
       </v-col>
       <v-col cols="12" class="demo-video">
         <div style="position: relative; padding-bottom: 56.25%; /* 16:9 aspect ratio */">
@@ -33,14 +32,14 @@
       </v-col>
       <div class="feature-boxes">
         <div class="feature-box">
-          <h3>Open world building</h3>
+          <h3>Unscripted Worlds</h3>
           <p>
             Leverage the capabilities of AI and enable players to input their own text to interact with characters and
             open the possibilities within to your game to the maximum.
           </p>
         </div>
         <div class="feature-box">
-          <h3>Unscripted NPCs</h3>
+          <h3>Autonomous NPCs</h3>
           <p>
             Build immersive character backstories and customize the way they respond to players. Make chat GPT a friend
             or a foe in your game quests.
@@ -65,7 +64,7 @@
       <v-col cols="12">
         <h2 class="page-headers">
           Create seamless AI characters to interact with players and users from any Frontend environment with NPC-GPT
-          library
+          SDK
         </h2>
         <div class="code-style">
           <pre class="code-display">
@@ -75,7 +74,7 @@ const { Configuration, NpcGptApi } = require("NpcGPt");
 
 const configuration = new Configuration({
   apiKey: process.env.NPCGPT_API_KEY,
-            });
+});
             
 const NpcGpt = new NpcGptApi(configuration);
 
@@ -86,11 +85,11 @@ const chat = await NpcGpt.createChat({
     "name": "GPTWizard",
     "age": 35,
     "personality": {
-    "traits": [
-      "shy",
-      "mystic",
-      "adventurous"
-    ],
+      "traits": [
+        "shy",
+        "mystic",
+        "adventurous"
+      ],
     "dialogueStyle": "mysterious"
     },
 
@@ -137,7 +136,7 @@ console.log(completion.data.choices[0].message);
       </v-col>
       <v-col cols="6" class="plugin-explain">
         <ol class="how-to-start">
-          <li>Sign up for a trial account or select a suitable paid plan.</li>
+          <li>Create an Account and get an API key.</li>
           <li>
             Install the NPC-GPT plugin in your preferred game engine.
             <a href="/download-plugin">Download Plugin file</a>.
@@ -146,7 +145,7 @@ console.log(completion.data.choices[0].message);
             Define personality traits, provide context about game events and establish guidelines for your NPC speech
             with seamless plugin commands.
           </li>
-          <li>Harness the power of Chat GPT AI to generate dynamic and immersive conversations.</li>
+          <li>Harness the power of Chat GPT to generate dynamic and immersive conversations.</li>
           <li>Integrate the generated responses into your game seamlessly.</li>
         </ol>
       </v-col>

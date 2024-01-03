@@ -60,9 +60,9 @@
               <li>
                 All characters will tell you the truth except for the culprit.
               </li>
-              <li>You can make 20 questions before the culprit runs away.</li>
-              <li>Clues are concieled within the characters and all over the house. </li>
-              <li>You have only one shot to indentify the culprit.</li>
+              <li>You can make 21 questions before the culprit runs away.</li>
+              <li>Clues are concealed within the characters and all over the house. </li>
+              <li>You have only one shot to identify the culprit.</li>
             </ul>
           </v-col>
         </v-col>
@@ -105,8 +105,9 @@
             <p>
               The outspoken wife of Mr.Hamilton. Does the victim's life partner conceal his darkest secrets?
             </p>
-            <button class="button">Accuse</button>
+            <button class="button" @click="connectAndMint(1)">Accuse</button>
           </div>
+          <modal-connect-wallet v-if="showModal" @close="showModal = false" />
           <div class="feature-box">
             <h2>The Butler</h2>
             <img src="/images/butler.png">
@@ -116,7 +117,7 @@
             <p>
               A refined gentleman in whom Mr. Hamilton placed the highest trust. Was it misplaced?
             </p>
-            <button class="button">Accuse</button>
+            <button class="button" @click="connectAndOpenModal">Accuse</button>
           </div>
           <div class="feature-box">
             <h2>The Maid</h2>
@@ -125,9 +126,9 @@
               <h3>11%</h3><p>votes</p>
             </v-col>
             <p>
-              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
+              A shy and caring servant who might know more about her masters' life than they know.
             </p>
-            <button class="button">Accuse</button>
+            <button class="button" @click="connectAndMint(3)">Accuse</button>
           </div>
           <div class="feature-box">
             <h2>The Gardener</h2>
@@ -136,9 +137,9 @@
               <h3>7%</h3><p>votes</p>
             </v-col>
             <p>
-              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
+              A simple working man that seems to only care about plants and flowers. Or does he?
             </p>
-            <button class="button">Accuse</button>
+            <button class="button" @click="connectAndMint(4)">Accuse</button>
           </div>
           <div class="feature-box">
             <h2>The Cook</h2>
@@ -147,9 +148,9 @@
               <h3>2%</h3><p>votes</p>
             </v-col>
             <p>
-              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
+              An extravagant cooking master who's been in the family since she was a child? Is there a catch?
             </p>
-            <button class="button">Accuse</button>
+            <button class="button" @click="connectAndMint(5)">Accuse</button>
           </div>
           <div class="feature-box">
             <h2>The Journalist</h2>
@@ -158,9 +159,9 @@
               <h3>8%</h3><p>votes</p>
             </v-col>
             <p>
-              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
+              A rising reporting star investigating Mr.Hamilton's latest scandal. Is he involved?
             </p>
-            <button class="button">Accuse</button>
+            <button class="button" @click="connectAndMint(6)">Accuse</button>
           </div>
           <div class="feature-box">
             <h2>The Businessman</h2>
@@ -169,9 +170,9 @@
               <h3>18%</h3><p>votes</p>
             </v-col>
             <p>
-              The outspoken wife of Mr.Hamilton. Did the victim's life partner hold more than love inside her?
+              A rude influential businessman with life-long dealings with Mr.Hamilton. Have things gone wrong?
             </p>
-            <button class="button">Accuse</button>
+            <button class="button" @click="connectAndMint(7)">Accuse</button>
           </div>
         </div>
       </v-row>
@@ -180,56 +181,41 @@
           <h2 class="bet-ttle">Want to know more about the game?</h2>
         </v-col>
         <v-col cols="4" class="join-section">
-         <img src="~/assets/images/document-icon.png">
-          <h3> Betting Game Rules</h3>
+          <a href="LINK_TO_BETTING_GAME_RULES">
+            <img src="~/assets/images/document-icon.png" alt="Betting Game Rules">
+            <h3> Betting Game Rules</h3>
+          </a>
         </v-col>
         <v-col cols="4" class="join-section">
-          <img src="/images/discord-logo.png">
-          <h3> Join the Community</h3>
+          <a href="https://discord.gg/JdDwRfTGNF">
+            <img src="/images/discord-logo.png" alt="Join the Community">
+            <h3> Join the Community</h3>
+          </a>
         </v-col>
         <v-col cols="4" class="join-section">
-          <img src="/images/twitter-white-logo.png">
-          <h3> Follow us on Twitter</h3>
+          <a href="https://twitter.com/gamertoolstudio">
+            <img src="/images/twitter-white-logo.png" alt="Follow us on Twitter">
+            <h3> Follow us on Twitter</h3>
+          </a>
         </v-col>
       </v-row>
     </v-container>
-  </template>
-<script lang="ts">
-import { defineComponent, onMounted, onBeforeUnmount } from 'vue';
-
-export default defineComponent({
-  name: 'YourComponentName', // replace with your component name
-  setup() {
-    const adjustGameIframeSize = () => {
-      const gameIframe = document.getElementById('gameIframe') as HTMLIFrameElement;
-      const container = document.querySelector('.demo-game') as HTMLElement;
-
-      if (container && gameIframe) {
-        // Calculate the aspect ratio
-        const aspectRatio = 16 / 9;
-        const containerWidth = container.offsetWidth;
-        const containerHeight = containerWidth / aspectRatio;
-
-        // Set iframe size
-        gameIframe.style.width = `${containerWidth}px`;
-        gameIframe.style.height = `${containerHeight}px`;
-      }
-    };
-
-    onMounted(() => {
-      adjustGameIframeSize();
-      window.addEventListener('resize', adjustGameIframeSize);
-      window.addEventListener('orientationchange', adjustGameIframeSize);
-    });
-
-    onBeforeUnmount(() => {
-      window.removeEventListener('resize', adjustGameIframeSize);
-      window.removeEventListener('orientationchange', adjustGameIframeSize);
-    });
-  },
+</template>
+<script setup>
+useHead({
+  title: "Demo Game ",
 });
+import { ref } from 'vue';
+
+const showModal = ref(false);
+
+const connectAndOpenModal = () => {
+  showModal.value = true;
+};
+
 </script>
- 
+
+
 <style lang="scss" scoped>
 h1,
 h2,
@@ -570,6 +556,13 @@ section {
   }
 }
 
+.join-section a {
+  text-decoration: none;
+}
+
+.join-section a:hover {
+  cursor: pointer;
+}
 /* Footer Styles */
 footer {
   background-color: black;

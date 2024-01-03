@@ -20,8 +20,8 @@
       <div class="footer-row">
         <h4>Community</h4>
         <ul>
-          <li><a href="https://discord.com/yourserver">Discord</a></li>
-          <li><a href="https://twitter.com/yourusername">Twitter</a></li>
+          <li><a href="https://discord.gg/JdDwRfTGNF">Discord</a></li>
+          <li><a href="https://twitter.com/gamertoolstudio">Twitter</a></li>
           <li><a href="https://www.youtube.com/@gamertoolstudio">Youtube</a></li>
         </ul>
       </div>

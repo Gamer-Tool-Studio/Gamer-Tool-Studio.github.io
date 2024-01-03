@@ -100,7 +100,7 @@
 const cancelPlan = ref(false);
 
 useHead({
-  title: "Overview ",
+  title: "Overview",
 });
 
 </script>
