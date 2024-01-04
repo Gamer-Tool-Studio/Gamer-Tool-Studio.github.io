@@ -53,7 +53,7 @@
 import Web3 from 'web3';
 
 export default {
-  name: "Connect Wallet",
+  name: 'Connect Wallet',
   data() {
     return {
       isLoading: false,
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     close() {
-      this.$emit("close");
+      this.$emit('close');
     },
     async connectWallet() {
       this.isLoading = true; // Start loading as soon as the function is called
@@ -76,7 +76,6 @@ export default {
         try {
           const web3 = new Web3(window.ethereum);
           await window.ethereum.enable();
-
 
           // Check the network
           const networkId = await web3.eth.net.getId();
@@ -91,6 +90,22 @@ export default {
               });
             } catch (switchError) {
               // Handle error, such as user rejecting the request
+              await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: '0x13881',
+                    rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
+                    chainName: 'Polygon Testnet Mumbai',
+                    nativeCurrency: {
+                      name: 'MATIC',
+                      symbol: 'MATIC', // 2-6 characters long
+                      decimals: 18,
+                    },
+                    blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
+                  },
+                ], // Hexadecimal chain ID
+              });
               console.error('Error switching to Mumbai Testnet:', switchError);
               throw switchError;
             }
@@ -119,59 +134,56 @@ export default {
   },
 };
 </script>
-  
 
 <style lang="scss">
-  
-  .nft-modal{
-    position: absolute;
-    top:auto;
-    left:auto;
-    background-color: #2A2C3F;
-    text-align: center;
-    border: 1px solid #6E6E80;
-    border-radius: 7px;
-    min-width: 50%;
-  }
+.nft-modal {
+  position: absolute;
+  top: auto;
+  left: auto;
+  background-color: #2a2c3f;
+  text-align: center;
+  border: 1px solid #6e6e80;
+  border-radius: 7px;
+  min-width: 50%;
+}
 
-  .modal-content-section{
-    display: block;
-    text-align: center;
-  }
+.modal-content-section {
+  display: block;
+  text-align: center;
+}
 
-  .modal-header {
-    display: inline-flex !important;
-  }
-  .modal-header button {
-    float: right !important;
-  }
-  .modal-header h1 {
-    color: #FFF !important;
-  }
-  .text-section p {
-    font-size: 22px !important;
-  }
+.modal-header {
+  display: inline-flex !important;
+}
+.modal-header button {
+  float: right !important;
+}
+.modal-header h1 {
+  color: #fff !important;
+}
+.text-section p {
+  font-size: 22px !important;
+}
 
-  .connect-button {
-    margin-bottom: 20px;
-    margin-top: 10px;
-  }
+.connect-button {
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
 
-  .connect-button button {
-    font-size: 20px;
-  }
-  .redirect {
-    font-size: 14px;
-  }
+.connect-button button {
+  font-size: 20px;
+}
+.redirect {
+  font-size: 14px;
+}
 
-  .redirect a{
-    text-decoration: none;
-    
-  }
-  .loader {
+.redirect a {
+  text-decoration: none;
+}
+.loader {
   margin: auto;
   border: 10px solid #f3f3f3;
-  border-top: 10px solid #6202EE;
+  border-top: 10px solid #6202ee;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -179,8 +191,12 @@ export default {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .nft-display {
@@ -194,18 +210,17 @@ export default {
   display: block;
 }
 .amount-section {
-  width:320px;
+  width: 320px;
   text-align: center;
   margin: auto;
 }
 .mint-amount-input {
   width: 100%;
   padding: 10px;
-  margin:0;
+  margin: 0;
   text-align: center;
   font-size: 24px;
   padding-top: 0;
   padding-bottom: 0;
 }
 </style>
-  
