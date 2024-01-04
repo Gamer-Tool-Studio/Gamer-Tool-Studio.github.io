@@ -4,11 +4,16 @@
       <div class="modal" role="dialog" @click.stop>
         <v-col cols="12">
           <header class="modal-header">
-            <h1>{{ isConnected ? 'Make your accusation' : 'Connect your web3 wallet' }}</h1>
-            <button type="button" class="btn-close" aria-label="Close modal" @click="close">
-              <img src="~/assets/icons/close.svg" />
-            </button>
+            <h1 v-if="!isConnected">Connect your web3 wallet</h1>
+            <h1 v-else-if="isApproving">Approve USDT spending in your wallet</h1>
+            <h1 v-else-if="isMinting">Approve the Minting Transaction in your wallet</h1>
+            <h1 v-else-if="mintInProgress">Minting your Accusation</h1>
+            <h1 v-else-if="mintSuccessful">Success!</h1>
+            <h1 v-else>Make your accusation</h1>
           </header>
+          <button type="button" class="btn-close" aria-label="Close modal" @click="close">
+            <img src="~/assets/icons/close_white.png" />
+          </button>
         </v-col>
         <section class="modal-body">
           <v-container>
@@ -17,7 +22,7 @@
               <div v-if="!isConnected">
                 <!-- Wallet Connection Content -->
                 <v-col cols="12" class="text-section">
-                  <p>Approve the connection in your wallet extension!</p>
+                  <p class="tx-status">Approve the connection in your wallet extension!</p>
                 </v-col>
                 <div v-if="isLoading" class="loader"></div>
                 <v-col cols="12" class="connect-button">
@@ -27,10 +32,31 @@
                   <p>Don't have web3 wallet? Get <a href="https://metamask.io/">Metamask wallet</a> now.</p>
                 </v-col>
               </div>
+              <!-- Approve state content -->
+              <div v-else-if="isApproving">
+                <div class="loader"></div>
+              </div>
+              <!-- Minting state content -->
+              <div v-else-if="isMinting">
+                <div class="loader"></div>
+              </div>
+              <!-- Minting in progress state content -->
+              <div v-else-if="mintInProgress">
+                <div class="loader"></div>
+                <p class="tx_status">Transaction pending. Check its status in your wallet</p>
+              </div>
+              <!-- Success State content -->
+              <div v-else-if="mintSuccessful">
+                <v-col cols="12" class="nft-display">
+                  <img :src="`/images/tcg/${suspectId}.png`" alt="Suspect Image">
+                </v-col>
+                <p class="tx_status">You have successfully minted your NFT.</p>
+                <a href="https://testnets.opensea.io/collection/unidentified-contract-e4ba0bc2-ca14-4e90-b433-df91"><button class="opensea">Check on OpenSea</button></a>
+              </div>
               <div v-else>
                 <!-- Minting Content -->
                 <v-col cols="12" class="nft-display">
-                  <img src="~/assets/images/tcg/2-butler-card.png" alt="NFT Image" class="nft-image" />
+                  <img :src="`/images/tcg/${suspectId}.png`" alt="Suspect Image">
                 </v-col>
                 <v-col cols="12" class="amount-section">
                   <input type="number" v-model.number="mintAmount" min="1" class="mint-amount-input" />
@@ -56,16 +82,646 @@
 import Web3 from 'web3';
 
 export default {
+  props: {
+    suspectId: Number
+  },
   name: 'Connect Wallet',
   data() {
     return {
       isLoading: false,
       account: null,
-      mintAmount: 1, // Default mint amount
-      // ... other data properties ...
+      mintAmount: 1, 
+      isConnected: false,
+      isApproving: false,
+      isMinting: false,
+      web3: null, // Initialize Web3
+      mintInProgress: false, 
+      mintSuccessful: false,
+      contract: null, // Initialize contract for NFT
+      usdtContract: null, // Initialize contract for USDT
+      mintPriceInUSDT: 5, // Set mint price (adjust as needed)
+      contractAddress: '0x316a753a5bDA0251FdAB083Afa6cf20DC8c0aFE7', // Set your contract address
+      usdtContractAddress: '0x89A84dc58ABA7909818C471B2EbFBc94e6C96c41', // Set USDT contract address
+      contractABI: [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "balance",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "needed",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "ERC1155InsufficientBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "approver",
+          "type": "address"
+        }
+      ],
+      "name": "ERC1155InvalidApprover",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "idsLength",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "valuesLength",
+          "type": "uint256"
+        }
+      ],
+      "name": "ERC1155InvalidArrayLength",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        }
+      ],
+      "name": "ERC1155InvalidOperator",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "receiver",
+          "type": "address"
+        }
+      ],
+      "name": "ERC1155InvalidReceiver",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "ERC1155InvalidSender",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "ERC1155MissingApprovalForAll",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "approved",
+          "type": "bool"
+        }
+      ],
+      "name": "ApprovalForAll",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "ids",
+          "type": "uint256[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "values",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "TransferBatch",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "TransferSingle",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "value",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "URI",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "MINT_PRICE",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "SUSPECT_1_ID",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "SUSPECT_2_ID",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "SUSPECT_3_ID",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "SUSPECT_4_ID",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "SUSPECT_5_ID",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "SUSPECT_6_ID",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "SUSPECT_7_ID",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "accounts",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "ids",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "balanceOfBatch",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        }
+      ],
+      "name": "isApprovedForAll",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "ids",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "values",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "safeBatchTransferFrom",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "safeTransferFrom",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "approved",
+          "type": "bool"
+        }
+      ],
+      "name": "setApprovalForAll",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "uri",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "usdtToken",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "mint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdrawFunds",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ], 
+      usdtContractABI: [
+      // Minimal ERC20 ABI for approve function
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "_owner",
+            "type": "address"
+          },
+          {
+            "name": "_spender",
+            "type": "address"
+          }
+        ],
+        "name": "allowance",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "type": "function"
+      }
+    ],
+
     };
   },
-
+  watch: {
+    mintAmount(newVal) {
+      if (newVal < 1 || !Number.isInteger(newVal)) {
+        this.mintAmount = 1;
+      }
+    },
+  },
   mounted() {
     this.connectWallet(); // Initiate the wallet connection when the modal is mounted
   },
@@ -78,7 +734,7 @@ export default {
       if (window.ethereum) {
         try {
           const web3 = new Web3(window.ethereum);
-          await window.ethereum.enable();
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
 
           // Check the network
           const networkId = await web3.eth.net.getId();
@@ -116,11 +772,17 @@ export default {
 
           const accounts = await web3.eth.getAccounts();
           this.account = accounts[0];
+          console.log('Wallet connected:', this.account); // Log the connected account
           this.isConnected = true; // Update connection status
-          // ... Additional logic after successful connection ...
+          
+          // Initialize contracts after getting accounts
+          this.web3 = new Web3(window.ethereum);
+          this.contract = new this.web3.eth.Contract(this.contractABI, this.contractAddress);
+          this.usdtContract = new this.web3.eth.Contract(this.usdtContractABI, this.usdtContractAddress);
+      
         } catch (error) {
           console.error('Error connecting to MetaMask:', error);
-          // ... Error handling ...
+          console.error('Wallet connection failed:', error); // Log the error
         } finally {
           this.isLoading = false; // Stop loading after the process is complete
         }
@@ -129,49 +791,136 @@ export default {
         this.isLoading = false; // Stop loading if MetaMask is not installed
       }
     },
-    mintNFT() {
-      // TODO: Add logic to mint NFT
-      console.log(`Minting ${this.mintAmount} NFT(s)`);
+
+    async checkAllowance() {
+      const allowance = await this.usdtContract.methods.allowance(this.account, this.contractAddress).call();
+      const requiredAllowance = this.mintPriceInUSDT * Math.pow(10, 18); // Adjust for USDT decimals
+      return parseFloat(allowance) >= requiredAllowance;
     },
-    // ... other methods ...
+
+
+    async mintNFT() {
+      if (!this.web3 || !this.contract || !this.usdtContract) {
+        await this.connectWallet();
+      }
+      if (this.contract && this.usdtContract && this.suspectId != null) {
+        this.isLoading = true;
+        
+        try {
+          // Check if enough allowance is already set
+          const hasEnoughAllowance = await this.checkAllowance();
+
+          if (!hasEnoughAllowance) {
+            this.isApproving = true;
+            const spendingCap = 10000000; // Set spending cap
+            const mintPrice = spendingCap * Math.pow(10, 18); // Adjust for USDT decimals
+            await this.usdtContract.methods.approve(this.contractAddress, mintPrice).send({ from: this.account });
+            this.isApproving = false;
+          }
+
+          this.isMinting = true;
+          // Mint NFT using suspectId from props
+          await this.contract.methods.mint(this.suspectId).send({ from: this.account })
+            .on('transactionHash', (hash) => {
+              console.log('Transaction Hash:', hash);
+              this.isMinting = false; // Set isMinting to false to move to the next stage
+              this.mintInProgress = true; // Set mintInProgress to true here
+            })
+            .on('confirmation', (confirmationNumber, receipt) => {
+              console.log('Mint successful:', confirmationNumber, receipt);
+              this.mintInProgress = false; // Set mintInProgress to false upon successful confirmation
+              this.mintSuccessful = true; // Set mintSuccessful to true
+            })
+            .on('error', console.error);
+        } catch (error) {
+          console.error("Error during the minting process:", error);
+          this.isMinting = false;
+          this.mintInProgress = false; // Reset this on error
+        } finally {
+          this.isLoading = false;
+        }
+      }
+      else {
+        console.error("suspectId is null or contracts are not set");
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss">
+.modal {
+  position: relative;
+}
+
 .nft-modal {
-  position: absolute;
-  top: auto;
-  left: auto;
-  background-color: #2a2c3f;
+  position: fixed; /* Use fixed positioning */
+  top: 54%; /* Position the top edge of the modal in the middle of the screen vertically */
+  left: 50%; /* Position the left edge of the modal in the middle of the screen horizontally */
+  transform: translate(-50%, -50%); /* Move the modal back by half its width and height to center it */
+  background-color: rgba(42, 44, 63, 0.95); /* Adjust the background color and opacity as needed */
   text-align: center;
-  border: 1px solid #6e6e80;
-  border-radius: 7px;
+  border: 1px solid #E5E6E8;
+  border-radius: 17px;
   min-width: 50%;
+  max-width: 90%; /* Optionally set a max-width to ensure it doesn't get too wide on larger screens */
+  max-height: 90%; /* Optionally set a max-height to ensure it doesn't get too tall */
+  overflow-y: auto; /* Allows scrolling inside the modal if content is too long */
+  z-index: 9001; /* Ensure it's above other elements */
+  display: flex; /* Enable flex layout */
+  flex-direction: column; /* Stack children vertically */
+  
 }
 
 .modal-content-section {
-  display: block;
-  text-align: center;
+  margin: auto;
+  flex-grow: 1; /* Allow this section to grow and fill available space */
+  display: flex; /* Enable flex layout */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  min-height: 60vh !important;
 }
 
 .modal-header {
   display: inline-flex !important;
+  flex-shrink: 0; /* Prevent the header from shrinking */
+  padding-right: 20px;
 }
-.modal-header button {
-  float: right !important;
-}
+
 .modal-header h1 {
   color: #fff !important;
 }
+
+.btn-close {
+  position: absolute; /* Position the button absolutely within the modal */
+  top: 29px; /* Distance from the top edge of the modal */
+  right: 15px; /* Distance from the right edge of the modal */
+  border: none; /* Optional: Removes the border from the button */
+  background: none; /* Optional: Removes the background from the button */
+  cursor: pointer; /* Changes the cursor to a pointer on hover */
+  /* Add additional styles as needed */
+}
+
+.btn-close img{
+  max-width:20px;
+}
+.modal-body {
+  flex-grow: 1; /* Allow the body to grow and fill available space */
+  display: flex; /* Enable flex layout for the body */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center content horizontally */
+  justify-content: center !important; /* Center content vertically */
+}
+
 .text-section p {
   font-size: 22px !important;
 }
 
-  .connect-button {
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
+.connect-button {
+  margin-top: 40px;
+  padding-top: 5px;
+}
 
 .connect-button button {
   font-size: 20px;
@@ -206,11 +955,11 @@ export default {
   text-align: center;
 }
 
-.nft-image {
-  max-width: 100%;
+
+.nft-display img {
+  margin-bottom:0 !important;
   max-width: 200px;
-  margin: auto;
-  display: block;
+  min-height: 100%;
 }
 .amount-section {
   width: 320px;
@@ -218,17 +967,59 @@ export default {
   margin: auto;
   padding-bottom: 0;
 }
+
 .mint-amount-input {
-  width: 100%;
-  padding: 10px;
-  margin: 0;
-  text-align: center;
-  font-size: 24px;
-  padding-top: 0;
-  padding-bottom: 0;
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+    font-size: 24px;
+    -moz-appearance: textfield; /* Removes default spinner for Firefox */
+    border: 1px solid #E5E6E8;
+    border-radius: 7px;
+  }
+
+  .mint-amount-input::-webkit-inner-spin-button,
+  .mint-amount-input::-webkit-outer-spin-button {
+    opacity: 1;
+  }
+
+  .mint-amount-input :active {
+    border: 1px solid #6202EE !important;
+  }
+
+.tx_status {
+  font-size:22px;
+  margin-top: 40px;
 }
 
-.mint-amount-input :active {
-  border: 1px solid #6202EE;
+.opensea {
+  background-color: #2081e2; /* OpenSea's primary blue color */
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding around the text and logo */
+  border-radius: 5px; /* Rounded corners */
+  font-weight: bold; /* Bold font */
+  display: inline-flex; /* To align the logo and text inline */
+  align-items: center; /* Center items vertically */
+  text-decoration: none; /* Remove underline from text */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  font-size: 16px; /* Font size */
+  margin-top: 50px;
+
+  &:before {
+    content: ''; /* Before pseudo-element for the logo */
+    background-image: url('/images/opensea_logo.png');
+    background-size: cover; /* Cover the entire content area */
+    display: inline-block; /* Make it an inline block */
+    width: 24px; /* Width of the logo */
+    height: 24px; /* Height of the logo */
+    margin-right: 10px; /* Space between logo and text */
+  }
+
+  &:hover {
+    background-color: darken(#2081e2, 10%); /* Slightly darken the button on hover */
+    cursor: pointer;
+  }
 }
 </style>
