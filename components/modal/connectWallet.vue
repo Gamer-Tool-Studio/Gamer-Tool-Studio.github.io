@@ -41,6 +41,9 @@
                 <v-col cols="12" class="connect-button">
                   <button class="button" @click="mintNFT">Mint Accusation</button>
                 </v-col>
+                <v-col cols="12" class="redirect">
+                  <p>Don't have any USDT? Buy it on <a href="https://www.binance.com/">Binance</a> or in another exchange.</p>
+                </v-col>
               </div>
             </v-row>
           </v-container>
@@ -165,10 +168,10 @@ export default {
   font-size: 22px !important;
 }
 
-.connect-button {
-  margin-bottom: 20px;
-  margin-top: 10px;
-}
+  .connect-button {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
 
 .connect-button button {
   font-size: 20px;
@@ -213,6 +216,7 @@ export default {
   width: 320px;
   text-align: center;
   margin: auto;
+  padding-bottom: 0;
 }
 .mint-amount-input {
   width: 100%;
@@ -222,5 +226,9 @@ export default {
   font-size: 24px;
   padding-top: 0;
   padding-bottom: 0;
+}
+
+.mint-amount-input :active {
+  border: 1px solid #6202EE;
 }
 </style>
