@@ -1,7 +1,7 @@
 /*:
  * @target MZ
  * @plugindesc Allows pictures to be clickable and trigger common events.
- * @author YourName
+ * @author Gamer Tool Studio
  *
  * @command SetClickablePicture
  * @text Set Clickable Picture
@@ -53,7 +53,7 @@
 
     Sprite_Picture.prototype.isClickTriggered = function() {
 		if (this.visible && this.opacity > 0 && TouchInput.isTriggered() && this.isTouchInsideFrame()) {
-			TouchInput.clear();  // Clear the touch input if it's within the picture
+			TouchInput.clear(); 
 			return true;
 		}
 		return false;

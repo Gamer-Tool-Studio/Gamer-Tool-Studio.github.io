@@ -6,5 +6,6 @@ var $plugins =
 {"name":"ClickablePictures","status":true,"description":"Allows pictures to be clickable and trigger common events.","parameters":{}},
 {"name":"NPC-GPT-Plugin","status":true,"description":"[RPG Maker MZ] [Tier 1] [Version 1.0] [Gamer Tools Studio]","parameters":{"apiKey":"","apiKeyVariable":"18","gptResponseVariableId":"6","responseStatusVariable":"13"}},
 {"name":"SimplestMainMenu ","status":true,"description":"v0.0.1 Simplest Main Menu","parameters":{}},
-{"name":"TextPicture","status":true,"description":"Displays text as a picture.","parameters":{}}
+{"name":"TextPicture","status":true,"description":"Displays text as a picture.","parameters":{}},
+{"name":"FixTouchInput","status":true,"description":"","parameters":{}}
 ];
