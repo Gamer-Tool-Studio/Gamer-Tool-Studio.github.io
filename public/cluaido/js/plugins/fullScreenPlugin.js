@@ -1,13 +1,29 @@
-(function() {
-    'use strict';
+/*:
+ * @target MZ
+ * @plugindesc Adds a Fullscreen Toggle to the Options Window
+ * @author SumRndmDde
+ */
 
-    Graphics._stretchHeight = function() {
-        if (Utils.isMobileDevice()) {
-            // Adjust for any additional elements or margins
-            const additionalHeight = 0; // Change this value as needed
-            return window.innerHeight - additionalHeight;
-        } else {
-            return window.innerHeight;
-        }
+(() => {
+    const optionName = "CustomFullScreenPlugin";
+
+    const _Window_Options_makeCommandList = Window_Options.prototype.makeCommandList;
+    Window_Options.prototype.makeCommandList = function() {
+        _Window_Options_makeCommandList.call(this);
+        this.addCommand(optionName, 'fullscreen');
     };
+
+    Object.defineProperty(ConfigManager, 'fullscreen', {
+        get: function() {
+            return Graphics._isFullScreen();
+        },
+        set: function(value) {
+            if (value) {
+                Graphics._requestFullScreen();
+            } else {
+                Graphics._cancelFullScreen();
+            }
+        },
+        configurable: true
+    });
 })();
