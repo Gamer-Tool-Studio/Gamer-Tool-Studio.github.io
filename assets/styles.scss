@@ -156,7 +156,7 @@ section ol {
   width: 250px;
   margin: 20px;
   padding: 20px;
-  border: 1px solid #6e6e80;
+  outline: 1px solid #6e6e80;
   border-radius: 7px;
   text-align: center;
 }
@@ -185,8 +185,8 @@ section ol {
 }
 
 .light-button {
-  background-color: #fff !important;
-  color: #6200ee !important;
+  background-color: #fff;
+  color: #6200ee;
   border: 1px solid #6200ee !important;
 }
 .no-hover-button {
