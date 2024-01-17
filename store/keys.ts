@@ -28,10 +28,10 @@ export const useKeysStore = defineStore('keys', {
   },
   actions: {
     async createApiToken(name: string) {
-      const { data, pending, error } = await useAuthAPI('/auth/gen-key', 'GET', undefined, {
+      const { data, pending, error } = await useAuthAPI<{ token: string }>('/auth/gen-key', 'GET', undefined, {
         name,
       });
-      console.log(data.value);
+      console.log(data.value.token);
 
       if (error.value) {
         throw error.value;

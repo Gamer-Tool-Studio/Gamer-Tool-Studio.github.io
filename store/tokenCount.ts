@@ -10,8 +10,16 @@ const BASE_URL =
     ? `http://127.0.0.1:3002/api/${apiVersion}`
     : `https://example.com/api/${apiVersion}`;
 
+type TokenCountState = {
+  maxTokens: number;
+  monthlyInput: Array<number>;
+  monthlyOutput: Array<number>;
+  currentMonth: number;
+  currentYear: number;
+};
+
 export const useTokenCountStore = defineStore('tokenCount', {
-  state: () => {
+  state: (): TokenCountState => {
     return {
       maxTokens: 100_000,
       monthlyInput: [],
@@ -21,13 +29,7 @@ export const useTokenCountStore = defineStore('tokenCount', {
     };
   },
   actions: {
-    updateProgressInput(newValue) {
-      this.progressInput = newValue;
-    },
-    updateProgressOutput(newValue) {
-      this.progressOutput = newValue;
-    },
-    async changeMonth(month) {
+    async changeMonth(month: number) {
       this.currentMonth = month;
       if (this.currentMonth == -1) {
         this.currentMonth = 11;
@@ -39,27 +41,25 @@ export const useTokenCountStore = defineStore('tokenCount', {
       }
       try {
         const user = useUserStore();
-        const { data, pending, error } = await useAuthAPI(USAGE_PER_DAY, 'POST', {
-          month: this.currentMonth,
-          year: this.currentYear,
-          accountId: user.username,
-        });
+        const { data, pending, error } = await useAuthAPI<{ monthly: { input: Array<number>; output: Array<number> } }>(
+          USAGE_PER_DAY,
+          'POST',
+          {
+            month: this.currentMonth,
+            year: this.currentYear,
+            accountId: user.username,
+          },
+        );
+
         if (error.value) {
           throw error.value;
         }
-        this.monthlyInput = data?.value.monthly?.input || [];
+        this.monthlyInput = data?.value.monthly.input || [];
         this.monthlyOutput = data?.value.monthly?.output || [];
       } catch (error) {
         console.error(error);
       }
     },
   },
-  getters: {
-    getProgressInput(state) {
-      return state.progressInput;
-    },
-    getProgressOutput(state) {
-      return state.progressOutput;
-    },
-  },
+  getters: {},
 });

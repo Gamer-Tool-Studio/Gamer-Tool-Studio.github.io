@@ -7,12 +7,12 @@ interface MemberInfo {
   role: string;
 }
 
-interface KeysInfo {
+type KeysInfo = {
   name: string;
   key: string;
   created: Date;
   used: string;
-}
+};
 interface State {
   userList: UserInfo[];
   user: UserInfo | null;
@@ -22,12 +22,13 @@ interface State {
   members: Array<MemberInfo>;
   keys: Array<KeysInfo>;
 }
-interface UserInfo {
+
+type UserInfo = {
   full_name?: string | 'Full name';
   username: string;
   email: string;
   password?: string;
-}
+};
 
 export const useUserStore = defineStore('user', {
   state: (): State => {
@@ -58,7 +59,7 @@ export const useUserStore = defineStore('user', {
     async getUserProfile(): Promise<any> {
       console.log('Call getUserProfile ');
 
-      const { data, pending }: any = await useAuthAPI(USER_PROFILE, 'GET');
+      const { data, pending } = await useAuthAPI<UserInfo & { keys: KeysInfo[] }>(USER_PROFILE, 'GET');
       console.log(data.value, pending.value);
 
       if (data.value) {
