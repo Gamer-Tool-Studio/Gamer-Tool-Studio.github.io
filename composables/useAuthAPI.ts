@@ -1,4 +1,6 @@
-export default function (
+import type { AsyncData } from 'nuxt/app';
+
+export default function <T>(
   endpoint: string,
   method:
     | 'GET'
@@ -21,7 +23,7 @@ export default function (
     | 'trace'
     | undefined,
   body?: any,
-  query?:any
+  query?: any,
 ) {
   const config = useRuntimeConfig();
   const BASE_URL = config.public.backendURL + '/api/v1';
@@ -47,5 +49,5 @@ export default function (
         router.push('/login');
       }
     },
-  });
+  }) as AsyncData<T, string>;
 }

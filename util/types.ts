@@ -14,3 +14,7 @@ declare type PricingList = Array<
     }
   | never
 >;
+
+declare type StripeCreateLink = {
+  url: string;
+};

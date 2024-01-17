@@ -43,7 +43,7 @@
   </v-container>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { BASE_URL, PRICING_LIST } from '~/util/urls';
 
 definePageMeta({
@@ -67,13 +67,14 @@ console.log('data', data);
 const isLightBoxHovered = ref(false);
 
 const openStripe = async (priceId: string) => {
-  const { data, pending, error } = await useAuthAPI('/stripe/create', 'POST', {
+  const { data } = await useAuthAPI<StripeCreateLink>('/stripe/create', 'POST', {
     price_id: priceId,
     mode: 'payment',
   });
-  console.log(data.value);
-  //@ts-ignore next-line
-  window.open(data.value?.url as string, '_blank');
+
+  if (data.value.url) {
+    window.open(data.value.url as string, '_blank');
+  }
 };
 
 const formatPrice = (price: number) => {
