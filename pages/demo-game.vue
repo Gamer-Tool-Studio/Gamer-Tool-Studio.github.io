@@ -63,7 +63,7 @@
                   All characters will tell you the truth except for the culprit.
                 </li>
                 <li>You can make 21 questions before the culprit runs away.</li>
-                <li>Clues are concealed within the characters and all over the house. </li>
+                <li>Clues are conceiled within the characters and all over the house. </li>
                 <li>You have only one shot to identify the culprit.</li>
               </ul>
             </v-col>
@@ -105,7 +105,7 @@
                 <h3>23%</h3><p>votes</p>
               </v-col>
               <p>
-                The outspoken wife of Mr.Hamilton. Does the victim's life partner conceal his darkest secrets?
+                The outspoken wife of Mr.Hamilton. Does the victim's life partner conceil his darkest secrets?
               </p>
               <button class="button" @click="connectAndOpenModal(1)">Accuse</button>
             </div>
