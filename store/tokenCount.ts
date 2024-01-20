@@ -1,6 +1,6 @@
 // store/tokenCount.js
 
-import { USAGE_PER_DAY } from '@/util/urls';
+import { BILLING_BALANCE, USAGE_PER_DAY } from '@/util/urls';
 
 // import { BASE_URL } from 'constants';
 const apiVersion = 'v1'; // process.env.API_VERSION;
@@ -11,7 +11,8 @@ const BASE_URL =
     : `https://example.com/api/${apiVersion}`;
 
 type TokenCountState = {
-  maxTokens: number;
+  availableInputTokens: number;
+  availableOutputTokens: number;
   monthlyInput: Array<number>;
   monthlyOutput: Array<number>;
   currentMonth: number;
@@ -21,7 +22,8 @@ type TokenCountState = {
 export const useTokenCountStore = defineStore('tokenCount', {
   state: (): TokenCountState => {
     return {
-      maxTokens: 100_000,
+      availableInputTokens: 0,
+      availableOutputTokens: 0,
       monthlyInput: [],
       monthlyOutput: [],
       currentMonth: new Date().getMonth(),
@@ -29,6 +31,24 @@ export const useTokenCountStore = defineStore('tokenCount', {
     };
   },
   actions: {
+    async getBalance() {
+      try {
+        const user = useUserStore();
+        const { data, pending, error } = await useAuthAPI<{
+          availableInputTokens: number;
+          availableOutputTokens: number;
+        }>(BILLING_BALANCE, 'GET');
+
+        if (error.value) {
+          throw error.value;
+        }
+        this.availableInputTokens = data?.value.availableInputTokens || 0;
+        this.availableOutputTokens = data?.value.availableOutputTokens || 0;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
     async changeMonth(month: number) {
       this.currentMonth = month;
       if (this.currentMonth == -1) {

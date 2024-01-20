@@ -34,7 +34,7 @@
         <div class="progress-container">
           <div class="progress-bar input-tokens"></div>
           <div class="progress-values">
-            <p>{{ consumedInputTokens }} / {{ maxTokens }} input tokens</p>
+            <p>{{ consumedInputTokens }} / {{ formatTokens(availableInputTokens) }} input tokens</p>
           </div>
         </div>
       </v-col>
@@ -42,7 +42,7 @@
         <div class="progress-container">
           <div class="progress-bar output-tokens"></div>
           <div class="progress-values">
-            <p>{{ consumedOutputTokens }} / {{ maxTokens }} output tokens</p>
+            <p>{{ consumedOutputTokens }} / {{ formatTokens(availableOutputTokens) }} output tokens</p>
           </div>
         </div>
       </v-col>
@@ -72,17 +72,21 @@ import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pini
 // Chart
 import { Bar } from 'vue-chartjs';
 
+import { formatTokens } from '~/util';
+
 const tokenStore = useTokenCountStore();
 
-const { monthlyInput, monthlyOutput, currentMonth, maxTokens } = storeToRefs(tokenStore); // make authenticated state reactive with storeToRefs
+const { monthlyInput, monthlyOutput, currentMonth, availableInputTokens, availableOutputTokens } =
+  storeToRefs(tokenStore); // make authenticated state reactive with storeToRefs
 // Calculate the percentages based on the initial values
 
 const consumedInputTokens = computed(() => monthlyInput.value.reduce((a, b) => a + b, 0));
 const consumedOutputTokens = computed(() => monthlyOutput.value.reduce((a, b) => a + b, 0));
-const progressInputPercentage = computed(() => `${(consumedInputTokens.value / maxTokens.value) * 100}%`);
-const progressOutputPercentage = computed(() => `${(consumedOutputTokens.value / maxTokens.value) * 100}%`);
+const progressInputPercentage = computed(() => `${(consumedInputTokens.value / availableInputTokens.value) * 100}%`);
+const progressOutputPercentage = computed(() => `${(consumedOutputTokens.value / availableOutputTokens.value) * 100}%`);
 
 const changeMonth = tokenStore.changeMonth;
+const getBalance = tokenStore.getBalance;
 
 const hasPreviousMonth = true;
 const hasNextMonth = true;
@@ -92,6 +96,7 @@ const currentMonthName = computed(() => getMonthName(currentMonth.value));
 const labels = computed(() => getMonthDays(currentMonth.value));
 
 changeMonth(currentMonth);
+getBalance();
 
 const chartData = computed(() => ({
   labels: labels.value,

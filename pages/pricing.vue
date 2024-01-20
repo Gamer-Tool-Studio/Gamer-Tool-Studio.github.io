@@ -45,6 +45,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { BASE_URL, PRICING_LIST } from '~/util/urls';
+import { formatTokens } from '~/util';
 
 definePageMeta({
   layout: 'default',
@@ -82,16 +83,6 @@ const formatPrice = (price: number) => {
     return 'Free';
   }
   return `$${price}`;
-};
-
-const formatTokens = (tokens: number) => {
-  if (tokens >= 1000000) {
-    return `${tokens / 1000000}M`;
-  } else if (tokens >= 1000) {
-    return `${tokens / 1000}K`;
-  } else {
-    return `${tokens}`;
-  }
 };
 </script>
 
