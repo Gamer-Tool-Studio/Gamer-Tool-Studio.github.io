@@ -27,6 +27,36 @@
       <v-col cols="12" class="chart-area">
         <Bar :data="chartData" :options="chartOptions" />
       </v-col>
+      <v-row>
+        <v-col>
+          <v-card class="counter-cards">
+            <v-col cols="12" class="available-tokens">
+              <h2>Input Tokens</h2>
+              <h3>{{ formatTokens(availableInputTokens) }} available tokens</h3>
+              <h4>{{ formatTokens(consumedInputTokens) }} used tokens</h4>
+            </v-col>
+          </v-card>
+        </v-col>
+        <v-col>
+          <v-card class="counter-cards">
+            <v-col cols="12" class="available-tokens">
+              <h2>Output Tokens</h2>
+              <h3>{{ formatTokens(availableOutputTokens) }} available tokens</h3>
+              <h4>{{ formatTokens(consumedOutputTokens) }} used tokens</h4>
+            </v-col>
+          </v-card>
+        </v-col>
+        <v-col>
+          <v-card class="counter-cards">
+            <v-col cols="12" class="available-tokens">
+              <h2>Interactions</h2>
+              <h3>{{ chatsTotal }} chats made all time</h3>
+              <h4>{{ chatsToday }} chats made today</h4>
+            </v-col>
+          </v-card>
+        </v-col>
+      </v-row>
+
       <v-col cols="12">
         <h3>Token usage count</h3>
       </v-col>
@@ -76,8 +106,15 @@ import { formatTokens } from '~/util';
 
 const tokenStore = useTokenCountStore();
 
-const { monthlyInput, monthlyOutput, currentMonth, availableInputTokens, availableOutputTokens } =
-  storeToRefs(tokenStore); // make authenticated state reactive with storeToRefs
+const {
+  monthlyInput,
+  monthlyOutput,
+  currentMonth,
+  availableInputTokens,
+  availableOutputTokens,
+  chatsTotal,
+  chatsToday,
+} = storeToRefs(tokenStore); // make authenticated state reactive with storeToRefs
 // Calculate the percentages based on the initial values
 
 const consumedInputTokens = computed(() => monthlyInput.value.reduce((a, b) => a + b, 0));
@@ -121,6 +158,18 @@ const chartOptions = ref({
 </script>
 
 <style lang="scss">
+.counter-cards {
+  background-color: transparent;
+  border-radius: 3px;
+  display: flex;
+  position: relative;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  --background: rgba(98, 0, 238, 0.1);
+  background-image: linear-gradient(90deg, transparent, var(--background), transparent);
+  background-size: 200%;
+}
+
 .usage-page p {
   font-size: 16px;
   margin-bottom: 10px;

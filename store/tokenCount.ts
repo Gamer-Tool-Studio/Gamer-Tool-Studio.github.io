@@ -17,6 +17,14 @@ type TokenCountState = {
   monthlyOutput: Array<number>;
   currentMonth: number;
   currentYear: number;
+  chatsTotal: number;
+  chatsToday: number;
+};
+
+type UsageResponse = {
+  monthly: { input: Array<number>; output: Array<number> };
+  chatsTotal: number;
+  chatsToday: number;
 };
 
 export const useTokenCountStore = defineStore('tokenCount', {
@@ -28,6 +36,8 @@ export const useTokenCountStore = defineStore('tokenCount', {
       monthlyOutput: [],
       currentMonth: new Date().getMonth(),
       currentYear: new Date().getFullYear(),
+      chatsTotal: 0,
+      chatsToday: 0,
     };
   },
   actions: {
@@ -61,21 +71,19 @@ export const useTokenCountStore = defineStore('tokenCount', {
       }
       try {
         const user = useUserStore();
-        const { data, pending, error } = await useAuthAPI<{ monthly: { input: Array<number>; output: Array<number> } }>(
-          USAGE_PER_DAY,
-          'POST',
-          {
-            month: this.currentMonth,
-            year: this.currentYear,
-            accountId: user.username,
-          },
-        );
+        const { data, pending, error } = await useAuthAPI<UsageResponse>(USAGE_PER_DAY, 'POST', {
+          month: this.currentMonth,
+          year: this.currentYear,
+          accountId: user.username,
+        });
 
         if (error.value) {
           throw error.value;
         }
         this.monthlyInput = data?.value.monthly.input || [];
         this.monthlyOutput = data?.value.monthly?.output || [];
+        this.chatsTotal = data?.value.chatsTotal || 0;
+        this.chatsToday = data?.value.chatsToday || 0;
       } catch (error) {
         console.error(error);
       }
