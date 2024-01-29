@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
@@ -22,6 +25,7 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
   vite: {
+    plugins: [nodePolyfills()],
     define: {
       'process.env.DEBUG': false,
       BACKEND_URL: JSON.stringify(process.env.BACKEND_URL),
