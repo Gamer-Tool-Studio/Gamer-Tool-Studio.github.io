@@ -26,7 +26,7 @@
             <li>Output tokens</li>
             <li>Users</li>
             <li class="align-right">{{ formatTokens(pricing.inputTokens) }}</li>
-            <li class="align-right">{{ formatTokens(pricing.inputTokens) }}</li>
+            <li class="align-right">{{ formatTokens(pricing.outputTokens) }}</li>
             <li class="align-right">{{ pricing.users }}</li>
           </ul>
           <div class="price-display" :class="{ 'featured-price': pricing.featured }">
