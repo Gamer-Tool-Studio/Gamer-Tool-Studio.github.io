@@ -65,9 +65,9 @@ const { authenticateUser, registerUser, authenticateGoogleUser } = useAuthStore(
 const { authenticated, errorMessage } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
 
 const user = ref({
-  username: 'vallados',
-  password: 'password1234',
-  email: '0xvallados+1@gmail.com',
+  username: '',
+  password: '',
+  email: '',
 });
 const router = useRouter();
 
