@@ -37,7 +37,7 @@
           <NuxtLink to="/login"> Log in</NuxtLink>
         </li>
         <li v-if="!authenticated" class="nav-right d-none d-sm-flex">
-          <a href="#register" class="button">Sign up</a>
+          <NuxtLink to="/login?register=true" class="button">Sign up</NuxtLink>
         </li>
         <li class="user-menu" :class="{ 'd-sm-none': !authenticated }">
           <DashboardUserMenu :isLandingPage="isLandingPage"></DashboardUserMenu>
@@ -112,6 +112,9 @@ nav {
       color: black;
       text-decoration: none;
       font-family: 'Bebas Neue';
+      &.button {
+        color: #fff;
+      }
     }
     .nav-logo {
       margin-right: 10px;
@@ -169,7 +172,8 @@ nav {
   }
 
   .nav-right a:hover {
-    color: #fff !important;
+    color: #6200ee !important;
+    background-color: #fff;
   }
 
   .nav-right-link {

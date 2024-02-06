@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { defineStore } from 'pinia';
 import { useUserStore } from './user';
 
@@ -22,8 +21,13 @@ export const useAuthStore = defineStore('auth', {
     authenticated: false,
     loading: false,
     userProfile: {},
+    errorMessage: '',
   }),
   actions: {
+    clearErrorMessage() {
+      this.errorMessage = '';
+    },
+
     async isAuthenticated(): Promise<Boolean> {
       const user = useUserStore();
 
@@ -74,8 +78,10 @@ export const useAuthStore = defineStore('auth', {
     },
 
     // LOCAL STRATEGY API
-    async authenticateUser(credentials: LoginUserPayload) {
-      const { data, pending }: any = await useFetch(BASE_URL + LOCAL_LOGIN, {
+    async authenticateUser(credentials: LoginUserPayload): Promise<any> {
+      this.clearErrorMessage();
+
+      const { data, pending, error }: any = await useFetch(BASE_URL + LOCAL_LOGIN, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: credentials,
@@ -84,18 +90,30 @@ export const useAuthStore = defineStore('auth', {
       this.loading = pending;
       console.log('data', data);
 
+      if (error.value) {
+        console.log('error', error, error.value?.statusMessage, error.value?.statusCode, error.value?.data?.error);
+        this.errorMessage = error.value?.data?.error;
+      }
+
       if (data.value) {
         const token = useCookie('token'); // useCookie new hook in nuxt 3
         token.value = data?.value?.token; // set token to cookie
         this.authenticated = true; // set authenticated  state value to true
       }
     },
-    async registerUser(newUser: RegisterUserPayload) {
-      const { data, pending }: any = await useFetch(BASE_URL + LOCAL_REGISTER, {
+    async registerUser(newUser: RegisterUserPayload): Promise<any> {
+      this.clearErrorMessage();
+
+      const { data, pending, error }: any = await useFetch(BASE_URL + LOCAL_REGISTER, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: newUser,
       });
+
+      if (error.value) {
+        console.log('error', error, error.value?.statusMessage, error.value?.statusCode, error.value?.data?.error);
+        this.errorMessage = error.value?.data?.error;
+      }
       this.loading = pending;
 
       if (data.value) {

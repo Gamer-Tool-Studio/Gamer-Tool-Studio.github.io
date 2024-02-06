@@ -207,11 +207,16 @@ section ol {
   line-height: normal;
   cursor: pointer;
   font-family: 'Bebas Neue';
+  border: solid 2px #6200ee;
+  &:hover {
+    background-color: #fff !important;
+    color: #6200ee !important;
+  }
 }
 
 .button:hover {
-  background-color: #6200ee !important; /* Change background color to #6200ee when hovered */
-  color: #6200ee !important; /* Change text color to #fff when hovered */
+  // background-color: #6200ee !important; /* Change background color to #6200ee when hovered */
+  // color: #fff !important; /* Change text color to #fff when hovered */
 }
 
 /* Media Queries for Responsiveness */

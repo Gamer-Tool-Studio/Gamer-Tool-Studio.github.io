@@ -12,7 +12,7 @@
             v-model="user.username"
             type="text"
             class="input"
-            placeholder="Enter Username or Email"
+            :placeholder="isRegistering ? 'Enter Username' : 'Enter Username or Email'"
             name="uname"
             required
           />
@@ -28,13 +28,21 @@
             name="psw"
             required
           />
-          <v-col cols="12">
-            <button @click.prevent="login" class="button loginBtn">Continue</button>
-          </v-col>
+        </div>
+        <div v-if="isRegistering" class="login-box">
+          <label for="psw" class="pass-text"><b>Email</b></label
+          ><br />
+          <input v-model="user.email" type="email" class="input" placeholder="Enter Email" name="email" required />
         </div>
       </v-col>
-      <v-col cols="12" class="register-link">
-        <p>Don't have an account? <a href="#">Sign up</a>.</p>
+      <v-col cols="12">
+        <button @click.prevent="isRegistering ? register() : login()" class="button loginBtn">Continue</button>
+      </v-col>
+      <v-col v-if="errorMessage" cols="12">
+        <p style="color: red">{{ errorMessage }}</p>
+      </v-col>
+      <v-col v-if="!isRegistering" cols="12" class="register-link">
+        <p>Don't have an account? <NuxtLink to="/login?register=true">Sign up</NuxtLink></p>
       </v-col>
       <v-col cols="12">
         <p>----------- Or ------------</p>
@@ -54,13 +62,18 @@ import { useAuthStore } from '~/store/auth'; // import the auth store we just cr
 
 const { authenticateUser, registerUser, authenticateGoogleUser } = useAuthStore(); // use authenticateUser action from  auth store
 
-const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+const { authenticated, errorMessage } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
 
 const user = ref({
-  username: '',
-  password: '',
+  username: 'vallados',
+  password: 'password1234',
+  email: '0xvallados+1@gmail.com',
 });
 const router = useRouter();
+
+// i want to check if there is a is #register in url if it is then i want to set isRegistering to true
+const isRegistering = computed(() => router.currentRoute.value.query.register === 'true');
+
 const loginGoogle = async () => {
   await authenticateGoogleUser(); // call authenticateUser and pass the user object
   // redirect to homepage if user is authenticated
@@ -70,24 +83,31 @@ const loginGoogle = async () => {
     router.push({ path: '/dashboard' });
   }
 };
+
 const login = async () => {
   await authenticateUser(user.value); // call authenticateUser and pass the user object
   // redirect to homepage if user is authenticated
-
   if (authenticated.value) {
     console.log('authenticated', authenticated.value);
     router.push({ path: '/dashboard' });
   }
 };
 const register = async () => {
-  await registerUser({ ...user.value, email: 'joe@mail.com' }); // call authenticateUser and pass the user object
+  await registerUser({ ...user.value }); // call authenticateUser and pass the user object
   // redirect to homepage if user is authenticated
+  console.log('authenticated', authenticated.value);
   if (authenticated) {
     router.push('/dashboard/');
   }
 };
 </script>
 <style lang="scss">
+.login-container {
+  text-align: center;
+  .button {
+    font-size: 18px;
+  }
+}
 .title {
   text-align: center;
 }
