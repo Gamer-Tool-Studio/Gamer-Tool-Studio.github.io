@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { USER_PROFILE } from '@/util/urls';
+import { useTokenCountStore } from './tokenCount';
 
 interface MemberInfo {
   name: string;
@@ -21,6 +22,7 @@ interface State {
   orgId: string;
   members: Array<MemberInfo>;
   keys: Array<KeysInfo>;
+  loading: boolean;
 }
 
 type UserInfo = {
@@ -33,6 +35,7 @@ type UserInfo = {
 export const useUserStore = defineStore('user', {
   state: (): State => {
     return {
+      loading: false,
       userList: [],
       user: null,
       isLoggedIn: false,
@@ -58,16 +61,21 @@ export const useUserStore = defineStore('user', {
   actions: {
     async getUserProfile(): Promise<any> {
       console.log('Call getUserProfile ');
+      this.loading = true;
 
       const { data, pending } = await useAuthAPI<UserInfo & { keys: KeysInfo[] }>(USER_PROFILE, 'GET');
       console.log(data.value, pending.value);
 
       if (data.value) {
         this.user = data.value;
-        console.log(data.value);
 
         this.setUser(data.value);
         this.setKeys(data.value.keys);
+
+        const tokenStore = useTokenCountStore();
+        await tokenStore.getBalance();
+
+        this.loading = false;
         return this.user;
       }
     },

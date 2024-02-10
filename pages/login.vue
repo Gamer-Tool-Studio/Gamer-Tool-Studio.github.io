@@ -84,20 +84,27 @@ const loginGoogle = async () => {
   }
 };
 
+const handleRedirect = () => {
+  if (router.currentRoute.value.query.redirect) {
+    router.push({ path: router.currentRoute.value.query.redirect as string });
+  } else {
+    router.push({ path: '/dashboard' });
+  }
+};
+
 const login = async () => {
   await authenticateUser(user.value); // call authenticateUser and pass the user object
   // redirect to homepage if user is authenticated
   if (authenticated.value) {
-    console.log('authenticated', authenticated.value);
-    router.push({ path: '/dashboard' });
+    handleRedirect();
   }
 };
 const register = async () => {
   await registerUser({ ...user.value }); // call authenticateUser and pass the user object
   // redirect to homepage if user is authenticated
   console.log('authenticated', authenticated.value);
-  if (authenticated) {
-    router.push('/dashboard/');
+  if (authenticated.value) {
+    handleRedirect();
   }
 };
 </script>

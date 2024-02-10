@@ -195,7 +195,8 @@ section ol {
 }
 
 /* Call to Action Button Styles */
-.button {
+.button,
+.v-btn.button {
   display: inline-block;
   background-color: #6200ee;
   color: #fff;
@@ -206,8 +207,10 @@ section ol {
   transition: background-color 0.3s ease;
   line-height: normal;
   cursor: pointer;
-  font-family: 'Bebas Neue';
   border: solid 2px #6200ee;
+  * {
+    font-family: 'Bebas Neue';
+  }
   &:hover {
     background-color: #fff !important;
     color: #6200ee !important;

@@ -1,5 +1,12 @@
 <template>
-  <v-data-table :headers="headers" :items="keys" item-value="name" class="elevation-0" density="compact">
+  <v-data-table
+    :headers="headers"
+    :items="keys"
+    item-value="name"
+    class="elevation-0"
+    density="compact"
+    :loading="loading"
+  >
     <template #[`item.dateCreated`]="{ item }">
       {{ formatDate(item.raw.dateCreated) }}
     </template>
@@ -11,7 +18,7 @@
       <v-icon size="small" @click="deleteItem(item.raw)"> mdi-delete </v-icon>
     </template>
     <template v-slot:bottom>
-      <v-toolbar flat color="transparent" height="40" class="table-toolbar">
+      <v-toolbar flat color="transparent" height="60" class="table-toolbar">
         <modal-generate-api-key
           v-if="generateNewKeys"
           v-model:name="editedItem.name"
@@ -23,18 +30,30 @@
         </modal-generate-api-key>
         <modal-revoke-key v-if="revokeKey" :name="editedItem.name" @close="closeDelete()" @delete="deleteItemConfirm">
         </modal-revoke-key>
-        <button class="cancel-button" @click="generateNewKeys = true">+ Create new secret key</button>
+        <v-btn v-if="hasTokensAvailable" class="button cancel-button" color="none" @click="generateNewKeys = true">
+          + Create new secret key
+        </v-btn>
+        <v-btn v-else class="button" color="none" to="/pricing"> Go to Princing </v-btn>
       </v-toolbar>
     </template>
 
     <template v-slot:no-data>
-      <v-btn color="primary"> Reset </v-btn>
+      <v-col class="text-center" :cols="12">
+        <h4 class="my-4">You don't have any API keys yet.</h4>
+      </v-col>
     </template>
   </v-data-table>
 </template>
 
 <script setup>
+import { storeToRefs } from 'pinia';
 import { VDataTable } from 'vuetify/labs/VDataTable';
+
+const tokenStore = useTokenCountStore();
+const userStore = useUserStore();
+
+const { availableInputTokens } = storeToRefs(tokenStore); // make authenticated state reactive with storeToRefs
+const { loading } = storeToRefs(userStore);
 
 const emit = defineEmits(['deleteItem', 'addItem', 'editItem']);
 
@@ -50,7 +69,8 @@ const headers = [
   { title: 'Actions', key: 'actions', sortable: false },
 ];
 const { keys } = defineProps(['keys']);
-console.log(keys);
+
+const hasTokensAvailable = computed(() => availableInputTokens.value > 0);
 
 const formTitle = computed(() => (editedIndex.value === -1 ? 'Create new secret key' : 'Edit key name'));
 const editedIndex = ref(-1),

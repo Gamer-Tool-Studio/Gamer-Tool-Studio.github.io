@@ -46,7 +46,7 @@ export default function <T>(
         logUserOut();
 
         const router = useRouter();
-        router.push('/login');
+        router.push('/login?redirect=' + router.currentRoute.value.fullPath);
       }
     },
   }) as AsyncData<T, string>;

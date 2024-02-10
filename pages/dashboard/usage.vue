@@ -56,26 +56,7 @@
           </v-card>
         </v-col>
       </v-row>
-
-      <v-col cols="12">
-        <h3>Token usage count</h3>
-      </v-col>
-      <v-col cols="12" class="progress-section">
-        <div class="progress-container">
-          <div class="progress-bar input-tokens"></div>
-          <div class="progress-values">
-            <p>{{ consumedInputTokens }} / {{ formatTokens(availableInputTokens) }} input tokens</p>
-          </div>
-        </div>
-      </v-col>
-      <v-col cols="12" class="progress-section">
-        <div class="progress-container">
-          <div class="progress-bar output-tokens"></div>
-          <div class="progress-values">
-            <p>{{ consumedOutputTokens }} / {{ formatTokens(availableOutputTokens) }} output tokens</p>
-          </div>
-        </div>
-      </v-col>
+      <!-- 
       <v-col cols="4" class="current-subscription">
         <h3>Active subsciption pack</h3>
       </v-col>
@@ -86,7 +67,7 @@
       </v-col>
       <v-col cols="4" class="upgrade-section">
         <button class="button">Upgrade account</button>
-      </v-col>
+      </v-col> -->
     </v-row>
   </v-container>
 </template>
@@ -96,7 +77,6 @@ useHead({
   title: 'Usage',
 });
 
-import { useTokenCountStore } from '~/store/tokenCount';
 import { getMonthDays, getMonthName, getCumulativeTokens } from '~/util/chart';
 import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
 // Chart
@@ -114,8 +94,7 @@ const {
   availableOutputTokens,
   chatsTotal,
   chatsToday,
-} = storeToRefs(tokenStore); // make authenticated state reactive with storeToRefs
-// Calculate the percentages based on the initial values
+} = storeToRefs(tokenStore);
 
 const consumedInputTokens = computed(() => monthlyInput.value.reduce((a, b) => a + b, 0));
 const consumedOutputTokens = computed(() => monthlyOutput.value.reduce((a, b) => a + b, 0));
