@@ -44,6 +44,9 @@
       <v-col v-if="!isRegistering" cols="12" class="register-link">
         <p>Don't have an account? <NuxtLink to="/login?register=true">Sign up</NuxtLink></p>
       </v-col>
+      <v-col v-if="isRegistering" cols="12" class="register-link">
+        <p>Already have an account? <NuxtLink to="/login">Log in</NuxtLink></p>
+      </v-col>
       <v-col cols="12">
         <p>----------- Or ------------</p>
       </v-col>

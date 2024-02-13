@@ -5,7 +5,7 @@
         <h1>Download Plugin</h1>
         <p>
           Use NPC-GPT from your favourite development environment and create seamless AI-powered NPCs. Download the Plugin file compatible with your game engine. Check out our
-          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/plugin-user-guide/getting-started" class="internal-link">user guide </a>to learn how to install and use it.
+          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/plugin-user-guide/getting-started" class="internal-link">user guide</a> to learn how to install and use it.
         </p>
       </v-col>
       <v-col cols="12" class="engine-cards">
@@ -14,18 +14,22 @@
         </v-col>
         <div class="cards-container">
           <v-col cols="6" class="download-cards left-card">
-            <v-col cols="12" class="card-icon-name">
-              <img class="download-logo" src="/images/RPGM-icon.png"/>
-              <h3>RPG Maker MZ</h3>
-            </v-col>
-            <p>&#8595Download</p>
+            <a :href="downloadURL" download clas="downloadFile">
+              <v-col cols="12" class="card-icon-name">
+                <img class="download-logo" src="/images/RPGM-icon.png"/>
+                <h3>RPG Maker MZ</h3>
+              </v-col>
+              <p>&#8595;Download</p>
+            </a>
           </v-col>
           <v-col cols="6" class="download-cards right-card">
-            <v-col cols="12" class="card-icon-name">
-              <img class="download-logo" src="/images/MV-icon.png"/>
-              <h3>RPG Maker MV</h3>
-            </v-col>
-            <p>&#8595Download</p>
+            <a :href="downloadURL" download>
+              <v-col cols="12" class="card-icon-name">
+                <img class="download-logo" src="/images/MV-icon.png"/>
+                <h3>RPG Maker MV</h3>
+              </v-col>
+              <p>&#8595Download</p>
+            </a>  
           </v-col>
         </div>
       </v-col>
@@ -38,12 +42,19 @@
     </v-row>
   </v-container>
 </template>
+
 <script lang="ts" setup>
+import { ref } from 'vue';
+
 useHead({
   title: "Download Plugin",
 });
 
+// Example of defining a reactive property for download URL
+// Ensure the URL is correctly encoded, especially if there are special characters
+const downloadURL = ref('/cluaido/js/plugins/NPC-GPT-Plugin.js');
 </script>
+
 
 <style lang="scss">
 
@@ -63,6 +74,9 @@ useHead({
   margin-bottom: 10px;
   margin-top: 15px;
   font-weight: 100;
+}
+.donwloadFile h3 p{
+  text-decoration: none;
 }
 
 .engine-cards{
@@ -117,12 +131,15 @@ useHead({
 .download-cards h3 {
   float: right;
   margin-left:10px;
+  color: #000000;
 }
 
 .download-cards p {
   margin-top: 0;
   font-size: 18px;
   text-align: center;
+  color: #000000;
+  text-decoration: underline !important;
 }
 
 .download-cards p:hover {

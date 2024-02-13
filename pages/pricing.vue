@@ -38,7 +38,7 @@
     </v-row>
     <v-col cols="12" class="contact-us">
       <h3>Need a tailored solution for your project?</h3>
-      <button class="button no-hover-button">Contact our Team</button>
+      <a href="https://discord.gg/JdDwRfTGNF"><button class="button no-hover-button">Contact our Team</button></a>
     </v-col>
   </v-container>
 </template>
@@ -184,8 +184,8 @@ const formatPrice = (price: number) => {
     color: #6200ee;
 
     &:hover {
-      color: #6200ee;
       color: #fff !important;
+      background-color: #6200ee !important;
     }
   }
 }

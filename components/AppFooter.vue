@@ -13,7 +13,7 @@
         <h4>Company</h4>
         <ul>
           <li><a href="#/pricing">Pricing</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a href="https://gamertoolstudio.itch.io/">About</a></li>
           <li><a href="#privacy-policy">Privacy Policy</a></li>
         </ul>
       </div>
