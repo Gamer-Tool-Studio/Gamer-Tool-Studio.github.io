@@ -1,17 +1,4 @@
 <script lang="ts" setup>
-</script>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-
-useHead({
-  title: 'Download Plugin',
-})
-
-useHead({
-  title: 'Download Plugin',
-})
-
 // Example of defining a reactive property for download URL
 // Ensure the URL is correctly encoded, especially if there are special characters
 const downloadURL = ref('/cluaido/js/plugins/NPC-GPT-Plugin.js')
@@ -47,7 +34,7 @@ const downloadURL = ref('/cluaido/js/plugins/NPC-GPT-Plugin.js')
                 <img class="download-logo" src="/images/MV-icon.png">
                 <h3>RPG Maker MV</h3>
               </v-col>
-              <p>&#8595Download</p>
+              <p>&#8595;Download</p>
             </a>
           </v-col>
         </div>

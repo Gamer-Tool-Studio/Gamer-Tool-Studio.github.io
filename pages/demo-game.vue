@@ -153,7 +153,6 @@ function connectAndOpenModal(suspectId) {
             <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>Read the full user guide.</p></a>
           </div>
         </v-col>
-        </v-col>
         <v-row class="features">
           <h2 class="bet-title">
             Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.
@@ -271,7 +270,6 @@ function connectAndOpenModal(suspectId) {
               <li>Clues are concealed within the characters and all over the house. </li>
               <li>You have only one shot to identify the culprit.</li>
             </ul>
-          </v-col>
           </v-col>
           <v-col cols="12" class="create-account-cta">
             <h2 class="page-headers">
