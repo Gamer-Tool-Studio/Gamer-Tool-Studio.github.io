@@ -14,7 +14,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "nuxt prepare && npx simple-git-hooks",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -44,12 +44,14 @@
     "@antfu/eslint-config": "^2.6.4",
     "@types/debug": "^4.1.12",
     "eslint": "^8.56.0",
-    "nuxt": "^3.8.2"
+    "lint-staged": "^15.2.2",
+    "nuxt": "^3.8.2",
+    "simple-git-hooks": "^2.9.0"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
+    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*": "eslint --fix"
+    "*": "eslint"
   }
 }
