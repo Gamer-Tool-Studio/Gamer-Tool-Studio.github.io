@@ -1,25 +1,28 @@
-<template>
-  <FormLogin>
-    <template #title>
-      <h1 class="my-5">Login</h1>
-    </template>
-  </FormLogin>
-</template>
 <script lang="ts">
-import FormLogin from "~/components/auth/FormLogin.vue";
+import FormLogin from '~/components/auth/FormLogin.vue'
 
 definePageMeta({
-  layout: "auth",
-});
+  layout: 'auth',
+})
 export default defineComponent({
   components: {
     FormLogin,
   },
   setup() {
     useHead({
-      title: "Login",
-    });
-    return {};
+      title: 'Login',
+    })
+    return {}
   },
-});
+})
 </script>
+
+<template>
+  <FormLogin>
+    <template #title>
+      <h1 class="my-5">
+        Login
+      </h1>
+    </template>
+  </FormLogin>
+</template>

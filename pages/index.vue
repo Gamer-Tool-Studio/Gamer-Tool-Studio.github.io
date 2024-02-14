@@ -1,3 +1,49 @@
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue'
+
+const messageToType
+  = 'Ah, greetings, traveler! You\'ve stumbled upon some intriguing information indeed. Yes, there is indeed a secret map hidden within the depths of the big cave, tucked away beneath a vibrant yellow flower. It\'s said to hold the key to unlocking hidden treasures and revealing the path to untold secrets.'
+// Typing animation
+let intervalTypeMessage: any
+const responseGPT = ref('')
+function typeMessage(textToType: string, typingSpeed: number) {
+  let currentIndex = 0
+
+  function typeNextCharacter() {
+    if (currentIndex < textToType.length) {
+      const currentCharacter = textToType.charAt(currentIndex)
+      responseGPT.value += currentCharacter
+      currentIndex++
+
+      setTimeout(typeNextCharacter, typingSpeed)
+    }
+  }
+  typeNextCharacter()
+}
+
+// Start typing animation when the component is mounted
+onMounted(() => {
+  const typingSpeed = 50
+  typeMessage(messageToType, typingSpeed)
+  intervalTypeMessage = setInterval(async () => {
+    if (responseGPT.value === messageToType) {
+      responseGPT.value = ''
+      typeMessage(messageToType, typingSpeed)
+    }
+  }, 3000)
+})
+
+onBeforeRouteLeave(() => clearInterval(intervalTypeMessage))
+
+definePageMeta({
+  layout: 'default',
+})
+
+useHead({
+  title: 'Home Page',
+})
+</script>
+
 <template>
   <v-container class="lp">
     <v-row>
@@ -5,9 +51,10 @@
         <h1>NPC-GPT - Real-time AI chats for your game characters</h1>
       </v-col>
       <v-col cols="12" class="intro-cta">
-          <button class="button">Start Trial Now</button>
-          <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"
-            ><p>View our documentation</p></a>
+        <button class="button">
+          Start Trial Now
+        </button>
+        <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>View our documentation</p></a>
       </v-col>
       <v-col cols="12" class="demo-video">
         <div style="position: relative; padding-bottom: 56.25%; /* 16:9 aspect ratio */">
@@ -18,10 +65,9 @@
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
-          ></iframe>
+          />
         </div>
       </v-col>
-
     </v-row>
     <v-row class="features">
       <v-col>
@@ -60,7 +106,7 @@
         </div>
       </div>
     </v-row>
-    <v-row class="get-started" id="sectionToLinkToApi">
+    <v-row id="sectionToLinkToApi" class="get-started">
       <v-col cols="12">
         <h2 class="page-headers">
           Create seamless AI characters to interact with players and users from any Frontend environment with NPC-GPT
@@ -75,7 +121,7 @@ const { Configuration, NpcGptApi } = require("NpcGPt");
 const configuration = new Configuration({
   apiKey: process.env.NPCGPT_API_KEY,
 });
-            
+
 const NpcGpt = new NpcGptApi(configuration);
 
 const chat = await NpcGpt.createChat({
@@ -93,16 +139,16 @@ const chat = await NpcGpt.createChat({
     "dialogueStyle": "mysterious"
     },
 
-    "backgroundStory": "GPT WIzard is a Mage who lives in Mystery Foster. 
-      She was brought up by witches and mages after being found as a baby 
-      wondering in the forest. She belongs to this tribe that remains 
-      undiscovered by most humans but learned the ways of the past and future 
+    "backgroundStory": "GPT WIzard is a Mage who lives in Mystery Foster.
+      She was brought up by witches and mages after being found as a baby
+      wondering in the forest. She belongs to this tribe that remains
+      undiscovered by most humans but learned the ways of the past and future
       and is able to interpret signs and energies.",
-              
+
     "eventsKnowledge": "Knows there is a secret map at the entrance of the
-      big cave under a yellow flower and  knows the player harduous future in 
+      big cave under a yellow flower and  knows the player harduous future in
       the forest with many enemies and challenges",
-            
+
     "interests": {
       "Astrology": 7,
       "Herbology": 9,
@@ -124,11 +170,9 @@ console.log(completion.data.choices[0].message);
         </div>
       </v-col>
       <v-col cols="12" class="button-display">
-        <a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction"
-          ><button class="button">View API Reference</button></a
-        >
+        <a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction"><button class="button">View API Reference</button></a>
       </v-col>
-      <v-col cols="12" id="sectionToLinkToPlugin">
+      <v-col id="sectionToLinkToPlugin" cols="12">
         <h2 class="page-headers">
           Add NPC-GPT Plugin to your favourite game engine today and start harnessing the power of AI-generated
           conversations with ease
@@ -151,10 +195,10 @@ console.log(completion.data.choices[0].message);
       </v-col>
       <v-col cols="6" class="engines-available">
         <div class="engine-logo-container">
-          <img class="engine-logo" src="/images/RMMZ.png" />
+          <img class="engine-logo" src="/images/RMMZ.png">
         </div>
         <div class="engine-logo-container">
-          <img class="engine-logo" src="/images/RMMV.png" />
+          <img class="engine-logo" src="/images/RMMV.png">
         </div>
       </v-col>
     </v-row>
@@ -164,56 +208,13 @@ console.log(completion.data.choices[0].message);
         Are you ready to take your game development to the next level with the ultimate AI-Powered character building
         tool?
       </h2>
-      <br />
-      <button class="button">Start Free Trial Now</button>
+      <br>
+      <button class="button">
+        Start Free Trial Now
+      </button>
     </v-col>
   </v-container>
 </template>
-<script lang="ts" setup>
-import { ref, onMounted } from 'vue';
-
-const messageToType =
-  "Ah, greetings, traveler! You've stumbled upon some intriguing information indeed. Yes, there is indeed a secret map hidden within the depths of the big cave, tucked away beneath a vibrant yellow flower. It's said to hold the key to unlocking hidden treasures and revealing the path to untold secrets.";
-// Typing animation
-let intervalTypeMessage: any;
-const responseGPT = ref('');
-function typeMessage(textToType: string, typingSpeed: number) {
-  let currentIndex = 0;
-
-  function typeNextCharacter() {
-    if (currentIndex < textToType.length) {
-      const currentCharacter = textToType.charAt(currentIndex);
-      responseGPT.value += currentCharacter;
-      currentIndex++;
-
-      setTimeout(typeNextCharacter, typingSpeed);
-    }
-  }
-  typeNextCharacter();
-}
-
-// Start typing animation when the component is mounted
-onMounted(() => {
-  const typingSpeed = 50;
-  typeMessage(messageToType, typingSpeed);
-  intervalTypeMessage = setInterval(async () => {
-    if (responseGPT.value == messageToType) {
-      responseGPT.value = '';
-      typeMessage(messageToType, typingSpeed);
-    }
-  }, 3000);
-});
-
-onBeforeRouteLeave(() => clearInterval(intervalTypeMessage));
-
-definePageMeta({
-  layout: 'default',
-});
-
-useHead({
-  title: 'Home Page',
-});
-</script>
 
 <style lang="scss" scoped>
 @import '../assets/lp_styles.scss';

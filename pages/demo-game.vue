@@ -1,5 +1,21 @@
+<script setup>
+import { ref } from 'vue'
+
+useHead({
+  title: 'Demo Game ',
+})
+
+const showModal = ref(false)
+const selectedSuspectId = ref(null)
+
+function connectAndOpenModal(suspectId) {
+  selectedSuspectId.value = suspectId
+  showModal.value = true
+}
+</script>
+
 <template>
-  <modal-connect-wallet v-if="showModal" :suspectId="selectedSuspectId" @close="showModal = false" />
+  <modal-connect-wallet v-if="showModal" :suspect-id="selectedSuspectId" @close="showModal = false" />
   <div :class="{ 'dimmed-content': showModal }">
     <v-container class="lp">
       <v-row>
@@ -7,96 +23,141 @@
           <h1>CLUAIDO - Play a detective game with AI characters.</h1>
         </v-col>
         <v-col cols="12">
-          <h2 class="hamilton-title"> Who Killed Mr. Hamilton?</h2>
-          <p class="game-desc">You were called to the victims' house to solve his misterious death. Talk to the people inside and unveil the clues that will lead you to the culprit. </p>
+          <h2 class="hamilton-title">
+            Who Killed Mr. Hamilton?
+          </h2>
+          <p class="game-desc">
+            You were called to the victims' house to solve his mysterious death. Talk to the people inside and unveil the clues that will lead you to the culprit.
+          </p>
         </v-col>
         <v-col cols="12" class="demo-section">
           <div class="demo-game">
             <iframe
               id="gameIframe"
-              src="/cluaido/index.html"  
+              src="/cluaido/index.html"
               title="CLUAIDO"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
-            ></iframe>
+            />
           </div>
         </v-col>
       </v-row>
       <v-row class="get-started">
         <v-col cols="6" class="controllers-section">
           <v-col cols="12">
-            <h2 class="page-headers">Controllers</h2>
-          </v-col>
-          <v-col cols="12" class="controller-container">
-            <div class="keyboard-control">&#11014;</div> <!-- Up arrow -->
-            <div class="keyboard-control">&#11015;</div> <!-- Down arrow -->
-            <div class="keyboard-control">&#10132;</div> <!-- Right arrow -->
-            <div class="keyboard-control">&#11013;</div> <!-- Left arrow -->
-            <p class="controller-type">Move Player</p>
-          </v-col>
-          <v-col cols="12" class="controller-container enter-com">              
-            <div class="keyboard-control">Enter</div>
-            <p class="controller-type">Action Button/ Confirm Action</p>
-          </v-col>
-          <v-col cols="12" class="controller-container">
-            <div class="keyboard-control">Esc</div>
-            <p class="controller-type">Open Menu/ Cancel Action</p>
-            </v-col>
-            <v-col cols="12" class="controller-container">
-              <div class="guide-link">
-                <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>Read the full user guide.</p></a>
-              </div>
-            </v-col>
-          </v-col>
-          <v-col cols="6" class="plugin-explain">
-            <v-col cols="12">
-              <h2 class="page-headers">Game Rules</h2>
-            </v-col>
-            <v-col cols="12">
-              <ul class="game-rules">
-                <li>There are 7 suspects and only one culprit inside the house.</li>
-                <li>
-                  You can ask whatever you want to the characters.
-                </li>
-                <li>
-                  All characters will tell you the truth except for the culprit.
-                </li>
-                <li>You can make 21 questions before the culprit runs away.</li>
-                <li>Clues are conceiled within the characters and all over the house. </li>
-                <li>You have only one shot to identify the culprit.</li>
-              </ul>
-            </v-col>
-          </v-col>
-          <v-col cols="12" class="create-account-cta">
             <h2 class="page-headers">
-              In order to play this game you will need an account with Gamer Tool Studio and to connect with your API key.
+              Controllers
             </h2>
-            <br/>
-            <button class="button">Create Account</button>
           </v-col>
-        </v-row>
-        <v-col cols="12" class="intro-section">
-          <h1> Can you really crack this case, detective?</h1>
+          <v-col cols="12" class="controller-container">
+            <div class="keyboard-control">
+              &#11014;
+            </div> <!-- Up arrow -->
+            <div class="keyboard-control">
+              &#11015;
+            </div> <!-- Down arrow -->
+            <div class="keyboard-control">
+              &#10132;
+            </div> <!-- Right arrow -->
+            <div class="keyboard-control">
+              &#11013;
+            </div> <!-- Left arrow -->
+            <p class="controller-type">
+              Move Player
+            </p>
+          </v-col>
+          <v-col cols="12" class="controller-container enter-com">
+            <div class="keyboard-control">
+              Enter
+            </div>
+            <p class="controller-type">
+              Action Button/ Confirm Action
+            </p>
+          </v-col>
+          <v-col cols="12" class="controller-container">
+            <div class="keyboard-control">
+              Esc
+            </div>
+            <p class="controller-type">
+              Open Menu/ Cancel Action
+            </p>
+          </v-col>
+          <v-col cols="12" class="controller-container">
+            <div class="guide-link">
+              <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>Read the full user guide.</p></a>
+            </div>
+          </v-col>
         </v-col>
-        <v-col cols="12">
-          <v-col cols="6" class="vote-count votes">
-            <div class="results-container">
-            <img src="~/assets/images/document-icon.png"  class="vote-icon">
-              <h3 class="prize-money">15,134</h3>
-              <h3 class="counter-text">Accusations Made</h3>
-            </div>
+        <v-col cols="6" class="plugin-explain">
+          <v-col cols="12">
+            <h2 class="page-headers">
+              Game Rules
+            </h2>
           </v-col>
-          <v-col cols="6" class="vote-count bets">
-            <div class="results-container">
-              <img src="~/assets/images/dollar-icon.png" class="vote-icon">
-              <h3 class="prize-money">150,565$</h3>
-              <h3 class="counter-text">Prize Money</h3>
-            </div>
+          <v-col cols="12">
+            <ul class="game-rules">
+              <li>There are 7 suspects and only one culprit inside the house.</li>
+              <li>
+                You can ask whatever you want to the characters.
+              </li>
+              <li>
+                All characters will tell you the truth except for the culprit.
+              </li>
+              <li>You can make 21 questions before the culprit runs away.</li>
+              <li>Clues are conceiled within the characters and all over the house. </li>
+              <li>You have only one shot to identify the culprit.</li>
+            </ul>
           </v-col>
+        </v-col>
+        <v-col cols="12" class="create-account-cta">
+          <h2 class="page-headers">
+            Controllers
+          </h2>
+        </v-col>
+        <v-col cols="12" class="controller-container">
+          <div class="keyboard-control">
+            &#11014;
+          </div> <!-- Up arrow -->
+          <div class="keyboard-control">
+            &#11015;
+          </div> <!-- Down arrow -->
+          <div class="keyboard-control">
+            &#10132;
+          </div> <!-- Right arrow -->
+          <div class="keyboard-control">
+            &#11013;
+          </div> <!-- Left arrow -->
+          <p class="controller-type">
+            Move Player
+          </p>
+        </v-col>
+        <v-col cols="12" class="controller-container enter-com">
+          <div class="keyboard-control">
+            Enter
+          </div>
+          <p class="controller-type">
+            Action Button/ Confirm Action
+          </p>
+        </v-col>
+        <v-col cols="12" class="controller-container">
+          <div class="keyboard-control">
+            Esc
+          </div>
+          <p class="controller-type">
+            Open Menu/ Cancel Action
+          </p>
+        </v-col>
+        <v-col cols="12" class="controller-container">
+          <div class="guide-link">
+            <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>Read the full user guide.</p></a>
+          </div>
+        </v-col>
         </v-col>
         <v-row class="features">
-          <h2 class="bet-title"> Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.</h2>
+          <h2 class="bet-title">
+            Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.
+          </h2>
           <div class="feature-boxes">
             <div class="feature-box">
               <h2>The Wife</h2>
@@ -107,7 +168,9 @@
               <p>
                 The outspoken wife of Mr.Hamilton. Does the victim's life partner conceil his darkest secrets?
               </p>
-              <button class="button" @click="connectAndOpenModal(1)">Accuse</button>
+              <button class="button" @click="connectAndOpenModal(1)">
+                Accuse
+              </button>
             </div>
             <div class="feature-box">
               <h2>The Butler</h2>
@@ -118,7 +181,9 @@
               <p>
                 A refined gentleman in whom Mr. Hamilton placed the highest trust. Was it misplaced?
               </p>
-              <button class="button" @click="connectAndOpenModal(2)">Accuse</button>
+              <button class="button" @click="connectAndOpenModal(2)">
+                Accuse
+              </button>
             </div>
             <div class="feature-box">
               <h2>The Maid</h2>
@@ -129,7 +194,9 @@
               <p>
                 A shy and caring servant who might know more about her masters' life than they know.
               </p>
-              <button class="button" @click="connectAndOpenModal(3)">Accuse</button>
+              <button class="button" @click="connectAndOpenModal(3)">
+                Accuse
+              </button>
             </div>
             <div class="feature-box">
               <h2>The Gardener</h2>
@@ -140,7 +207,9 @@
               <p>
                 A simple working man that seems to only care about plants and flowers. Or does he?
               </p>
-              <button class="button" @click="connectAndOpenModal(4)">Accuse</button>
+              <button class="button" @click="connectAndOpenModal(4)">
+                Accuse
+              </button>
             </div>
             <div class="feature-box">
               <h2>The Cook</h2>
@@ -151,7 +220,9 @@
               <p>
                 An extravagant cooking master who's been in the family since she was a child? Is there a catch?
               </p>
-              <button class="button" @click="connectAndOpenModal(5)">Accuse</button>
+              <button class="button" @click="connectAndOpenModal(5)">
+                Accuse
+              </button>
             </div>
             <div class="feature-box">
               <h2>The Journalist</h2>
@@ -162,7 +233,9 @@
               <p>
                 A rising reporting star investigating Mr.Hamilton's latest scandal. Is he involved?
               </p>
-              <button class="button" @click="connectAndOpenModal(6)">Accuse</button>
+              <button class="button" @click="connectAndOpenModal(6)">
+                Accuse
+              </button>
             </div>
             <div class="feature-box">
               <h2>The Businessman</h2>
@@ -173,13 +246,173 @@
               <p>
                 A rude influential businessman with life-long dealings with Mr.Hamilton. Have things gone wrong?
               </p>
-              <button class="button" @click="connectAndOpenModal(7)">Accuse</button>
+              <button class="button" @click="connectAndOpenModal(7)">
+                Accuse
+              </button>
             </div>
           </div>
         </v-row>
         <v-row>
           <v-col cols="12">
-            <h2 class="bet-ttle">Want to know more about the game?</h2>
+            <h2 class="page-headers">
+              Game Rules
+            </h2>
+          </v-col>
+          <v-col cols="12">
+            <ul class="game-rules">
+              <li>There are 7 suspects and only one culprit inside the house.</li>
+              <li>
+                You can ask whatever you want to the characters.
+              </li>
+              <li>
+                All characters will tell you the truth except for the culprit.
+              </li>
+              <li>You can make 21 questions before the culprit runs away.</li>
+              <li>Clues are concealed within the characters and all over the house. </li>
+              <li>You have only one shot to identify the culprit.</li>
+            </ul>
+          </v-col>
+          </v-col>
+          <v-col cols="12" class="create-account-cta">
+            <h2 class="page-headers">
+              In order to play this game you will need an account with Gamer Tool Studio and to connect with your API key.
+            </h2>
+            <br>
+            <button class="button">
+              Create Account
+            </button>
+          </v-col>
+        </v-row>
+        <v-col cols="12" class="intro-section">
+          <h1> Can you really crack this case, detective?</h1>
+        </v-col>
+        <v-col cols="12">
+          <v-col cols="6" class="vote-count votes">
+            <div class="results-container">
+              <img src="~/assets/images/document-icon.png" class="vote-icon">
+              <h3 class="prize-money">
+                15,134
+              </h3>
+              <h3 class="counter-text">
+                Accusations Made
+              </h3>
+            </div>
+          </v-col>
+          <v-col cols="6" class="vote-count bets">
+            <div class="results-container">
+              <img src="~/assets/images/dollar-icon.png" class="vote-icon">
+              <h3 class="prize-money">
+                150,565$
+              </h3>
+              <h3 class="counter-text">
+                Prize Money
+              </h3>
+            </div>
+          </v-col>
+        </v-col>
+        <v-row class="features">
+          <h2 class="bet-title">
+            Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.
+          </h2>
+          <div class="feature-boxes">
+            <div class="feature-box">
+              <h2>The Wife</h2>
+              <img src="/images/wife.png">
+              <v-col cols="12" class="vote-perc">
+                <h3>23%</h3><p>votes</p>
+              </v-col>
+              <p>
+                The outspoken wife of Mr.Hamilton. Does the victim's life partner conceal his darkest secrets?
+              </p>
+              <button class="button" @click="connectAndOpenModal(1)">
+                Accuse
+              </button>
+            </div>
+            <div class="feature-box">
+              <h2>The Butler</h2>
+              <img src="/images/butler.png">
+              <v-col cols="12" class="vote-perc">
+                <h3>16%</h3><p>votes</p>
+              </v-col>
+              <p>
+                A refined gentleman in whom Mr. Hamilton placed the highest trust. Was it misplaced?
+              </p>
+              <button class="button" @click="connectAndOpenModal(2)">
+                Accuse
+              </button>
+            </div>
+            <div class="feature-box">
+              <h2>The Maid</h2>
+              <img src="/images/maid.png">
+              <v-col cols="12" class="vote-perc">
+                <h3>11%</h3><p>votes</p>
+              </v-col>
+              <p>
+                A shy and caring servant who might know more about her masters' life than they know.
+              </p>
+              <button class="button" @click="connectAndOpenModal(3)">
+                Accuse
+              </button>
+            </div>
+            <div class="feature-box">
+              <h2>The Gardener</h2>
+              <img src="/images/gardener.png">
+              <v-col cols="12" class="vote-perc">
+                <h3>7%</h3><p>votes</p>
+              </v-col>
+              <p>
+                A simple working man that seems to only care about plants and flowers. Or does he?
+              </p>
+              <button class="button" @click="connectAndOpenModal(4)">
+                Accuse
+              </button>
+            </div>
+            <div class="feature-box">
+              <h2>The Cook</h2>
+              <img src="/images/cook.png">
+              <v-col cols="12" class="vote-perc">
+                <h3>2%</h3><p>votes</p>
+              </v-col>
+              <p>
+                An extravagant cooking master who's been in the family since she was a child? Is there a catch?
+              </p>
+              <button class="button" @click="connectAndOpenModal(5)">
+                Accuse
+              </button>
+            </div>
+            <div class="feature-box">
+              <h2>The Journalist</h2>
+              <img src="/images/journalist.png">
+              <v-col cols="12" class="vote-perc">
+                <h3>8%</h3><p>votes</p>
+              </v-col>
+              <p>
+                A rising reporting star investigating Mr.Hamilton's latest scandal. Is he involved?
+              </p>
+              <button class="button" @click="connectAndOpenModal(6)">
+                Accuse
+              </button>
+            </div>
+            <div class="feature-box">
+              <h2>The Businessman</h2>
+              <img src="/images/businessman.png">
+              <v-col cols="12" class="vote-perc">
+                <h3>18%</h3><p>votes</p>
+              </v-col>
+              <p>
+                A rude influential businessman with life-long dealings with Mr.Hamilton. Have things gone wrong?
+              </p>
+              <button class="button" @click="connectAndOpenModal(7)">
+                Accuse
+              </button>
+            </div>
+          </div>
+        </v-row>
+        <v-row>
+          <v-col cols="12">
+            <h2 class="bet-title">
+              Want to know more about the game?
+            </h2>
           </v-col>
           <v-col cols="4" class="join-section">
             <a href="LINK_TO_BETTING_GAME_RULES">
@@ -200,25 +433,10 @@
             </a>
           </v-col>
         </v-row>
-      </v-container>
-    </div>
+      </v-row>
+    </v-container>
+  </div>
 </template>
-<script setup>
-useHead({
-  title: "Demo Game ",
-});
-import { ref } from 'vue';
-
-const showModal = ref(false);
-const selectedSuspectId = ref(null);
-
-const connectAndOpenModal = (suspectId) => {
-  selectedSuspectId.value = suspectId;
-  showModal.value = true;
-};
-
-</script>
-
 
 <style lang="scss" scoped>
 h1,
@@ -276,7 +494,7 @@ section {
   width: 100%;
   margin: auto;
   max-height: 624px !important;
-  
+
 }
 
 #gameIframe {
@@ -326,14 +544,13 @@ section {
 
 .controllers-section{
   align-items: flex-end;
-  
+
 }
 .controller-container {
   display: inline-flex;
   align-items: center;
   padding-left: 0;
-  
-  
+
 }
 .keyboard-control{
   padding: 10px 15px;
@@ -349,7 +566,7 @@ section {
 .controller-type {
   vertical-align: middle;
   font-size: 20px;
-  margin-left: 20px;  
+  margin-left: 20px;
 }
 
 /* Counter Section */
@@ -384,9 +601,8 @@ section {
 .vote-icon {
   width:80px;
   height: 80px;
-  
-}
 
+}
 
 /* Features Section */
 
@@ -417,7 +633,7 @@ section {
   font-size: 26px;
   margin-top:20px;
 }
-.bet-ttle {
+.bet-title {
   margin-top: 50px !important;
   font-size: 30px !important;
   padding-bottom: 20px;
@@ -460,18 +676,18 @@ section {
   width:100%;
   text-align: center;
   align-items: baseline;
-  
+
 }
 
 .vote-perc p{
   margin-right: auto;
-  
+
   padding-left: 5px;
 }
 
 .vote-perc h3 {
   margin-left: auto;
-  
+
 }
 
 .feature-box button {
@@ -502,7 +718,7 @@ section {
 .game-rules li {
   margin-bottom: 25px;
   font-size: 20px;
-  
+
 }
 
 .controller-container {
@@ -589,18 +805,17 @@ footer {
     margin:auto;
     min-width: 100%;
     text-align: center !important;
-    
+
   }
   .bets {
     margin-top: 20px;
     margin-left: 0 !important;
-   
+
   }
-  .bet-ttle {
+  .bet-title {
     text-align: center;
   }
 }
-
 
 @media (max-width: 768px) {
   .navbar {
@@ -636,7 +851,6 @@ footer {
     font-size: 30px;
   }
 
-
   .game-desc{
     text-align: center;
   }
@@ -659,7 +873,7 @@ footer {
     text-align: center;
 
   }
- 
+
    .guide-link p {
     font-size: 22px !important;
     padding: 15px;
@@ -677,7 +891,7 @@ footer {
   font-size: 23px;
   }
 
-  .bet-ttle {
+  .bet-title {
     text-align: center;
   }
   .join-section {
@@ -724,7 +938,7 @@ footer {
 @media (max-width: 1290px) {
   .feature-boxes {
     flex-wrap: wrap !important;
-    
+
   }
 
   .feature-box {
@@ -736,7 +950,7 @@ footer {
 @media (max-width: 820px) {
   .get-started .started-grid {
     flex-direction: column;
-    
+
   }
 
   .plugin-explain {
@@ -762,7 +976,6 @@ footer {
   margin-top: 30px;
 }
 
-
 @media (max-width: 768px) {
   .page-headers {
     text-align: center;
@@ -787,7 +1000,6 @@ footer {
     min-width: 100%;
     margin: auto;
 
-    
   }
 }
 @media (max-width: 600px) {

@@ -1,3 +1,44 @@
+<script lang="ts" setup>
+const debug = getDebugger('pricing')
+
+definePageMeta({
+  layout: 'default',
+})
+// let pricingList: PricingList = ref([]);
+
+// set the pricing list to the type PricingList
+let pricingList: PricingList = []
+const { data } = await useFetch(() => BASE_URL + PRICING_LIST, {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
+pricingList = data as unknown as PricingList
+
+debug.log('pricingList', pricingList)
+debug.log('data', data)
+
+const isLightBoxHovered = ref(false)
+
+async function openStripe(priceId: string) {
+  const { data } = await useAuthAPI<StripeCreateLink>('/stripe/create', 'POST', {
+    price_id: priceId,
+    mode: 'payment',
+  })
+
+  if (data.value.url)
+    window.open(data.value.url as string, '_blank')
+}
+
+function formatPrice(price: number) {
+  if (Number(price) === 0)
+    return 'Free'
+
+  return `$${price}`
+}
+</script>
+
 <template>
   <v-container class="pricing pt-0">
     <v-row class="intro-section">
@@ -5,7 +46,7 @@
         <h1>NPC-GPT Pricing Plans</h1>
         <p>
           Simple and flexible pricing plans adapted to the development stage of your game. Pay per volume of requests
-          made to our API only.<br />
+          made to our API only.<br>
           Only Developer packs are available at the moment. Packs for games in production will be available soon.
         </p>
       </v-col>
@@ -15,6 +56,7 @@
       <div class="feature-boxes my-9">
         <div
           v-for="pricing in pricingList"
+          :key="pricing.price_id"
           class="feature-box"
           :class="{ 'featured-item': pricing.featured && !isLightBoxHovered }"
           @mouseover="isLightBoxHovered = !pricing.featured && true"
@@ -25,14 +67,22 @@
             <li>Input tokens</li>
             <li>Output tokens</li>
             <li>Users</li>
-            <li class="align-right">{{ formatTokens(pricing.inputTokens) }}</li>
-            <li class="align-right">{{ formatTokens(pricing.outputTokens) }}</li>
-            <li class="align-right">{{ pricing.users }}</li>
+            <li class="align-right">
+              {{ formatTokens(pricing.inputTokens) }}
+            </li>
+            <li class="align-right">
+              {{ formatTokens(pricing.outputTokens) }}
+            </li>
+            <li class="align-right">
+              {{ pricing.users }}
+            </li>
           </ul>
           <div class="price-display" :class="{ 'featured-price': pricing.featured }">
             <h4>{{ formatPrice(pricing.value) }}</h4>
           </div>
-          <button class="button light-button" @click="openStripe(pricing.price_id)">Subscribe</button>
+          <button class="button light-button" @click="openStripe(pricing.price_id)">
+            Subscribe
+          </button>
         </div>
       </div>
     </v-row>
@@ -42,49 +92,6 @@
     </v-col>
   </v-container>
 </template>
-<script lang="ts" setup>
-import { ref } from 'vue';
-import { BASE_URL, PRICING_LIST } from '~/util/urls';
-import { formatTokens } from '~/util';
-
-definePageMeta({
-  layout: 'default',
-});
-// let pricingList: PricingList = ref([]);
-
-// set the pricing list to the type PricingList
-let pricingList: PricingList = [];
-let { data } = await useFetch(() => BASE_URL + PRICING_LIST, {
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-pricingList = data as unknown as PricingList;
-
-console.log('pricingList', pricingList);
-console.log('data', data);
-
-const isLightBoxHovered = ref(false);
-
-const openStripe = async (priceId: string) => {
-  const { data } = await useAuthAPI<StripeCreateLink>('/stripe/create', 'POST', {
-    price_id: priceId,
-    mode: 'payment',
-  });
-
-  if (data.value.url) {
-    window.open(data.value.url as string, '_blank');
-  }
-};
-
-const formatPrice = (price: number) => {
-  if (Number(price) === 0) {
-    return 'Free';
-  }
-  return `$${price}`;
-};
-</script>
 
 <style lang="scss" scoped>
 .pricing .intro-section h1 {
@@ -207,3 +214,4 @@ const formatPrice = (price: number) => {
   }
 }
 </style>
+src/utils/urlssrc/utils

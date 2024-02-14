@@ -1,72 +1,96 @@
+<script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+
+// import storeToRefs helper hook from pinia
+import { useAuthStore } from '~/store/auth'
+
+// import the auth store we just created
+import { getWordPattern } from '~/utils'
+
+const { getUserProfile } = useUserStore()
+
+const debug = getDebugger('AppHeader')
+
+const route = useRoute()
+
+const isLandingPage = computed(() => ['/', '/demo-game', '/demo-game/'].includes(route.path))
+
+const pattern = /^(\/[^\/]+)/
+const smallHeaderPages = ['/dashboard']
+
+const isSmallHeader = computed(() => !smallHeaderPages.includes(getWordPattern(route?.path || '', pattern)))
+
+const open = ref(false)
+
+// authentication methods
+
+const { authenticated } = storeToRefs(useAuthStore()) // make authenticated state reactive with storeToRefs
+
+if (authenticated.value) {
+  debug.log('authenticated', authenticated.value)
+
+  getUserProfile()
+}
+</script>
+
 <template>
   <nav :class="{ lp: isLandingPage, small: isSmallHeader }">
     <div class="navbar">
       <ul class="nav-links">
         <li class="nav-left">
           <NuxtLink to="/">
-            <img alt="logo" src="~/assets/images/GTS-iso.png" class="nav-logo" />
+            <img alt="logo" src="~/assets/images/GTS-iso.png" class="nav-logo">
           </NuxtLink>
         </li>
         <li class="nav-left mobile-display">
           <!-- <NuxtLink to="/products">Products</NuxtLink> -->
           <NuxtLink>
             Products
-            <v-menu activator="parent" v-model:model-value="open">
+            <v-menu v-model:model-value="open" activator="parent">
               <v-list class="dropDownMenu">
                 <a class="dropLink" href="/#sectionToLinkToApi"><v-list-item class="dropDownItem"> SDK</v-list-item></a>
-                <a class="dropLink" href="/#sectionToLinkToPlugin"
-                  ><v-list-item class="dropDownItem"> Plugins</v-list-item></a
-                >
-                <a class="dropLink" href="https://web3bazaar.org"
-                  ><v-list-item class="dropDownItem"> Web3 Marketplace</v-list-item></a
-                >
+                <a class="dropLink" href="/#sectionToLinkToPlugin"><v-list-item class="dropDownItem"> Plugins</v-list-item></a>
+                <a class="dropLink" href="https://web3bazaar.org"><v-list-item class="dropDownItem"> Web3 Marketplace</v-list-item></a>
               </v-list>
             </v-menu>
           </NuxtLink>
         </li>
         <li class="nav-left mobile-display">
-          <NuxtLink to="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction">Documentation</NuxtLink>
+          <NuxtLink to="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction">
+            Documentation
+          </NuxtLink>
         </li>
-        <li class="nav-left mobile-display"><NuxtLink to="/pricing">Pricing</NuxtLink></li>
         <li class="nav-left mobile-display">
-          <NuxtLink to="/download-plugin">Download Plugin</NuxtLink>
+          <NuxtLink to="/pricing">
+            Pricing
+          </NuxtLink>
+        </li>
+        <li class="nav-left mobile-display">
+          <NuxtLink to="/download-plugin">
+            Download Plugin
+          </NuxtLink>
         </li>
       </ul>
       <ul class="login-section">
         <li v-if="!authenticated" class="nav-right-link d-none d-sm-flex">
-          <NuxtLink to="/login"> Log in</NuxtLink>
+          <NuxtLink to="/login">
+            Log in
+          </NuxtLink>
         </li>
         <li v-if="!authenticated" class="nav-right d-none d-sm-flex">
-          <NuxtLink to="/login?register=true" class="button">Sign up</NuxtLink>
+          <NuxtLink to="/login?register=true" class="button">
+            Sign up
+          </NuxtLink>
         </li>
         <li class="user-menu" :class="{ 'd-sm-none': !authenticated }">
-          <DashboardUserMenu :isLandingPage="isLandingPage"></DashboardUserMenu>
+          <DashboardUserMenu :is-landing-page="isLandingPage" />
           <!-- <NuxtLink @click="logout">Logout</NuxtLink> -->
         </li>
       </ul>
     </div>
   </nav>
 </template>
-<script lang="ts" setup>
-import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
-import { useAuthStore } from '~/store/auth'; // import the auth store we just created
-import { getWordPattern } from '~/util';
 
-const route = useRoute();
-
-const isLandingPage = computed(() => ['/', '/demo-game', '/demo-game/'].includes(route.path));
-
-const pattern = /^(\/[^\/]+)/;
-const smallHeaderPages = ['/dashboard'];
-
-const isSmallHeader = computed(() => !smallHeaderPages.includes(getWordPattern(route?.path || '', pattern)));
-
-const open = ref(false);
-
-// authentication methods
-
-const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
-</script>
 <style lang="scss">
 nav {
   width: 100%;
@@ -273,3 +297,4 @@ nav.lp {
   }
 }
 </style>
+src/utils

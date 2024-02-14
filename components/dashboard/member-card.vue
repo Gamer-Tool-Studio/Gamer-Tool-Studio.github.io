@@ -1,3 +1,9 @@
+<script setup>
+const { member } = defineProps(['member'])
+
+const select = member.role
+</script>
+
 <template>
   <v-container class="member-card">
     <v-row class="align-center">
@@ -17,7 +23,7 @@
           readonly
           hide-details
           :items="[member.role]"
-        ></v-select>
+        />
       </v-col>
       <v-col cols="4" class="remove-user-button">
         <button
@@ -25,18 +31,13 @@
           type="submit"
           @click="removeUser = true"
         >
-        Remove
+          Remove
         </button>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script setup>
-const { member } = defineProps(["member"]);
-
-const select = member.role;
-</script>
 <style lang="scss">
 .member-card {
   .avatar {

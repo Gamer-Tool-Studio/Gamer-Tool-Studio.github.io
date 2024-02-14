@@ -1,5 +1,5 @@
 <template>
-    <div>
-        auth index
-    </div>
+  <div>
+    auth index
+  </div>
 </template>

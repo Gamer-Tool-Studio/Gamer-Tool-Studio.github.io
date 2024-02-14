@@ -1,22 +1,23 @@
-var port = process.env.PORT || 3000;
-const path = require('path');
-const express = require('express');
-let log = console;
+const port = require('node:process').env.PORT || 3000
+const path = require('node:path')
+const Express = require('express')
 
-const app = new express();
-app.use(express.static('./.output/public'));
+const log = console
 
-app.use(function (request, res, next) {
-  console.log('[CALL_ROUTE] [', request.originalUrl, '] ', ' METHOD [', request.method, '] ');
-  next();
-});
+const app = new Express()
+app.use(express.static('./.output/public'))
+
+app.use((request, res, next) => {
+  log.log('[CALL_ROUTE] [', request.originalUrl, '] ', ' METHOD [', request.method, '] ')
+  next()
+})
 
 app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './dist', 'index.html'));
-});
+  res.sendFile(path.resolve(__dirname, './dist', 'index.html'))
+})
 
-app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, './dist', 'index.html')));
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, './dist', 'index.html')))
 
 app.listen(port, () => {
-  log.log('**** ->  App listening on port : ', port);
-});
+  log.log('**** ->  App listening on port : ', port)
+})

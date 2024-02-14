@@ -1,6 +1,53 @@
+<script>
+import DialogCraftGPTLib from 'dialogcraftgpt-lib'
+
+export default {
+  name: 'BaseModal',
+  components: {},
+  emits: ['close'],
+  data() {
+    return { chatGPTText: '' }
+  },
+  computed: {},
+  async mounted() {
+    const chat = new DialogCraftGPTLib({ apiKey: 'my apiKey ' })
+    const characterContext = {
+      'name': 'John Doe',
+      'age': 30,
+      'personality': {
+        traits: ['friendly', 'outgoing'],
+        dialogueStyle: 'casual',
+      },
+      'background story': 'A character with an interesting backstory.',
+      'game knowledge': 'Experienced player',
+      'interests': {
+        sports: 5,
+        movies: 4,
+        music: 3,
+      },
+      'supportiveness': 7,
+    }
+    const chatInput = {
+      chatHistory: [],
+      userInput: 'Hello, GPT!',
+      characterContext,
+      maxOutputTokens: 50,
+    }
+    const { chatHistory } = await chat.createChat(chatInput)
+
+    this.chatGPTText = chatHistory.at(-1).content
+  },
+  methods: {
+    close() {
+      this.$emit('close')
+    },
+  },
+}
+</script>
+
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop" @click="close">
+    <div v-show="true" class="modal-backdrop" @click="close">
       <div
         class="modal"
         role="dialog"
@@ -17,7 +64,7 @@
               aria-label="Close modal"
               @click="close"
             >
-              <img src="~/assets/icons/close.svg" />
+              <img src="~/assets/icons/close.svg">
             </button>
           </slot>
         </header>
@@ -33,52 +80,6 @@
     </div>
   </transition>
 </template>
-
-<script>
-import DialogCraftGPTLib from "dialogcraftgpt-lib";
-
-export default {
-  name: "BaseModal",
-  components: {},
-  data() {
-    return { chatGPTText: "" };
-  },
-  computed: {},
-  async mounted() {
-    const chat = new DialogCraftGPTLib({ apiKey: "my apiKey " });
-    const characterContext = {
-      name: "John Doe",
-      age: 30,
-      personality: {
-        traits: ["friendly", "outgoing"],
-        dialogueStyle: "casual",
-      },
-      "background story": "A character with an interesting backstory.",
-      "game knowledge": "Experienced player",
-      interests: {
-        sports: 5,
-        movies: 4,
-        music: 3,
-      },
-      supportiveness: 7,
-    };
-    const chatInput = {
-      chatHistory: [],
-      userInput: "Hello, GPT!",
-      characterContext,
-      maxOutputTokens: 50,
-    };
-    const { response, chatHistory } = await chat.createChat(chatInput);
-
-    this.chatGPTText = chatHistory.at(-1).content;
-  },
-  methods: {
-    close() {
-      this.$emit("close");
-    },
-  },
-};
-</script>
 
 <style lang="scss">
 .modal-fade-enter,
@@ -151,4 +152,3 @@ export default {
   background: transparent;
 }
 </style>
-

@@ -1,12 +1,30 @@
+<script>
+export default {
+  name: 'RevokeKey',
+  components: {},
+  props: ['name'],
+  emits: ['close', 'delete'],
+  data() {
+    return {}
+  },
+
+  methods: {
+    close() {
+      this.$emit('close')
+    },
+  },
+}
+</script>
+
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop" @click="close">
+    <div v-show="name" class="modal-backdrop" @click="close">
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" @click.stop>
         <header class="modal-header">
           <slot name="header">
             <h1>Revoke API key</h1>
             <button type="button" class="btn-close" aria-label="Close modal" @click="close">
-              <img src="~/assets/icons/close.svg" />
+              <img src="~/assets/icons/close.svg">
             </button>
           </slot>
         </header>
@@ -27,8 +45,12 @@
                   </div>
                 </v-col>
                 <v-col cols="12" class="footer-section">
-                  <button class="cancel-button" @click="close">Cancel</button>
-                  <button class="button red" @click="$emit('delete')">Revoke Key</button>
+                  <button class="cancel-button" @click="close">
+                    Cancel
+                  </button>
+                  <button class="button red" @click="$emit('delete')">
+                    Revoke Key
+                  </button>
                 </v-col>
               </v-row>
             </v-container>
@@ -38,23 +60,6 @@
     </div>
   </transition>
 </template>
-
-<script>
-export default {
-  name: 'RevokeKey',
-  components: {},
-  props: ['name'],
-  data() {
-    return {};
-  },
-
-  methods: {
-    close() {
-      this.$emit('close');
-    },
-  },
-};
-</script>
 
 <style lang="scss">
 .text-section p {

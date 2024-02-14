@@ -1,10 +1,6 @@
-<template>
-  <base-item-group :item="item" text sub-group />
-</template>
-
 <script>
 export default {
-  name: "ItemSubGroup",
+  name: 'ItemSubGroup',
 
   props: {
     item: {
@@ -17,5 +13,9 @@ export default {
       }),
     },
   },
-};
+}
 </script>
+
+<template>
+  <base-item-group :item="item" text sub-group />
+</template>

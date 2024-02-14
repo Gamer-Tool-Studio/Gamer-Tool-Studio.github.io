@@ -1,13 +1,15 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
+
+const debug = getDebugger('store:keys')
 
 interface KeysInfo {
-  name: string;
-  key: string;
-  created: Date;
-  used: string;
+  name: string
+  key: string
+  created: Date
+  used: string
 }
 interface State {
-  keys: Array<KeysInfo>;
+  keys: Array<KeysInfo>
 }
 
 export const useKeysStore = defineStore('keys', {
@@ -21,36 +23,36 @@ export const useKeysStore = defineStore('keys', {
           used: 'Never',
         },
       ],
-    };
+    }
   },
   getters: {
     // Computed property to get the login status
   },
   actions: {
     async createApiToken(name: string) {
-      const { data, pending, error } = await useAuthAPI<{ token: string }>('/auth/gen-key', 'GET', undefined, {
+      const { data, error } = await useAuthAPI<{ token: string }>('/auth/gen-key', 'GET', undefined, {
         name,
-      });
-      console.log(data.value.token);
+      })
+      debug.log(data.value.token)
 
-      if (error.value) {
-        throw error.value;
-      }
-      return data.value;
+      if (error.value)
+        throw error.value
+
+      return data.value
     },
     async editApiToken(name: string, id: string) {
-      console.log(name, id);
+      debug.log(name, id)
 
-      const { data, pending, error } = await useAuthAPI('/auth/edit-token', 'PATCH', undefined, {
+      const { data, error } = await useAuthAPI('/auth/edit-token', 'PATCH', undefined, {
         name,
         id,
-      });
-      console.log(data.value);
+      })
+      debug.log(data.value)
 
-      if (error.value) {
-        throw error.value;
-      }
-      return data.value;
+      if (error.value)
+        throw error.value
+
+      return data.value
     },
   },
-});
+})

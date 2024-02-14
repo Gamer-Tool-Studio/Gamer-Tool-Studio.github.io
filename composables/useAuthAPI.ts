@@ -1,6 +1,8 @@
-import type { AsyncData } from 'nuxt/app';
+import type { AsyncData } from 'nuxt/app'
 
-export default function <T>(
+const debug = getDebugger('composables:useAuthAPI')
+
+export default function<T>(
   endpoint: string,
   method:
     | 'GET'
@@ -25,29 +27,29 @@ export default function <T>(
   body?: any,
   query?: any,
 ) {
-  const config = useRuntimeConfig();
-  const BASE_URL = config.public.backendURL + '/api/v1';
-  const token = useCookie('token'); // get token from cookies
+  const config = useRuntimeConfig()
+  const BASE_URL = `${config.public.backendURL}/api/v1`
+  const token = useCookie('token') // get token from cookies
 
   return useFetch(BASE_URL + endpoint, {
     method,
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token.value}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token.value}` },
     body,
     query,
     credentials: 'include', // fetch
 
     onResponseError({ request, response, options }) {
       // Handle the request errors
-      console.log(request, response, options);
+      debug.log(request, response, options)
 
       if (response.status === 401) {
-        console.log('Logged out, redirecting to login');
-        const { logUserOut } = useAuthStore(); // use authenticateUser action from  auth store
-        logUserOut();
+        debug.log('Logged out, redirecting to login')
+        const { logUserOut } = useAuthStore() // use authenticateUser action from  auth store
+        logUserOut()
 
-        const router = useRouter();
-        router.push('/login?redirect=' + router.currentRoute.value.fullPath);
+        const router = useRouter()
+        router.push(`/login?redirect=${router.currentRoute.value.fullPath}`)
       }
     },
-  }) as AsyncData<T, string>;
+  }) as AsyncData<T, string>
 }

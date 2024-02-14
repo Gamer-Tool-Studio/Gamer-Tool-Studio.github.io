@@ -1,41 +1,35 @@
-<template>
-  <NuxtLayout :name="layout">
-    <NuxtLoadingIndicator />
-    <NuxtPage />
-  </NuxtLayout>
-</template>
 <script lang="ts" setup>
-const route = useRoute();
+const route = useRoute()
 // Watch the user's login status
-
-let layout = ref("default");
+const debug = getDebugger('app')
 
 watch(
   () => route.name,
   () => {
-    console.debug(`watch route.name changed to ${String(route.name)}`);
-    // Do something here...
-    // setPageLayout(
-    //   route.path.includes("dashboard") ? "dashboard-layout" : "default"
-    // );
-
-    layout.value = route.path.includes("dashboard")
-      ? "dashboard-layout"
-      : "default";
-    // Optionally you can set immediate: true config for the watcher to run on init
-    //},
+    debug.log(`watch route.name changed to ${String(route.name)}`)
+    setPageLayout(
+      route.path.includes('dashboard') ? 'dashboard-layout' : 'default',
+    )
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 
 useHead({
   // as a string,
   // where `%s` is replaced with the title
   // of the current page
-  title: "Welcome ",
-  titleTemplate: "%s - GTS",
-});
+  title: 'Welcome ',
+  titleTemplate: '%s - GTS',
+})
 </script>
+
+<template>
+  <NuxtLayout>
+    <NuxtLoadingIndicator />
+    <NuxtPage />
+  </NuxtLayout>
+</template>
+
 <style>
 .page-enter-active,
 .page-leave-active,

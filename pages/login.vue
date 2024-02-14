@@ -1,3 +1,59 @@
+<script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+
+// import storeToRefs helper hook from pinia
+import { useAuthStore } from '~/store/auth'
+
+const debug = getDebugger('login')
+
+// import the auth store we just created
+
+const { authenticateUser, registerUser, authenticateGoogleUser } = useAuthStore() // use authenticateUser action from  auth store
+
+const { authenticated, errorMessage } = storeToRefs(useAuthStore()) // make authenticated state reactive with storeToRefs
+
+const user = ref({
+  username: '',
+  password: '',
+  email: '',
+})
+const router = useRouter()
+
+// i want to check if there is a is #register in url if it is then i want to set isRegistering to true
+const isRegistering = computed(() => router.currentRoute.value.query.register === 'true')
+
+async function loginGoogle() {
+  await authenticateGoogleUser() // call authenticateUser and pass the user object
+  // redirect to homepage if user is authenticated
+
+  if (authenticated.value) {
+    debug.log('authenticated', authenticated.value)
+    router.push({ path: '/dashboard' })
+  }
+}
+
+function handleRedirect() {
+  if (router.currentRoute.value.query.redirect)
+    router.push({ path: router.currentRoute.value.query.redirect as string })
+  else
+    router.push({ path: '/dashboard' })
+}
+
+async function login() {
+  await authenticateUser(user.value) // call authenticateUser and pass the user object
+  // redirect to homepage if user is authenticated
+  if (authenticated.value)
+    handleRedirect()
+}
+async function register() {
+  await registerUser({ ...user.value }) // call authenticateUser and pass the user object
+  // redirect to homepage if user is authenticated
+  debug.log('authenticated', authenticated.value)
+  if (authenticated.value)
+    handleRedirect()
+}
+</script>
+
 <template>
   <v-container class="login-container">
     <v-row>
@@ -6,8 +62,7 @@
       </v-col>
       <v-col cols="12" class="container-form">
         <div class="login-box">
-          <label for="uname" class="pass-text"><b>Username</b></label
-          ><br />
+          <label for="uname" class="pass-text"><b>Username</b></label><br>
           <input
             v-model="user.username"
             type="text"
@@ -15,11 +70,10 @@
             :placeholder="isRegistering ? 'Enter Username' : 'Enter Username or Email'"
             name="uname"
             required
-          />
+          >
         </div>
         <div class="login-box">
-          <label for="psw" class="pass-text"><b>Password</b></label
-          ><br />
+          <label for="psw" class="pass-text"><b>Password</b></label><br>
           <input
             v-model="user.password"
             type="password"
@@ -27,22 +81,29 @@
             placeholder="Enter Password"
             name="psw"
             required
-          />
+          >
         </div>
         <div v-if="isRegistering" class="login-box">
-          <label for="psw" class="pass-text"><b>Email</b></label
-          ><br />
-          <input v-model="user.email" type="email" class="input" placeholder="Enter Email" name="email" required />
+          <label for="psw" class="pass-text"><b>Email</b></label><br>
+          <input v-model="user.email" type="email" class="input" placeholder="Enter Email" name="email" required>
         </div>
       </v-col>
       <v-col cols="12">
-        <button @click.prevent="isRegistering ? register() : login()" class="button loginBtn">Continue</button>
+        <button class="button loginBtn" @click.prevent="isRegistering ? register() : login()">
+          Continue
+        </button>
       </v-col>
       <v-col v-if="errorMessage" cols="12">
-        <p style="color: red">{{ errorMessage }}</p>
+        <p style="color: red">
+          {{ errorMessage }}
+        </p>
       </v-col>
       <v-col v-if="!isRegistering" cols="12" class="register-link">
-        <p>Don't have an account? <NuxtLink to="/login?register=true">Sign up</NuxtLink></p>
+        <p>
+          Don't have an account? <NuxtLink to="/login?register=true">
+            Sign up
+          </NuxtLink>
+        </p>
       </v-col>
       <v-col v-if="isRegistering" cols="12" class="register-link">
         <p>Already have an account? <NuxtLink to="/login">Log in</NuxtLink></p>
@@ -52,65 +113,14 @@
       </v-col>
       <v-col cols="12">
         <div class="auth-card" @click.prevent="loginGoogle">
-          <img src="~/assets/images/google-logo.png" style="width: 30px" />
+          <img src="~/assets/images/google-logo.png" style="width: 30px">
           <p>Continue with Google</p>
         </div>
       </v-col>
     </v-row>
   </v-container>
 </template>
-<script lang="ts" setup>
-import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
-import { useAuthStore } from '~/store/auth'; // import the auth store we just created
 
-const { authenticateUser, registerUser, authenticateGoogleUser } = useAuthStore(); // use authenticateUser action from  auth store
-
-const { authenticated, errorMessage } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
-
-const user = ref({
-  username: '',
-  password: '',
-  email: '',
-});
-const router = useRouter();
-
-// i want to check if there is a is #register in url if it is then i want to set isRegistering to true
-const isRegistering = computed(() => router.currentRoute.value.query.register === 'true');
-
-const loginGoogle = async () => {
-  await authenticateGoogleUser(); // call authenticateUser and pass the user object
-  // redirect to homepage if user is authenticated
-
-  if (authenticated.value) {
-    console.log('authenticated', authenticated.value);
-    router.push({ path: '/dashboard' });
-  }
-};
-
-const handleRedirect = () => {
-  if (router.currentRoute.value.query.redirect) {
-    router.push({ path: router.currentRoute.value.query.redirect as string });
-  } else {
-    router.push({ path: '/dashboard' });
-  }
-};
-
-const login = async () => {
-  await authenticateUser(user.value); // call authenticateUser and pass the user object
-  // redirect to homepage if user is authenticated
-  if (authenticated.value) {
-    handleRedirect();
-  }
-};
-const register = async () => {
-  await registerUser({ ...user.value }); // call authenticateUser and pass the user object
-  // redirect to homepage if user is authenticated
-  console.log('authenticated', authenticated.value);
-  if (authenticated.value) {
-    handleRedirect();
-  }
-};
-</script>
 <style lang="scss">
 .login-container {
   text-align: center;

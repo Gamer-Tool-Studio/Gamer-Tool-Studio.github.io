@@ -1,17 +1,47 @@
+<script setup>
+import { useTheme } from 'vuetify'
+
+const { getUserProfile } = useUserStore()
+const cssVars = {}
+
+const theme = useTheme()
+
+getUserProfile()
+
+theme.global.name.value = 'light'
+cssVars['--background'] = 'white'
+</script>
+
 <template>
   <v-layout :style="cssVars">
-    <v-app-bar color="w-100" elevation="0">
+    <v-app-bar
+      color="w-100"
+      elevation="0"
+    >
       <AppHeader />
     </v-app-bar>
     <v-main class="d-flex">
-      <v-container fluid class="pa-0 d-flex flex-grow-1 dashboard-border">
+      <v-container
+        fluid
+        class="pa-0 d-flex flex-grow-1 dashboard-border"
+      >
         <v-row no-gutters>
-          <v-col cols="1" lg="2">
+          <v-col
+            cols="1"
+            lg="2"
+          >
             <dashboard-drawer />
           </v-col>
 
-          <v-col cols="10" class="">
-            <v-card class="dashboard-content" elevation="0" outlined>
+          <v-col
+            cols="10"
+            class=""
+          >
+            <v-card
+              class="dashboard-content"
+              elevation="0"
+              outlined
+            >
               <slot />
             </v-card>
           </v-col>
@@ -21,19 +51,7 @@
     <!-- <AppFooter /> -->
   </v-layout>
 </template>
-<script setup>
-import { useTheme } from 'vuetify';
 
-const { getUserProfile } = useUserStore();
-const cssVars = {};
-
-const theme = useTheme();
-
-getUserProfile();
-
-theme.global.name.value = 'light';
-cssVars['--background'] = 'white';
-</script>
 <style lang="scss">
 :root {
   --content-v-padding: 12px;

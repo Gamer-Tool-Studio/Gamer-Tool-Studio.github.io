@@ -10,7 +10,7 @@ Required node version: >=19.0.0
 
 Basic middleware was added to project for auth. You can use it as a template for your own middleware.
 
-Auth middleware control in /composables/useAuth
+Auth middleware control in /composables/useAuthAPI
 
 Pinia was implemented in /store folder.
 

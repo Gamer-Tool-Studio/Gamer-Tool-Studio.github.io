@@ -1,3 +1,14 @@
+<script>
+export default {
+  computed: {
+    // Going to make some small js tweaks
+    isLandingPage() {
+      return this.$route.path === '/'
+    },
+  },
+}
+</script>
+
 <template>
   <footer :class="{ lp: isLandingPage }" class="comp-footer">
     <div class="footer-content">
@@ -26,19 +37,12 @@
         </ul>
       </div>
     </div>
-    <p class="footer-copy">© Gamer Tools Studio 2023</p>
+    <p class="footer-copy">
+      © Gamer Tools Studio 2023
+    </p>
   </footer>
 </template>
-<script>
-export default {
-  computed: {
-    // Going to make some small js tweaks
-    isLandingPage() {
-      return this.$route.path == "/";
-    },
-  },
-};
-</script>
+
 <style lang="scss">
 /* Footer Styles */
 footer {
@@ -112,12 +116,11 @@ footer a {
   font-size: 14px;
 }
 
-
 @media (max-width: 768px) {
   .footer-content {
     display: inline-block;
   }
-  
+
   .footer-row {
     width: 100%;
   }

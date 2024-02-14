@@ -1,12 +1,61 @@
+<script>
+const debug = getDebugger('GenerateApiKey')
+
+export default {
+  name: 'GenerateApiKey',
+  props: ['formTitle', 'name', 'id'],
+  emits: ['close', 'update:name'],
+  data() {
+    return {
+      isCreating: !this.name ? 'Create Secret Key' : 'Save',
+      inviteUser: false,
+      apiKey: '', // Store the generated key
+      keyGenerated: false, // Add this property
+    }
+  },
+  methods: {
+    close() {
+      this.$emit('close')
+    },
+    async editKey() {
+      debug.log('editKey')
+
+      const keysStore = useKeysStore()
+      await keysStore.editApiToken(this.name, this.id)
+      this.keyGenerated = true // Set keyGenerated to true
+    },
+    async generateKey() {
+      debug.log('generateKey')
+      const keysStore = useKeysStore()
+      const { token: apiKey } = await keysStore.createApiToken(this.name)
+      debug.log(apiKey)
+      this.apiKey = apiKey
+      this.keyGenerated = true // Set keyGenerated to true
+    },
+    async copyToClipboard() {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(this.apiKey)
+          debug.log('API key copied to clipboard')
+        }
+      }
+      catch (err) {
+        debug.error('Error copying API key to clipboard:', err)
+      }
+    },
+  },
+}
+</script>
+
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop" @click="close">
+    <div v-show="true" class="modal-backdrop" @click="close">
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" @click.stop>
         <header class="modal-header">
           <slot name="header">
             <h1>{{ apiKey ? 'Create new secret key' : formTitle }}</h1>
             <button type="button" class="btn-close" aria-label="Close modal" @click="close">
-              <img src="~/assets/icons/close.svg" />
+              <img src="~/assets/icons/close.svg">
             </button>
           </slot>
         </header>
@@ -14,7 +63,9 @@
           <slot name="body">
             <div v-if="!apiKey">
               <v-col cols="12" class="header-section">
-                <h3 class="modal-subheader">Name</h3>
+                <h3 class="modal-subheader">
+                  Name
+                </h3>
               </v-col>
               <v-col cols="12" class="forms-section">
                 <input
@@ -23,11 +74,13 @@
                   placeholder="My test key"
                   :value="name"
                   @input="$emit('update:name', $event.target.value)"
-                />
+                >
               </v-col>
               <v-col cols="12" class="footer-section">
                 <div class="button-container">
-                  <button class="cancel-button" @click="close">Cancel</button>
+                  <button class="cancel-button" @click="close">
+                    Cancel
+                  </button>
                   <button class="button" @click="id ? editKey() : generateKey()">
                     {{ isCreating }}
                   </button>
@@ -53,11 +106,11 @@
                     :value="apiKey"
                     disabled
                     @input="$emit('update:name', $event.target.value)"
-                  />
+                  >
                 </v-col>
                 <v-col cols="2" class="copy-button-section">
                   <div class="img-container methods-bcg" @click="copyToClipboard">
-                    <img src="~/assets/images/white-copy-icon.png" />
+                    <img src="~/assets/images/white-copy-icon.png">
                   </div>
                 </v-col>
               </v-col>
@@ -75,51 +128,6 @@
     </div>
   </transition>
 </template>
-
-<script>
-export default {
-  name: 'GenerateApiKey',
-  props: ['formTitle', 'name', 'id'],
-  data() {
-    return {
-      isCreating: !this.name ? 'Create Secret Key' : 'Save',
-      inviteUser: false,
-      apiKey: '', // Store the generated key
-      keyGenerated: false, // Add this property
-    };
-  },
-  methods: {
-    close() {
-      this.$emit('close');
-    },
-    async editKey() {
-      console.log('editKey');
-
-      const keysStore = useKeysStore();
-      await keysStore.editApiToken(this.name, this.id);
-      this.keyGenerated = true; // Set keyGenerated to true
-    },
-    async generateKey() {
-      console.log('generateKey');
-      const keysStore = useKeysStore();
-      const { token: apiKey } = await keysStore.createApiToken(this.name);
-      console.log(apiKey);
-      this.apiKey = apiKey;
-      this.keyGenerated = true; // Set keyGenerated to true
-    },
-    async copyToClipboard() {
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(this.apiKey);
-          console.log('API key copied to clipboard');
-        }
-      } catch (err) {
-        console.error('Error copying API key to clipboard:', err);
-      }
-    },
-  },
-};
-</script>
 
 <style lang="scss">
 .modal-fade-enter,

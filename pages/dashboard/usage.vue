@@ -1,3 +1,66 @@
+<script setup>
+import { storeToRefs } from 'pinia'
+
+// import storeToRefs helper hook from pinia
+// Chart
+import { Bar } from 'vue-chartjs'
+
+useHead({
+  title: 'Usage',
+})
+
+const tokenStore = useTokenCountStore()
+
+const {
+  monthlyInput,
+  monthlyOutput,
+  currentMonth,
+  availableInputTokens,
+  availableOutputTokens,
+  chatsTotal,
+  chatsToday,
+} = storeToRefs(tokenStore)
+
+const consumedInputTokens = computed(() => monthlyInput.value.reduce((a, b) => a + b, 0))
+const consumedOutputTokens = computed(() => monthlyOutput.value.reduce((a, b) => a + b, 0))
+const progressInputPercentage = computed(() => `${(consumedInputTokens.value / availableInputTokens.value) * 100}%`)
+const progressOutputPercentage = computed(() => `${(consumedOutputTokens.value / availableOutputTokens.value) * 100}%`)
+
+const changeMonth = tokenStore.changeMonth
+const getBalance = tokenStore.getBalance
+
+const hasPreviousMonth = true
+const hasNextMonth = true
+const isCumulative = ref(false)
+
+const currentMonthName = computed(() => getMonthName(currentMonth.value))
+const labels = computed(() => getMonthDays(currentMonth.value))
+
+changeMonth(currentMonth)
+getBalance()
+
+const chartData = computed(() => ({
+  labels: labels.value,
+  datasets: [
+    {
+      label: 'Input tokens',
+      backgroundColor: '#6200EE',
+      data: isCumulative.value ? getCumulativeTokens(monthlyInput.value) : monthlyInput.value,
+    },
+    {
+      label: 'Output tokens',
+      backgroundColor: '#C834A4',
+      data: isCumulative.value ? getCumulativeTokens(monthlyOutput.value) : monthlyOutput.value,
+    },
+  ],
+}))
+const chartOptions = ref({
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: { legend: { display: false } },
+})
+</script>
+
 <template>
   <v-container class="usage-page">
     <v-row>
@@ -11,9 +74,15 @@
         </p>
       </v-col>
       <v-col cols="8" class="month-title-section">
-        <v-btn flat class="switch-month" v-if="hasPreviousMonth" @click="changeMonth(currentMonth - 1)">&lt;</v-btn>
-        <v-btn flat class="month-title" width="120">{{ currentMonthName }}</v-btn>
-        <v-btn flat class="switch-month" v-if="hasNextMonth" @click="changeMonth(currentMonth + 1)">&gt;</v-btn>
+        <v-btn v-if="hasPreviousMonth" flat class="switch-month" @click="changeMonth(currentMonth - 1)">
+          &lt;
+        </v-btn>
+        <v-btn flat class="month-title" width="120">
+          {{ currentMonthName }}
+        </v-btn>
+        <v-btn v-if="hasNextMonth" flat class="switch-month" @click="changeMonth(currentMonth + 1)">
+          &gt;
+        </v-btn>
       </v-col>
       <v-col cols="4" class="daily-section">
         <div class="switch-field">
@@ -56,7 +125,10 @@
           </v-card>
         </v-col>
       </v-row>
-      <!-- 
+      <v-btn class="button" color="none" to="/pricing">
+        Add credits
+      </v-btn>
+      <!--
       <v-col cols="4" class="current-subscription">
         <h3>Active subsciption pack</h3>
       </v-col>
@@ -71,70 +143,6 @@
     </v-row>
   </v-container>
 </template>
-
-<script setup>
-useHead({
-  title: 'Usage',
-});
-
-import { getMonthDays, getMonthName, getCumulativeTokens } from '~/util/chart';
-import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
-// Chart
-import { Bar } from 'vue-chartjs';
-
-import { formatTokens } from '~/util';
-
-const tokenStore = useTokenCountStore();
-
-const {
-  monthlyInput,
-  monthlyOutput,
-  currentMonth,
-  availableInputTokens,
-  availableOutputTokens,
-  chatsTotal,
-  chatsToday,
-} = storeToRefs(tokenStore);
-
-const consumedInputTokens = computed(() => monthlyInput.value.reduce((a, b) => a + b, 0));
-const consumedOutputTokens = computed(() => monthlyOutput.value.reduce((a, b) => a + b, 0));
-const progressInputPercentage = computed(() => `${(consumedInputTokens.value / availableInputTokens.value) * 100}%`);
-const progressOutputPercentage = computed(() => `${(consumedOutputTokens.value / availableOutputTokens.value) * 100}%`);
-
-const changeMonth = tokenStore.changeMonth;
-const getBalance = tokenStore.getBalance;
-
-const hasPreviousMonth = true;
-const hasNextMonth = true;
-const isCumulative = ref(false);
-
-const currentMonthName = computed(() => getMonthName(currentMonth.value));
-const labels = computed(() => getMonthDays(currentMonth.value));
-
-changeMonth(currentMonth);
-getBalance();
-
-const chartData = computed(() => ({
-  labels: labels.value,
-  datasets: [
-    {
-      label: 'Input tokens',
-      backgroundColor: '#6200EE',
-      data: isCumulative.value ? getCumulativeTokens(monthlyInput.value) : monthlyInput.value,
-    },
-    {
-      label: 'Output tokens',
-      backgroundColor: '#C834A4',
-      data: isCumulative.value ? getCumulativeTokens(monthlyOutput.value) : monthlyOutput.value,
-    },
-  ],
-}));
-const chartOptions = ref({
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: { legend: { display: false } },
-});
-</script>
 
 <style lang="scss">
 .counter-cards {
@@ -324,3 +332,4 @@ const chartOptions = ref({
   }
 }
 </style>
+src/utils/chartsrc/utils

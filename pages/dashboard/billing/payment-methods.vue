@@ -1,3 +1,11 @@
+<script setup>
+useHead({
+  title: 'Payment methods ',
+})
+
+const baseModal = ref(false)
+</script>
+
 <template>
   <v-container>
     <v-row>
@@ -9,11 +17,13 @@
       <v-col cols="4">
         <div class="cards-section">
           <div class="logo-container">
-            <img src="~/assets/images/visa-logo.jpeg" />
+            <img src="~/assets/images/visa-logo.jpeg">
             <h3>***** 833798</h3>
           </div>
           <div class="text-container">
-            <p class="billing-desc">Expires 01/2024</p>
+            <p class="billing-desc">
+              Expires 01/2024
+            </p>
           </div>
           <div class="delete-default">
             <p>Set as Default</p>
@@ -24,11 +34,13 @@
       <v-col cols="4">
         <div class="cards-section">
           <div class="logo-container">
-            <img src="~/assets/images/visa-logo.jpeg" />
+            <img src="~/assets/images/visa-logo.jpeg">
             <h3>***** 833798</h3>
           </div>
           <div class="text-container">
-            <p class="billing-desc">Expires 01/2024</p>
+            <p class="billing-desc">
+              Expires 01/2024
+            </p>
           </div>
           <div class="delete-default">
             <p>Set as Default</p>
@@ -39,11 +51,13 @@
       <v-col cols="4">
         <div class="cards-section">
           <div class="logo-container">
-            <img src="~/assets/images/visa-logo.jpeg" />
+            <img src="~/assets/images/visa-logo.jpeg">
             <h3>***** 833798</h3>
           </div>
           <div class="text-container">
-            <p class="billing-desc">Expires 01/2024</p>
+            <p class="billing-desc">
+              Expires 01/2024
+            </p>
           </div>
           <div class="delete-default">
             <p>Set as Default</p>
@@ -62,17 +76,9 @@
     <modal-base-modal
       v-if="baseModal"
       @close="baseModal = false"
-    ></modal-base-modal>
+    />
   </v-container>
 </template>
-
-<script setup>
-useHead({
-  title: "Payment methods ",
-});
-
-const baseModal = ref(false);
-</script>
 
 <style lang="scss">
 .cards-section {

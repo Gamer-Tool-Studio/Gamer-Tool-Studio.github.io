@@ -1,12 +1,29 @@
+<script>
+export default {
+  name: 'InviteNewUser',
+  components: {},
+  emits: ['close'],
+  data() {
+    return {}
+  },
+
+  methods: {
+    close() {
+      this.$emit('close')
+    },
+  },
+}
+</script>
+
 <template>
   <transition name="modal-fade">
-    <div class="modal-backdrop" @click="close">
+    <div v-show="true" class="modal-backdrop" @click="close">
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" @click.stop>
         <header class="modal-header">
           <slot name="header">
             <h1>Invite team members</h1>
             <button type="button" class="btn-close" aria-label="Close modal" @click="close">
-              <img src="~/assets/icons/close.svg" />
+              <img src="~/assets/icons/close.svg">
             </button>
           </slot>
         </header>
@@ -14,23 +31,31 @@
           <slot name="body">
             <v-col cols="12" class="header-section">
               <v-col cols="9" class="header-div">
-                <h3 class="modal-subheader">Emails</h3>
+                <h3 class="modal-subheader">
+                  Emails
+                </h3>
               </v-col>
               <v-col cols="3">
-                <h3 class="modal-subheader">Role</h3>
+                <h3 class="modal-subheader">
+                  Role
+                </h3>
               </v-col>
             </v-col>
             <v-col cols="12" class="forms-section">
               <v-col cols="9">
-                <input class="modal-forms" type="form" placeholder="john@example.com, jane@example.com" />
+                <input class="modal-forms" type="form" placeholder="john@example.com, jane@example.com">
               </v-col>
               <v-col cols="3">
-                <input class="modal-forms" type="form" placeholder="Admin" />
+                <input class="modal-forms" type="form" placeholder="Admin">
               </v-col>
             </v-col>
             <v-col cols="12" class="footer-section">
-              <button class="cancel-button" @click="close">Cancel</button>
-              <button class="button">Invite</button>
+              <button class="cancel-button" @click="close">
+                Cancel
+              </button>
+              <button class="button">
+                Invite
+              </button>
             </v-col>
           </slot>
         </section>
@@ -38,22 +63,6 @@
     </div>
   </transition>
 </template>
-
-<script>
-export default {
-  name: 'InviteNewUser',
-  components: {},
-  data() {
-    return {};
-  },
-
-  methods: {
-    close() {
-      this.$emit('close');
-    },
-  },
-};
-</script>
 
 <style lang="scss">
 .modal-fade-enter,

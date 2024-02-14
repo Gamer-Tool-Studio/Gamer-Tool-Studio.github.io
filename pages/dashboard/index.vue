@@ -1,3 +1,22 @@
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/store/user'
+
+const debug = getDebugger('app:pages:dashboard:index')
+
+const store = useUserStore()
+
+const { orgName, orgId } = storeToRefs(store)
+
+function updateProfile(e) {
+  debug.log('updateProfile', e)
+}
+
+useHead({
+  title: 'Home ',
+})
+</script>
+
 <template>
   <v-container class="settings-page">
     <v-row>
@@ -10,33 +29,20 @@
           <label>
             Human-friendly label for your organization, shown in user interfaces
           </label>
-          <v-text-field v-model="orgName"> </v-text-field>
+          <v-text-field v-model="orgName" />
           <h4>Organization ID</h4>
           <label>
             Identifier for this organization sometimes used in API requests
           </label>
-          <v-text-field v-model="orgId" disabled> </v-text-field>
-          <button class="button" type="submit">Save</button>
+          <v-text-field v-model="orgId" disabled />
+          <button class="button" type="submit">
+            Save
+          </button>
         </v-form>
       </v-col>
     </v-row>
   </v-container>
 </template>
-<script setup>
-import { storeToRefs } from "pinia";
-import { useUserStore } from "@/store/user";
-const store = useUserStore();
-
-const { orgName, orgId } = storeToRefs(store);
-
-const updateProfile = (e) => {
-  console.log("updateProfile", e);
-};
-
-useHead({
-  title: "Home ",
-});
-</script>
 
 <style lang="scss">
 .settings-page h4 {

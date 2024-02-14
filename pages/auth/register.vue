@@ -1,15 +1,9 @@
-<template>
-  <FormRegister>
-    <template #title>
-      <h1 class="my-5">Register</h1>
-    </template>
-  </FormRegister>
-</template>
 <script lang="ts">
-import FormRegister from "~/components/auth/FormRegister.vue";
+import FormRegister from '~/components/auth/FormRegister.vue'
+
 definePageMeta({
-  layout: "auth",
-});
+  layout: 'auth',
+})
 
 export default defineComponent({
   components: {
@@ -17,9 +11,19 @@ export default defineComponent({
   },
   setup() {
     useHead({
-      title: "Register",
-    });
-    return {};
+      title: 'Register',
+    })
+    return {}
   },
-});
+})
 </script>
+
+<template>
+  <FormRegister>
+    <template #title>
+      <h1 class="my-5">
+        Register
+      </h1>
+    </template>
+  </FormRegister>
+</template>

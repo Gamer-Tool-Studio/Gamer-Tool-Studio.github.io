@@ -1,3 +1,22 @@
+<script lang="ts" setup>
+</script>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+useHead({
+  title: 'Download Plugin',
+})
+
+useHead({
+  title: 'Download Plugin',
+})
+
+// Example of defining a reactive property for download URL
+// Ensure the URL is correctly encoded, especially if there are special characters
+const downloadURL = ref('/cluaido/js/plugins/NPC-GPT-Plugin.js')
+</script>
+
 <template>
   <v-container class="download-plugin-page">
     <v-row class="intro-section">
@@ -10,13 +29,13 @@
       </v-col>
       <v-col cols="12" class="engine-cards">
         <v-col cols="12" class="card-header-section">
-          <img src="/images/RPGM-text.png"/>
+          <img src="/images/RPGM-text.png">
         </v-col>
         <div class="cards-container">
           <v-col cols="6" class="download-cards left-card">
             <a :href="downloadURL" download clas="downloadFile">
               <v-col cols="12" class="card-icon-name">
-                <img class="download-logo" src="/images/RPGM-icon.png"/>
+                <img class="download-logo" src="/images/RPGM-icon.png">
                 <h3>RPG Maker MZ</h3>
               </v-col>
               <p>&#8595;Download</p>
@@ -25,11 +44,11 @@
           <v-col cols="6" class="download-cards right-card">
             <a :href="downloadURL" download>
               <v-col cols="12" class="card-icon-name">
-                <img class="download-logo" src="/images/MV-icon.png"/>
+                <img class="download-logo" src="/images/MV-icon.png">
                 <h3>RPG Maker MV</h3>
               </v-col>
               <p>&#8595Download</p>
-            </a>  
+            </a>
           </v-col>
         </div>
       </v-col>
@@ -43,21 +62,7 @@
   </v-container>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue';
-
-useHead({
-  title: "Download Plugin",
-});
-
-// Example of defining a reactive property for download URL
-// Ensure the URL is correctly encoded, especially if there are special characters
-const downloadURL = ref('/cluaido/js/plugins/NPC-GPT-Plugin.js');
-</script>
-
-
 <style lang="scss">
-
 .download-plugin-page {
   margin-top: 0px;
   padding-top: 0px;
@@ -112,7 +117,7 @@ const downloadURL = ref('/cluaido/js/plugins/NPC-GPT-Plugin.js');
   margin-top: 3px;
   border: 1px solid #ECECF1;
   padding: 0;
-  border-radius: 7px;  
+  border-radius: 7px;
 
 }
 
@@ -145,7 +150,7 @@ const downloadURL = ref('/cluaido/js/plugins/NPC-GPT-Plugin.js');
 .download-cards p:hover {
   text-decoration: underline;
   color:#6200EE;
-} 
+}
 
 .download-logo {
   max-width: 50px;

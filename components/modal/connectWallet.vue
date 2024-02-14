@@ -1,744 +1,81 @@
-<template>
-  <transition name="modal-fade">
-    <div class="modal-backdrop nft-modal" @click="close">
-      <div class="modal" role="dialog" @click.stop>
-        <v-col cols="12">
-          <header class="modal-header">
-            <h1 v-if="!isConnected">Connect your web3 wallet</h1>
-            <h1 v-else-if="isApproving">Approve USDT spending in your wallet</h1>
-            <h1 v-else-if="isMinting">Approve the Minting Transaction in your wallet</h1>
-            <h1 v-else-if="mintInProgress">Minting your Accusation</h1>
-            <h1 v-else-if="mintSuccessful">Success!</h1>
-            <h1 v-else>Make your accusation</h1>
-          </header>
-          <button type="button" class="btn-close" aria-label="Close modal" @click="close">
-            <img src="~/assets/icons/close_white.png" />
-          </button>
-        </v-col>
-        <section class="modal-body">
-          <v-container>
-            <v-row class="modal-content-section">
-              <!-- Conditional Content -->
-              <div v-if="!isConnected">
-                <!-- Wallet Connection Content -->
-                <v-col cols="12" class="text-section">
-                  <p class="tx-status">Approve the connection in your wallet extension!</p>
-                </v-col>
-                <div v-if="isLoading" class="loader"></div>
-                <v-col cols="12" class="connect-button">
-                  <button class="button" @click="connectWallet">Connect again</button>
-                </v-col>
-                <v-col cols="12" class="redirect">
-                  <p>Don't have web3 wallet? Get <a href="https://metamask.io/">Metamask wallet</a> now.</p>
-                </v-col>
-              </div>
-              <!-- Approve state content -->
-              <div v-else-if="isApproving">
-                <div class="loader"></div>
-              </div>
-              <!-- Minting state content -->
-              <div v-else-if="isMinting">
-                <div class="loader"></div>
-              </div>
-              <!-- Minting in progress state content -->
-              <div v-else-if="mintInProgress">
-                <div class="loader"></div>
-                <p class="tx_status">Transaction pending. Check its status in your wallet</p>
-              </div>
-              <!-- Success State content -->
-              <div v-else-if="mintSuccessful">
-                <v-col cols="12" class="nft-display">
-                  <img :src="`/images/tcg/${suspectId}.png`" alt="Suspect Image">
-                </v-col>
-                <p class="tx_status">You have successfully minted your NFT.</p>
-                <a href="https://testnets.opensea.io/collection/unidentified-contract-e4ba0bc2-ca14-4e90-b433-df91"><button class="opensea">Check on OpenSea</button></a>
-              </div>
-              <div v-else>
-                <!-- Minting Content -->
-                <v-col cols="12" class="nft-display">
-                  <img :src="`/images/tcg/${suspectId}.png`" alt="Suspect Image">
-                </v-col>
-                <v-col cols="12" class="amount-section">
-                  <input type="number" v-model.number="mintAmount" min="1" class="mint-amount-input" />
-                </v-col>
-                <v-col cols="12" class="text-section">
-                  <p>Total Price: {{ mintAmount * 5 }} USDT</p>
-                </v-col>
-                <v-col cols="12" class="connect-button">
-                  <button class="button" @click="mintNFT">Mint Accusation</button>
-                </v-col>
-                <v-col cols="12" class="redirect">
-                  <p>Don't have any USDT? Buy it on <a href="https://www.binance.com/">Binance</a> or in another exchange.</p>
-                </v-col>
-              </div>
-            </v-row>
-          </v-container>
-        </section>
-      </div>
-    </div>
-  </transition>
-</template>
 <script>
-import Web3 from 'web3';
+import Web3 from 'web3'
+
+const debug = getDebugger('modal:ConnectWallet')
 
 export default {
+  name: 'ConnectWallet',
   props: {
-    suspectId: Number
+    suspectId: Number,
   },
-  name: 'Connect Wallet',
+  emits: ['close'],
   data() {
     return {
       isLoading: false,
       account: null,
-      mintAmount: 1, 
+      mintAmount: 1,
       isConnected: false,
       isApproving: false,
       isMinting: false,
       web3: null, // Initialize Web3
-      mintInProgress: false, 
+      mintInProgress: false,
       mintSuccessful: false,
       contract: null, // Initialize contract for NFT
       usdtContract: null, // Initialize contract for USDT
       mintPriceInUSDT: 5, // Set mint price (adjust as needed)
       contractAddress: '0x316a753a5bDA0251FdAB083Afa6cf20DC8c0aFE7', // Set your contract address
       usdtContractAddress: '0x89A84dc58ABA7909818C471B2EbFBc94e6C96c41', // Set USDT contract address
-      contractABI: [
-    {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "sender",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "balance",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "needed",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "tokenId",
-          "type": "uint256"
-        }
-      ],
-      "name": "ERC1155InsufficientBalance",
-      "type": "error"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "approver",
-          "type": "address"
-        }
-      ],
-      "name": "ERC1155InvalidApprover",
-      "type": "error"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "idsLength",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "valuesLength",
-          "type": "uint256"
-        }
-      ],
-      "name": "ERC1155InvalidArrayLength",
-      "type": "error"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "operator",
-          "type": "address"
-        }
-      ],
-      "name": "ERC1155InvalidOperator",
-      "type": "error"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "receiver",
-          "type": "address"
-        }
-      ],
-      "name": "ERC1155InvalidReceiver",
-      "type": "error"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "sender",
-          "type": "address"
-        }
-      ],
-      "name": "ERC1155InvalidSender",
-      "type": "error"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "operator",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "owner",
-          "type": "address"
-        }
-      ],
-      "name": "ERC1155MissingApprovalForAll",
-      "type": "error"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "operator",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "bool",
-          "name": "approved",
-          "type": "bool"
-        }
-      ],
-      "name": "ApprovalForAll",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "operator",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "from",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256[]",
-          "name": "ids",
-          "type": "uint256[]"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256[]",
-          "name": "values",
-          "type": "uint256[]"
-        }
-      ],
-      "name": "TransferBatch",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "operator",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "from",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "id",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "value",
-          "type": "uint256"
-        }
-      ],
-      "name": "TransferSingle",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "value",
-          "type": "string"
-        },
-        {
-          "indexed": true,
-          "internalType": "uint256",
-          "name": "id",
-          "type": "uint256"
-        }
-      ],
-      "name": "URI",
-      "type": "event"
-    },
-    {
-      "inputs": [],
-      "name": "MINT_PRICE",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "SUSPECT_1_ID",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "SUSPECT_2_ID",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "SUSPECT_3_ID",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "SUSPECT_4_ID",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "SUSPECT_5_ID",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "SUSPECT_6_ID",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "SUSPECT_7_ID",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "id",
-          "type": "uint256"
-        }
-      ],
-      "name": "balanceOf",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address[]",
-          "name": "accounts",
-          "type": "address[]"
-        },
-        {
-          "internalType": "uint256[]",
-          "name": "ids",
-          "type": "uint256[]"
-        }
-      ],
-      "name": "balanceOfBatch",
-      "outputs": [
-        {
-          "internalType": "uint256[]",
-          "name": "",
-          "type": "uint256[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "operator",
-          "type": "address"
-        }
-      ],
-      "name": "isApprovedForAll",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "owner",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "from",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256[]",
-          "name": "ids",
-          "type": "uint256[]"
-        },
-        {
-          "internalType": "uint256[]",
-          "name": "values",
-          "type": "uint256[]"
-        },
-        {
-          "internalType": "bytes",
-          "name": "data",
-          "type": "bytes"
-        }
-      ],
-      "name": "safeBatchTransferFrom",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "from",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "id",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "value",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bytes",
-          "name": "data",
-          "type": "bytes"
-        }
-      ],
-      "name": "safeTransferFrom",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "operator",
-          "type": "address"
-        },
-        {
-          "internalType": "bool",
-          "name": "approved",
-          "type": "bool"
-        }
-      ],
-      "name": "setApprovalForAll",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes4",
-          "name": "interfaceId",
-          "type": "bytes4"
-        }
-      ],
-      "name": "supportsInterface",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "uri",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [],
-      "name": "usdtToken",
-      "outputs": [
-        {
-          "internalType": "contract IERC20",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "id",
-          "type": "uint256"
-        }
-      ],
-      "name": "mint",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "withdrawFunds",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ], 
+      contractABI,
       usdtContractABI: [
       // Minimal ERC20 ABI for approve function
-      {
-        "constant": true,
-        "inputs": [
-          {
-            "name": "_owner",
-            "type": "address"
-          },
-          {
-            "name": "_spender",
-            "type": "address"
-          }
-        ],
-        "name": "allowance",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "type": "function"
-      }
-    ],
+        {
+          constant: true,
+          inputs: [
+            {
+              name: '_owner',
+              type: 'address',
+            },
+            {
+              name: '_spender',
+              type: 'address',
+            },
+          ],
+          name: 'allowance',
+          outputs: [
+            {
+              name: '',
+              type: 'uint256',
+            },
+          ],
+          type: 'function',
+        },
+      ],
 
-    };
+    }
   },
   watch: {
     mintAmount(newVal) {
-      if (newVal < 1 || !Number.isInteger(newVal)) {
-        this.mintAmount = 1;
-      }
+      if (newVal < 1 || !Number.isInteger(newVal))
+        this.mintAmount = 1
     },
   },
   mounted() {
-    this.connectWallet(); // Initiate the wallet connection when the modal is mounted
+    this.connectWallet() // Initiate the wallet connection when the modal is mounted
   },
   methods: {
     close() {
-      this.$emit('close');
+      this.$emit('close')
     },
     async connectWallet() {
-      this.isLoading = true; // Start loading as soon as the function is called
+      this.isLoading = true // Start loading as soon as the function is called
       if (window.ethereum) {
         try {
-          const web3 = new Web3(window.ethereum);
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          const web3 = new Web3(window.ethereum)
+          await window.ethereum.request({ method: 'eth_requestAccounts' })
 
           // Check the network
-          const networkId = await web3.eth.net.getId();
-          const mumbaiTestnetId = 0x13881; // Chain ID for Mumbai Testnet
+          const networkId = await web3.eth.net.getId()
+          const mumbaiTestnetId = 0x13881 // Chain ID for Mumbai Testnet
 
           if (networkId !== mumbaiTestnetId) {
             // Request to switch to Mumbai Testnet
@@ -746,8 +83,9 @@ export default {
               await window.ethereum.request({
                 method: 'wallet_switchEthereumChain',
                 params: [{ chainId: '0x13881' }], // Hexadecimal chain ID
-              });
-            } catch (switchError) {
+              })
+            }
+            catch (switchError) {
               // Handle error, such as user rejecting the request
               await window.ethereum.request({
                 method: 'wallet_addEthereumChain',
@@ -764,89 +102,195 @@ export default {
                     blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
                   },
                 ], // Hexadecimal chain ID
-              });
-              console.error('Error switching to Mumbai Testnet:', switchError);
-              throw switchError;
+              })
+              debug.error('Error switching to Mumbai Testnet:', switchError)
+              throw switchError
             }
           }
 
-          const accounts = await web3.eth.getAccounts();
-          this.account = accounts[0];
-          console.log('Wallet connected:', this.account); // Log the connected account
-          this.isConnected = true; // Update connection status
-          
+          const accounts = await web3.eth.getAccounts()
+          this.account = accounts[0]
+          debug.log('Wallet connected:', this.account) // Log the connected account
+          this.isConnected = true // Update connection status
+
           // Initialize contracts after getting accounts
-          this.web3 = new Web3(window.ethereum);
-          this.contract = new this.web3.eth.Contract(this.contractABI, this.contractAddress);
-          this.usdtContract = new this.web3.eth.Contract(this.usdtContractABI, this.usdtContractAddress);
-      
-        } catch (error) {
-          console.error('Error connecting to MetaMask:', error);
-          console.error('Wallet connection failed:', error); // Log the error
-        } finally {
-          this.isLoading = false; // Stop loading after the process is complete
+          this.web3 = new Web3(window.ethereum)
+          this.contract = new this.web3.eth.Contract(this.contractABI, this.contractAddress)
+          this.usdtContract = new this.web3.eth.Contract(this.usdtContractABI, this.usdtContractAddress)
         }
-      } else {
-        console.error('MetaMask not installed');
-        this.isLoading = false; // Stop loading if MetaMask is not installed
+        catch (error) {
+          debug.error('Error connecting to MetaMask:', error)
+          debug.error('Wallet connection failed:', error) // Log the error
+        }
+        finally {
+          this.isLoading = false // Stop loading after the process is complete
+        }
+      }
+      else {
+        debug.error('MetaMask not installed')
+        this.isLoading = false // Stop loading if MetaMask is not installed
       }
     },
 
     async checkAllowance() {
-      const allowance = await this.usdtContract.methods.allowance(this.account, this.contractAddress).call();
-      const requiredAllowance = this.mintPriceInUSDT * Math.pow(10, 18); // Adjust for USDT decimals
-      return parseFloat(allowance) >= requiredAllowance;
+      const allowance = await this.usdtContract.methods.allowance(this.account, this.contractAddress).call()
+      const requiredAllowance = this.mintPriceInUSDT * 10 ** 18 // Adjust for USDT decimals
+      return Number.parseFloat(allowance) >= requiredAllowance
     },
 
-
     async mintNFT() {
-      if (!this.web3 || !this.contract || !this.usdtContract) {
-        await this.connectWallet();
-      }
+      if (!this.web3 || !this.contract || !this.usdtContract)
+        await this.connectWallet()
+
       if (this.contract && this.usdtContract && this.suspectId != null) {
-        this.isLoading = true;
-        
+        this.isLoading = true
+
         try {
           // Check if enough allowance is already set
-          const hasEnoughAllowance = await this.checkAllowance();
+          const hasEnoughAllowance = await this.checkAllowance()
 
           if (!hasEnoughAllowance) {
-            this.isApproving = true;
-            const spendingCap = 10000000; // Set spending cap
-            const mintPrice = spendingCap * Math.pow(10, 18); // Adjust for USDT decimals
-            await this.usdtContract.methods.approve(this.contractAddress, mintPrice).send({ from: this.account });
-            this.isApproving = false;
+            this.isApproving = true
+            const spendingCap = 10000000 // Set spending cap
+            const mintPrice = spendingCap * 10 ** 18 // Adjust for USDT decimals
+            await this.usdtContract.methods.approve(this.contractAddress, mintPrice).send({ from: this.account })
+            this.isApproving = false
           }
 
-          this.isMinting = true;
+          this.isMinting = true
           // Mint NFT using suspectId from props
           await this.contract.methods.mint(this.suspectId).send({ from: this.account })
             .on('transactionHash', (hash) => {
-              console.log('Transaction Hash:', hash);
-              this.isMinting = false; // Set isMinting to false to move to the next stage
-              this.mintInProgress = true; // Set mintInProgress to true here
+              debug.log('Transaction Hash:', hash)
+              this.isMinting = false // Set isMinting to false to move to the next stage
+              this.mintInProgress = true // Set mintInProgress to true here
             })
             .on('confirmation', (confirmationNumber, receipt) => {
-              console.log('Mint successful:', confirmationNumber, receipt);
-              this.mintInProgress = false; // Set mintInProgress to false upon successful confirmation
-              this.mintSuccessful = true; // Set mintSuccessful to true
+              debug.log('Mint successful:', confirmationNumber, receipt)
+              this.mintInProgress = false // Set mintInProgress to false upon successful confirmation
+              this.mintSuccessful = true // Set mintSuccessful to true
             })
-            .on('error', console.error);
-        } catch (error) {
-          console.error("Error during the minting process:", error);
-          this.isMinting = false;
-          this.mintInProgress = false; // Reset this on error
-        } finally {
-          this.isLoading = false;
+            .on('error', debug.error)
+        }
+        catch (error) {
+          debug.error('Error during the minting process:', error)
+          this.isMinting = false
+          this.mintInProgress = false // Reset this on error
+        }
+        finally {
+          this.isLoading = false
         }
       }
       else {
-        console.error("suspectId is null or contracts are not set");
+        debug.error('suspectId is null or contracts are not set')
       }
     },
   },
-};
+}
 </script>
+
+<template>
+  <transition name="modal-fade">
+    <div v-show="true" class="modal-backdrop nft-modal" @click="close">
+      <div class="modal" role="dialog" @click.stop>
+        <v-col cols="12">
+          <header class="modal-header">
+            <h1 v-if="!isConnected">
+              Connect your web3 wallet
+            </h1>
+            <h1 v-else-if="isApproving">
+              Approve USDT spending in your wallet
+            </h1>
+            <h1 v-else-if="isMinting">
+              Approve the Minting Transaction in your wallet
+            </h1>
+            <h1 v-else-if="mintInProgress">
+              Minting your Accusation
+            </h1>
+            <h1 v-else-if="mintSuccessful">
+              Success!
+            </h1>
+            <h1 v-else>
+              Make your accusation
+            </h1>
+          </header>
+          <button type="button" class="btn-close" aria-label="Close modal" @click="close">
+            <img src="~/assets/icons/close_white.png">
+          </button>
+        </v-col>
+        <section class="modal-body">
+          <v-container>
+            <v-row class="modal-content-section">
+              <!-- Conditional Content -->
+              <div v-if="!isConnected">
+                <!-- Wallet Connection Content -->
+                <v-col cols="12" class="text-section">
+                  <p class="tx-status">
+                    Approve the connection in your wallet extension!
+                  </p>
+                </v-col>
+                <div v-if="isLoading" class="loader" />
+                <v-col cols="12" class="connect-button">
+                  <button class="button" @click="connectWallet">
+                    Connect again
+                  </button>
+                </v-col>
+                <v-col cols="12" class="redirect">
+                  <p>Don't have web3 wallet? Get <a href="https://metamask.io/">Metamask wallet</a> now.</p>
+                </v-col>
+              </div>
+              <!-- Approve state content -->
+              <div v-else-if="isApproving">
+                <div class="loader" />
+              </div>
+              <!-- Minting state content -->
+              <div v-else-if="isMinting">
+                <div class="loader" />
+              </div>
+              <!-- Minting in progress state content -->
+              <div v-else-if="mintInProgress">
+                <div class="loader" />
+                <p class="tx_status">
+                  Transaction pending. Check its status in your wallet
+                </p>
+              </div>
+              <!-- Success State content -->
+              <div v-else-if="mintSuccessful">
+                <v-col cols="12" class="nft-display">
+                  <img :src="`/images/tcg/${suspectId}.png`" alt="Suspect Image">
+                </v-col>
+                <p class="tx_status">
+                  You have successfully minted your NFT.
+                </p>
+                <a href="https://testnets.opensea.io/collection/unidentified-contract-e4ba0bc2-ca14-4e90-b433-df91"><button class="opensea">Check on OpenSea</button></a>
+              </div>
+              <div v-else>
+                <!-- Minting Content -->
+                <v-col cols="12" class="nft-display">
+                  <img :src="`/images/tcg/${suspectId}.png`" alt="Suspect Image">
+                </v-col>
+                <v-col cols="12" class="amount-section">
+                  <input v-model.number="mintAmount" type="number" min="1" class="mint-amount-input">
+                </v-col>
+                <v-col cols="12" class="text-section">
+                  <p>Total Price: {{ mintAmount * 5 }} USDT</p>
+                </v-col>
+                <v-col cols="12" class="connect-button">
+                  <button class="button" @click="mintNFT">
+                    Mint Accusation
+                  </button>
+                </v-col>
+                <v-col cols="12" class="redirect">
+                  <p>Don't have any USDT? Buy it on <a href="https://www.binance.com/">Binance</a> or in another exchange.</p>
+                </v-col>
+              </div>
+            </v-row>
+          </v-container>
+        </section>
+      </div>
+    </div>
+  </transition>
+</template>
 
 <style lang="scss">
 .modal {
@@ -869,7 +313,7 @@ export default {
   z-index: 9001; /* Ensure it's above other elements */
   display: flex; /* Enable flex layout */
   flex-direction: column; /* Stack children vertically */
-  
+
 }
 
 .modal-content-section {
@@ -955,7 +399,6 @@ export default {
   text-align: center;
 }
 
-
 .nft-display img {
   margin-bottom:0 !important;
   max-width: 200px;
@@ -975,6 +418,7 @@ export default {
     text-align: center;
     font-size: 24px;
     -moz-appearance: textfield; /* Removes default spinner for Firefox */
+    appearance: textfield; /* Removes default spinner for other browsers */
     border: 1px solid #E5E6E8;
     border-radius: 7px;
   }

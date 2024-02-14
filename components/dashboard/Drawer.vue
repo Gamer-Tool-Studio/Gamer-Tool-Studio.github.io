@@ -1,50 +1,39 @@
-<template>
-  <v-card id="core-navigation-drawer" class="pa-0" elevation="0">
-    <!-- <v-list expand nav class="pa-0" density="compact"> -->
-    <base-item-group :items="computedItems" v-model:open="open" v-model:selected="selected"></base-item-group>
-    <!-- </v-list> -->
-  </v-card>
-</template>
-
 <script setup>
-const route = useRoute();
-const selected = ref([]);
-const open = ref([]);
+const route = useRoute()
+const selected = ref([])
+const open = ref([])
 
 watch(
   () => route.name,
   (r) => {
-    if (r.includes('billing') && !open.value.includes('Billing')) {
-      open.value.push('Billing');
-    } else {
-      open.value.splice(0);
-    }
+    if (r.includes('billing') && !open.value.includes('Billing'))
+      open.value.push('Billing')
+    else
+      open.value.splice(0)
   },
-);
+)
 watch(
   selected,
   (s) => {
-    if (open.value.includes('Billing') && !s.value?.[0]?.title) {
-      return;
-    } else {
-      open.value.pop();
-    }
+    if (open.value.includes('Billing') && !s.value?.[0]?.title)
+      return null
+
+    else
+      open.value.pop()
   },
   { deep: true },
-);
+)
 watch(
   () => open,
   (o) => {
-    if (route.path.includes('billing') && !o.value.includes('Billing')) {
-      open.value.push('Billing');
-    }
+    if (route.path.includes('billing') && !o.value.includes('Billing'))
+      open.value.push('Billing')
 
-    if (o.value.length > 0) {
-      selected.value.splice(0);
-    }
+    if (o.value.length > 0)
+      selected.value.splice(0)
   },
   { deep: true },
-);
+)
 
 const items = ref([
   {
@@ -128,26 +117,29 @@ const items = ref([
       prependIcon: 'mdi-key-chain',
     },
   },
-]);
+])
 
 const computedItems = computed(() => {
-  return items.value.map(mapItem);
-});
+  return items.value.map(mapItem)
+})
 
-const profile = computed(() => {
-  return {
-    avatar: true,
-    title: 'Avatar',
-  };
-});
-const mapItem = (item) => {
+function mapItem(item) {
   return {
     ...item,
     children: item.children ? item.children.map(mapItem) : undefined,
     title: item.title,
-  };
-};
+  }
+}
 </script>
+
+<template>
+  <v-card id="core-navigation-drawer" class="pa-0" elevation="0">
+    <!-- <v-list expand nav class="pa-0" density="compact"> -->
+    <base-item-group v-model:open="open" v-model:selected="selected" :items="computedItems" />
+    <!-- </v-list> -->
+  </v-card>
+</template>
+
 <style lang="scss">
 #core-navigation-drawer {
   padding-top: 32px !important;

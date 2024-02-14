@@ -1,3 +1,11 @@
+<script setup>
+const cancelPlan = ref(false)
+
+useHead({
+  title: 'Overview',
+})
+</script>
+
 <template>
   <v-container>
     <v-row>
@@ -8,31 +16,34 @@
         <h2> Pay as you go</h2>
       </v-col>
       <v-col cols="12">
-        <p> You are billed at the moment you acquire token credits. 
-            Check the <NuxtLink to="/dashboard/usage" class="internal-link">Usage page</NuxtLink> to confirm detailed token usage.</p>
+        <p>
+          You are billed at the moment you acquire token credits.
+          Check the <NuxtLink to="/dashboard/usage" class="internal-link">
+            Usage page
+          </NuxtLink> to confirm detailed token usage.
+        </p>
       </v-col>
       <v-col cols="3" class="addTokensSection">
         <NuxtLink to="/pricing">
           <button
-          class="cancel-paid"
-          type="submit"
-        >
-          Add token credits
+            class="cancel-paid"
+            type="submit"
+          >
+            Add token credits
           </button>
         </NuxtLink>
       </v-col>
       <v-col cols="3" class="addTokensSection">
         <modal-cancel-plan
           v-if="cancelPlan"
-          @close="cancelPlan= false"
-        >
-        </modal-cancel-plan>
+          @close="cancelPlan = false"
+        />
         <button
           class="cancel-paid"
           type="submit"
           @click="cancelPlan = true"
         >
-        Cancel plan
+          Cancel plan
         </button>
       </v-col>
     </v-row>
@@ -52,7 +63,7 @@
       </v-col> -->
       <v-col cols="12" class="billing-card">
         <a href="/dashboard/billing/history">
-        <div class="items-container">
+          <div class="items-container">
             <div class="img-container history-bcg">
               <img src="~/assets/images/document-icon.png">
             </div>
@@ -95,15 +106,6 @@
   </v-container>
 </template>
 
-<script setup>
-
-const cancelPlan = ref(false);
-
-useHead({
-  title: "Overview",
-});
-
-</script>
 <style lang="scss">
 .internal-link {
   color: #000000;
@@ -124,7 +126,7 @@ useHead({
 }
 
 .cancel-paid:hover {
-background-color:#d9d9e3; 
+background-color:#d9d9e3;
 }
 
 .billing-card {
@@ -202,6 +204,4 @@ background-color:#d9d9e3;
   }
 
 }
-
-
 </style>
