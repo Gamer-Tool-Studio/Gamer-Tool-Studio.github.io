@@ -65,4 +65,10 @@ export default defineNuxtConfig({
     '/redirect': { ssr: false },
   },
   ssr: false,
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ['/', 'sitemap.xml'],
+    },
+  },
 })
