@@ -1,15 +1,10 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
-
-// import storeToRefs helper hook from pinia
 import { useAuthStore } from '~/store/auth'
 
 const debug = getDebugger('login')
 
-// import the auth store we just created
-
-const { authenticateUser, registerUser, authenticateGoogleUser } = useAuthStore() // use authenticateUser action from  auth store
-
+const { authenticateUser, registerUser, authenticateGoogleUser } = useAuthStore() // use authenticateUser action from auth store
 const { authenticated, errorMessage } = storeToRefs(useAuthStore()) // make authenticated state reactive with storeToRefs
 
 const user = ref({
@@ -42,13 +37,36 @@ async function login() {
   if (authenticated.value)
     handleRedirect()
 }
+
 async function register() {
-  await registerUser({ ...user.value }) // call authenticateUser and pass the user object
+  await registerUser({ ...user.value }) // call registerUser and pass the user object
   // redirect to homepage if user is authenticated
   debug.log('authenticated', authenticated.value)
   if (authenticated.value)
     handleRedirect()
 }
+
+useHead({
+  title: 'Login/Register - NPC-GPT',
+  meta: [
+    { name: 'description', content: 'Access NPC-GPT to start creating AI-driven characters for your games.' },
+    { rel: 'canonical', href: 'https://gamertoolstudio.com/login' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: 'Login/Register - NPC-GPT' },
+    { property: 'og:description', content: 'Access NPC-GPT to start creating AI-driven characters for your games.' },
+    { property: 'og:image', content: 'https://gamertoolstudio.com/images/og-image-login.jpg' },
+    { property: 'og:url', content: 'https://gamertoolstudio.com/login' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'Login/Register - NPC-GPT' },
+    { name: 'twitter:description', content: 'Start using NPC-GPT for advanced game character development.' },
+    { name: 'twitter:image', content: 'https://gamertoolstudio.com/images/twitter-image-login.jpg' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'author', content: 'Game Tool Studio' },
+  ],
+  link: [
+    { rel: 'icon', type: 'image/x-icon', href: '~/public/favicon.png' },
+  ],
+})
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
-const messageToType
-  = 'Ah, greetings, traveler! You\'ve stumbled upon some intriguing information indeed. Yes, there is indeed a secret map hidden within the depths of the big cave, tucked away beneath a vibrant yellow flower. It\'s said to hold the key to unlocking hidden treasures and revealing the path to untold secrets.'
-// Typing animation
+const messageToType = 'Ah, greetings, traveler! You\'ve stumbled upon some intriguing information indeed. Yes, there is indeed a secret map hidden within the depths of the big cave, tucked away beneath a vibrant yellow flower. It\'s said to hold the key to unlocking hidden treasures and revealing the path to untold secrets.'
+
 let intervalTypeMessage: any
 const responseGPT = ref('')
+
 function typeMessage(textToType: string, typingSpeed: number) {
   let currentIndex = 0
 
@@ -21,7 +21,6 @@ function typeMessage(textToType: string, typingSpeed: number) {
   typeNextCharacter()
 }
 
-// Start typing animation when the component is mounted
 onMounted(() => {
   const typingSpeed = 50
   typeMessage(messageToType, typingSpeed)
@@ -33,14 +32,28 @@ onMounted(() => {
   }, 3000)
 })
 
-onBeforeRouteLeave(() => clearInterval(intervalTypeMessage))
-
-definePageMeta({
-  layout: 'default',
+onBeforeRouteLeave(() => {
+  clearInterval(intervalTypeMessage)
 })
 
 useHead({
-  title: 'Home Page',
+  title: 'NPC-GPT - Create AI characters for your games',
+  meta: [
+    { name: 'description', content: 'NPC-GPT allows you to create AI-driven characters for immersive gaming experiences. Integrate unscripted conversations and dynamic interactions in your games.' },
+    { property: 'og:title', content: 'NPC-GPT - Create AI characters for your games' },
+    { property: 'og:description', content: 'Explore the next level in game development with NPC-GPT. Create autonomous worlds and interactive characters easily.' },
+    { property: 'og:image', content: '~/assets/images/GTS-iso.png' },
+    { property: 'og:url', content: 'https://gamertoolstudio.com' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'NPC-GPT - Create AI characters for your games' },
+    { name: 'twitter:description', content: 'Explore the next level in game development with NPC-GPT. Create autonomous worlds and interactive characters easily.' },
+    { name: 'twitter:image', content: '~/assets/images/GTS-iso.png' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'author', content: 'Game Tool Studio' },
+  ],
+  link: [
+    { rel: 'icon', type: 'image/x-icon', href: '~/public/favicon.png' },
+  ],
 })
 </script>
 
@@ -48,7 +61,7 @@ useHead({
   <v-container class="lp">
     <v-row>
       <v-col cols="12" class="intro-section">
-        <h1>NPC-GPT - Real-time AI chats for your game characters</h1>
+        <h1>NPC-GPT - Create AI characters for your games.</h1>
       </v-col>
       <v-col cols="12" class="intro-cta">
         <button class="button">
@@ -72,20 +85,20 @@ useHead({
     <v-row class="features">
       <v-col>
         <h2 class="page-headers">
-          Unlock entirely new gaming experiences and create autonomous worlds with the assistance of AI-driven NPCs.
+          Unlock entirely new gaming experiences with autonomous worlds and the assistance of AI-driven characters.
           Effortlessly add unscripted conversations to your game by integrating with the GPT-4 model.
         </h2>
       </v-col>
       <div class="feature-boxes">
         <div class="feature-box">
-          <h3>Unscripted Worlds</h3>
+          <h3>Autonomous Worlds</h3>
           <p>
             Leverage the capabilities of AI and enable players to input their own text to interact with characters and
             open the possibilities within to your game to the maximum.
           </p>
         </div>
         <div class="feature-box">
-          <h3>Autonomous NPCs</h3>
+          <h3>Unscripted Characters</h3>
           <p>
             Build immersive character backstories and customize the way they respond to players. Make chat GPT a friend
             or a foe in your game quests.

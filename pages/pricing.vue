@@ -1,12 +1,15 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
+
+// Debugger for the pricing page
 const debug = getDebugger('pricing')
 
+// Define page meta layout
 definePageMeta({
   layout: 'default',
 })
-// let pricingList: PricingList = ref([]);
 
-// set the pricing list to the type PricingList
+// Fetch the pricing list data
 let pricingList: PricingList = []
 const { data } = await useFetch(() => BASE_URL + PRICING_LIST, {
   headers: {
@@ -21,6 +24,7 @@ debug.log('data', data)
 
 const isLightBoxHovered = ref(false)
 
+// Function to handle opening Stripe payment
 async function openStripe(priceId: string) {
   const { data } = await useAuthAPI<StripeCreateLink>('/stripe/create', 'POST', {
     price_id: priceId,
@@ -31,12 +35,73 @@ async function openStripe(priceId: string) {
     window.open(data.value.url as string, '_blank')
 }
 
+// Function to format the price
 function formatPrice(price: number) {
   if (Number(price) === 0)
     return 'Free'
 
   return `$${price}`
 }
+
+// SEO Meta Tags for the Pricing Page
+useHead({
+  title: 'NPC-GPT Pricing Plans - Flexible and Affordable AI Integration',
+  meta: [
+    {
+      name: 'description',
+      content: 'Choose the perfect NPC-GPT pricing plan for your game development needs. Affordable, flexible options for developers at every stage.',
+    },
+    // Open Graph Tags
+    {
+      property: 'og:title',
+      content: 'NPC-GPT Pricing Plans - Flexible and Affordable AI Integration',
+    },
+    {
+      property: 'og:description',
+      content: 'Explore our pricing plans tailored for all game development stages with NPC-GPT. Find the plan that fits your needs and budget.',
+    },
+    {
+      property: 'og:image',
+      content: '~/assets/images/GTS-iso.png', // Replace with your own image URL
+    },
+    {
+      property: 'og:url',
+      content: 'https://gamertoolstudio.com/pricing', // Replace with the actual URL of your pricing page
+    },
+    // Twitter Card Tags
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      name: 'twitter:title',
+      content: 'NPC-GPT Pricing Plans - Flexible and Affordable AI Integration',
+    },
+    {
+      name: 'twitter:description',
+      content: 'Choose the perfect NPC-GPT pricing plan for your game development. Flexible, affordable options for all developers.',
+    },
+    {
+      name: 'twitter:image',
+      content: '~/assets/images/GTS-iso.png', // Replace with your own image URL
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1',
+    },
+    {
+      name: 'author',
+      content: 'Game Tool Studio',
+    },
+  ],
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '~/public/favicon.png',
+    },
+  ],
+})
 </script>
 
 <template>
@@ -46,7 +111,7 @@ function formatPrice(price: number) {
         <h1>NPC-GPT Pricing Plans</h1>
         <p>
           Simple and flexible pricing plans adapted to the development stage of your game. Pay per volume of requests
-          made to our API only.<br>
+          made to our API.<br>
           Only Developer packs are available at the moment. Packs for games in production will be available soon.
         </p>
       </v-col>

@@ -1,7 +1,76 @@
 <script lang="ts" setup>
-// Example of defining a reactive property for download URL
-// Ensure the URL is correctly encoded, especially if there are special characters
+import { ref } from 'vue'
+
 const downloadURL = ref('/cluaido/js/plugins/NPC-GPT-Plugin.js')
+
+// SEO Meta Tags
+useHead({
+  title: 'Download NPC-GPT Plugin for Game Development',
+  meta: [
+    {
+      hid: 'description',
+      name: 'description',
+      content: 'Download the NPC-GPT Plugin to integrate advanced AI-powered NPCs into your game development environment. Compatible with popular game engines.',
+    },
+    // Open Graph Tags for social media
+    {
+      hid: 'og:title',
+      property: 'og:title',
+      content: 'Download NPC-GPT Plugin for Game Development',
+    },
+    {
+      hid: 'og:description',
+      property: 'og:description',
+      content: 'Integrate AI-driven characters into your games with the NPC-GPT Plugin. Available for RPG Maker MZ, RPG Maker MV, and other engines.',
+    },
+    {
+      hid: 'og:image',
+      property: 'og:image',
+      content: '~/assets/images/GTS-iso.png', // Replace with the URL of your image
+    },
+    {
+      hid: 'og:url',
+      property: 'og:url',
+      content: 'https://gamertoolstudio.com/download-plugin', // Replace with the URL of your download page
+    },
+    // Twitter Card Tags
+    {
+      hid: 'twitter:card',
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+    {
+      hid: 'twitter:title',
+      name: 'twitter:title',
+      content: 'Download NPC-GPT Plugin for Game Development',
+    },
+    {
+      hid: 'twitter:description',
+      name: 'twitter:description',
+      content: 'Integrate AI-driven characters into your games with the NPC-GPT Plugin. Compatible with RPG Maker MZ, MV, and more.',
+    },
+    {
+      hid: 'twitter:image',
+      name: 'twitter:image',
+      content: '~/assets/images/GTS-iso.png', // Replace with the URL of your image
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1',
+    },
+    {
+      name: 'author',
+      content: 'Game Tool Studio',
+    },
+  ],
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '~/public/favicon.png',
+    },
+  ],
+})
 </script>
 
 <template>
