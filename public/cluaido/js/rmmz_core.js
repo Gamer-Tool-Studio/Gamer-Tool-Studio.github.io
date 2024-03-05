@@ -5680,6 +5680,7 @@ Input.keyRepeatInterval = 6;
  *
  * @type Object
  */
+
 Input.keyMapper = {
     9: "tab", // tab
     13: "ok", // enter
@@ -5692,11 +5693,15 @@ Input.keyMapper = {
     34: "pagedown", // pagedown
     37: "left", // left arrow
     38: "up", // up arrow
+	65: 'left', // A
+    87: 'up', // W
+    68: 'right', // D
+	83: 'down',  // S
     39: "right", // right arrow
     40: "down", // down arrow
     45: "escape", // insert
     81: "pageup", // Q
-    87: "pagedown", // W
+    80: "pagedown", // P
     88: "escape", // X
     90: "ok", // Z
     96: "escape", // numpad 0
@@ -5706,6 +5711,7 @@ Input.keyMapper = {
     104: "up", // numpad 8
     120: "debug" // F9
 };
+
 
 /**
  * A hash table to convert from a gamepad button to a mapped key name.
