@@ -124,10 +124,12 @@ const chartOptions = ref({
             </v-col>
           </v-card>
         </v-col>
+        <v-col cols="12">
+          <v-btn class="button" color="none" to="/pricing">
+            Add credits
+          </v-btn>
+        </v-col>
       </v-row>
-      <v-btn class="button" color="none" to="/pricing">
-        Add credits
-      </v-btn>
       <!--
       <v-col cols="4" class="current-subscription">
         <h3>Active subsciption pack</h3>

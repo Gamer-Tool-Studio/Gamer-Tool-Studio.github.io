@@ -19,13 +19,10 @@ const user = ref({
 })
 const router = useRouter()
 
-// i want to check if there is a is #register in url if it is then i want to set isRegistering to true
 const isRegistering = computed(() => router.currentRoute.value.query.register === 'true')
 
 async function loginGoogle() {
   await authenticateGoogleUser() // call authenticateUser and pass the user object
-  // redirect to homepage if user is authenticated
-
   if (authenticated.value) {
     debug.log('authenticated', authenticated.value)
     router.push({ path: '/dashboard' })
@@ -106,7 +103,11 @@ async function register() {
         </p>
       </v-col>
       <v-col v-if="isRegistering" cols="12" class="register-link">
-        <p>Already have an account? <NuxtLink to="/login">Log in</NuxtLink></p>
+        <p>
+          Already have an account? <NuxtLink to="/login">
+            Log in
+          </NuxtLink>
+        </p>
       </v-col>
       <v-col cols="12">
         <p>----------- Or ------------</p>
