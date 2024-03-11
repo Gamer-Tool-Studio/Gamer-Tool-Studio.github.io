@@ -128,6 +128,7 @@
 		Input.keyMapper[90] = 'z';     
 		Input.keyMapper[88] = 'x';
 		Input.keyMapper[87] = 'w';
+		Input.keyMapper[80] = 'p';
 	};
 
     // Handle Input

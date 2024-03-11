@@ -170,9 +170,12 @@ section {
   margin: 0;
 }
 
+
+
 .code-display {
   max-width: 92%;
   overflow-x: auto;
+  margin: auto;
 }
 
 .code-block {
@@ -180,7 +183,6 @@ section {
 }
 
 .code-style {
-  margin: auto !important;
   font-family: monospace;
   font-size: 16px;
   white-space: pre-wrap;
@@ -190,8 +192,6 @@ section {
   display: block;
   max-width: 100%;
   margin-top: 0;
-  margin-left: 10%;
-  margin-right: 10%;
   font-family: monospace;
   font-size: 16px;
   border: 1px solid #6e6e80;
