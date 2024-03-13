@@ -587,7 +587,6 @@
 		Input.keyMapper[90] = 'z';     
 		Input.keyMapper[88] = 'x';
 		Input.keyMapper[87] = 'w';
-		Input.keyMapper[80] = 'p';
 	};
 
     // Handle Input
@@ -791,7 +790,7 @@
 		$gameVariables.setValue(inputVariable, 0);
 
         // Get the response from the Server
-        fetch("http://localhost:3002/api/v1/chat/send-message", requestOptions)
+        fetch("https://npc-gpt-api-04c6279a15ad.herokuapp.com/api/v1/chat/send-message", requestOptions)
         .then(function (response) {
             if (response.ok) {
                 return response.json();
