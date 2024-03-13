@@ -85,7 +85,7 @@ useHead({
     <v-row class="features">
       <v-col>
         <h2 class="page-headers">
-          Unlock entirely new gaming experiences with autonomous worlds and the assistance of AI-driven characters.
+          Unlock entirely new gaming experiences with the assistance of autonomous characters.
           Effortlessly add unscripted conversations to your game by integrating with the GPT-4 model.
         </h2>
       </v-col>
@@ -93,8 +93,8 @@ useHead({
         <div class="feature-box">
           <h3>Autonomous Worlds</h3>
           <p>
-            Leverage the capabilities of AI and enable players to input their own text to interact with characters and
-            open the possibilities within to your game to the maximum.
+            Leverage the capabilities of AI and enable players to freely interact with characters to
+            create unique scenarios for players within your game.
           </p>
         </div>
         <div class="feature-box">
@@ -122,7 +122,7 @@ useHead({
     <v-row id="sectionToLinkToApi" class="get-started">
       <v-col cols="12">
         <h2 class="page-headers">
-          Create seamless AI characters to interact with players and users from any Frontend environment with NPC-GPT
+          Create seamless AI characters to interact with users from any frontend environment with NPC-GPT
           SDK
         </h2>
         <div class="code-style">
@@ -142,7 +142,7 @@ useHead({
           "name": "GPTWizard",
           "environment": "RPG Game",
           "age": 35,
-          "personality traits": "shy", mystic, adventurous",
+          "personalityTraits": "shy", mystic, adventurous",
           "dialogueStyle": "mysterious",
           "backgroundStory": "GPT WIzard is a Mage who lives in Mystery Foster.
                 She was brought up by witches and mages after being found as a baby
@@ -172,8 +172,7 @@ useHead({
       </v-col>
       <v-col id="sectionToLinkToPlugin" cols="12">
         <h2 class="page-headers">
-          Add NPC-GPT Plugin to your favourite game engine today and start harnessing the power of AI-generated
-          conversations with ease
+          Add NPC-GPT Plugin to your favourite game engine today and start harnessing the power of dynamic character interactions with ease.
         </h2>
       </v-col>
       <v-col cols="6" class="plugin-explain">
@@ -203,12 +202,12 @@ useHead({
 
     <v-col cols="12" class="start-trial">
       <h2 class="page-headers">
-        Are you ready to take your game development to the next level with the ultimate AI-Powered character building
+        Are you ready to take your game development to the next level with the ultimate character building
         tool?
       </h2>
       <br>
       <button class="button">
-        Start Free Trial Now
+        Start Trial Now
       </button>
     </v-col>
   </v-container>
