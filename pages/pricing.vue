@@ -45,7 +45,7 @@ function formatPrice(price: number) {
 
 // SEO Meta Tags for the Pricing Page
 useHead({
-  title: 'NPC-GPT Pricing Plans - Flexible and Affordable AI Integration',
+  title: 'NPC-GPT Pricing Plans - Flexible and affordable AI character integration',
   meta: [
     {
       name: 'description',

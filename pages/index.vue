@@ -39,7 +39,7 @@ onBeforeRouteLeave(() => {
 useHead({
   title: 'NPC-GPT - Create AI characters for your games',
   meta: [
-    { name: 'description', content: 'NPC-GPT allows you to create AI-driven characters for immersive gaming experiences. Integrate unscripted conversations and dynamic interactions in your games.' },
+    { name: 'description', content: 'Create autonomous AI characters in your game engine' },
     { property: 'og:title', content: 'NPC-GPT - Create AI characters for your games' },
     { property: 'og:description', content: 'Explore the next level in game development with NPC-GPT. Create autonomous worlds and interactive characters easily.' },
     { property: 'og:image', content: '~/assets/images/GTS-iso.png' },
@@ -143,7 +143,7 @@ useHead({
           "environment": "RPG Game",
           "age": 35,
           "personality traits": "shy", mystic, adventurous",
-          "dialogueStyle": "mysterious"
+          "dialogueStyle": "mysterious",
           "backgroundStory": "GPT WIzard is a Mage who lives in Mystery Foster.
                 She was brought up by witches and mages after being found as a baby
                 wondering in the forest. She belongs to this tribe that remains
@@ -155,7 +155,7 @@ useHead({
           "interests": "Herbology, potions, history",
           "friendliness": "High",
           "maxOutputWords": 50
-        },
+        }
   });
           </code>
         </pre>
