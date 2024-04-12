@@ -64,9 +64,11 @@ useHead({
         <h1>NPC-GPT - Create AI characters for your games.</h1>
       </v-col>
       <v-col cols="12" class="intro-cta">
-        <button class="button">
-          Start Trial Now
-        </button>
+        <NuxtLink to="/pricing">
+          <button class="button">
+            Start Trial Now
+          </button>
+        </NuxtLink>
         <a href="https://gamertoolstudio.gitbook.io/npc-gpt/introduction/introduction"><p>View our documentation</p></a>
       </v-col>
       <v-col cols="12" class="demo-video">
@@ -206,9 +208,11 @@ useHead({
         tool?
       </h2>
       <br>
-      <button class="button">
-        Start Trial Now
-      </button>
+      <NuxtLink to="/pricing">
+        <button class="button">
+          Start Trial Now
+        </button>
+      </NuxtLink>
     </v-col>
   </v-container>
 </template>
