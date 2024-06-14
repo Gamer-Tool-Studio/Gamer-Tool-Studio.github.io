@@ -1,5 +1,5 @@
  /*:
- * @plugindesc [RPG Maker MZ] [Version 1.20] [Gamer Tools Studio]
+ * @plugindesc [RPG Maker MZ] [Version 1.2.2] [Gamer Tools Studio]
  * 
  * @param apiKey
  * @text API Key
@@ -523,6 +523,7 @@
  (function() {
   // Retrieve the plugin parameters
   var pluginParams = PluginManager.parameters('NPC-GPT-Plugin');
+  let frameDelay = 10; // Initialize frame delay
   var apiKey = pluginParams['apiKey'];
   var apiKeyVariableId = parseInt(pluginParams['apiKeyVariable']) || 18;
   var gptResponseVariableId = parseInt(pluginParams['gptResponseVariableId']) || 6;
