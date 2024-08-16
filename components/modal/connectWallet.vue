@@ -50,7 +50,51 @@ export default {
           type: 'function',
         },
       ],
-
+      selectedChainId: null,
+      contracts: [
+        {
+          chain: 'BNB mainnet',
+          chainId: 56,
+          address: [
+            {
+              type: 'ERC20',
+              address: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
+            },
+            {
+              type: 'ERC1155',
+              address: '0x545C05eaE06A171a583Fbad43e9F065986a13fD2',
+            },
+          ],
+        },
+        {
+          chain: 'Polygon test',
+          chainId: 80001,
+          address: [
+            {
+              type: 'ERC20',
+              address: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
+            },
+            {
+              type: 'ERC1155',
+              address: '0x545C05eaE06A171a583Fbad43e9F065986a13fD2',
+            },
+          ],
+        },
+        {
+          chain: 'Arbritirum Sepolia',
+          chainId: 421611,
+          address: [
+            {
+              type: 'ERC20',
+              address: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
+            },
+            {
+              type: 'ERC1155',
+              address: '0x850EEE3Fd95Abd59E9160493f3E66112aC33EA97',
+            },
+          ],
+        },
+      ],
     }
   },
   watch: {
@@ -69,43 +113,42 @@ export default {
     async connectWallet() {
       this.isLoading = true // Start loading as soon as the function is called
       if (window.ethereum) {
+        // console.log('chainId', this.selectedChainId)
         try {
           const web3 = new Web3(window.ethereum)
           await window.ethereum.request({ method: 'eth_requestAccounts' })
 
           // Check the network
-          const networkId = await web3.eth.net.getId()
-          const mumbaiTestnetId = 0x13881 // Chain ID for Mumbai Testnet
+          if (!this.selectedChainId)
+            this.selectedChainId = await web3.eth.net.getId()
 
-          if (networkId !== mumbaiTestnetId) {
-            // Request to switch to Mumbai Testnet
-            try {
-              await window.ethereum.request({
-                method: 'wallet_switchEthereumChain',
-                params: [{ chainId: '0x13881' }], // Hexadecimal chain ID
-              })
-            }
-            catch (switchError) {
-              // Handle error, such as user rejecting the request
-              await window.ethereum.request({
-                method: 'wallet_addEthereumChain',
-                params: [
-                  {
-                    chainId: '0x13881',
-                    rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
-                    chainName: 'Polygon Testnet Mumbai',
-                    nativeCurrency: {
-                      name: 'MATIC',
-                      symbol: 'MATIC', // 2-6 characters long
-                      decimals: 18,
-                    },
-                    blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
+          // Request to switch to Mumbai Testnet
+          try {
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x13881' }], // Hexadecimal chain ID
+            })
+          }
+          catch (switchError) {
+            // Handle error, such as user rejecting the request
+            await window.ethereum.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainId: '0x13881',
+                  rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
+                  chainName: 'Polygon Testnet Mumbai',
+                  nativeCurrency: {
+                    name: 'MATIC',
+                    symbol: 'MATIC', // 2-6 characters long
+                    decimals: 18,
                   },
-                ], // Hexadecimal chain ID
-              })
-              debug.error('Error switching to Mumbai Testnet:', switchError)
-              throw switchError
-            }
+                  blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
+                },
+              ], // Hexadecimal chain ID
+            })
+            debug.error('Error switching to Mumbai Testnet:', switchError)
+            throw switchError
           }
 
           const accounts = await web3.eth.getAccounts()
@@ -222,6 +265,15 @@ export default {
           <v-container>
             <v-row class="modal-content-section">
               <!-- Conditional Content -->
+              <v-col cols="6">
+                <v-select
+                  v-model="selectedChainId"
+                  label="Select"
+                  item-title="chain"
+                  item-value="chainId"
+                  :items="contracts"
+                />
+              </v-col>
               <div v-if="!isConnected">
                 <!-- Wallet Connection Content -->
                 <v-col cols="12" class="text-section">
@@ -310,7 +362,7 @@ export default {
   max-width: 90%; /* Optionally set a max-width to ensure it doesn't get too wide on larger screens */
   max-height: 90%; /* Optionally set a max-height to ensure it doesn't get too tall */
   overflow-y: auto; /* Allows scrolling inside the modal if content is too long */
-  z-index: 9001; /* Ensure it's above other elements */
+  z-index: 10; /* Ensure it's above other elements */
   display: flex; /* Enable flex layout */
   flex-direction: column; /* Stack children vertically */
 
@@ -321,7 +373,7 @@ export default {
   flex-grow: 1; /* Allow this section to grow and fill available space */
   display: flex; /* Enable flex layout */
   flex-direction: column; /* Stack children vertically */
-  justify-content: center; /* Center content vertically */
+  justify-content: space-around; /* Center content vertically */
   align-items: center; /* Center content horizontally */
   min-height: 60vh !important;
 }
