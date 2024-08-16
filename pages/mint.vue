@@ -1,74 +1,69 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { createThirdwebClient, getContract } from "thirdweb";
-import { defineChain } from "thirdweb/chains";
+import { createThirdwebClient, getContract } from 'thirdweb'
+import { defineChain } from 'thirdweb/chains'
 
 // Debugger for the pricing page
 const debug = getDebugger('pricing')
 
-
 // create the client with your clientId, or secretKey if in a server environment
-const client = createThirdwebClient({ 
-  clientId: "5767633e1a68bf575326487901480929"
- });
+const client = createThirdwebClient({
+  clientId: '5767633e1a68bf575326487901480929',
+})
 
 // connect to your contract
-const contract = getContract({ 
-  client, 
-  chain: defineChain(421614), 
-  address: "0x850EEE3Fd95Abd59E9160493f3E66112aC33EA97"
-});
+const contract = getContract({
+  client,
+  chain: defineChain(421614),
+  address: '0x850EEE3Fd95Abd59E9160493f3E66112aC33EA97',
+})
 
 // Define page meta layout
 definePageMeta({
   layout: 'default',
 })
 
-let nftList = [
-    {
-    id : 1,
-    image: "https://npc-gpt-api-04c6279a15ad.herokuapp.com/assets/characters/2-butler-card.png",
-    title : "The Butler",
-    price       : "5 usd",
-    feature : true
+const nftList = [
+  {
+    id: 1,
+    image: 'https://npc-gpt-api-04c6279a15ad.herokuapp.com/assets/characters/2-butler-card.png',
+    title: 'The Butler',
+    price: '5 usd',
+    feature: true,
 
   },
   {
-    id : 2,
-    image: "https://npc-gpt-api-04c6279a15ad.herokuapp.com/assets/characters/3-maid-card.png",
-    title : "The Maid",
-    price       : "10 usd",
-    feature : true
-
-
-  },
-  {
-    id : 3,
-    image : "https://npc-gpt-api-04c6279a15ad.herokuapp.com/assets/characters/4-gardener-card.png",
-    title : "The Gardener",
-    price       : "15 usd",
-    feature : true
-
+    id: 2,
+    image: 'https://npc-gpt-api-04c6279a15ad.herokuapp.com/assets/characters/3-maid-card.png',
+    title: 'The Maid',
+    price: '10 usd',
+    feature: true,
 
   },
   {
-    id : 4,
-    image : "https://npc-gpt-api-04c6279a15ad.herokuapp.com/assets/characters/5-cook-card.png",
-    title : "The Cook",
-    price       : "20 usd",
-    feature : true
-
+    id: 3,
+    image: 'https://npc-gpt-api-04c6279a15ad.herokuapp.com/assets/characters/4-gardener-card.png',
+    title: 'The Gardener',
+    price: '15 usd',
+    feature: true,
 
   },
   {
-    id : 5,
-    image : "https://npc-gpt-api-04c6279a15ad.herokuapp.com/assets/characters/6-journalist-card.png",
-    title : "The Journalist",
-    price       : "25 usd",
-    feature : true
+    id: 4,
+    image: 'https://npc-gpt-api-04c6279a15ad.herokuapp.com/assets/characters/5-cook-card.png',
+    title: 'The Cook',
+    price: '20 usd',
+    feature: true,
 
+  },
+  {
+    id: 5,
+    image: 'https://npc-gpt-api-04c6279a15ad.herokuapp.com/assets/characters/6-journalist-card.png',
+    title: 'The Journalist',
+    price: '25 usd',
+    feature: true,
 
-  }
+  },
 ]
 // Fetch the pricing list data
 let pricingList: PricingList = []
@@ -85,23 +80,20 @@ debug.log('data', data)
 
 const isLightBoxHovered = ref(false)
 
-
 async function mintTheirdWeb(nftID: string) {
-
-   console.log("mint the nft ", nftID )
+  console.log('mint the nft ', nftID)
 
   // import { prepareContractCall, sendTransaction } from "thirdweb";
 
-  //   const transaction = await prepareContractCall({ 
-  //     contract, 
-  //     method: "function mint(uint256 id, address paymentToken)", 
-  //     params: [nftID, paymentToken] 
+  //   const transaction = await prepareContractCall({
+  //     contract,
+  //     method: "function mint(uint256 id, address paymentToken)",
+  //     params: [nftID, paymentToken]
   //   });
-  //   const { transactionHash } = await sendTransaction({ 
-  //     transaction, 
-  //     account 
+  //   const { transactionHash } = await sendTransaction({
+  //     transaction,
+  //     account
   //   });
-
 }
 
 // Function to handle opening Stripe payment
@@ -212,7 +204,7 @@ useHead({
               {{ formatTokens(nft.title) }}
             </li>
           </ul>
-          <img :src="nft.image" alt="NFT Image" class="nft-image" />
+          <img :src="nft.image" alt="NFT Image" class="nft-image">
           <div class="price-display" :class="{ 'featured-price': nft.featured }">
             <h4>{{ formatPrice(nft.price) }}</h4>
           </div>
@@ -230,7 +222,6 @@ useHead({
 </template>
 
 <style lang="scss" scoped>
-
 .nft-image {
   width: 185px; /* Ajuste o tamanho conforme necessário */
   height: 185px; /* Ajuste o tamanho conforme necessário */
