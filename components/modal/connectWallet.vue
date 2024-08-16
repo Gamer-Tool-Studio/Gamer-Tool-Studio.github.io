@@ -50,7 +50,7 @@ export default {
           type: 'function',
         },
       ],
-      selectedChainId: null,
+      selectedChainId: 56,
       contracts: [
         {
           chain: 'BNB mainnet',
@@ -119,14 +119,18 @@ export default {
           await window.ethereum.request({ method: 'eth_requestAccounts' })
 
           // Check the network
-          if (!this.selectedChainId)
-            this.selectedChainId = await web3.eth.net.getId()
+          const networkId = await web3.eth.net.getId()
+          const networkIndex = this.contracts.findIndex(contract => contract.chainId === networkId)
+          if (networkIndex === -1) {
+            debug.error('Unsupported network:', networkId)
+            throw new Error('Unsupported network')
+          }
 
           // Request to switch to Mumbai Testnet
           try {
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
-              params: [{ chainId: '0x13881' }], // Hexadecimal chain ID
+              params: [{ chainId: this.selectedChainId }], // Hexadecimal chain ID
             })
           }
           catch (switchError) {
