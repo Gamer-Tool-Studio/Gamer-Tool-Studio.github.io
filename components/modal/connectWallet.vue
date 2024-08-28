@@ -12,6 +12,43 @@ export default {
   data() {
     return {
       isLoading: false,
+
+      networkConfig: [
+      {
+          chainId: 80002,
+          rpcUrls: ['https://rpc-amoy.polygon.technology/'],
+          chainName: 'Polygon Amoy Testnet',
+          nativeCurrency: {
+            name: 'MATIC',
+            symbol: 'MATIC', // 2-6 characters long
+            decimals: 18,
+          },
+          blockExplorerUrls: ['https://amoy.polygonscan.com/'],
+        },
+        {
+          chainId: "56",
+          rpcUrls: ['https://bsc-dataseed.binance.org/'],
+          chainName: 'BNB Chain',
+          nativeCurrency: {
+            name: 'BNB',
+            symbol: 'BNB', // 2-6 characters long
+            decimals: 18,
+          },
+          blockExplorerUrls: ['https://bscscan.com/'],
+        },
+        {
+          chainId: "421614",
+          rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
+          chainName: 'Arbitrum Sepolia',
+          nativeCurrency: {
+            name: 'ETH',
+            symbol: 'ETH', // 2-6 characters long
+            decimals: 18,
+          },
+          blockExplorerUrls: ['https://sepolia.arbiscan.io'],
+        }
+      ],
+
       account: null,
       mintAmount: 1,
       isConnected: false,
@@ -23,10 +60,25 @@ export default {
       contract: null, // Initialize contract for NFT
       usdtContract: null, // Initialize contract for USDT
       mintPriceInUSDT: 5, // Set mint price (adjust as needed)
-      contractAddress: '0x316a753a5bDA0251FdAB083Afa6cf20DC8c0aFE7', // Set your contract address
-      usdtContractAddress: '0x89A84dc58ABA7909818C471B2EbFBc94e6C96c41', // Set USDT contract address
-      contractABI,
-      usdtContractABI: [
+      contractABI : [{
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "paymentToken",
+            "type": "address"
+          }
+        ],
+        "name": "mint",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }],
+      stableContract: [
       // Minimal ERC20 ABI for approve function
         {
           constant: true,
@@ -58,7 +110,7 @@ export default {
           address: [
             {
               type: 'ERC20',
-              address: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
+              address: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
             },
             {
               type: 'ERC1155',
@@ -68,7 +120,7 @@ export default {
         },
         {
           chain: 'Polygon test',
-          chainId: 80001,
+          chainId: 80002,
           address: [
             {
               type: 'ERC20',
@@ -82,7 +134,7 @@ export default {
         },
         {
           chain: 'Arbritirum Sepolia',
-          chainId: 421611,
+          chainId: 421614,
           address: [
             {
               type: 'ERC20',
@@ -104,56 +156,35 @@ export default {
     },
   },
   mounted() {
-    this.connectWallet() // Initiate the wallet connection when the modal is mounted
+    //this.connectWallet() // Initiate the wallet connection when the modal is mounted
+    //this.checkIsConnected();
   },
   methods: {
+    async handleSelectionChange(newValue) {
+      // Aqui você pode adicionar a lógica para lidar com a alteração da seleção
+      console.log('Selected Chain ID:', newValue);
+      // Adicione aqui o código que deseja executar quando a seleção mudar
+    },
     close() {
       this.$emit('close')
     },
-    async connectWallet() {
-      this.isLoading = true // Start loading as soon as the function is called
+    async checkIsConnected(){
       if (window.ethereum) {
-        // console.log('chainId', this.selectedChainId)
-        try {
+
           const web3 = new Web3(window.ethereum)
           await window.ethereum.request({ method: 'eth_requestAccounts' })
 
           // Check the network
-          const networkId = await web3.eth.net.getId()
+          const networkId =  Number(await web3.eth.net.getId())
+          console.log('networkId ', networkId);
           const networkIndex = this.contracts.findIndex(contract => contract.chainId === networkId)
+          console.log('networkIndex ', networkIndex );
           if (networkIndex === -1) {
             debug.error('Unsupported network:', networkId)
             throw new Error('Unsupported network')
           }
 
-          // Request to switch to Mumbai Testnet
-          try {
-            await window.ethereum.request({
-              method: 'wallet_switchEthereumChain',
-              params: [{ chainId: this.selectedChainId }], // Hexadecimal chain ID
-            })
-          }
-          catch (switchError) {
-            // Handle error, such as user rejecting the request
-            await window.ethereum.request({
-              method: 'wallet_addEthereumChain',
-              params: [
-                {
-                  chainId: '0x13881',
-                  rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
-                  chainName: 'Polygon Testnet Mumbai',
-                  nativeCurrency: {
-                    name: 'MATIC',
-                    symbol: 'MATIC', // 2-6 characters long
-                    decimals: 18,
-                  },
-                  blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
-                },
-              ], // Hexadecimal chain ID
-            })
-            debug.error('Error switching to Mumbai Testnet:', switchError)
-            throw switchError
-          }
+          this.selectedChainId =  networkId;
 
           const accounts = await web3.eth.getAccounts()
           this.account = accounts[0]
@@ -162,8 +193,46 @@ export default {
 
           // Initialize contracts after getting accounts
           this.web3 = new Web3(window.ethereum)
-          this.contract = new this.web3.eth.Contract(this.contractABI, this.contractAddress)
-          this.usdtContract = new this.web3.eth.Contract(this.usdtContractABI, this.usdtContractAddress)
+          this.contract = new this.web3.eth.Contract(this.contractABI, this.a)
+          this.stableContract = new this.web3.eth.Contract(this.usdtContractABI, this.usdtContractAddress)
+
+      }
+    },
+    async connectWallet() {
+      this.isLoading = true // Start loading as soon as the function is called
+      if (window.ethereum) {
+        // console.log('chainId', this.selectedChainId)
+        try {
+         this.checkIsConnected();
+          // Request to switch to Mumbai Testnet
+          try {
+            await window.ethereum.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x' + this.selectedChainId.toString(16)  }], // Hexadecimal chain ID
+            })
+          }
+          catch (switchError) {
+            console.log('Eerror changing the network ', switchError );
+
+            console.log('Eerror chainIdSelected  ',  this.selectedChainId );
+            console.log("netowkr config 0", this.networkConfig[0].chainId)
+
+            const selectedNetwork = this.networkConfig.find(config => config.chainId === this.selectedChainId);
+            console.log("select network ", selectedNetwork )
+            selectedNetwork.chainId = '0x' +  selectedNetwork.chainId.toString(16);
+
+            // Handle error, such as user rejecting the request
+            await window.ethereum.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                selectedNetwork
+              ], // Hexadecimal chain ID
+            })
+            debug.error('Error switching :', switchError)
+            throw switchError
+          }
+
+         
         }
         catch (error) {
           debug.error('Error connecting to MetaMask:', error)
@@ -179,13 +248,17 @@ export default {
       }
     },
 
+ 
+
     async checkAllowance() {
       const allowance = await this.usdtContract.methods.allowance(this.account, this.contractAddress).call()
       const requiredAllowance = this.mintPriceInUSDT * 10 ** 18 // Adjust for USDT decimals
       return Number.parseFloat(allowance) >= requiredAllowance
     },
 
+   
     async mintNFT() {
+      console.log('Mint NFT');
       if (!this.web3 || !this.contract || !this.usdtContract)
         await this.connectWallet()
 
@@ -276,6 +349,7 @@ export default {
                   item-title="chain"
                   item-value="chainId"
                   :items="contracts"
+                  @input="handleSelectionChange"
                 />
               </v-col>
               <div v-if="!isConnected">
@@ -333,7 +407,7 @@ export default {
                 </v-col>
                 <v-col cols="12" class="connect-button">
                   <button class="button" @click="mintNFT">
-                    Mint Accusation
+                    Mint
                   </button>
                 </v-col>
                 <v-col cols="12" class="redirect">
