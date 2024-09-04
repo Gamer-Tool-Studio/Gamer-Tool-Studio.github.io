@@ -70,11 +70,12 @@ if (authenticated.value) {
             Download Plugin
           </NuxtLink>
         </li>
-        <li class="nav-left mobile-display">
+ <!--       <li class="nav-left mobile-display">
           <NuxtLink to="/mint">
             Mint
           </NuxtLink>
         </li>
+      -->
       </ul>
       <ul class="login-section">
         <li v-if="!authenticated" class="nav-right-link d-none d-sm-flex">

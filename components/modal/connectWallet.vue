@@ -51,6 +51,7 @@ export default {
 
       account: null,
       mintAmount: 1,
+      mintPrice : 5,
       isConnected: false,
       isApproving: false,
       isMinting: false,
@@ -58,9 +59,23 @@ export default {
       mintInProgress: false,
       mintSuccessful: false,
       contract: null, // Initialize contract for NFT
-      usdtContract: null, // Initialize contract for USDT
+      stableContract: null, // Initialize contract for USDT
       mintPriceInUSDT: 5, // Set mint price (adjust as needed)
-      contractABI : [{
+      contractABI : [
+      {
+          "inputs": [],
+          "name": "mintPrice",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
         "inputs": [
           {
             "internalType": "uint256",
@@ -78,7 +93,7 @@ export default {
         "stateMutability": "nonpayable",
         "type": "function"
       }],
-      stableContract: [
+      stableContractABI: [
       // Minimal ERC20 ABI for approve function
         {
           constant: true,
@@ -103,10 +118,13 @@ export default {
         },
       ],
       selectedChainId: 56,
+      loadedContract : null,
       contracts: [
         {
           chain: 'BNB mainnet',
           chainId: 56,
+          stableConctractAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+          nftContractAddress : "0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee",
           address: [
             {
               type: 'ERC20',
@@ -121,6 +139,8 @@ export default {
         {
           chain: 'Polygon test',
           chainId: 80002,
+          stableConctractAddress: "0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee",
+          nftContractAddress : "0x545C05eaE06A171a583Fbad43e9F065986a13fD2",
           address: [
             {
               type: 'ERC20',
@@ -135,6 +155,8 @@ export default {
         {
           chain: 'Arbritirum Sepolia',
           chainId: 421614,
+          stableConctractAddress: "0xd0dCB97bC361C67b36a2254eA31909499118E1FB",
+          nftContractAddress : "0x850EEE3Fd95Abd59E9160493f3E66112aC33EA97",
           address: [
             {
               type: 'ERC20',
@@ -150,14 +172,18 @@ export default {
     }
   },
   watch: {
+
     mintAmount(newVal) {
       if (newVal < 1 || !Number.isInteger(newVal))
         this.mintAmount = 1
     },
+    selectedChainId(newVal){
+      console.log("chain selected change")
+    }
   },
   mounted() {
     //this.connectWallet() // Initiate the wallet connection when the modal is mounted
-    //this.checkIsConnected();
+    this.checkIsConnected();
   },
   methods: {
     async handleSelectionChange(newValue) {
@@ -167,6 +193,12 @@ export default {
     },
     close() {
       this.$emit('close')
+    },
+    async setMintAmount(){
+      console.log('CALL:: set mint amount');
+      const requiredAllowance = await this.contract.methods.mintPrice().call();
+      console.log("Mint price", this.web3.utils.fromWei(requiredAllowance, 'ether'), "ETH");
+      this.mintPrice =  this.web3.utils.fromWei(requiredAllowance, 'ether');
     },
     async checkIsConnected(){
       if (window.ethereum) {
@@ -191,12 +223,39 @@ export default {
           debug.log('Wallet connected:', this.account) // Log the connected account
           this.isConnected = true // Update connection status
 
+          console.log('Contract info loaded for chainID : ', this.contracts[networkIndex]);
+          this.loadedContract = this.contracts[networkIndex];
+          
           // Initialize contracts after getting accounts
           this.web3 = new Web3(window.ethereum)
-          this.contract = new this.web3.eth.Contract(this.contractABI, this.a)
-          this.stableContract = new this.web3.eth.Contract(this.usdtContractABI, this.usdtContractAddress)
+          console.log('LOG: load nft contract');
+          this.contract = new this.web3.eth.Contract(this.contractABI, this.loadedContract.nftContractAddress )
+          console.log('LOG: load stableContract');
+          this.stableContract = new this.web3.eth.Contract(this.stableContractABI, this.loadedContract.stableConctractAddress )
+          console.log('finish load contracts');
+          this.setMintAmount();
 
       }
+    },
+    async addDefaultNetwork(){
+        console.log('Eerror changing the network ', switchError );
+
+        console.log('Eerror chainIdSelected  ',  this.selectedChainId );
+        console.log("netowkr config 0", this.networkConfig[0].chainId)
+
+        const selectedNetwork = this.networkConfig.find(config => config.chainId === this.selectedChainId);
+        console.log("select network ", selectedNetwork )
+        selectedNetwork.chainId = '0x' +  selectedNetwork.chainId.toString(16);
+
+        // Handle error, such as user rejecting the request
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            selectedNetwork
+          ], // Hexadecimal chain ID
+        })
+        debug.error('Error switching :', switchError)
+
     },
     async connectWallet() {
       this.isLoading = true // Start loading as soon as the function is called
@@ -204,35 +263,20 @@ export default {
         // console.log('chainId', this.selectedChainId)
         try {
          this.checkIsConnected();
-          // Request to switch to Mumbai Testnet
+          // Request to switch network if need
+          const networkId =  Number(await web3.eth.net.getId())
           try {
-            await window.ethereum.request({
-              method: 'wallet_switchEthereumChain',
-              params: [{ chainId: '0x' + this.selectedChainId.toString(16)  }], // Hexadecimal chain ID
-            })
+            if(this.selectedChainId !=  networkId){
+                await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: '0x' + this.selectedChainId.toString(16)  }], // Hexadecimal chain ID
+              })
+            }
           }
           catch (switchError) {
-            console.log('Eerror changing the network ', switchError );
-
-            console.log('Eerror chainIdSelected  ',  this.selectedChainId );
-            console.log("netowkr config 0", this.networkConfig[0].chainId)
-
-            const selectedNetwork = this.networkConfig.find(config => config.chainId === this.selectedChainId);
-            console.log("select network ", selectedNetwork )
-            selectedNetwork.chainId = '0x' +  selectedNetwork.chainId.toString(16);
-
-            // Handle error, such as user rejecting the request
-            await window.ethereum.request({
-              method: 'wallet_addEthereumChain',
-              params: [
-                selectedNetwork
-              ], // Hexadecimal chain ID
-            })
-            debug.error('Error switching :', switchError)
-            throw switchError
+            this.addDefaultNetwork();
+            console.error("Error adding default network!")
           }
-
-         
         }
         catch (error) {
           debug.error('Error connecting to MetaMask:', error)
@@ -248,22 +292,33 @@ export default {
       }
     },
 
- 
 
     async checkAllowance() {
-      const allowance = await this.usdtContract.methods.allowance(this.account, this.contractAddress).call()
-      const requiredAllowance = this.mintPriceInUSDT * 10 ** 18 // Adjust for USDT decimals
+      console.log("CALL::checkAllowance");
+      console.log('account and contract address : ', this.account, this.loadedContract.nftContractAddress)
+      const allowance = await this.stableContract.methods.allowance(this.account, this.loadedContract.nftContractAddress).call()
+      console.log('Read allowance from contract : ', allowance);
+      const requiredAllowance = await this.contract.methods.mintPrice().call();
+      console.log("Mint price", this.web3.utils.fromWei(requiredAllowance, 'ether'), "ETH");
+      console.log("LOG::after checkAllowance")
       return Number.parseFloat(allowance) >= requiredAllowance
     },
 
    
     async mintNFT() {
-      console.log('Mint NFT');
-      if (!this.web3 || !this.contract || !this.usdtContract)
+
+      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+
+      console.log('******  Mint NFT ***** ', Number(chainId) );
+
+      if (!this.web3 || !this.contract || !this.stableContract)
         await this.connectWallet()
 
-      if (this.contract && this.usdtContract && this.suspectId != null) {
+      console.log('MINT: after check instance ', this.suspectId )
+
+      if (this.contract && this.stableContract && this.suspectId != null) {
         this.isLoading = true
+
 
         try {
           // Check if enough allowance is already set
@@ -273,13 +328,16 @@ export default {
             this.isApproving = true
             const spendingCap = 10000000 // Set spending cap
             const mintPrice = spendingCap * 10 ** 18 // Adjust for USDT decimals
-            await this.usdtContract.methods.approve(this.contractAddress, mintPrice).send({ from: this.account })
+            await this.stableContract.methods.approve(this.contractAddress, mintPrice).send({ from: this.account })
             this.isApproving = false
+          }else{
+            console.log('Allowance is enough!')
           }
 
           this.isMinting = true
+          console.log('Will start the minting for suspectId ',  this.suspectId, " with token : ", this.loadedContract.stableConctractAddress)
           // Mint NFT using suspectId from props
-          await this.contract.methods.mint(this.suspectId).send({ from: this.account })
+          await this.contract.methods.mint(this.suspectId, this.loadedContract.stableConctractAddress ).send({ from: this.account })
             .on('transactionHash', (hash) => {
               debug.log('Transaction Hash:', hash)
               this.isMinting = false // Set isMinting to false to move to the next stage
@@ -403,7 +461,7 @@ export default {
                   <input v-model.number="mintAmount" type="number" min="1" class="mint-amount-input">
                 </v-col>
                 <v-col cols="12" class="text-section">
-                  <p>Total Price: {{ mintAmount * 5 }} USDT</p>
+                  <p>Total Price: {{ mintAmount * mintPrice }} USDT</p>
                 </v-col>
                 <v-col cols="12" class="connect-button">
                   <button class="button" @click="mintNFT">
