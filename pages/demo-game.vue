@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { NFTS_LIST } from '@/constants'
+
+const debug = getDebugger('page:demo-game')
 
 useHead({
   title: 'Demo Game ',
@@ -13,6 +16,13 @@ function connectAndOpenModal(suspectId) {
   showModal.value = true
 }
 
+function calculateVotesPercentage(suspectId) {
+  const totalVotes = 10000 // TODO: get votes from contract
+  const suspectVotes = 5000 // TODO: get votes from contract
+  debug.log('suspectId', suspectId)
+  const percentage = (suspectVotes / totalVotes) * 100
+  return `${percentage.toFixed(2)}%`
+}
 </script>
 
 <template>
@@ -143,94 +153,16 @@ function connectAndOpenModal(suspectId) {
             Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.
           </h2>
           <div class="feature-boxes">
-            <div class="feature-box">
-              <h2>The Wife</h2>
-              <img src="/images/wife.png">
+            <div v-for="nft in NFTS_LIST" :key="nft.id" class="feature-box">
+              <h2>{{ nft.name }}</h2>
+              <img :src="nft.src">
               <v-col cols="12" class="vote-perc">
-                <h3>23%</h3><p>votes</p>
+                <h3>{{ calculateVotesPercentage(nft.id) }}</h3><p>votes</p>
               </v-col>
               <p>
-                The outspoken wife of Mr.Hamilton. Does the victim's life partner conceal his darkest secrets?
+                {{ nft.description }}
               </p>
-              <button class="button" @click="connectAndOpenModal(1)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Butler</h2>
-              <img src="/images/butler.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>16%</h3><p>votes</p>
-              </v-col>
-              <p>
-                A refined gentleman in whom Mr. Hamilton placed the highest trust. Was it misplaced?
-              </p>
-              <button class="button" @click="connectAndOpenModal(2)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Maid</h2>
-              <img src="/images/maid.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>11%</h3><p>votes</p>
-              </v-col>
-              <p>
-                A shy and caring servant who might know more about her masters' life than they know.
-              </p>
-              <button class="button" @click="connectAndOpenModal(3)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Gardener</h2>
-              <img src="/images/gardener.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>7%</h3><p>votes</p>
-              </v-col>
-              <p>
-                A simple working man that seems to only care about plants and flowers. Or does he?
-              </p>
-              <button class="button" @click="connectAndOpenModal(4)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Cook</h2>
-              <img src="/images/cook.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>2%</h3><p>votes</p>
-              </v-col>
-              <p>
-                An extravagant cooking master who's been in the family since she was a child? Is there a catch?
-              </p>
-              <button class="button" @click="connectAndOpenModal(5)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Journalist</h2>
-              <img src="/images/journalist.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>8%</h3><p>votes</p>
-              </v-col>
-              <p>
-                A rising reporting star investigating Mr.Hamilton's latest scandal. Is he involved?
-              </p>
-              <button class="button" @click="connectAndOpenModal(6)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Businessman</h2>
-              <img src="/images/businessman.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>18%</h3><p>votes</p>
-              </v-col>
-              <p>
-                A rude influential businessman with life-long dealings with Mr.Hamilton. Have things gone wrong?
-              </p>
-              <button class="button" @click="connectAndOpenModal(7)">
+              <button class="button" @click="connectAndOpenModal(nft.id)">
                 Accuse
               </button>
             </div>
