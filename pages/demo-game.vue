@@ -1,11 +1,38 @@
 <script setup>
 import { ref } from 'vue'
-import { NFTS_LIST } from '@/constants'
+import Web3 from 'web3'
+import { NFTS_LIST, nftContractAbi, nftContractAddress } from '@/constants'
 
 const debug = getDebugger('page:demo-game')
 
 useHead({
   title: 'Demo Game ',
+})
+
+const nfts = reactive(NFTS_LIST)
+
+const totalVotes = ref(0)
+
+onMounted(async () => {
+  const web3 = new Web3(window.ethereum)
+  const networkId = Number(await web3.eth.net.getId())
+  // debug.log('networkId', networkId)
+  const contract = new web3.eth.Contract(nftContractAbi, nftContractAddress.find(c => c.chainId === networkId).nftContractAddress)
+
+  // debug.log('contract', contract)
+
+  if (!contract)
+    debug.error('Contract not found')
+
+  for (const nft of nfts) {
+    // debug.log('nft', nft.id)
+    const votes = Number(await contract.methods.mintedCount(nft.id).call())
+    // debug.log('votes', votes)
+
+    nft.votes = votes || 0
+    totalVotes.value += votes
+    // debug.log('totalVotes', totalVotes)
+  }
 })
 
 const showModal = ref(false)
@@ -16,11 +43,12 @@ function connectAndOpenModal(suspectId) {
   showModal.value = true
 }
 
-function calculateVotesPercentage(suspectId) {
-  const totalVotes = 10000 // TODO: get votes from contract
-  const suspectVotes = 5000 // TODO: get votes from contract
-  debug.log('suspectId', suspectId)
-  const percentage = (suspectVotes / totalVotes) * 100
+function calculateVotesPercentage(suspect) {
+  const suspectVotes = suspect.votes
+  // debug.log('suspectId', suspect)
+  if (!suspectVotes || !totalVotes.value)
+    return '0%'
+  const percentage = (suspectVotes / totalVotes.value) * 100
   return `${percentage.toFixed(2)}%`
 }
 </script>
@@ -153,11 +181,11 @@ function calculateVotesPercentage(suspectId) {
             Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.
           </h2>
           <div class="feature-boxes">
-            <div v-for="nft in NFTS_LIST" :key="nft.id" class="feature-box">
+            <div v-for="nft in nfts" :key="nft.id" class="feature-box">
               <h2>{{ nft.name }}</h2>
               <img :src="nft.src">
               <v-col cols="12" class="vote-perc">
-                <h3>{{ calculateVotesPercentage(nft.id) }}</h3><p>votes</p>
+                <h3>{{ calculateVotesPercentage(nft) }}</h3><p>votes</p>
               </v-col>
               <p>
                 {{ nft.description }}
