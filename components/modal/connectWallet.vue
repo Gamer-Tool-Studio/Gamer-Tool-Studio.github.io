@@ -99,6 +99,30 @@ export default {
         },
       ],
       stableContractABI: [
+        {
+        "inputs":[
+            {
+              "internalType":"address",
+              "name":"spender",
+              "type":"address"
+            },
+            {
+              "internalType":"uint256",
+              "name":"value",
+              "type":"uint256"
+            }
+        ],
+        "name":"approve",
+        "outputs":[
+            {
+              "internalType":"bool",
+              "name":"",
+              "type":"bool"
+            }
+        ],
+        "stateMutability":"nonpayable",
+        "type":"function"
+      },
       // Minimal ERC20 ABI for approve function
         {
           constant: true,
@@ -127,6 +151,7 @@ export default {
       contracts: [
         {
           chain: 'BNB mainnet',
+          statble_icon : "B-USD",
           chainId: 56,
           stableConctractAddress: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
           nftContractAddress: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
@@ -144,8 +169,9 @@ export default {
         {
           chain: 'Polygon test',
           chainId: 80002,
+          statble_icon : "USD",
           stableConctractAddress: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
-          nftContractAddress: '0x545C05eaE06A171a583Fbad43e9F065986a13fD2',
+          nftContractAddress: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
           address: [
             {
               type: 'ERC20',
@@ -153,13 +179,14 @@ export default {
             },
             {
               type: 'ERC1155',
-              address: '0x545C05eaE06A171a583Fbad43e9F065986a13fD2',
+              address: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
             },
           ],
         },
         {
           chain: 'Arbitrum Sepolia',
           chainId: 421614,
+          statble_icon : "USD",
           stableConctractAddress: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
           nftContractAddress: '0x52772940628d1EBc08E1B50C39e466495f808F89',
           address: [
@@ -347,17 +374,21 @@ export default {
       debug.log('CALL::checkAllowance')
       debug.log('account and contract address : ', this.account, this.loadedContract.nftContractAddress)
       const allowance = await this.stableContract.methods.allowance(this.account, this.loadedContract.nftContractAddress).call()
+      if(!allowance)
+        return false;
       debug.log('Read allowance from contract : ', allowance)
       const requiredAllowance = await this.contract.methods.mintPrice().call()
       debug.log('Mint price', this.web3.utils.fromWei(requiredAllowance, 'ether'), 'ETH')
       debug.log('LOG::after checkAllowance')
-      return Number.parseFloat(allowance) >= Number.parseFloat(requiredAllowance * this.mintAmount )
+      return Number(allowance) >= (Number(requiredAllowance) * this.mintAmount)
     },
 
     async mintNFT() {
       const chainId = await this.web3.currentProvider.request({ method: 'eth_chainId' })
 
       debug.log('******  Mint NFT ***** ', Number(chainId))
+      console.log('Mint NFT  ');
+
 
       if (!this.web3 || !this.contract || !this.stableContract)
         await this.connectWallet()
@@ -373,12 +404,13 @@ export default {
           console.log('Allowance amount ',  hasEnoughAllowance);
 
           if (!hasEnoughAllowance) {
-            console.log('Allowance is NOT enough!')
+            console.log('Allowance is NOT enough!#2 ', this.loadedContract.stableConctractAddress )
 
             this.isApproving = true
-            const spendingCap = 10000000 // Set spending cap
-            const mintPrice = spendingCap * 10 ** 18 // Adjust for USDT decimals
-            await this.stableContract.methods.approve(this.contractAddress, mintPrice).send({ from: this.account })
+            let approveAmount = (this.mintAmount * this.mintPrice) * (10**18);
+       
+            await (this.stableContract.methods.approve(this.loadedContract.nftContractAddress, approveAmount ).send({ from: this.account }) )
+
             this.isApproving = false
           }
           else {
