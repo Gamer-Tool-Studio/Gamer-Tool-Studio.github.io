@@ -32,6 +32,7 @@
     "nitropack": "^2.8.1",
     "pinia": "^2.1.6",
     "sass": "^1.58.0",
+    "thirdweb": "^5.46.0",
     "vat-moss": "^1.0.2",
     "vite-plugin-node-polyfills": "^0.19.0",
     "vue-chartjs": "^5.2.0",

@@ -1,8 +1,40 @@
 <script setup>
 import { ref } from 'vue'
+import Web3 from 'web3'
+import { NFTS_LIST, nftContractAbi, nftContractAddress } from '@/constants'
+
+const debug = getDebugger('page:demo-game')
 
 useHead({
   title: 'Demo Game ',
+})
+
+const nfts = reactive(NFTS_LIST)
+
+const totalVotes = ref(0)
+
+onMounted(async () => {
+  const web3 = new Web3(window.ethereum)
+  const networkId = Number(await web3.eth.net.getId())
+  // debug.log('networkId', networkId)
+  const contractAddress = nftContractAddress.find(c => c.chainId === networkId)?.nftContractAddress
+  if (!contractAddress) {
+    debug.error('Contract not found')
+    return
+  }
+  const contract = new web3.eth.Contract(nftContractAbi, contractAddress)
+
+  // debug.log('contract', contract)
+
+  for (const nft of nfts) {
+    // debug.log('nft', nft.id)
+    const votes = Number(await contract.methods.mintedCount(nft.id).call())
+    // debug.log('votes', votes)
+
+    nft.votes = votes || 0
+    totalVotes.value += votes
+    // debug.log('totalVotes', totalVotes)
+  }
 })
 
 const showModal = ref(false)
@@ -11,6 +43,15 @@ const selectedSuspectId = ref(null)
 function connectAndOpenModal(suspectId) {
   selectedSuspectId.value = suspectId
   showModal.value = true
+}
+
+function calculateVotesPercentage(suspect) {
+  const suspectVotes = suspect.votes
+  // debug.log('suspectId', suspect)
+  if (!suspectVotes || !totalVotes.value)
+    return '0%'
+  const percentage = (suspectVotes / totalVotes.value) * 100
+  return `${percentage.toFixed(2)}%`
 }
 </script>
 
@@ -142,94 +183,16 @@ function connectAndOpenModal(suspectId) {
             Bet on the character you think is the culprit and earn the money from the bets of failed guesses. Results will be announced on the 1st of March.
           </h2>
           <div class="feature-boxes">
-            <div class="feature-box">
-              <h2>The Wife</h2>
-              <img src="/images/wife.png">
+            <div v-for="nft in nfts" :key="nft.id" class="feature-box">
+              <h2>{{ nft.name }}</h2>
+              <img :src="nft.src">
               <v-col cols="12" class="vote-perc">
-                <h3>23%</h3><p>votes</p>
+                <h3>{{ calculateVotesPercentage(nft) }}</h3><p>votes</p>
               </v-col>
               <p>
-                The outspoken wife of Mr.Hamilton. Does the victim's life partner conceal his darkest secrets?
+                {{ nft.description }}
               </p>
-              <button class="button" @click="connectAndOpenModal(1)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Butler</h2>
-              <img src="/images/butler.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>16%</h3><p>votes</p>
-              </v-col>
-              <p>
-                A refined gentleman in whom Mr. Hamilton placed the highest trust. Was it misplaced?
-              </p>
-              <button class="button" @click="connectAndOpenModal(2)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Maid</h2>
-              <img src="/images/maid.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>11%</h3><p>votes</p>
-              </v-col>
-              <p>
-                A shy and caring servant who might know more about her masters' life than they know.
-              </p>
-              <button class="button" @click="connectAndOpenModal(3)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Gardener</h2>
-              <img src="/images/gardener.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>7%</h3><p>votes</p>
-              </v-col>
-              <p>
-                A simple working man that seems to only care about plants and flowers. Or does he?
-              </p>
-              <button class="button" @click="connectAndOpenModal(4)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Cook</h2>
-              <img src="/images/cook.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>2%</h3><p>votes</p>
-              </v-col>
-              <p>
-                An extravagant cooking master who's been in the family since she was a child? Is there a catch?
-              </p>
-              <button class="button" @click="connectAndOpenModal(5)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Journalist</h2>
-              <img src="/images/journalist.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>8%</h3><p>votes</p>
-              </v-col>
-              <p>
-                A rising reporting star investigating Mr.Hamilton's latest scandal. Is he involved?
-              </p>
-              <button class="button" @click="connectAndOpenModal(6)">
-                Accuse
-              </button>
-            </div>
-            <div class="feature-box">
-              <h2>The Businessman</h2>
-              <img src="/images/businessman.png">
-              <v-col cols="12" class="vote-perc">
-                <h3>18%</h3><p>votes</p>
-              </v-col>
-              <p>
-                A rude influential businessman with life-long dealings with Mr.Hamilton. Have things gone wrong?
-              </p>
-              <button class="button" @click="connectAndOpenModal(7)">
+              <button class="button" @click="connectAndOpenModal(nft.id)">
                 Accuse
               </button>
             </div>
