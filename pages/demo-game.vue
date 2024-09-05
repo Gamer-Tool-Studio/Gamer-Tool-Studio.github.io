@@ -17,12 +17,14 @@ onMounted(async () => {
   const web3 = new Web3(window.ethereum)
   const networkId = Number(await web3.eth.net.getId())
   // debug.log('networkId', networkId)
-  const contract = new web3.eth.Contract(nftContractAbi, nftContractAddress.find(c => c.chainId === networkId).nftContractAddress)
+  const contractAddress = nftContractAddress.find(c => c.chainId === networkId)?.nftContractAddress
+  if (!contractAddress) {
+    debug.error('Contract not found')
+    return
+  }
+  const contract = new web3.eth.Contract(nftContractAbi, contractAddress)
 
   // debug.log('contract', contract)
-
-  if (!contract)
-    debug.error('Contract not found')
 
   for (const nft of nfts) {
     // debug.log('nft', nft.id)
