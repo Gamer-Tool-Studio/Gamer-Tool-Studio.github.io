@@ -12,6 +12,7 @@ function connectAndOpenModal(suspectId) {
   selectedSuspectId.value = suspectId
   showModal.value = true
 }
+
 </script>
 
 <template>

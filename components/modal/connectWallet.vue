@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       isLoading: false,
-
+      watch_network_change : false,
       networkConfig: [
         {
           chainId: 80002,
@@ -85,6 +85,7 @@ export default {
               name: 'id',
               type: 'uint256',
             },
+            {"internalType":"uint256","name":"amount","type":"uint256"},
             {
               internalType: 'address',
               name: 'paymentToken',
@@ -157,10 +158,10 @@ export default {
           ],
         },
         {
-          chain: 'Arbritirum Sepolia',
+          chain: 'Arbitrum Sepolia',
           chainId: 421614,
           stableConctractAddress: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
-          nftContractAddress: '0x850EEE3Fd95Abd59E9160493f3E66112aC33EA97',
+          nftContractAddress: '0x52772940628d1EBc08E1B50C39e466495f808F89',
           address: [
             {
               type: 'ERC20',
@@ -168,7 +169,7 @@ export default {
             },
             {
               type: 'ERC1155',
-              address: '0x850EEE3Fd95Abd59E9160493f3E66112aC33EA97',
+              address: '0x52772940628d1EBc08E1B50C39e466495f808F89',
             },
           ],
         },
@@ -176,18 +177,25 @@ export default {
     }
   },
   watch: {
-
     mintAmount(newVal) {
       if (newVal < 1 || !Number.isInteger(newVal))
         this.mintAmount = 1
     },
     selectedChainId(newVal) {
+      console.log("WATCH selected Chain ID", this.watch_network_change );
+
       debug.log('chain selected change', newVal)
+      console.log("actual value ", this.selectedChainId );
+      if(this.watch_network_change){
+        this.connectWallet(newVal);
+      }else{
+        console.log("watch network change was disable by a variable");
+      }
     },
   },
   mounted() {
     // this.connectWallet() // Initiate the wallet connection when the modal is mounted
-    this.checkIsConnected()
+    this.checkIsConnected(true);
   },
   methods: {
     async handleSelectionChange(newValue) {
@@ -204,23 +212,61 @@ export default {
       debug.log('Mint price', this.web3.utils.fromWei(requiredAllowance, 'ether'), 'ETH')
       this.mintPrice = this.web3.utils.fromWei(requiredAllowance, 'ether')
     },
-    async checkIsConnected() {
+    async  checkWalletConnection() {
+      if (window.ethereum) {
+        // Inicializa o Web3 com o provedor MetaMask
+        const web3 = new Web3(window.ethereum);
+
+        try {
+          // Obtém as contas conectadas
+          const accounts = await web3.eth.getAccounts();
+
+          if (accounts.length > 0) {
+            // Se houver contas conectadas, a carteira já está conectada
+            console.log('Wallet already connected:', accounts[0]);
+            return true; // Retorna true para indicar que a wallet está conectada
+          } else {
+            console.log('Wallet not connected');
+            return false; // Retorna false para indicar que a wallet não está conectada
+          }
+        } catch (error) {
+          console.error('Error checking wallet connection:', error);
+          return false;
+        }
+      } else {
+        console.error('MetaMask not detected. Please install MetaMask.');
+        return false;
+      }
+   },
+    async checkIsConnected(call_from_mounted) {
+      console.log("CALL::checkIsConnected ", call_from_mounted)
       if (window.ethereum) {
         this.web3 = new Web3(window.ethereum)
-        await this.web3.currentProvider.request({ method: 'eth_requestAccounts' })
+
+        const networkId = Number(await this.web3.eth.net.getId())
+        console.log('networkId ', networkId)
 
         // Check the network
-        const networkId = Number(await this.web3.eth.net.getId())
-        debug.log('networkId ', networkId)
+        this.watch_network_change = false;
         const networkIndex = this.contracts.findIndex(contract => contract.chainId === networkId)
         debug.log('networkIndex ', networkIndex)
         if (networkIndex === -1) {
           debug.error('Unsupported network:', networkId)
           throw new Error('Unsupported network')
         }
+        this.selectedChainId = networkId;
+
+
+        console.log('validate if condition : ', !(await this.checkWalletConnection())  && call_from_mounted )
+        if( !(await this.checkWalletConnection())  && call_from_mounted ){
+          console.log("LOG:: not connected called from mounted")
+          return;
+        }
+        console.log("LOG:: continue to connect user wallet");
+        await this.web3.currentProvider.request({ method: 'eth_requestAccounts' });
 
         const accounts = await this.web3.eth.getAccounts()
-        this.account = accounts[0]
+        this.account = accounts[0];
         debug.log('Wallet connected:', this.account) // Log the connected account
         this.isConnected = true // Update connection status
 
@@ -233,10 +279,12 @@ export default {
         debug.log('LOG: load stableContract')
         this.stableContract = new this.web3.eth.Contract(this.stableContractABI, this.loadedContract.stableConctractAddress)
         debug.log('finish load contracts')
+        this.watch_network_change = true;
         this.setMintAmount()
       }
     },
     async addDefaultNetwork() {
+      console.log("CALL::addDefaultNetwork")
       debug.log('Eerror changing the network ')
 
       debug.log('Eerror selectedChainId  ', this.selectedChainId)
@@ -258,16 +306,19 @@ export default {
         debug.error('Error switching :', error)
       }
     },
-    async connectWallet() {
+    async connectWallet(chainToCompare) {
+      console.log("CALL::connectWallet ", chainToCompare)
+
       this.isLoading = true // Start loading as soon as the function is called
       if (window.ethereum) {
         // debug.log('chainId', this.selectedChainId)
         try {
-          this.checkIsConnected()
+          this.checkIsConnected(false)
           // Request to switch network if need
           const networkId = Number(await this.web3.eth.net.getId())
+          let newChain = chainToCompare ? chainToCompare : this.selectedChainId;
           try {
-            if (this.selectedChainId !== networkId) {
+            if (newChain !== networkId) {
               await this.web3.currentProvider.request({
                 method: 'wallet_switchEthereumChain',
                 params: [{ chainId: `0x${this.selectedChainId.toString(16)}` }], // Hexadecimal chain ID
@@ -300,7 +351,7 @@ export default {
       const requiredAllowance = await this.contract.methods.mintPrice().call()
       debug.log('Mint price', this.web3.utils.fromWei(requiredAllowance, 'ether'), 'ETH')
       debug.log('LOG::after checkAllowance')
-      return Number.parseFloat(allowance) >= requiredAllowance
+      return Number.parseFloat(allowance) >= Number.parseFloat(requiredAllowance * this.mintAmount )
     },
 
     async mintNFT() {
@@ -319,8 +370,11 @@ export default {
         try {
           // Check if enough allowance is already set
           const hasEnoughAllowance = await this.checkAllowance()
+          console.log('Allowance amount ',  hasEnoughAllowance);
 
           if (!hasEnoughAllowance) {
+            console.log('Allowance is NOT enough!')
+
             this.isApproving = true
             const spendingCap = 10000000 // Set spending cap
             const mintPrice = spendingCap * 10 ** 18 // Adjust for USDT decimals
@@ -328,13 +382,13 @@ export default {
             this.isApproving = false
           }
           else {
-            debug.log('Allowance is enough!')
+            console.log('Allowance is enough!')
           }
 
           this.isMinting = true
-          debug.log('Will start the minting for suspectId ', this.suspectId, ' with token : ', this.loadedContract.stableConctractAddress)
+          console.log('Will start the minting for suspectId ', this.suspectId, ', with the aount : ', this.mintAmount ,  ' with token : ', this.loadedContract.stableConctractAddress)
           // Mint NFT using suspectId from props
-          await this.contract.methods.mint(this.suspectId, this.loadedContract.stableConctractAddress).send({ from: this.account })
+          await this.contract.methods.mint(this.suspectId, this.mintAmount, this.loadedContract.stableConctractAddress).send({ from: this.account })
             .on('transactionHash', (hash) => {
               debug.log('Transaction Hash:', hash)
               this.isMinting = false // Set isMinting to false to move to the next stage
