@@ -14,8 +14,8 @@ const nfts = reactive(NFTS_LIST)
 const totalVotes = ref(0)
 
 onMounted(async () => {
-  const web3 = new Web3(window.ethereum)
-  const networkId = Number(await web3.eth.net.getId())
+  const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/'))
+  const networkId = 56 // Number(await web3.eth.net.getId())
   // debug.log('networkId', networkId)
   const contractAddress = nftContractAddress.find(c => c.chainId === networkId)?.nftContractAddress
   if (!contractAddress) {
