@@ -176,7 +176,7 @@ function calculateVotesPercentage(suspect) {
             <div class="results-container">
               <img src="~/assets/images/dollar-icon.png" class="vote-icon">
               <h3 class="prize-money">
-                {{ totalVotes * 5 }}
+                {{ totalVotes * 5 }}$
               </h3>
               <h3 class="counter-text">
                 Funds Raised
