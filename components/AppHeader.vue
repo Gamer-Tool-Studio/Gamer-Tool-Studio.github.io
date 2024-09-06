@@ -20,7 +20,8 @@ const smallHeaderPages = ['/dashboard']
 
 const isSmallHeader = computed(() => !smallHeaderPages.includes(getWordPattern(route?.path || '', pattern)))
 
-const open = ref(false)
+const openDemoGames = ref(false)
+const openProducts = ref(false)
 
 // authentication methods
 
@@ -46,7 +47,7 @@ if (authenticated.value) {
           <!-- <NuxtLink to="/products">Products</NuxtLink> -->
           <NuxtLink>
             Products
-            <v-menu v-model:model-value="open" activator="parent">
+            <v-menu v-model:model-value="openProducts" activator="parent">
               <v-list class="dropDownMenu">
                 <a class="dropLink" href="/#sectionToLinkToApi"><v-list-item class="dropDownItem"> SDK</v-list-item></a>
                 <a class="dropLink" href="/#sectionToLinkToPlugin"><v-list-item class="dropDownItem"> Plugins</v-list-item></a>
@@ -73,7 +74,7 @@ if (authenticated.value) {
         <li class="nav-left mobile-display">
           <NuxtLink>
             Demo Games
-            <v-menu v-model:model-value="open" activator="parent">
+            <v-menu v-model:model-value="openDemoGames" activator="parent">
               <v-list class="dropDownMenu">
                 <a class="dropLink" href="/cluaido"><v-list-item class="dropDownItem"> CLUAIDO</v-list-item></a>
               </v-list>
