@@ -165,7 +165,7 @@ function calculateVotesPercentage(suspect) {
             <div class="results-container">
               <img src="~/assets/images/document-icon.png" class="vote-icon">
               <h3 class="prize-money">
-                15,134
+                {{ totalVotes }}
               </h3>
               <h3 class="counter-text">
                 Accusations Made
@@ -176,7 +176,7 @@ function calculateVotesPercentage(suspect) {
             <div class="results-container">
               <img src="~/assets/images/dollar-icon.png" class="vote-icon">
               <h3 class="prize-money">
-                150,565$
+                {{ totalVotes * 5 }}
               </h3>
               <h3 class="counter-text">
                 Funds Raised
