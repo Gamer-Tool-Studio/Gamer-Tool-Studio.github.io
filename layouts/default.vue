@@ -17,7 +17,7 @@ const route = useRoute()
 const name = computed(() => route.name)
 
 const theme = useTheme()
-const darkThemePAges = ['index', 'demo-game']
+const darkThemePAges = ['index', 'cluaido']
 
 watch(
   name,

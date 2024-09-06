@@ -373,13 +373,13 @@ export default {
         <v-col cols="12">
           <header class="modal-header">
             <h1 v-if="!isConnected">
-              Connect your web3 wallet
+              Connect a web3 wallet
             </h1>
             <h1 v-else-if="isApproving">
-              Approve USDT spending in your wallet
+              Approve Token spending in your Wallet
             </h1>
             <h1 v-else-if="isMinting">
-              Approve the Minting Transaction in your wallet
+              Approve the Minting Transaction in your Wallet
             </h1>
             <h1 v-else-if="mintInProgress">
               Minting your Accusation
@@ -388,7 +388,7 @@ export default {
               Success!
             </h1>
             <h1 v-else>
-              Make your accusation
+              Make your Accusation
             </h1>
           </header>
           <button type="button" class="btn-close" aria-label="Close modal" @click="close">
@@ -402,7 +402,7 @@ export default {
               <v-col cols="6">
                 <v-select
                   v-model="selectedChainId"
-                  label="Select"
+                  label="Select a Network"
                   item-title="chain"
                   item-value="chainId"
                   :items="contracts"
@@ -419,7 +419,7 @@ export default {
                 <div v-if="isLoading" class="loader" />
                 <v-col cols="12" class="connect-button">
                   <button class="button" @click="connectWallet">
-                    Connect again
+                    Connect Wallet
                   </button>
                 </v-col>
                 <v-col cols="12" class="redirect">
@@ -460,7 +460,7 @@ export default {
                   <input v-model.number="mintAmount" type="number" min="1" class="mint-amount-input">
                 </v-col>
                 <v-col cols="12" class="text-section">
-                  <p>Total Price: {{ mintAmount * mintPrice }} USDT</p>
+                  <p>Total Price: {{ mintAmount * mintPrice }} BUSD</p>
                 </v-col>
                 <v-col cols="12" class="connect-button">
                   <button class="button" @click="mintNFT">
@@ -468,7 +468,7 @@ export default {
                   </button>
                 </v-col>
                 <v-col cols="12" class="redirect">
-                  <p>Don't have any USDT? Buy it on <a href="https://www.binance.com/">Binance</a> or in another exchange.</p>
+                  <p>Don't have any BUSD? Buy it on <a href="https://www.binance.com/">Binance</a> or in another exchange.</p>
                 </v-col>
               </div>
             </v-row>
@@ -549,7 +549,8 @@ export default {
 }
 
 .connect-button {
-  margin-top: 40px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   padding-top: 5px;
 }
 

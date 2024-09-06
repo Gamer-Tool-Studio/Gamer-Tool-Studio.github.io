@@ -38,7 +38,7 @@ section {
   margin-left: 20px;
   text-decoration: underline;
   font-family: 'Bebas Neue';
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 100;
 }
 
@@ -48,7 +48,7 @@ section {
 }
 
 .intro-cta button {
-  font-size: 18px;
+  font-size: 25px;
   font-family: 'Bebas Neue';
 }
 
@@ -56,6 +56,27 @@ section {
   color: #6200ee;
 }
 
+.shiny{
+  transition: background 0.6s ease-in-out !important;
+  text-decoration: none;
+  border-radius: 7px;
+}
+
+.shiny:hover{
+  background: linear-gradient(135deg, #1a1a1a, #303030, #6200ee, #303030, #1a1a1a) !important;
+  background-size: 200% 200% !important;
+  animation: metallic-shine 1.5s ease-in-out forwards !important;
+  color:#fff !important;
+}
+
+@keyframes metallic-shine {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
 /*Demo Video */
 
 .demo-video {
@@ -82,7 +103,8 @@ section {
 
 /* Plugin Features Box Styles */
 .feature-boxes {
-  margin-top: 60px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   width: 100%;
   padding: 0;
   display: inline-flex;

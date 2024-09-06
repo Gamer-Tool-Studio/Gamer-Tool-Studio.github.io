@@ -15,9 +15,9 @@ export default {
       <div class="footer-row">
         <h4>Product</h4>
         <ul>
-          <li><a href="#documentation">Download Plugin</a></li>
-          <li><a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction">API Reference</a></li>
-          <li><a href="https://github.com/Gamer-Tool-Studio">Github</a></li>
+          <li><a href="#documentation">Plugins</a></li>
+          <li><a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction">SDKs</a></li>
+          <li><a href="/cluaido">Games</a></li>
         </ul>
       </div>
       <div class="footer-row">
@@ -33,12 +33,12 @@ export default {
         <ul>
           <li><a href="https://discord.gg/JdDwRfTGNF">Discord</a></li>
           <li><a href="https://twitter.com/gamertoolstudio">Twitter</a></li>
-          <li><a href="https://www.youtube.com/@gamertoolstudio">Youtube</a></li>
+          <li><a href="https://github.com/Gamer-Tool-Studio">Github</a></li>
         </ul>
       </div>
     </div>
     <p class="footer-copy">
-      © Gamer Tools Studio 2023
+      © Gamer Tool Studio 2024
     </p>
   </footer>
 </template>
@@ -115,6 +115,10 @@ footer a {
 footer a {
   font-size: 14px;
 }
+
+.footer-copy{
+    margin-top: 10px;
+  }
 
 @media (max-width: 768px) {
   .footer-content {

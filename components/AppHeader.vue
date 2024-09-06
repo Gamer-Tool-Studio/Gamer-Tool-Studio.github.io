@@ -13,7 +13,7 @@ const debug = getDebugger('AppHeader')
 
 const route = useRoute()
 
-const isLandingPage = computed(() => ['/', '/demo-game', '/demo-game/'].includes(route.path))
+const isLandingPage = computed(() => ['/', '/cluaido', '/cluaido/'].includes(route.path))
 
 const pattern = /^(\/[^\/]+)/
 const smallHeaderPages = ['/dashboard']
@@ -68,6 +68,16 @@ if (authenticated.value) {
         <li class="nav-left mobile-display">
           <NuxtLink to="/download-plugin">
             Download Plugin
+          </NuxtLink>
+        </li>
+        <li class="nav-left mobile-display">
+          <NuxtLink>
+            Demo Games
+            <v-menu v-model:model-value="open" activator="parent">
+              <v-list class="dropDownMenu">
+                <a class="dropLink" href="/cluaido"><v-list-item class="dropDownItem"> CLUAIDO</v-list-item></a>
+              </v-list>
+            </v-menu>
           </NuxtLink>
         </li>
  <!--       <li class="nav-left mobile-display">

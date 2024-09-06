@@ -61,11 +61,11 @@ useHead({
   <v-container class="lp">
     <v-row>
       <v-col cols="12" class="intro-section">
-        <h1>NPC-GPT - Create AI characters for your games.</h1>
+        <h1>NPC-GPT - Create Open Simulations With AI Agents.</h1>
       </v-col>
       <v-col cols="12" class="intro-cta">
         <NuxtLink to="/pricing">
-          <button class="button">
+          <button class="button shiny">
             Start Trial Now
           </button>
         </NuxtLink>
@@ -87,29 +87,27 @@ useHead({
     <v-row class="features">
       <v-col>
         <h2 class="page-headers">
-          Unlock entirely new gaming experiences with the assistance of autonomous characters.
-          Effortlessly add unscripted conversations to your game by integrating with the GPT-4 model.
+          Unlock entirely new simulated experiences with the assistance of AI agents.
+          Create complex chracaters and deploy them in game environments to create your simulated worlds.
         </h2>
       </v-col>
       <div class="feature-boxes">
         <div class="feature-box">
-          <h3>Autonomous Worlds</h3>
+          <h3>Interactive agents</h3>
           <p>
-            Leverage the capabilities of AI and enable players to freely interact with characters to
-            create unique scenarios for players within your game.
+            Build character backstories and customize the way they respond to players.
           </p>
         </div>
         <div class="feature-box">
-          <h3>Unscripted Characters</h3>
+          <h3>Open interactions</h3>
           <p>
-            Build immersive character backstories and customize the way they respond to players. Make chat GPT a friend
-            or a foe in your game quests.
+            Create open simulation worlds where players can freely interact with characters through text inputs.
           </p>
         </div>
         <div class="feature-box">
-          <h3>Intuitive Interface</h3>
+          <h3>Seamless AI</h3>
           <p>
-            NPC-GPT plugin requires no programming experience to setup and use from within your favourite game engine.
+            NPC-GPT requires no coding experience to integrate its AI capabilities in your favourite game engines or frontend frameworks.
           </p>
         </div>
         <div class="feature-box">
@@ -124,8 +122,7 @@ useHead({
     <v-row id="sectionToLinkToApi" class="get-started">
       <v-col cols="12">
         <h2 class="page-headers">
-          Create seamless AI characters to interact with users from any frontend environment with NPC-GPT
-          SDK
+          Enable open interactions with dyanmic AI characters with our frontend libraries.
         </h2>
         <div class="code-style">
           <pre class="code-display">
@@ -170,7 +167,7 @@ useHead({
         </div>
       </v-col>
       <v-col cols="12" class="button-display">
-        <a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction"><button class="button">View API Reference</button></a>
+        <a href="https://gamertoolstudio.gitbook.io/npc-gpt/api-reference/introduction"><button class="button shiny">View API Reference</button></a>
       </v-col>
       <v-col id="sectionToLinkToPlugin" cols="12">
         <h2 class="page-headers">
@@ -204,12 +201,11 @@ useHead({
 
     <v-col cols="12" class="start-trial">
       <h2 class="page-headers">
-        Are you ready to take your game development to the next level with the ultimate character building
-        tool?
+        Are You Ready To Take Control Over The Simulation?
       </h2>
       <br>
       <NuxtLink to="/pricing">
-        <button class="button">
+        <button class="button shiny">
           Start Trial Now
         </button>
       </NuxtLink>

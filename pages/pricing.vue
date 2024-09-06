@@ -153,7 +153,7 @@ useHead({
     </v-row>
     <v-col cols="12" class="contact-us">
       <h3>Need a tailored solution for your project?</h3>
-      <a href="https://discord.gg/JdDwRfTGNF"><button class="button no-hover-button">Contact our Team</button></a>
+      <a href="https://discord.gg/JdDwRfTGNF"><button class="button shiny">Contact our Team</button></a>
     </v-col>
   </v-container>
 </template>
@@ -261,6 +261,29 @@ useHead({
     }
   }
 }
+
+.shiny{
+  transition: background 0.6s ease-in-out !important;
+  text-decoration: none;
+  border-radius: 7px;
+}
+
+.shiny:hover{
+  background: linear-gradient(135deg, #1a1a1a, #303030, #6200ee, #303030, #1a1a1a) !important;
+  background-size: 200% 200% !important;
+  animation: metallic-shine 1.5s ease-in-out forwards !important;
+  color:#fff !important;
+}
+
+@keyframes metallic-shine {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
 .feature-box.featured-item {
   background-color: #fff;
   outline: 3px solid #6200ee !important;
