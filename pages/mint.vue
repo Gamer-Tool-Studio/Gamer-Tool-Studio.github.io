@@ -7,16 +7,16 @@ import { defineChain } from 'thirdweb/chains'
 const debug = getDebugger('pricing')
 
 // create the client with your clientId, or secretKey if in a server environment
-const client = createThirdwebClient({
-  clientId: '5767633e1a68bf575326487901480929',
-})
+// const client = createThirdwebClient({
+//   clientId: '5767633e1a68bf575326487901480929',
+// })
 
 // connect to your contract
-const contract = getContract({
-  client,
-  chain: defineChain(421614),
-  address: '0x850EEE3Fd95Abd59E9160493f3E66112aC33EA97',
-})
+// const contract = getContract({
+//   client,
+//   chain: defineChain(421614),
+//   address: '0x850EEE3Fd95Abd59E9160493f3E66112aC33EA97',
+// })
 
 // Define page meta layout
 definePageMeta({
@@ -80,8 +80,8 @@ debug.log('data', data)
 
 const isLightBoxHovered = ref(false)
 
-async function mintTheirdWeb(nftID: string) {
-  console.log('mint the nft ', nftID)
+async function mintTheirdWeb(nftID: number) {
+  debug.log('mint the nft ', nftID)
 
   // import { prepareContractCall, sendTransaction } from "thirdweb";
 
@@ -97,15 +97,15 @@ async function mintTheirdWeb(nftID: string) {
 }
 
 // Function to handle opening Stripe payment
-async function openStripe(priceId: string) {
-  const { data } = await useAuthAPI<StripeCreateLink>('/stripe/create', 'POST', {
-    price_id: priceId,
-    mode: 'payment',
-  })
+// async function openStripe(priceId: string) {
+//   const { data } = await useAuthAPI<StripeCreateLink>('/stripe/create', 'POST', {
+//     price_id: priceId,
+//     mode: 'payment',
+//   })
 
-  if (data.value.url)
-    window.open(data.value.url as string, '_blank')
-}
+//   if (data.value.url)
+//     window.open(data.value.url as string, '_blank')
+// }
 
 // Function to format the price
 function formatPrice(price: number) {
@@ -193,20 +193,20 @@ useHead({
           v-for="nft in nftList"
           :key="nft.id"
           class="feature-box"
-          :class="{ 'featured-item': nft.featured && !isLightBoxHovered }"
-          @mouseover="isLightBoxHovered = !nft.featured && true"
-          @mouseleave="isLightBoxHovered = !nft.featured && false"
+          :class="{ 'featured-item': nft.feature && !isLightBoxHovered }"
+          @mouseover="isLightBoxHovered = !nft.feature && true"
+          @mouseleave="isLightBoxHovered = !nft.feature && false"
         >
           <h3>{{ nft.title }}</h3>
           <ul class="pricing-tables">
             <li>Title </li>
             <li class="align-right">
-              {{ formatTokens(nft.title) }}
+              {{ formatTokens(nft.id) }}
             </li>
           </ul>
           <img :src="nft.image" alt="NFT Image" class="nft-image">
-          <div class="price-display" :class="{ 'featured-price': nft.featured }">
-            <h4>{{ formatPrice(nft.price) }}</h4>
+          <div class="price-display" :class="{ 'featured-price': nft.feature }">
+            <h4>{{ formatPrice(nft.id) }}</h4>
           </div>
           <button class="button light-button" @click="mintTheirdWeb(nft.id)">
             Mint

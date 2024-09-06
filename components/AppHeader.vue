@@ -80,7 +80,7 @@ if (authenticated.value) {
             </v-menu>
           </NuxtLink>
         </li>
- <!--       <li class="nav-left mobile-display">
+        <!--       <li class="nav-left mobile-display">
           <NuxtLink to="/mint">
             Mint
           </NuxtLink>

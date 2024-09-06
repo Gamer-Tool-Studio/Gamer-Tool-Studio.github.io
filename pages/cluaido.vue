@@ -84,15 +84,15 @@ function calculateVotesPercentage(suspect) {
           </div>
         </v-col>
         <v-col cols="12">
-            <div class="about-game">
-              <a href="https://store.steampowered.com/app/2919500/CLUAIDO/">
-                <h3 class="learn-more">Learn more about CLUAIDO!</h3>
-              </a>
-            </div>
-          </v-col>
+          <div class="about-game">
+            <a href="https://store.steampowered.com/app/2919500/CLUAIDO/">
+              <h3 class="learn-more">Learn more about CLUAIDO!</h3>
+            </a>
+          </div>
+        </v-col>
       </v-row>
       <v-row class="get-started">
-       <!-- <v-col cols="6" class="controllers-section">
+        <!-- <v-col cols="6" class="controllers-section">
           <v-col cols="12">
             <h2 class="page-headers">
               Controllers
@@ -101,16 +101,16 @@ function calculateVotesPercentage(suspect) {
           <v-col cols="12" class="controller-container">
             <div class="keyboard-control">
               &#11014;
-            </div> 
+            </div>
             <div class="keyboard-control">
               &#11015;
-            </div> 
+            </div>
             <div class="keyboard-control">
               &#10132;
-            </div> 
+            </div>
             <div class="keyboard-control">
               &#11013;
-            </div> 
+            </div>
             <p class="controller-type">
               Move Player
             </p>
@@ -191,9 +191,9 @@ function calculateVotesPercentage(suspect) {
           <v-col cols="12" class="">
             <div class="guide-link acc-guide">
               <a href="">
-              <img class="acc-rules" src="~/assets/images/document-icon.png" alt="Betting Game Rules">
-              <h3>  Read the Rules and Learn All About the Rewards.</h3>
-            </a>
+                <img class="acc-rules" src="~/assets/images/document-icon.png" alt="Betting Game Rules">
+                <h3>  Read the Rules and Learn All About the Rewards.</h3>
+              </a>
             </div>
           </v-col>
           <div class="feature-boxes">
@@ -341,7 +341,7 @@ section {
   align-content: center;
   min-width: 100%;
   transition: background 0.6s ease-in-out;
- 
+
 }
 
 .about-game a{
@@ -359,7 +359,7 @@ section {
   background-size: 100% 100%;
   animation: metallic-shine 1.5s ease-in-out forwards;
   border-radius: 17px;
-  
+
 }
 
 .acc-guide a{
@@ -399,12 +399,11 @@ section {
   }
 }
 
-
 .acc-guide h3 {
   font-size: 30px;
   margin-left: 20px;
   align-self: center;
- 
+
 }
 
 .learn-more {
