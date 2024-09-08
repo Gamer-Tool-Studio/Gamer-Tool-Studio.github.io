@@ -53,13 +53,131 @@ export const NFTS_LIST = [
 
 ]
 
+export const stableContractAbi = [
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'spender',
+        type: 'address',
+      },
+      {
+        internalType: 'uint256',
+        name: 'value',
+        type: 'uint256',
+      },
+    ],
+    name: 'approve',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  // Minimal ERC20 ABI for approve function
+  {
+    constant: true,
+    inputs: [
+      {
+        name: '_owner',
+        type: 'address',
+      },
+      {
+        name: '_spender',
+        type: 'address',
+      },
+    ],
+    name: 'allowance',
+    outputs: [
+      {
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    type: 'function',
+  },
+]
+
+export const NETWORKS_LIST = [
+  {
+    chainId: 80002,
+    rpcUrls: ['https://rpc-amoy.polygon.technology/'],
+    chainName: 'Polygon Amoy Testnet',
+    nativeCurrency: {
+      name: 'MATIC',
+      symbol: 'MATIC',
+      decimals: 18,
+    },
+    blockExplorerUrls: ['https://amoy.polygonscan.com/'],
+  },
+  {
+    chainId: 56,
+    rpcUrls: ['https://bsc-dataseed.binance.org/'],
+    chainName: 'BNB Chain',
+    nativeCurrency: {
+      name: 'BNB',
+      symbol: 'BNB',
+      decimals: 18,
+    },
+    blockExplorerUrls: ['https://bscscan.com/'],
+  },
+  {
+    chainId: 421614,
+    rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
+    chainName: 'Arbitrum Sepolia',
+    nativeCurrency: {
+      name: 'ETH',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    blockExplorerUrls: ['https://sepolia.arbiscan.io'],
+  },
+  {
+    chainId: 42161,
+    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+    chainName: 'Arbitrum One Mainnet',
+    nativeCurrency: {
+      name: 'ETH',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    blockExplorerUrls: ['https://arbiscan.io'],
+  },
+  {
+    chainId: 43114,
+    rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
+    chainName: 'C-Chain',
+    nativeCurrency: {
+      name: 'AVAX',
+      symbol: 'AVAX',
+      decimals: 18,
+    },
+    blockExplorerUrls: ['https://snowtrace.io/'],
+  },
+  {
+    chainId: 137,
+    rpcUrls: ['https://polygon-rpc.com/'],
+    chainName: 'Polygon Mainnet',
+    nativeCurrency: {
+      name: 'POL',
+      symbol: 'POL',
+      decimals: 18,
+    },
+    blockExplorerUrls: ['https://polygonscan.com/'],
+  },
+]
+
 export const nftContractAbi = [{ inputs: [{ internalType: 'address[]', name: '_acceptedTokens', type: 'address[]' }], stateMutability: 'nonpayable', type: 'constructor' }, { inputs: [{ internalType: 'uint256', name: 'index', type: 'uint256' }], name: 'BatchMintInvalidBatchId', type: 'error' }, { inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }], name: 'BatchMintInvalidTokenId', type: 'error' }, { inputs: [{ internalType: 'uint256', name: 'batchId', type: 'uint256' }], name: 'BatchMintMetadataFrozen', type: 'error' }, { inputs: [], name: 'ContractMetadataUnauthorized', type: 'error' }, { inputs: [{ internalType: 'address', name: 'sender', type: 'address' }, { internalType: 'uint256', name: 'balance', type: 'uint256' }, { internalType: 'uint256', name: 'needed', type: 'uint256' }, { internalType: 'uint256', name: 'tokenId', type: 'uint256' }], name: 'ERC1155InsufficientBalance', type: 'error' }, { inputs: [{ internalType: 'address', name: 'approver', type: 'address' }], name: 'ERC1155InvalidApprover', type: 'error' }, { inputs: [{ internalType: 'uint256', name: 'idsLength', type: 'uint256' }, { internalType: 'uint256', name: 'valuesLength', type: 'uint256' }], name: 'ERC1155InvalidArrayLength', type: 'error' }, { inputs: [{ internalType: 'address', name: 'operator', type: 'address' }], name: 'ERC1155InvalidOperator', type: 'error' }, { inputs: [{ internalType: 'address', name: 'receiver', type: 'address' }], name: 'ERC1155InvalidReceiver', type: 'error' }, { inputs: [{ internalType: 'address', name: 'sender', type: 'address' }], name: 'ERC1155InvalidSender', type: 'error' }, { inputs: [{ internalType: 'address', name: 'operator', type: 'address' }, { internalType: 'address', name: 'owner', type: 'address' }], name: 'ERC1155MissingApprovalForAll', type: 'error' }, { inputs: [], name: 'LazyMintInvalidAmount', type: 'error' }, { inputs: [], name: 'LazyMintUnauthorized', type: 'error' }, { inputs: [{ internalType: 'address', name: 'owner', type: 'address' }], name: 'OwnableInvalidOwner', type: 'error' }, { inputs: [{ internalType: 'address', name: 'account', type: 'address' }], name: 'OwnableUnauthorizedAccount', type: 'error' }, { anonymous: false, inputs: [{ indexed: true, internalType: 'address', name: 'account', type: 'address' }, { indexed: true, internalType: 'address', name: 'operator', type: 'address' }, { indexed: false, internalType: 'bool', name: 'approved', type: 'bool' }], name: 'ApprovalForAll', type: 'event' }, { anonymous: false, inputs: [{ indexed: false, internalType: 'uint256', name: '_fromTokenId', type: 'uint256' }, { indexed: false, internalType: 'uint256', name: '_toTokenId', type: 'uint256' }], name: 'BatchMetadataUpdate', type: 'event' }, { anonymous: false, inputs: [{ indexed: false, internalType: 'string', name: 'prevURI', type: 'string' }, { indexed: false, internalType: 'string', name: 'newURI', type: 'string' }], name: 'ContractURIUpdated', type: 'event' }, { anonymous: false, inputs: [{ indexed: true, internalType: 'uint256', name: 'id', type: 'uint256' }, { indexed: false, internalType: 'uint256', name: 'maxSupply', type: 'uint256' }], name: 'MaxSupplyUpdated', type: 'event' }, { anonymous: false, inputs: [], name: 'MetadataFrozen', type: 'event' }, { anonymous: false, inputs: [{ indexed: false, internalType: 'uint256', name: 'newPrice', type: 'uint256' }], name: 'MintPriceUpdated', type: 'event' }, { anonymous: false, inputs: [{ indexed: true, internalType: 'address', name: 'account', type: 'address' }, { indexed: true, internalType: 'uint256', name: 'id', type: 'uint256' }, { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' }], name: 'Minted', type: 'event' }, { anonymous: false, inputs: [{ indexed: true, internalType: 'address', name: 'previousOwner', type: 'address' }, { indexed: true, internalType: 'address', name: 'newOwner', type: 'address' }], name: 'OwnershipTransferred', type: 'event' }, { anonymous: false, inputs: [{ indexed: false, internalType: 'address', name: 'account', type: 'address' }], name: 'Paused', type: 'event' }, { anonymous: false, inputs: [{ indexed: false, internalType: 'address', name: 'token', type: 'address' }], name: 'TokenAccepted', type: 'event' }, { anonymous: false, inputs: [{ indexed: false, internalType: 'address', name: 'token', type: 'address' }], name: 'TokenRemoved', type: 'event' }, { anonymous: false, inputs: [{ indexed: true, internalType: 'uint256', name: 'startTokenId', type: 'uint256' }, { indexed: false, internalType: 'uint256', name: 'endTokenId', type: 'uint256' }, { indexed: false, internalType: 'string', name: 'baseURI', type: 'string' }, { indexed: false, internalType: 'bytes', name: 'encryptedBaseURI', type: 'bytes' }], name: 'TokensLazyMinted', type: 'event' }, { anonymous: false, inputs: [{ indexed: true, internalType: 'address', name: 'operator', type: 'address' }, { indexed: true, internalType: 'address', name: 'from', type: 'address' }, { indexed: true, internalType: 'address', name: 'to', type: 'address' }, { indexed: false, internalType: 'uint256[]', name: 'ids', type: 'uint256[]' }, { indexed: false, internalType: 'uint256[]', name: 'values', type: 'uint256[]' }], name: 'TransferBatch', type: 'event' }, { anonymous: false, inputs: [{ indexed: true, internalType: 'address', name: 'operator', type: 'address' }, { indexed: true, internalType: 'address', name: 'from', type: 'address' }, { indexed: true, internalType: 'address', name: 'to', type: 'address' }, { indexed: false, internalType: 'uint256', name: 'id', type: 'uint256' }, { indexed: false, internalType: 'uint256', name: 'value', type: 'uint256' }], name: 'TransferSingle', type: 'event' }, { anonymous: false, inputs: [{ indexed: false, internalType: 'string', name: 'value', type: 'string' }, { indexed: true, internalType: 'uint256', name: 'id', type: 'uint256' }], name: 'URI', type: 'event' }, { anonymous: false, inputs: [{ indexed: false, internalType: 'address', name: 'account', type: 'address' }], name: 'Unpaused', type: 'event' }, { anonymous: false, inputs: [{ indexed: true, internalType: 'address', name: 'owner', type: 'address' }, { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' }, { indexed: false, internalType: 'address', name: 'token', type: 'address' }], name: 'Withdrawn', type: 'event' }, { inputs: [], name: 'SUSPECT_1_ID', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [], name: 'SUSPECT_2_ID', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [], name: 'SUSPECT_3_ID', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [], name: 'SUSPECT_4_ID', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [], name: 'SUSPECT_5_ID', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [], name: 'SUSPECT_6_ID', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [], name: 'SUSPECT_7_ID', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'address', name: 'token', type: 'address' }], name: 'acceptToken', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [{ internalType: 'address', name: '', type: 'address' }], name: 'acceptedTokens', outputs: [{ internalType: 'bool', name: '', type: 'bool' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'address', name: 'account', type: 'address' }, { internalType: 'uint256', name: 'id', type: 'uint256' }], name: 'balanceOf', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'address[]', name: 'accounts', type: 'address[]' }, { internalType: 'uint256[]', name: 'ids', type: 'uint256[]' }], name: 'balanceOfBatch', outputs: [{ internalType: 'uint256[]', name: '', type: 'uint256[]' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], name: 'batchFrozen', outputs: [{ internalType: 'bool', name: '', type: 'bool' }], stateMutability: 'view', type: 'function' }, { inputs: [], name: 'contractURI', outputs: [{ internalType: 'string', name: '', type: 'string' }], stateMutability: 'view', type: 'function' }, { inputs: [], name: 'getBaseURICount', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'uint256', name: '_index', type: 'uint256' }], name: 'getBatchIdAtIndex', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'address', name: 'account', type: 'address' }, { internalType: 'address', name: 'operator', type: 'address' }], name: 'isApprovedForAll', outputs: [{ internalType: 'bool', name: '', type: 'bool' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }, { internalType: 'string', name: '_baseURIForTokens', type: 'string' }, { internalType: 'bytes', name: '_data', type: 'bytes' }], name: 'lazyMint', outputs: [{ internalType: 'uint256', name: 'batchId', type: 'uint256' }], stateMutability: 'nonpayable', type: 'function' }, { inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], name: 'maxSupply', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'uint256', name: 'id', type: 'uint256' }, { internalType: 'uint256', name: 'amount', type: 'uint256' }, { internalType: 'address', name: 'paymentToken', type: 'address' }], name: 'mint', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [], name: 'mintPrice', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], name: 'mintedCount', outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'bytes[]', name: 'data', type: 'bytes[]' }], name: 'multicall', outputs: [{ internalType: 'bytes[]', name: 'results', type: 'bytes[]' }], stateMutability: 'nonpayable', type: 'function' }, { inputs: [], name: 'owner', outputs: [{ internalType: 'address', name: '', type: 'address' }], stateMutability: 'view', type: 'function' }, { inputs: [], name: 'pause', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [], name: 'paused', outputs: [{ internalType: 'bool', name: '', type: 'bool' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'address', name: 'token', type: 'address' }], name: 'removeToken', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [], name: 'renounceOwnership', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [{ internalType: 'address', name: 'from', type: 'address' }, { internalType: 'address', name: 'to', type: 'address' }, { internalType: 'uint256[]', name: 'ids', type: 'uint256[]' }, { internalType: 'uint256[]', name: 'values', type: 'uint256[]' }, { internalType: 'bytes', name: 'data', type: 'bytes' }], name: 'safeBatchTransferFrom', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [{ internalType: 'address', name: 'from', type: 'address' }, { internalType: 'address', name: 'to', type: 'address' }, { internalType: 'uint256', name: 'id', type: 'uint256' }, { internalType: 'uint256', name: 'value', type: 'uint256' }, { internalType: 'bytes', name: 'data', type: 'bytes' }], name: 'safeTransferFrom', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [{ internalType: 'address', name: 'operator', type: 'address' }, { internalType: 'bool', name: 'approved', type: 'bool' }], name: 'setApprovalForAll', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [{ internalType: 'string', name: '_uri', type: 'string' }], name: 'setContractURI', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [{ internalType: 'bytes4', name: 'interfaceId', type: 'bytes4' }], name: 'supportsInterface', outputs: [{ internalType: 'bool', name: '', type: 'bool' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'address', name: 'newOwner', type: 'address' }], name: 'transferOwnership', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [], name: 'unpause', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [{ internalType: 'uint256', name: 'id', type: 'uint256' }, { internalType: 'uint256', name: 'newMaxSupply', type: 'uint256' }], name: 'updateMaxSupply', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [{ internalType: 'uint256', name: 'newPrice', type: 'uint256' }], name: 'updateMintPrice', outputs: [], stateMutability: 'nonpayable', type: 'function' }, { inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }], name: 'uri', outputs: [{ internalType: 'string', name: '', type: 'string' }], stateMutability: 'view', type: 'function' }, { inputs: [{ internalType: 'address', name: 'token', type: 'address' }], name: 'withdrawFunds', outputs: [], stateMutability: 'nonpayable', type: 'function' }]
 
-export const nftContractAddress = [
+export const NFT_ADDRESSES_LIST = [
   {
     chain: 'BNB mainnet',
     chainId: 56,
-    stableConctractAddress: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
+    stableContractAddress: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
     nftContractAddress: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
     address: [
       {
@@ -75,7 +193,7 @@ export const nftContractAddress = [
   {
     chain: 'Polygon test',
     chainId: 80002,
-    stableConctractAddress: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
+    stableContractAddress: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
     nftContractAddress: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
     address: [
       {
@@ -91,7 +209,7 @@ export const nftContractAddress = [
   {
     chain: 'Arbitrum Sepolia',
     chainId: 421614,
-    stableConctractAddress: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
+    stableContractAddress: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
     nftContractAddress: '0x52772940628d1EBc08E1B50C39e466495f808F89',
     address: [
       {
@@ -104,4 +222,53 @@ export const nftContractAddress = [
       },
     ],
   },
+  {
+    chain: 'Arbitrum One',
+    chainId: 42161,
+    stableContractAddress: '',
+    nftContractAddress: '',
+    address: [
+      {
+        type: 'ERC20',
+        address: '',
+      },
+      {
+        type: 'ERC1155',
+        address: '',
+      },
+    ],
+  },
+  {
+    chain: 'Avalanche C-Chain',
+    chainId: 43114,
+    stableContractAddress: '',
+    nftContractAddress: '',
+    address: [
+      {
+        type: 'ERC20',
+        address: '',
+      },
+      {
+        type: 'ERC1155',
+        address: '',
+      },
+    ],
+  },
+  {
+    chain: 'Polygon Mainnet',
+    chainId: 137,
+    stableContractAddress: '',
+    nftContractAddress: '',
+    address: [
+      {
+        type: 'ERC20',
+        address: '',
+      },
+      {
+        type: 'ERC1155',
+        address: '',
+      },
+    ],
+  },
+
 ]

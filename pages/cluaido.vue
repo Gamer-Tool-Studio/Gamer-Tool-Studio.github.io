@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import Web3 from 'web3'
-import { NFTS_LIST, nftContractAbi, nftContractAddress } from '@/constants'
+import { NFTS_LIST, NFT_ADDRESSES_LIST, nftContractAbi } from '@/constants'
 
 const debug = getDebugger('page:cluaido')
 
@@ -17,7 +17,7 @@ onMounted(async () => {
   const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/'))
   const networkId = 56 // Number(await web3.eth.net.getId())
   // debug.log('networkId', networkId)
-  const contractAddress = nftContractAddress.find(c => c.chainId === networkId)?.nftContractAddress
+  const contractAddress = NFT_ADDRESSES_LIST.find(c => c.chainId === networkId)?.nftContractAddress
   if (!contractAddress) {
     debug.error('Contract not found')
     return
