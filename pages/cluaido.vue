@@ -190,7 +190,7 @@ function calculateVotesPercentage(suspect) {
           </h2>
           <v-col cols="12" class="">
             <div class="guide-link acc-guide">
-              <a href="">
+              <a href="https://medium.com/@gamertoolstudio/play-cluaido-demo-and-unlock-exclusive-rewards-with-our-nfts-d1189568a6a1">
                 <img class="acc-rules" src="~/assets/images/document-icon.png" alt="Betting Game Rules">
                 <h3>  Read the Rules and Learn All About the Rewards.</h3>
               </a>
