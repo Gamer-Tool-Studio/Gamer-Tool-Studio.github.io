@@ -6,7 +6,23 @@ import { NFTS_LIST, NFT_ADDRESSES_LIST, nftContractAbi } from '@/constants'
 const debug = getDebugger('page:cluaido')
 
 useHead({
-  title: 'cluaido ',
+  title: 'CLUAIDO - Detective AI game.',
+  meta: [
+    { name: 'description', content: 'Play a detective demo game with AI agents and free interrogation mechanics.' },
+    { property: 'og:title', content: 'CLUAIDO - Detective AI game.' },
+    { property: 'og:description', content: 'Play a detective demo game with AI agents and free interrogation mechanics.' },
+    { property: 'og:image', content: '~/assets/images/new-art.png' },
+    { property: 'og:url', content: 'https://gamertoolstudio.com/cluaido' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'CLUAIDO- Detective AI game.' },
+    { name: 'twitter:description', content: 'Play a detective demo game with AI agents and free interrogation mechanics.' },
+    { name: 'twitter:image', content: '~/assets/images/new-art.png' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'author', content: 'Game Tool Studio' },
+  ],
+  link: [
+    { rel: 'icon', type: 'image/x-icon', href: '~/public/favicon.png' },
+  ],
 })
 
 const nfts = reactive(NFTS_LIST)
