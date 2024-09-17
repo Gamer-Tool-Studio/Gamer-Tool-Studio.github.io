@@ -177,12 +177,13 @@ export const NFT_ADDRESSES_LIST = [
   {
     chain: 'BNB mainnet',
     chainId: 56,
-    stableContractAddress: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
+    stableContractAddress: '0xc5f0f7b66764F6ec8C8Dff7BA683102295E16409',
     nftContractAddress: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
+    stableSymbol : 'FDUSD',
     address: [
       {
         type: 'ERC20',
-        address: '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56',
+        address: '0xc5f0f7b66764F6ec8C8Dff7BA683102295E16409',
       },
       {
         type: 'ERC1155',
@@ -195,6 +196,7 @@ export const NFT_ADDRESSES_LIST = [
     chainId: 80002,
     stableContractAddress: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
     nftContractAddress: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
+    stableSymbol : 'USDT',
     address: [
       {
         type: 'ERC20',
@@ -211,6 +213,7 @@ export const NFT_ADDRESSES_LIST = [
     chainId: 421614,
     stableContractAddress: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
     nftContractAddress: '0x52772940628d1EBc08E1B50C39e466495f808F89',
+    stableSymbol : 'USDT',
     address: [
       {
         type: 'ERC20',
@@ -227,6 +230,7 @@ export const NFT_ADDRESSES_LIST = [
     chainId: 42161,
     stableContractAddress: '',
     nftContractAddress: '',
+    stableSymbol : 'USDT',
     address: [
       {
         type: 'ERC20',
@@ -243,6 +247,7 @@ export const NFT_ADDRESSES_LIST = [
     chainId: 43114,
     stableContractAddress: '',
     nftContractAddress: '',
+    stableSymbol : 'USDT',
     address: [
       {
         type: 'ERC20',
@@ -259,6 +264,7 @@ export const NFT_ADDRESSES_LIST = [
     chainId: 137,
     stableContractAddress: '',
     nftContractAddress: '',
+    stableSymbol : 'USDT',
     address: [
       {
         type: 'ERC20',
