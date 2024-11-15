@@ -175,6 +175,23 @@ export const nftContractAbi = [{ inputs: [{ internalType: 'address[]', name: '_a
 
 export const NFT_ADDRESSES_LIST = [
   {
+    chain: 'OP Mainnet',
+    chainId: 10,
+    stableContractAddress: '0x94b008aa00579c1307b0ef2c499ad98a8ce58e58',
+    nftContractAddress: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
+    stableSymbol : 'USDT',
+    address: [
+      {
+        type: 'ERC20',
+        address: '0x94b008aa00579c1307b0ef2c499ad98a8ce58e58',
+      },
+      {
+        type: 'ERC1155',
+        address: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
+      },
+    ],
+  },
+  {
     chain: 'BNB mainnet',
     chainId: 56,
     stableContractAddress: '0xc5f0f7b66764F6ec8C8Dff7BA683102295E16409',

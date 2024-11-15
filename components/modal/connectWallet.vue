@@ -32,6 +32,7 @@ export default {
       stableContractABI: stableContractAbi,
       selectedChainId: 56,
       contracts: NFT_ADDRESSES_LIST,
+      tokenSymbol : 'ETH'
     }
   },
   computed: {
@@ -110,6 +111,7 @@ export default {
       // Initialize contracts after getting accounts
       this.NFTContract = new this.web3.eth.Contract(this.contractABI, this.nftContractAddress)
       this.stableContract = new this.web3.eth.Contract(this.stableContractABI, this.stableContractAddress)
+      this.tokenSymbol = this.stableSymbol;
     },
 
     async addDefaultNetwork() {
@@ -350,7 +352,7 @@ export default {
                   <input v-model.number="mintAmount" type="number" min="1" class="mint-amount-input">
                 </v-col>
                 <v-col cols="12" class="text-section">
-                  <p>Total Price: {{ mintAmount * mintPrice }} FDUSD</p>
+                  <p>Total Price: {{ mintAmount * mintPrice }} {{tokenSymbol}}</p>
                 </v-col>
                 <v-col cols="12" class="connect-button">
                   <button class="button" @click="mintNFT">
