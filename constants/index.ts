@@ -117,7 +117,7 @@ export const NETWORKS_LIST = [
   {
     chainId: 56,
     rpcUrls: ['https://bsc-dataseed.binance.org/'],
-    chainName: 'BNB Chain',
+    chainName: 'BSC Binance Smart Chain',
     nativeCurrency: {
       name: 'BNB',
       symbol: 'BNB',
@@ -192,7 +192,7 @@ export const NFT_ADDRESSES_LIST = [
     ],
   },
   {
-    chain: 'BNB mainnet',
+    chain: 'BSC Binance Smart Chain',
     chainId: 56,
     stableContractAddress: '0xc5f0f7b66764F6ec8C8Dff7BA683102295E16409',
     nftContractAddress: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
@@ -208,90 +208,90 @@ export const NFT_ADDRESSES_LIST = [
       },
     ],
   },
-  {
-    chain: 'Polygon test',
-    chainId: 80002,
-    stableContractAddress: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
-    nftContractAddress: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
-    stableSymbol : 'USDT',
-    address: [
-      {
-        type: 'ERC20',
-        address: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
-      },
-      {
-        type: 'ERC1155',
-        address: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
-      },
-    ],
-  },
-  {
-    chain: 'Arbitrum Sepolia',
-    chainId: 421614,
-    stableContractAddress: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
-    nftContractAddress: '0x52772940628d1EBc08E1B50C39e466495f808F89',
-    stableSymbol : 'USDT',
-    address: [
-      {
-        type: 'ERC20',
-        address: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
-      },
-      {
-        type: 'ERC1155',
-        address: '0x52772940628d1EBc08E1B50C39e466495f808F89',
-      },
-    ],
-  },
-  {
-    chain: 'Arbitrum One',
-    chainId: 42161,
-    stableContractAddress: '',
-    nftContractAddress: '',
-    stableSymbol : 'USDT',
-    address: [
-      {
-        type: 'ERC20',
-        address: '',
-      },
-      {
-        type: 'ERC1155',
-        address: '',
-      },
-    ],
-  },
-  {
-    chain: 'Avalanche C-Chain',
-    chainId: 43114,
-    stableContractAddress: '',
-    nftContractAddress: '',
-    stableSymbol : 'USDT',
-    address: [
-      {
-        type: 'ERC20',
-        address: '',
-      },
-      {
-        type: 'ERC1155',
-        address: '',
-      },
-    ],
-  },
-  {
-    chain: 'Polygon Mainnet',
-    chainId: 137,
-    stableContractAddress: '',
-    nftContractAddress: '',
-    stableSymbol : 'USDT',
-    address: [
-      {
-        type: 'ERC20',
-        address: '',
-      },
-      {
-        type: 'ERC1155',
-        address: '',
-      },
-    ],
-  },
+  // {
+  //   chain: 'Polygon test',
+  //   chainId: 80002,
+  //   stableContractAddress: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
+  //   nftContractAddress: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
+  //   stableSymbol : 'USDT',
+  //   address: [
+  //     {
+  //       type: 'ERC20',
+  //       address: '0xF269CC8B597a13fb1B2a72Ce6F0C9677f89dd0ee',
+  //     },
+  //     {
+  //       type: 'ERC1155',
+  //       address: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
+  //     },
+  //   ],
+  // },
+  // {
+  //   chain: 'Arbitrum Sepolia',
+  //   chainId: 421614,
+  //   stableContractAddress: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
+  //   nftContractAddress: '0x52772940628d1EBc08E1B50C39e466495f808F89',
+  //   stableSymbol : 'USDT',
+  //   address: [
+  //     {
+  //       type: 'ERC20',
+  //       address: '0xd0dCB97bC361C67b36a2254eA31909499118E1FB',
+  //     },
+  //     {
+  //       type: 'ERC1155',
+  //       address: '0x52772940628d1EBc08E1B50C39e466495f808F89',
+  //     },
+  //   ],
+  // },
+  // {
+  //   chain: 'Arbitrum One',
+  //   chainId: 42161,
+  //   stableContractAddress: '',
+  //   nftContractAddress: '',
+  //   stableSymbol : 'USDT',
+  //   address: [
+  //     {
+  //       type: 'ERC20',
+  //       address: '',
+  //     },
+  //     {
+  //       type: 'ERC1155',
+  //       address: '',
+  //     },
+  //   ],
+  // },
+  // {
+  //   chain: 'Avalanche C-Chain',
+  //   chainId: 43114,
+  //   stableContractAddress: '',
+  //   nftContractAddress: '',
+  //   stableSymbol : 'USDT',
+  //   address: [
+  //     {
+  //       type: 'ERC20',
+  //       address: '',
+  //     },
+  //     {
+  //       type: 'ERC1155',
+  //       address: '',
+  //     },
+  //   ],
+  // },
+  // {
+  //   chain: 'Polygon Mainnet',
+  //   chainId: 137,
+  //   stableContractAddress: '',
+  //   nftContractAddress: '',
+  //   stableSymbol : 'USDT',
+  //   address: [
+  //     {
+  //       type: 'ERC20',
+  //       address: '',
+  //     },
+  //     {
+  //       type: 'ERC1155',
+  //       address: '',
+  //     },
+  //   ],
+  // },
 
 ]
