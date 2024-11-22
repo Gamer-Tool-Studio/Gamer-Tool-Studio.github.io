@@ -175,6 +175,23 @@ export const nftContractAbi = [{ inputs: [{ internalType: 'address[]', name: '_a
 
 export const NFT_ADDRESSES_LIST = [
   {
+    chain: 'SAGA Chainlet',
+    chainId: 2732190003600000,
+    stableContractAddress: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
+    nftContractAddress: '0x56b4fAAfA1AF53553542429aB9bC77F55E9722f7',
+    stableSymbol : 'GTS',
+    address: [
+      {
+        type: 'ERC20',
+        address: '0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC',
+      },
+      {
+        type: 'ERC1155',
+        address: '0x56b4fAAfA1AF53553542429aB9bC77F55E9722f7',
+      },
+    ],
+  },
+  {
     chain: 'OP Mainnet',
     chainId: 10,
     stableContractAddress: '0x94b008aa00579c1307b0ef2c499ad98a8ce58e58',
