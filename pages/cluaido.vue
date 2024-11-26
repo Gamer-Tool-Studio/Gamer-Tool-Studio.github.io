@@ -303,18 +303,15 @@ section {
 .demo-game {
   position: relative;
   width: 100%;
-  max-width: 816px; /* Adjust if needed */
-  max-height: 624px !important;
+  max-width: 1280px;
   margin: auto;
   overflow: hidden; /* Hide overflow to prevent scrollbars */
 }
 
 .demo-section {
   position: relative;
-  width: 100%;
   margin: auto;
-  max-height: 624px !important;
-
+  width:100%;
 }
 
 #gameIframe {
