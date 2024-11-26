@@ -5701,6 +5701,7 @@ Input.keyMapper = {
     81: "pageup", // Q
     80: "pagedown", // P
     88: "escape", // X
+	90: 'ok', // Z
     96: "escape", // numpad 0
     98: "down", // numpad 2
     100: "left", // numpad 4

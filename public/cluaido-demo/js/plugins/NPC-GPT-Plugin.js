@@ -1,5 +1,5 @@
 /*:
- * @plugindesc [RPG Maker MZ] [Version 1.3.0] [Gamer Tools Studio]
+ * @plugindesc [RPG Maker MZ] [Version 1.4.1] [Gamer Tool Studio]
  * 
  * @param apiKey
  * @text API Key
@@ -376,6 +376,12 @@
  * @type number
  * @default 50
  *
+ * @arg wrapTextLength
+ * @text Wrap Text Length
+ * @desc The maximum word length for wrapping the user input text (default: 40).
+ * @type number
+ * @default 40
+ *
  * @command sendRequest
  * @text Send Request
  * @desc Sends the user input to the server and stores the response for the "Display Response" command.
@@ -526,91 +532,258 @@
  * @type variable
  * @default 13
  */
-
+  
 (function() {
   // Retrieve the plugin parameters
   var pluginParams = PluginManager.parameters('NPC-GPT-Plugin');
-  let frameDelay = 10; // Initialize frame delay
-  var apiKey = pluginParams['apiKey'];
+  let apiKey = pluginParams['apiKey'];
   var apiKeyVariableId = parseInt(pluginParams['apiKeyVariable']) || 18;
   var gptResponseVariableId = parseInt(pluginParams['gptResponseVariableId']) || 6;
 
-  // Prepare Input
-  Window_Message.prototype.prepareInputWindow = function(args) {
-    this._inputArgs = args;
-    this._inputVariable = parseInt(args.inputVariable, 10) || 19;
-    this._inputLines = [''];
+  // Global variable to track user input activity
+  window.NPCGPT = window.NPCGPT || {};
+  window.NPCGPT.userInputActive = false;
 
-    // Set speaker name to actorName each time before displaying the input window.
-    const actorName = args.actorName || $gameParty.leader().name();
-    $gameMessage.setSpeakerName(actorName);
-
-    this.activateInput();
-    this.open();
-    this.setPositionType();
-    this.refreshInputWindow(); // This will now reflect the updated speakerName
+  // Prevent player movement when userInput window is active
+  const _Game_Player_canMove = Game_Player.prototype.canMove;
+  Game_Player.prototype.canMove = function() {
+    if (window.NPCGPT.userInputActive) {
+      return false;
+    }
+    return _Game_Player_canMove.call(this);
   };
 
-  Window_Message.prototype.setPositionType = function() {
-    // Position type: 0 (top), 1 (middle), 2 (bottom)
-    const positionType = 2; // Force to bottom for input
-    this.y = this.calculateY(positionType);
-  };
-
-  Window_Message.prototype.calculateY = function(positionType) {
-    const messageY = {
-      0: 0, // Top
-      1: (Graphics.boxHeight - this.height) / 2, // Middle
-      2: Graphics.boxHeight - this.height // Bottom
-    };
-    return messageY[positionType];
-  };
-
-  // Activate Input
-  Window_Message.prototype.activateInput = function() {
-    if (this._inputActive) return; // Prevent multiple activations
-
-    this._originalKeyMapper = Object.assign({}, Input.keyMapper);
-    this._overrideKeyMapperForTextInput();
-
-    this._inputActive = true;
-    this._boundHandleInput = this.handleInput.bind(this);
-    document.addEventListener('keydown', this._boundHandleInput);
-
-    this._lastInputTime = 0; // Debounce setup
-    this.refreshInputWindow();
-
-    // Ensure the input window is properly focused
-    this.activate();
-    this.open();
-    this.visible = true;
-
-    // Log the input activation
-    console.log("Input activated");
-  };
-
-  // Introducing the frame delay mechanism
-  const _Window_Message_update = Window_Message.prototype.update;
-  Window_Message.prototype.update = function() {
-    _Window_Message_update.call(this); // Call the original update method
-    if (this.frameDelay && this.frameDelay > 0) {
-      this.frameDelay--; // Decrement the frame delay
-      return; // Skip the rest of the update if we're still delaying
+  // Prevent menu access and event triggering when userInput window is active
+  const _Scene_Map_update = Scene_Map.prototype.update;
+  Scene_Map.prototype.update = function() {
+    if (window.NPCGPT.userInputActive) {
+      this.updateMainMultiply();
+      this.updateDestination();
+      // Skip menu calling and other updates
+    } else {
+      _Scene_Map_update.call(this);
     }
   };
 
-  // Adjust handleInput to account for frame delay
-  Window_Message.prototype.handleInput = function(event) {
-    if (!this._inputActive || !this.isOpen() || (this.frameDelay && this.frameDelay > 0)) return;
+  // Pause event processing when userInput window is active
+  const _Game_Interpreter_update = Game_Interpreter.prototype.update;
+  Game_Interpreter.prototype.update = function() {
+    if (window.NPCGPT.userInputActive) {
+      if (this.isParallel()) {
+        // Allow parallel events but prevent message commands
+        while (this._index < this._list.length) {
+          if (this.updateChild() || this.updateWait()) {
+            break;
+          }
+          const command = this.currentCommand();
+          if (command) {
+            if (this.isMessageCommand(command)) {
+              // Skip message commands
+              break;
+            }
+            this.executeCommand();
+            if (this.checkFreeze()) {
+              break;
+            }
+          } else {
+            this.terminate();
+            break;
+          }
+        }
+      } else {
+        // Prevent non-parallel events from processing
+        return;
+      }
+    } else {
+      _Game_Interpreter_update.call(this);
+    }
+  };
 
-    console.log("Handling input: ", event.key);
+  // Define the isParallel method
+  Game_Interpreter.prototype.isParallel = function() {
+    if (this._eventId > 0) {
+      // For map events
+      const event = $gameMap.event(this._eventId);
+      if (event) {
+        const page = event.page();
+        if (page) {
+          const trigger = page.trigger;
+          return trigger === 4; // 4 is for Parallel events
+        }
+      }
+    } else if (this._commonEventId > 0) {
+      // For common events
+      const commonEvent = $dataCommonEvents[this._commonEventId];
+      return commonEvent && commonEvent.trigger === 2; // 2 is for Parallel common events
+    }
+    return false;
+  };
 
-    const currentLineIndex = this._inputLines.length - 1;
-    let currentLine = this._inputLines[currentLineIndex];
+  // Define the isMessageCommand method
+  Game_Interpreter.prototype.isMessageCommand = function(command) {
+    // List of command codes that display messages
+    return [101, 102, 103, 104, 105, 111, 117, 118, 119, 355, 356].includes(command.code);
+  };
+  
+  const _Game_Interpreter_updateWaitMode = Game_Interpreter.prototype.updateWaitMode;
+  Game_Interpreter.prototype.updateWaitMode = function() {
+    // Check if we're waiting for the message to close
+    if (this._waitMode === 'message') {
+      if (!$gameMessage.isBusy()) {
+        // If we need to activate self-switch B
+        if (this._activateSelfSwitchBAfterMessage) {
+          // Activate self-switch B for the event
+          const key = [$gameMap.mapId(), this._gptEventId, 'B'];
+          $gameSelfSwitches.setValue(key, true);
+  
+          // Clear the flag
+          this._activateSelfSwitchBAfterMessage = false;
+        }
+  
+        // Clear the wait mode
+        this._waitMode = '';
+  
+        return false;
+      } else {
+        return true; // Continue waiting
+      }
+    } else {
+      return _Game_Interpreter_updateWaitMode.call(this);
+    }
+  };
+
+
+  function Window_UserInput() {
+    this.initialize.apply(this, arguments);
+  }
+  
+  Window_UserInput.prototype = Object.create(Window_Base.prototype);
+  Window_UserInput.prototype.constructor = Window_UserInput;
+  
+  Window_UserInput.prototype.initialize = function(args) {
+    this._inputArgs = args;
+    this._inputVariable = parseInt(args.inputVariable, 10) || 19;
+    this._inputLines = [''];
+    this._maxLines = 4;
+    this._wrapTextLength = parseInt(args.wrapTextLength, 10) || 40;
+    this._placeholderText = args.placeholderText || 'Enter your message...';
+  
+    // Adjust face image handling
+    this._actorFaceImage = args.actorFaceImage && args.actorFaceImage.trim() !== '' ? args.actorFaceImage : null;
+    this._actorFaceImageIndex = this._actorFaceImage ? (parseInt(args.actorFaceImageIndex, 10) || 0) : 0;
+  
+    this._actorName = args.actorName || '';
+  
+    // Set the window width to 816 pixels
+    const width = 816;
+    const height = this.fittingHeight(this._maxLines);
+  
+    // Center the window horizontally
+    const x = (Graphics.boxWidth - width) / 2;
+    const y = Graphics.boxHeight - height;
+  
+    const rect = new Rectangle(x, y, width, height);
+  
+    Window_Base.prototype.initialize.call(this, rect);
+  
+    // Preload face image if specified
+    if (this._actorFaceImage) {
+      this._faceBitmap = ImageManager.loadFace(this._actorFaceImage);
+  
+      if (!this._faceBitmap.isReady()) {
+        this._faceBitmap.addLoadListener(function() {
+          this.refresh();
+        }.bind(this));
+      }
+    }
+  
+    this.activate();
+    this.open();
+    this.refresh();
+  
+    this._boundHandleInput = this.processInput.bind(this);
+    document.addEventListener('keydown', this._boundHandleInput);
+  
+    // Set flag to indicate input window is active
+    window.NPCGPT.userInputActive = true;
+  };
+  
+  Window_UserInput.prototype.refresh = function() {
+    this.contents.clear();
+  
+    var textX = this.padding; // Default text X position
+    var textY = this.padding; // Default text Y position
+  
+    // Check if a face image is specified
+    if (this._actorFaceImage) {
+      // Draw the face image
+      var faceWidth = ImageManager.faceWidth;
+      var faceHeight = ImageManager.faceHeight;
+      this.drawFace(this._actorFaceImage, this._actorFaceImageIndex, 0, 0, faceWidth, faceHeight);
+  
+      // Adjust textX to account for the face image width
+      textX = faceWidth + this.padding;
+    }
+  
+    // Draw the input text
+    var text = this._inputLines.join('').trim() !== '' ? this._inputLines.join('\n') : this._placeholderText;
+    this.drawTextEx(text, textX, textY);
+  };
+  
+
+  Window_UserInput.prototype.submitInput = function() {
+    const inputText = this._inputLines.join('\n');
+    $gameVariables.setValue(this._inputVariable, inputText);
+
+    this.deactivate();
+    this.close();
+    document.removeEventListener('keydown', this._boundHandleInput);
+
+    // Remove the window from the scene
+    var scene = SceneManager._scene;
+    scene.removeChild(this);
+
+    // Remove the name box window if it exists
+    if (this._nameBoxWindow) {
+      scene.removeChild(this._nameBoxWindow);
+    }
+
+    // Clear the input active flag
+    window.NPCGPT.userInputActive = false;
+
+    console.log("Processed input: ", inputText);
+  };
+
+  Window_UserInput.prototype.cancelInput = function() {
+    $gameVariables.setValue(this._inputVariable, '');
+    this.deactivate();
+    this.close();
+    document.removeEventListener('keydown', this._boundHandleInput);
+
+    // Remove the window from the scene
+    var scene = SceneManager._scene;
+    scene.removeChild(this);
+
+    // Remove the name box window if it exists
+    if (this._nameBoxWindow) {
+      scene.removeChild(this._nameBoxWindow);
+    }
+
+    // Clear the input active flag
+    window.NPCGPT.userInputActive = false;
+
+    console.log("Input canceled");
+  };
+
+
+  Window_UserInput.prototype.processInput = function(event) {
+    if (!this.active) return;
+
+    var currentLineIndex = this._inputLines.length - 1;
+    var currentLine = this._inputLines[currentLineIndex];
 
     if (event.key === 'Enter') {
-      console.log("Enter key pressed");
-      this.processInput();
+      this.submitInput();
       event.preventDefault();
     } else if (event.key === 'Backspace') {
       if (currentLine.length > 0) {
@@ -618,87 +791,41 @@
       } else if (this._inputLines.length > 1) {
         this._inputLines.pop();
       }
-      this.refreshInputWindow();
+      this.refresh();
+    } else if (event.key === 'Escape') {
+      this.cancelInput();
+      event.preventDefault();
     } else if (event.key.length === 1) {
-      if (currentLine.length < 40) {
-        this._inputLines[currentLineIndex] += event.key;
-      } else if (this._inputLines.length < 4) {
-        this._inputLines.push(event.key);
+      currentLine += event.key;
+
+      // Apply word wrapping
+      var wrappedInput = wrapText(currentLine, this._wrapTextLength);
+      var wrappedLines = wrappedInput.split('\n');
+
+      // Update the _inputLines array based on the wrapped input
+      this._inputLines[currentLineIndex] = wrappedLines[0];
+      for (var i = 1; i < wrappedLines.length; i++) {
+        this._inputLines.push(wrappedLines[i]);
       }
-      this.refreshInputWindow();
+
+      // Limit the number of lines
+      if (this._inputLines.length > this._maxLines) {
+        this._inputLines = this._inputLines.slice(-this._maxLines);
+      }
+
+      this.refresh();
     }
   };
 
-  // Deactivate Input
-  Window_Message.prototype.deactivateInput = function() {
-    document.removeEventListener('keydown', this._boundHandleInput);
-    Input.keyMapper = this._originalKeyMapper;
-    this._inputActive = false;
-    console.log("Input deactivated");
-  };
 
-  // Temporarily override key mappings for special keys.
-  Window_Message.prototype._overrideKeyMapperForTextInput = function() {
-    Input.keyMapper[32] = 'space'; 
-    Input.keyMapper[90] = 'z';     
-    Input.keyMapper[88] = 'x';
-    Input.keyMapper[87] = 'w';
-    Input.keyMapper[80] = 'p';
-  };
-
-  // Process Input
-  Window_Message.prototype.processInput = function() {
-    const inputText = this._inputLines.join('\n');
-    $gameVariables.setValue(this._inputVariable, inputText);
-    this.deactivateInput();
-    this.close();
-
-    console.log("Processed input: ", inputText);
-
-    // Reset the speakerName after processing the input.
-    $gameMessage.setSpeakerName('');
-  };
-
-  // Refresh Input Window
-  Window_Message.prototype.refreshInputWindow = function() {
-    if (!this._inputLines) {
-      return; // Guard clause
-    }
-
-    // Face Image and text input positioning
-    const faceImageWidth = 144;
-    const textMargin = 15;
-    const textStartX = faceImageWidth + textMargin;
-
-    // This sets the text to start at the very top of the window.
-    const textStartY = 0;
-
-    // This ensures the actor's face image remains on the screen.
-    this.contents.clearRect(textStartX, textStartY, this.contents.width - textStartX, this.contents.height);
-
-    this.resetFontSettings();
-
-    const args = this._inputArgs;
-
-    const textToShow = this._inputLines.join('').trim() !== '' ? this._inputLines.join('\n') : "Enter your message...";
-
-    // Draw the text at the calculated position.
-    this.drawTextEx(textToShow, textStartX, textStartY);
-  };
-
-  // Clear contents
-  Window_Message.prototype.clear = function() {
-    this.contents.clear(); // Clears the window's drawing contents
-    this._textState = null; // Reset text state
-  }; 
-
-  // Display the text response within the window limits
+  // Wrap text for proper word wrapping
   function wrapText(text, wrapTextLength) {
     const words = text.split(' ');
     let wrappedText = '';
     let currentLine = '';
 
-    for (const word of words) {
+    for (var i = 0; i < words.length; i++) {
+      var word = words[i];
       const potentialLine = currentLine + (currentLine ? ' ' : '') + word;
       if (potentialLine.length <= wrapTextLength) {
         currentLine = potentialLine;
@@ -715,6 +842,54 @@
     return wrappedText;
   }
 
+  // Create a new window class for the name box
+  function Window_UserInputNameBox() {
+    this.initialize.apply(this, arguments);
+  }
+
+  Window_UserInputNameBox.prototype = Object.create(Window_Base.prototype);
+  Window_UserInputNameBox.prototype.constructor = Window_UserInputNameBox;
+
+  Window_UserInputNameBox.prototype.initialize = function(name, parentWindow) {
+    this._name = name;
+    this._parentWindow = parentWindow;
+
+    // Position the name box above the parent window
+    const height = this.fittingHeight(1);
+    const x = parentWindow.x;
+    const y = parentWindow.y - height;
+
+    // Create the window with initial size
+    const tempWidth = 100; // Temporary width
+    const rect = new Rectangle(x, y, tempWidth, height);
+    Window_Base.prototype.initialize.call(this, rect);
+
+    // Now that the window is initialized, we can calculate the text width
+    const textWidth = this.textWidth(this._name) + this.padding * 2;
+    const width = textWidth;
+
+    // Update the window size
+    this.width = width;
+    this.move(x, y, width, height);
+
+    // Recreate the contents with the new size
+    this.createContents();
+
+    this.opacity = 255;       // Window frame opacity
+    this.backOpacity = 192;   // Window background opacity (semi-transparent)
+    this.open();
+    this.refresh();
+  };
+
+  Window_UserInputNameBox.prototype.refresh = function() {
+    if (this.contents) {
+      this.contents.clear();
+      // Draw the name text
+      this.resetTextColor();
+      this.drawText(this._name, 0, 0, this.contentsWidth(), 'left');
+    }
+  };
+	
   // Show NPC response in-game
   function showGptResponse(response, eventId, eventPageId, actorImageFile, actorImageIndex, actorName, wrapTextLength, historyVariableId) {
     const responseContent = response.content;
@@ -743,112 +918,72 @@
     }
   }
 
-  const pluginName = "NPC-GPT-Plugin";
+  var pluginName = "NPC-GPT-Plugin";
 
   PluginManager.registerCommand(pluginName, 'userInput', function (args) {
-    const inputVariable = parseInt(args.inputVariable, 10) || 19;
-    const actorName = args.actorName || $gameParty.leader().name();
-    const actorFaceImage = args.actorFaceImage || $gameParty.leader().faceName();
-    const actorFaceImageIndex = parseInt(args.actorFaceImageIndex, 10) || $gameParty.leader().faceIndex();
-    const placeholderText = args.placeholderText ? args.placeholderText : 'Enter your message...';
-    const maxInputWords = parseInt(args.maxInputWords, 10) || 50;
-
-    // Set up the game message with speaker name and face image, but no text.
-    $gameMessage.setFaceImage(actorFaceImage, actorFaceImageIndex);
-    $gameMessage.setSpeakerName(actorName);
-    $gameMessage.add(placeholderText);
-
-    // Ensure the message window activates input mode once it's open.
     const scene = SceneManager._scene;
     if (scene instanceof Scene_Map) {
-      const messageWindow = scene._messageWindow;
-      if (messageWindow) {
-        messageWindow.prepareInputWindow(args);
-        messageWindow.activateInput();
+      // Create and add the input window to the scene
+      var inputWindow = new Window_UserInput(args);
+      scene.addChild(inputWindow);
+
+      // If actorName is provided, create and add the name box window
+      if (args.actorName && args.actorName.trim() !== '') {
+        var nameBoxWindow = new Window_UserInputNameBox(args.actorName, inputWindow);
+        scene.addChild(nameBoxWindow);
+        // Store reference to nameBoxWindow in inputWindow to manage it
+        inputWindow._nameBoxWindow = nameBoxWindow;
       }
     }
   });
 
   PluginManager.registerCommand(pluginName, 'sendRequest', function (args) {
     const historyVariableId = parseInt(args.historyVariableId, 10) || 1;
-    const contextVariableId = parseInt(args.contextVariableId, 10) || 12;   
-    const maxInputWords = parseInt(args.maxInputWords, 10) || 50;
-    const inputVariable = parseInt(args.inputVariable, 10) || 19; 
+    const contextVariableId = parseInt(args.contextVariableId, 10) || 12;
+    const inputVariable = parseInt(args.inputVariable, 10) || 19;
     const responseStatusVariable = parseInt(args.responseStatusVariable, 10) || 13;
-    const userInput = $gameVariables.value(inputVariable).toString(); 
+    const userInput = $gameVariables.value(inputVariable).toString();
 
-    // Proceed only if input is provided
     if (userInput.trim() !== '') {
-        const words = userInput.split(' ');
-        const limitedUserInput = words.slice(0, maxInputWords).join(' ');
+      const limitedUserInput = userInput.split(' ').slice(0, 50).join(' ');
 
-        var apiKeyValue = $gameVariables.value(apiKeyVariableId);
-        if (!apiKeyValue) {
-            apiKeyValue = pluginParams['apiKey']; // Use default API key if variable is empty
-        }
+      var apiKeyValue = $gameVariables.value(apiKeyVariableId);
+      if (!apiKeyValue) {
+        apiKeyValue = pluginParams['apiKey'];
+      }
 
-        let requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + apiKeyValue
-            }
-        };
-        
-        // Check if the History Variable contains data and send request
-        if ($gameVariables.value(historyVariableId)) {
-            requestOptions.body = JSON.stringify({
-                userInput: limitedUserInput,
-                chatHistory: JSON.parse($gameVariables.value(historyVariableId) || '[]'), // Use the existing chat history
-                characterContext: {}, // Use an empty object for Character Context
-            });
-        } else {
-            // If History Variable is empty, use characterContext from contextVariableId and send request
-            requestOptions.body = JSON.stringify({
-                userInput: limitedUserInput,
-                chatHistory: [], // Use an empty array for no history
-                characterContext: $gameVariables.value(contextVariableId), // Use the contextVariableId content
-            });
-        }
-        
-        console.log("contextVariableId content:", $gameVariables.value(contextVariableId)); 
-        console.log("Request data:", requestOptions.body);
-        console.log("Sending request to the server...");
-        
-        // Set the inputVariable variable back to 0
-        $gameVariables.setValue(inputVariable, 0);
-
-        // Get the response from the Server
-        fetch("https://npc-gpt-api-04c6279a15ad.herokuapp.com/api/v1/chat/send-message", requestOptions)
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error("HTTP request failed");
-            }
+      let requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + apiKeyValue
+        },
+        body: JSON.stringify({
+          userInput: limitedUserInput,
+          chatHistory: JSON.parse($gameVariables.value(historyVariableId) || '[]'),
+          characterContext: $gameVariables.value(contextVariableId)
         })
-        .then(function (data) {
-            console.log("Received response from server:", data);
+      };
 
-            // Store the assistant response data in the specified variable (GPT Response)
-            $gameVariables.setValue(gptResponseVariableId, data.response);
+      $gameVariables.setValue(inputVariable, '');
 
-            // Store the chat history into the variable
-            $gameVariables.setValue(historyVariableId, JSON.stringify(data.chatHistory));
-
-            // Log the updated content of the conversation history variable
-            const updatedValue = $gameVariables.value(historyVariableId);
-            console.log(`Conversation History (Variable ${historyVariableId}):\n${updatedValue}`);
-
-            // Set the response status variable to 1
-            $gameVariables.setValue(responseStatusVariable, 1);
+      fetch("https://npc-gpt-api-04c6279a15ad.herokuapp.com/api/v1/chat/send-message", requestOptions)
+        .then(function(response) {
+          return response.json();
         })
-        .catch(function (error) {
-            console.error("Error:", error);
+        .then(function(data) {
+          console.log("Data received from server:", data);
+          $gameVariables.setValue(gptResponseVariableId, data.response);
+          $gameVariables.setValue(historyVariableId, JSON.stringify(data.chatHistory));
+          $gameVariables.setValue(responseStatusVariable, 1);
+          console.log("Set GPT response variable:", gptResponseVariableId, data.response);
+        })
+        .catch(function(error) {
+          console.error("Error:", error);
         });
     }
   });
-     
+  
   PluginManager.registerCommand(pluginName, "characterContext", function (args) {
     const name = args.name;
     const age = parseInt(args.age, 10) || 0;
@@ -885,20 +1020,29 @@
   });
 
   PluginManager.registerCommand(pluginName, "displayResponse", function (args) {
-    const eventId = parseInt(args.eventId, 10) || 0;
+    const eventId = parseInt(args.eventId, 10) || this.eventId();
     const eventPageId = parseInt(args.eventPageId, 10) || 0;
     const actorImageFile = args.actorImage;
     const actorImageIndex = parseInt(args.actorImageIndex) || 0;
     const actorName = args.actorName;
-    const wrapTextLength = parseInt(args.wrapTextLength) || 40;
+    const wrapTextLength = parseInt(args.wrapTextLength, 10) || 40;
     const response = $gameVariables.value(gptResponseVariableId);
     const historyVariableId = parseInt(args.historyVariableId, 10);
     const responseStatusVariable = parseInt(args.responseStatusVariable, 10) || 13;
-
+  
     if (response && typeof response === 'object') {
       showGptResponse(response, eventId, eventPageId, actorImageFile, actorImageIndex, actorName, wrapTextLength, historyVariableId);
     }
     // Set the response status variable back to 0
     $gameVariables.setValue(responseStatusVariable, 0);
+  
+    // Set the interpreter to wait until the message is closed
+    this.setWaitMode('message');
+  
+    // Store the event ID for use after the message is closed
+    this._gptEventId = this.eventId();
+  
+    // Indicate that we should activate self-switch B after the message is closed
+    this._activateSelfSwitchBAfterMessage = true;
   });
 })();
