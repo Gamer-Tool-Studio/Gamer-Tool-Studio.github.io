@@ -101,7 +101,7 @@ function calculateVotesPercentage(suspect) {
         </v-col>
         <v-col cols="12">
           <div class="about-game">
-            <a href="https://store.steampowered.com/app/2919500/CLUAIDO/">
+            <a href="https://medium.com/@gamertoolstudio/play-cluaido-demo-and-unlock-exclusive-rewards-with-our-nfts-d1189568a6a1">
               <h3 class="learn-more">Learn the Rules and Controls!</h3>
             </a>
           </div>
