@@ -77,7 +77,7 @@ function calculateVotesPercentage(suspect) {
     <v-container class="lp">
       <v-row>
         <v-col cols="12" class="intro-section">
-          <h1>CLUAIDO - A Detective Demo Game Where You Can Freely Interrogate The Suspects.</h1>
+          <h1>CLUAIDO - A Detective Game Where You Can Freely Interrogate The Suspects.</h1>
         </v-col>
         <v-col cols="12">
           <h2 class="hamilton-title">
@@ -102,7 +102,7 @@ function calculateVotesPercentage(suspect) {
         <v-col cols="12">
           <div class="about-game">
             <a href="https://store.steampowered.com/app/2919500/CLUAIDO/">
-              <h3 class="learn-more">Learn more about CLUAIDO!</h3>
+              <h3 class="learn-more">Learn the Rules and Controls!</h3>
             </a>
           </div>
         </v-col>
@@ -303,9 +303,21 @@ section {
 .demo-game {
   position: relative;
   width: 100%;
-  max-width: 1280px;
-  margin: auto;
-  overflow: hidden; /* Hide overflow to prevent scrollbars */
+  height: 0;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  overflow: hidden;
+}
+
+#gameIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensure the content scales proportionally */
+  margin: 0;
+  padding: 0;
+  display: block;
 }
 
 .demo-section {
@@ -314,17 +326,10 @@ section {
   width:100%;
 }
 
-#gameIframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100% !important;
-}
-
 #fullscreen-button {
   z-index: 999 !important;
 }
+
 .game-desc {
   margin-top: 20px;
   font-size: 26px;
@@ -845,6 +850,10 @@ footer {
   .feature-box p {
     font-size: 20px;
   }
+  .demo-game {
+    padding-top: 56.25%; /* Maintain the 16:9 aspect ratio */
+  }
+
 }
 @media (max-width: 1290px) {
   .feature-boxes {
@@ -934,6 +943,10 @@ footer {
     max-width:350px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  .demo-game {
+    padding-top: 56.25%; /* Maintain aspect ratio for mobile */
   }
 }
 @media screen and (orientation: landscape) {
