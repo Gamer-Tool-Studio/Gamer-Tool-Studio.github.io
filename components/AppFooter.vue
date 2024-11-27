@@ -1,9 +1,9 @@
 <script>
 export default {
   computed: {
-    // Going to make some small js tweaks
     isLandingPage() {
-      return this.$route.path === '/'
+      const path = this.$route.path
+      return path === '/' || path === '/cluaido' || path === '/cluaido/'
     },
   },
 }

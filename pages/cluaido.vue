@@ -710,7 +710,7 @@ section {
 }
 /* Footer Styles */
 footer {
-  background-color: black;
+  background-color: black !important;
   color: #6e6e80;
   text-align: center;
   padding: 20px;
