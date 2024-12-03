@@ -72,8 +72,11 @@ useHead({
 <template>
   <v-container class="login-container">
     <v-row>
-      <v-col cols="12" class="title">
-        <h1>Welcome back</h1>
+      <v-col v-if="!isRegistering" cols="12" class="title">
+        <h1>Welcome back!</h1>
+      </v-col>
+      <v-col v-if="isRegistering" cols="12" class="title">
+        <h1>Create an account!</h1>
       </v-col>
       <v-col cols="12" class="container-form">
         <div class="login-box">
