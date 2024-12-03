@@ -160,6 +160,7 @@
  *                     Example: "Knows there is a secret map at the entrance
  *                     of the big cave under a yellow flower and knows the
  *                     player arduous future". 
+ *                     player arduous future". 
  *
  * Interests           The character's interests stored as a string. 
  *                     Example: Technology, cars.
