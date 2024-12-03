@@ -13,7 +13,7 @@ onMounted(() => {
 })
 
 // Correctly set the game source path
-const gameSrc = '/cluaido-demo/index.html' // Adjust the path if necessary
+const gameSrc = '/cluaido_demo/index.html' // Adjust the path if necessary
 </script>
 
 <template>
