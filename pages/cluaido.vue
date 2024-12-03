@@ -786,11 +786,6 @@ footer {
 }
 
 @media (max-width: 960px) {
-  .feature-boxes {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .feature-boxes h2 {
     font-size: 35px;
   }
@@ -836,9 +831,14 @@ footer {
   }
 }
 
-@media (max-width: 820px) {
+@media (max-width: 960px) {
   .get-started .started-grid {
     flex-direction: column;
+
+  }
+
+  .feature-boxes{
+    padding:12px;
 
   }
 
@@ -892,7 +892,7 @@ footer {
   }
 }
 @media (max-width: 600px) {
-    .vote-count{
+  .vote-count{
     min-width:100%;
     text-align: center;
   }
@@ -907,13 +907,6 @@ footer {
   text-align: center !important;
   font-size: 22px;
   }
-  .feature-box{
-    min-width: 250px !important;
-    max-width:350px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
   .demo-game {
     padding-top: 56.25%; /* Maintain aspect ratio for mobile */
   }
