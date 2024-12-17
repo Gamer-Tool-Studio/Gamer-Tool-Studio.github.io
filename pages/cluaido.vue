@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
 import Web3 from 'web3'
-import { NFTS_LIST, NFT_ADDRESSES_LIST, nftContractAbi } from '@/constants'
+import { NETWORKS_LIST, NFTS_LIST, NFT_ADDRESSES_LIST, nftContractAbi } from '@/constants'
 
 const debug = getDebugger('page:cluaido')
 
@@ -30,9 +30,8 @@ const nfts = reactive(NFTS_LIST)
 const totalVotes = ref(0)
 
 onMounted(async () => {
-  const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/'))
-  const networkId = 56 // Number(await web3.eth.net.getId())
-  // debug.log('networkId', networkId)
+  const web3 = new Web3(new Web3.providers.HttpProvider(NETWORKS_LIST.find(c => c.chainId === 2732190003600000).rpcUrls[0]))
+  const networkId = 2732190003600000 // Number(await web3.eth.net.getId())
   const contractAddress = NFT_ADDRESSES_LIST.find(c => c.chainId === networkId)?.nftContractAddress
   if (!contractAddress) {
     debug.error('Contract not found')
@@ -104,7 +103,9 @@ function closeGameWindow() {
           </h1>
         </v-col>
         <v-col cols="12">
-          <h2 class="hamilton-title">Who Killed Mr. Hamilton?</h2>
+          <h2 class="hamilton-title">
+            Who Killed Mr. Hamilton?
+          </h2>
           <p class="game-desc">
             You were called to the victims' house to solve a mysterious death.
             Interrogate the suspects, search for clues and discover secrets that
@@ -117,7 +118,7 @@ function closeGameWindow() {
             src="~/assets/images/play-clu.png"
             alt="Play the Game"
             @click="openGameWindow"
-          />
+          >
         </v-col>
         <v-col cols="12">
           <div class="about-game">
@@ -142,9 +143,13 @@ function closeGameWindow() {
                 src="~/assets/images/document-icon.png"
                 class="vote-icon"
                 alt="Accusations Made"
-              />
-              <h3 class="prize-money">{{ totalVotes }}</h3>
-              <h3 class="counter-text">Accusations Made</h3>
+              >
+              <h3 class="prize-money">
+                {{ totalVotes }}
+              </h3>
+              <h3 class="counter-text">
+                Accusations Made
+              </h3>
             </div>
           </v-col>
           <v-col cols="12" md="6" class="vote-count bets">
@@ -153,9 +158,13 @@ function closeGameWindow() {
                 src="~/assets/images/dollar-icon.png"
                 class="vote-icon"
                 alt="Funds Raised"
-              />
-              <h3 class="prize-money">${{ totalVotes * 5 }}</h3>
-              <h3 class="counter-text">Funds Raised</h3>
+              >
+              <h3 class="prize-money">
+                ${{ totalVotes * 5 }}
+              </h3>
+              <h3 class="counter-text">
+                Funds Raised
+              </h3>
             </div>
           </v-col>
         </v-row>
@@ -178,22 +187,22 @@ function closeGameWindow() {
                   class="acc-rules"
                   src="~/assets/images/document-icon.png"
                   alt="Betting Game Rules"
-                />
+                >
                 <h3>Read the Rules and Learn All About the Rewards.</h3>
               </a>
             </div>
           </v-col>
           <v-row class="feature-boxes">
             <v-col
+              v-for="nft in nfts"
+              :key="nft.id"
               cols="12"
               sm="6"
               md="4"
-              v-for="nft in nfts"
-              :key="nft.id"
               class="feature-box"
             >
               <h2>{{ nft.name }}</h2>
-              <img :src="nft.src" :alt="nft.name" />
+              <img :src="nft.src" :alt="nft.name">
               <div class="vote-perc">
                 <h3>{{ calculateVotesPercentage(nft) }}</h3>
                 <p>votes</p>
@@ -209,20 +218,22 @@ function closeGameWindow() {
         <!-- Join Section -->
         <v-row>
           <v-col cols="12">
-            <h2 class="bet-title">Begin your detective journey now!</h2>
+            <h2 class="bet-title">
+              Begin your detective journey now!
+            </h2>
           </v-col>
           <v-col cols="12" sm="4" class="join-section">
             <a href="https://store.steampowered.com/app/2919500/CLUAIDO/">
               <img
                 src="/images/Steam-white-logo.png"
                 alt="Wishlist the Game"
-              />
+              >
               <h3>Wishlist the Game</h3>
             </a>
           </v-col>
           <v-col cols="12" sm="4" class="join-section">
             <a href="https://discord.gg/JdDwRfTGNF">
-              <img src="/images/discord-logo.png" alt="Join the Community" />
+              <img src="/images/discord-logo.png" alt="Join the Community">
               <h3>Join the Community</h3>
             </a>
           </v-col>
@@ -231,7 +242,7 @@ function closeGameWindow() {
               <img
                 src="/images/twitter-white-logo.png"
                 alt="Follow our Journey"
-              />
+              >
               <h3>Follow our Journey</h3>
             </a>
           </v-col>
