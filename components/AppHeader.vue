@@ -68,7 +68,7 @@ if (authenticated.value) {
         </li>
         <li class="nav-left mobile-display">
           <NuxtLink to="/download-plugin">
-            Download Plugin
+            Download Plugins
           </NuxtLink>
         </li>
         <li class="nav-left mobile-display">

@@ -61,7 +61,7 @@ useHead({
   <v-container class="lp">
     <v-row>
       <v-col cols="12" class="intro-section">
-        <h1>NPC-GPT - Create Open Simulations With AI Agents.</h1>
+        <h1>NPC-GPT - Create Interactive Simulations With AI Agents.</h1>
       </v-col>
       <v-col cols="12" class="intro-cta">
         <NuxtLink to="/pricing">
@@ -171,7 +171,7 @@ useHead({
       </v-col>
       <v-col id="sectionToLinkToPlugin" cols="12">
         <h2 class="page-headers">
-          Add NPC-GPT Plugin to your favourite game engine today and start harnessing the power of dynamic character interactions with ease.
+          Add NPC-GPT Plugins to your favourite game engine today and start harnessing the power of dynamic character interactions with ease.
         </h2>
       </v-col>
       <v-col cols="6" class="plugin-explain">

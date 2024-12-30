@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const downloadURL = ref('/cluaido/js/plugins/NPC-GPT-Plugin.js')
+const downloadURLMz = ref('/public/downloads/NPC-GPT-Plugin.js')
+const downloadURLMV = ref('/public/downloads/NPC-GPT-MV.js')
 
 // SEO Meta Tags
 useHead({
@@ -89,7 +90,7 @@ useHead({
         </v-col>
         <div class="cards-container">
           <v-col cols="6" class="download-cards left-card">
-            <a :href="downloadURL" download clas="downloadFile">
+            <a :href="downloadURLMz" download class="downloadFile">
               <v-col cols="12" class="card-icon-name">
                 <img class="download-logo" src="/images/RPGM-icon.png">
                 <h3>RPG Maker MZ</h3>
@@ -98,7 +99,7 @@ useHead({
             </a>
           </v-col>
           <v-col cols="6" class="download-cards right-card">
-            <a :href="downloadURL" download>
+            <a :href="downloadURLMV" download class="downloadFile">
               <v-col cols="12" class="card-icon-name">
                 <img class="download-logo" src="/images/MV-icon.png">
                 <h3>RPG Maker MV</h3>
