@@ -74,7 +74,7 @@ useHead({
       <v-col cols="12" class="demo-video">
         <div style="position: relative; padding-bottom: 56.25%; /* 16:9 aspect ratio */">
           <video
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+            style="position: absolute; top: 0; left: 0; max-width: 1200px; width:99%;  height: 100%; margin:auto;"
             src="~/public/sim_convo_video.mp4"
             autoplay
             loop

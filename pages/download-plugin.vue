@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 const downloadURLMz = ref('/public/downloads/NPC-GPT-Plugin.js')
 const downloadURLMV = ref('/public/downloads/NPC-GPT-MV.js')
+const downloadURLGodot = ref('/public/downloads/npc-gpt-godot.zip')
 
 // SEO Meta Tags
 useHead({
@@ -111,11 +112,11 @@ useHead({
       </v-col>
       <v-col cols="12" class="engine-cards">
         <v-col cols="12" class="card-header-section godot">
-          <img src="/images/RPGM-text.png">
+          <img src="assets/images/godot-white.png">
         </v-col>
         <div class="cards-container">
           <v-col cols="12" class="download-cards left-card">
-            <a :href="downloadURLMz" download class="downloadFile">
+            <a :href="downloadURLGodot" download class="downloadFile">
               <v-col cols="12" class="card-icon-name center">
                 <img class="download-logo" src="/images/godot-logo.png">
                 <h3>Godot 4.3.</h3>
