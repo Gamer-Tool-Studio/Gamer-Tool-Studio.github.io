@@ -11,11 +11,14 @@ export default defineNuxtConfig({
     },
 
   },
+
   generate: {},
+
   // add port to 3001
   devServer: {
     port: 3001,
   },
+
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
@@ -23,15 +26,18 @@ export default defineNuxtConfig({
       link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }],
     },
   },
+
   css: [
     'vuetify/lib/styles/main.sass',
     '@mdi/font/css/materialdesignicons.min.css',
     '@/assets/styles/main.scss',
     '@/assets/styles.scss',
   ],
+
   build: {
     transpile: ['vuetify'],
   },
+
   vite: {
     plugins: [nodePolyfills()],
     define: {
@@ -54,21 +60,28 @@ export default defineNuxtConfig({
       },
     },
   },
+
   // plugins: ["@/plugins/chartist.js"],
   modules: [
     ['@pinia/nuxt', { autoImports: ['defineStore'] }],
   ],
+
   imports: {
     dirs: ['store'],
   },
+
   routeRules: {
     '/redirect': { ssr: false },
   },
+
   ssr: false,
+
   nitro: {
     prerender: {
       crawlLinks: true,
       routes: ['/', 'sitemap.xml'],
     },
   },
+
+  compatibilityDate: '2024-12-17',
 })
