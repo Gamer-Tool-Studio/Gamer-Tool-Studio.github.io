@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 
 const { keys } = defineProps(['keys'])
 
-const emit = defineEmits(['deleteItem', 'addItem', 'editItem'])
+const emit = defineEmits(['deleteItem', 'addItem', 'editItem', 'keyGenerated', 'keyEdited'])
 
 const debug = getDebugger('table-keys')
 
@@ -67,6 +67,16 @@ function close() {
     editedItem.value = Object.assign({}, defaultItem)
     editedIndex.value = -1
   })
+}
+
+function handleKeyGenerated(keyData) {
+  debug.log('Key generated in table:', keyData)
+  emit('keyGenerated', keyData)
+}
+
+function handleKeyEdited(keyData) {
+  debug.log('Key edited in table:', keyData)
+  emit('keyEdited', keyData)
 }
 function closeDelete() {
   revokeKey.value = false
@@ -133,6 +143,8 @@ function formatDate(time) {
           :form-title="formTitle"
           @close="close(), (generateNewKeys = false)"
           @save="save"
+          @key-generated="handleKeyGenerated"
+          @key-edited="handleKeyEdited"
         />
         <modal-revoke-key v-if="revokeKey" :name="editedItem.name" @close="closeDelete()" @delete="deleteItemConfirm" />
         <v-btn v-if="hasTokensAvailable" class="button cancel-button" color="none" @click="generateNewKeys = true">

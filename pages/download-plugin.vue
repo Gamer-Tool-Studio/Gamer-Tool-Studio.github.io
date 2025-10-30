@@ -215,7 +215,6 @@ useHead({
   padding-bottom: 0;
 }
 
-
 .download-cards h3 {
   float: right;
   margin-left:10px;

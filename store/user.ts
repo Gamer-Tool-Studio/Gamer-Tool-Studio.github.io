@@ -14,12 +14,20 @@ interface KeysInfo {
   created: Date
   used: string
 }
+interface OrganizationInfo {
+  id: string
+  name: string
+  orgId: string
+  ownerId: string
+  isOwner: boolean
+  memberCount: number
+}
+
 interface State {
   userList: UserInfo[]
-  user: UserInfo | null
+  user: any
   isLoggedIn: boolean
-  orgName: string
-  orgId: string
+  organization: OrganizationInfo
   members: Array<MemberInfo>
   keys: Array<KeysInfo>
   loading: boolean
@@ -37,26 +45,38 @@ export const useUserStore = defineStore('user', {
     return {
       loading: false,
       userList: [],
-      user: null,
+      user: {
+        id: '',
+        username: '',
+        email: '',
+        name: '',
+        picture: '',
+        role: 'user',
+        authProvider: 'local',
+        emailVerified: false,
+        passwordRequired: true,
+      },
       isLoggedIn: false,
-      orgName: 'MyOgrName',
-      orgId: 'MyOrgId',
-      members: [{ name: 'John Doe', email: 'johndoe@mail.com', role: 'admin' }],
-      keys: [
-        {
-          name: 'query-game-test',
-          key: 'sk-...1nF6',
-          created: new Date(Date.now()),
-          used: 'Never',
-        },
-      ],
+      organization: {
+        id: '',
+        name: '',
+        orgId: '',
+        ownerId: '',
+        isOwner: false,
+        memberCount: 0,
+      },
+      members: [],
+      keys: [],
     }
   },
   getters: {
     // Computed property to get the login status
     isUserLoggedIn: state => state.isLoggedIn,
-    username: state => state.user?.username,
+    username: state => state.user?.username || state.user?.name,
     userEmail: state => state.user?.email,
+    isAdmin: state => state.user?.role === 'admin',
+    orgName: state => state.organization?.name,
+    orgId: state => state.organization?.orgId,
   },
   actions: {
     async getUserProfile(): Promise<any> {
@@ -85,11 +105,72 @@ export const useUserStore = defineStore('user', {
     setLogin(val: boolean) {
       this.isLoggedIn = val
     },
-    setUser(loginUser: UserInfo) {
-      this.user = loginUser
+    setUser(loginUser: any) {
+      // Update user data
+      this.user = {
+        ...this.user,
+        ...loginUser,
+      }
+
+      // Update organization data if present
+      if (loginUser.organization) {
+        this.organization = {
+          ...this.organization,
+          ...loginUser.organization,
+        }
+      }
+
+      debug.log('User updated:', this.user)
+      debug.log('Organization updated:', this.organization)
     },
+
+    async fetchUserProfile() {
+      debug.log('Fetching user profile with organization data...')
+      this.loading = true
+
+      try {
+        const { data, error } = await useAuthAPI('/user/profile', 'GET')
+
+        if (data.value && !error.value) {
+          this.setUser(data.value)
+          if (data.value.keys)
+            this.setKeys(data.value.keys)
+
+          this.isLoggedIn = true
+        }
+        else {
+          debug.log('Error fetching profile:', error.value)
+        }
+      }
+      catch (e) {
+        debug.log('Error:', e)
+      }
+      finally {
+        this.loading = false
+      }
+    },
+
     logout() {
-      this.user = null
+      this.user = {
+        id: '',
+        username: '',
+        email: '',
+        name: '',
+        picture: '',
+        role: 'user',
+        authProvider: 'local',
+        emailVerified: false,
+        passwordRequired: true,
+      }
+      this.organization = {
+        id: '',
+        name: '',
+        orgId: '',
+        ownerId: '',
+        isOwner: false,
+        memberCount: 0,
+      }
+      this.isLoggedIn = false
       navigateTo('/')
     },
   },

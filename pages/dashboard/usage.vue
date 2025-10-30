@@ -17,14 +17,14 @@ const {
   currentMonth,
   availableInputTokens,
   availableOutputTokens,
-  chatsTotal,
-  chatsToday,
 } = storeToRefs(tokenStore)
 
 const consumedInputTokens = computed(() => monthlyInput.value.reduce((a, b) => a + b, 0))
 const consumedOutputTokens = computed(() => monthlyOutput.value.reduce((a, b) => a + b, 0))
 const progressInputPercentage = computed(() => `${(consumedInputTokens.value / availableInputTokens.value) * 100}%`)
 const progressOutputPercentage = computed(() => `${(consumedOutputTokens.value / availableOutputTokens.value) * 100}%`)
+const inputPercentageValue = computed(() => Math.round((consumedInputTokens.value / availableInputTokens.value) * 100))
+const outputPercentageValue = computed(() => Math.round((consumedOutputTokens.value / availableOutputTokens.value) * 100))
 
 const changeMonth = tokenStore.changeMonth
 const getBalance = tokenStore.getBalance
@@ -65,8 +65,84 @@ const chartOptions = ref({
   <v-container class="usage-page">
     <v-row>
       <v-col cols="12">
-        <h1>Usage</h1>
+        <div class="page-header">
+          <h1>Usage</h1>
+          <v-btn class="button" color="none" to="/pricing" size="large">
+            Add credits
+          </v-btn>
+        </div>
       </v-col>
+
+      <!-- Token Usage Cards - Right Below Title -->
+      <v-col cols="12">
+        <v-row>
+          <v-col cols="12" md="6">
+            <v-card elevation="2" class="usage-card">
+              <div class="card-content">
+                <div class="circular-progress">
+                  <v-progress-circular
+                    :model-value="inputPercentageValue"
+                    :size="140"
+                    :width="12"
+                    color="primary"
+                  >
+                    <div class="progress-text">
+                      <div class="percentage">
+                        {{ inputPercentageValue }}%
+                      </div>
+                      <div class="label">
+                        Used
+                      </div>
+                    </div>
+                  </v-progress-circular>
+                </div>
+                <div class="card-details">
+                  <h2>Input Tokens</h2>
+                  <p class="usage-numbers">
+                    <strong>{{ formatTokens(consumedInputTokens) }}</strong> / {{ formatTokens(availableInputTokens) }}
+                  </p>
+                  <p class="usage-label">
+                    tokens used
+                  </p>
+                </div>
+              </div>
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="6">
+            <v-card elevation="2" class="usage-card">
+              <div class="card-content">
+                <div class="circular-progress">
+                  <v-progress-circular
+                    :model-value="outputPercentageValue"
+                    :size="140"
+                    :width="12"
+                    color="warning"
+                  >
+                    <div class="progress-text">
+                      <div class="percentage">
+                        {{ outputPercentageValue }}%
+                      </div>
+                      <div class="label">
+                        Used
+                      </div>
+                    </div>
+                  </v-progress-circular>
+                </div>
+                <div class="card-details">
+                  <h2>Output Tokens</h2>
+                  <p class="usage-numbers">
+                    <strong>{{ formatTokens(consumedOutputTokens) }}</strong> / {{ formatTokens(availableOutputTokens) }}
+                  </p>
+                  <p class="usage-label">
+                    tokens used
+                  </p>
+                </div>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-col>
+
       <v-col cols="12" class="intro-text">
         <p>
           Below you'll find a summary of API usage for your organization. All dates and times are UTC-based, and data
@@ -96,40 +172,6 @@ const chartOptions = ref({
       <v-col cols="12" class="chart-area">
         <Bar :data="chartData" :options="chartOptions" />
       </v-col>
-      <v-row>
-        <v-col>
-          <v-card class="counter-cards">
-            <v-col cols="12" class="available-tokens">
-              <h2>Input Tokens</h2>
-              <h3>{{ formatTokens(availableInputTokens) }} available tokens</h3>
-              <h4>{{ formatTokens(consumedInputTokens) }} used tokens</h4>
-            </v-col>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="counter-cards">
-            <v-col cols="12" class="available-tokens">
-              <h2>Output Tokens</h2>
-              <h3>{{ formatTokens(availableOutputTokens) }} available tokens</h3>
-              <h4>{{ formatTokens(consumedOutputTokens) }} used tokens</h4>
-            </v-col>
-          </v-card>
-        </v-col>
-        <v-col>
-          <v-card class="counter-cards">
-            <v-col cols="12" class="available-tokens">
-              <h2>Interactions</h2>
-              <h3>{{ chatsTotal }} chats made all time</h3>
-              <h4>{{ chatsToday }} chats made today</h4>
-            </v-col>
-          </v-card>
-        </v-col>
-        <v-col cols="12">
-          <v-btn class="button" color="none" to="/pricing">
-            Add credits
-          </v-btn>
-        </v-col>
-      </v-row>
       <!--
       <v-col cols="4" class="current-subscription">
         <h3>Active subsciption pack</h3>
@@ -147,16 +189,80 @@ const chartOptions = ref({
 </template>
 
 <style lang="scss">
-.counter-cards {
-  background-color: transparent;
-  border-radius: 3px;
+.page-header {
   display: flex;
-  position: relative;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
-  margin-top: 20px;
-  --background: rgba(98, 0, 238, 0.1);
-  background-image: linear-gradient(90deg, transparent, var(--background), transparent);
-  background-size: 200%;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.usage-card {
+  padding: 24px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .card-content {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    .circular-progress {
+      flex-shrink: 0;
+
+      .progress-text {
+        text-align: center;
+
+        .percentage {
+          font-size: 28px;
+          font-weight: 700;
+          line-height: 1;
+        }
+
+        .label {
+          font-size: 12px;
+          color: #666;
+          margin-top: 4px;
+        }
+      }
+    }
+
+    .card-details {
+      flex: 1;
+
+      h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: #333;
+      }
+
+      .usage-numbers {
+        font-size: 18px;
+        margin: 0 0 4px 0;
+        color: #333;
+
+        strong {
+          font-weight: 700;
+          color: #6200EE;
+        }
+      }
+
+      .usage-label {
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+      }
+    }
+  }
 }
 
 .usage-page p {

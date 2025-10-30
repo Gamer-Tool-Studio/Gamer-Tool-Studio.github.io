@@ -4,17 +4,28 @@ const debug = getDebugger('GenerateApiKey')
 export default {
   name: 'GenerateApiKey',
   props: ['formTitle', 'name', 'id'],
-  emits: ['close', 'update:name'],
+  emits: ['close', 'update:name', 'keyGenerated', 'keyEdited', 'error'],
   data() {
     return {
       isCreating: !this.name ? 'Create Secret Key' : 'Save',
       inviteUser: false,
       apiKey: '', // Store the generated key
       keyGenerated: false, // Add this property
+      keyName: '',
     }
   },
   methods: {
     close() {
+      // Emit key generated event if a key was created
+      if (this.keyGenerated && this.apiKey) {
+        const keyData = {
+          name: this.keyName,
+          key: this.apiKey,
+          created: new Date(),
+          used: 'Never',
+        }
+        this.$emit('keyGenerated', keyData)
+      }
       this.$emit('close')
     },
     async editKey() {
@@ -23,14 +34,25 @@ export default {
       const keysStore = useKeysStore()
       await keysStore.editApiToken(this.name, this.id)
       this.keyGenerated = true // Set keyGenerated to true
+      this.$emit('keyEdited', { id: this.id, name: this.name })
     },
     async generateKey() {
-      debug.log('generateKey')
+      this.keyName = this.name // Store the name
       const keysStore = useKeysStore()
-      const { token: apiKey } = await keysStore.createApiToken(this.name)
-      debug.log(apiKey)
-      this.apiKey = apiKey
-      this.keyGenerated = true // Set keyGenerated to true
+
+      try {
+        const { token: apiKey } = await keysStore.createApiToken(this.name)
+        this.apiKey = apiKey
+        this.keyGenerated = true // Set keyGenerated to true
+
+        // Refresh user profile to get updated keys
+        const userStore = useUserStore()
+        await userStore.fetchUserProfile()
+      }
+      catch (_error) {
+        // Error handling: show error UI or emit error event
+        this.$emit('error', 'Failed to generate API key. Please try again.')
+      }
     },
     async copyToClipboard() {
       try {

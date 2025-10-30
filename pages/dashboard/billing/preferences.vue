@@ -18,7 +18,7 @@ const countrySelect = ref(null)
       <v-col cols="12">
         <p>
           Changes to these preferences will apply to future invoices only. If you need a past invoice reissued, please
-          contact bill@gamertoolsstudio.com.
+          contact billing@gamertoolstudio.com.
         </p>
       </v-col>
     </v-row>
@@ -44,7 +44,7 @@ const countrySelect = ref(null)
       <v-col cols="8" class="form1">
         <h3>Primary business address</h3>
         <p>
-          This is the physical address of the company purchasing OpenAI services and is used to calculate any applicable
+          This is the physical address of the company purchasing Gamer Tool Studio services and is used to calculate any applicable
           sales taxes.
         </p>
         <select ref="countrySelect" class="form_input input2">

@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     public: {
       backendURL: process.env.BACKEND_URL,
       debugNamespace: process.env.DEBUG_NAMESPACE,
+      helloClientId: process.env.HELLO_CLIENT_ID,
     },
 
   },

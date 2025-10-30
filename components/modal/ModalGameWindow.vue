@@ -19,9 +19,9 @@ const gameSrc = '/cluaido_demo/index.html' // Adjust the path if necessary
 <template>
   <div
     class="modal-overlay"
+    tabindex="0"
     @click.self="closeModal"
     @keydown.esc="closeModal"
-    tabindex="0"
   >
     <div class="modal-content">
       <!-- Game content filling 100% of the modal -->
@@ -31,7 +31,7 @@ const gameSrc = '/cluaido_demo/index.html' // Adjust the path if necessary
         height="100%"
         frameborder="0"
         allowfullscreen
-      ></iframe>
+      />
     </div>
   </div>
 </template>

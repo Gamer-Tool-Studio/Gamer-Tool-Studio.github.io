@@ -6,8 +6,6 @@ const debug = getDebugger('store:auth')
 const BASE_URL = `${BACKEND_URL}/api/v1` // "https://dummyjson.com/auth/login";
 const LOCAL_LOGIN = '/auth/local/login' //
 const LOCAL_REGISTER = '/auth/local/register' //
-const GOOGLE_LOGIN = '/auth/google/login' //
-const GOOGLE_REGISTER = '/auth/google/register' //
 const AUTH_CHECK = '/auth/check' //
 
 interface LoginUserPayload {
@@ -49,34 +47,6 @@ export const useAuthStore = defineStore('auth', {
         return this.authenticated
       }
       return false
-    },
-    async authenticateGoogleUser() {
-      window.location.href = BASE_URL + GOOGLE_LOGIN
-      // const { data, pending }: any = await useFetch(BASE_URL + GOOGLE_LOGIN, {
-      //   method: 'get',
-      // });
-      // this.loading = pending;
-
-      // if (data.value) {
-      //   const token = useCookie('token'); // useCookie new hook in nuxt 3
-      //   token.value = data?.value?.password; // set token to cookie
-      //   this.authenticated = true; // set authenticated  state value to true
-      // }
-    },
-
-    async registerGoogleUser(newUser: RegisterUserPayload) {
-      const { data, pending }: any = await useFetch(BASE_URL + GOOGLE_REGISTER, {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: newUser,
-      })
-      this.loading = pending
-
-      if (data.value) {
-        const token = useCookie('token') // useCookie new hook in nuxt 3
-        token.value = data?.value?.token // set token to cookie
-        this.authenticated = true // set authenticated  state value to true
-      }
     },
 
     // LOCAL STRATEGY API

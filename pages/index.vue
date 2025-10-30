@@ -80,7 +80,7 @@ useHead({
             loop
             muted
             playsinline
-          ></video>
+          />
         </div>
       </v-col>
     </v-row>
@@ -93,28 +93,28 @@ useHead({
       </v-col>
       <div class="feature-boxes">
         <div class="feature-box">
-          <img src="/images/anime-character1.png" alt="Interactive agents" class="feature-image" />
+          <img src="/images/anime-character1.png" alt="Interactive agents" class="feature-image">
           <div class="feature-content">
             <h3>Interactive agents</h3>
             <p>Build character backstories and customize the way they respond to players.</p>
           </div>
         </div>
         <div class="feature-box">
-          <img src="/images/anime-character2.png" alt="Open interactions" class="feature-image" />
+          <img src="/images/anime-character2.png" alt="Open interactions" class="feature-image">
           <div class="feature-content">
             <h3>Open interactions</h3>
             <p>Create open simulation worlds where players can freely interact with characters through text inputs.</p>
           </div>
         </div>
         <div class="feature-box">
-          <img src="/images/anime-character3.png" alt="Seamless AI" class="feature-image" />
+          <img src="/images/anime-character3.png" alt="Seamless AI" class="feature-image">
           <div class="feature-content">
             <h3>Seamless AI</h3>
             <p>NPC-GPT requires no coding experience to integrate its AI capabilities in your favorite game engines or frontend frameworks.</p>
           </div>
         </div>
         <div class="feature-box">
-          <img src="/images/anime-character4.png" alt="Secure and Private" class="feature-image" />
+          <img src="/images/anime-character4.png" alt="Secure and Private" class="feature-image">
           <div class="feature-content">
             <h3>Secure and Private</h3>
             <p>Rest assured that your sensitive game content and storylines are safeguarded. We follow strict privacy standards to protect your intellectual property.</p>

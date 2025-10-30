@@ -111,6 +111,13 @@ const items = ref([
     },
   },
   {
+    title: 'Profile',
+    to: '/dashboard/profile',
+    props: {
+      prependIcon: 'mdi-account',
+    },
+  },
+  {
     title: 'API keys',
     to: '/dashboard/api-keys',
     props: {

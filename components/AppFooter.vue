@@ -38,7 +38,7 @@ export default {
       </div>
     </div>
     <p class="footer-copy">
-      © Gamer Tool Studio 2024
+      © Gamer Tool Studio 2025
     </p>
   </footer>
 </template>
