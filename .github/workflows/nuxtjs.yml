@@ -17,6 +17,9 @@ jobs:
       # Pick your own package manager and build script
       - run: npm install
       - run: npm run generate
+        env:
+          BACKEND_URL: https://npc-gpt-api-04c6279a15ad.herokuapp.com
+          HELLO_CLIENT_ID: ${{ secrets.HELLO_CLIENT_ID }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
