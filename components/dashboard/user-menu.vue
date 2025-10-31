@@ -3,6 +3,7 @@
 import { storeToRefs } from 'pinia'
 
 import { useUserStore } from '~/store/user'
+import defaultAvatar from '~/assets/images/GTS-iso.png'
 
 // make authenticated state reactive with storeToRefs
 
@@ -16,6 +17,8 @@ const { username, userEmail, userPicture, orgName } = storeToRefs(useUserStore()
 const items = ref([])
 const open = ref(false)
 
+const displayPicture = computed(() => userPicture.value || defaultAvatar)
+
 function logout() {
   logUserOut()
   router.push('/')
@@ -25,8 +28,7 @@ function logout() {
 <template>
   <v-btn flat :ripple="false" class="">
     <div v-if="authenticated" class="d-none d-sm-flex align-center">
-      <img v-if="userPicture" class="profile-img" :src="userPicture">
-      <img v-else class="profile-img" src="~/assets/images/ghn.jpeg">
+      <img class="profile-img" :src="displayPicture">
       <p class="logged-orgName">
         {{ orgName || 'Organization' }}
       </p>
@@ -40,8 +42,7 @@ function logout() {
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
         <div v-if="authenticated" class="menu-group d-flex d-sm-none pa-2 pt-0 flex-row">
-          <img v-if="userPicture" class="profile-img" :src="userPicture" width="30">
-          <img v-else class="profile-img" src="~/assets/images/ghn.jpeg" width="30">
+          <img class="profile-img" :src="displayPicture" width="30">
           <p class="logged-orgName">
             {{ orgName || 'Organization' }}
           </p>
