@@ -11,7 +11,7 @@ const { authenticated } = storeToRefs(useAuthStore())
 const router = useRouter()
 const { logUserOut } = useAuthStore() // use authenticateUser action from  auth store
 
-const { username, userEmail } = storeToRefs(useUserStore())
+const { username, userEmail, userPicture, orgName } = storeToRefs(useUserStore())
 
 const items = ref([])
 const open = ref(false)
@@ -25,9 +25,10 @@ function logout() {
 <template>
   <v-btn flat :ripple="false" class="">
     <div v-if="authenticated" class="d-none d-sm-flex align-center">
-      <img class="profile-img" src="~/assets/images/ghn.jpeg">
+      <img v-if="userPicture" class="profile-img" :src="userPicture">
+      <img v-else class="profile-img" src="~/assets/images/ghn.jpeg">
       <p class="logged-orgName">
-        Org Name
+        {{ orgName || 'Organization' }}
       </p>
     </div>
     <li class="d-flex d-sm-none">
@@ -39,9 +40,10 @@ function logout() {
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
         <div v-if="authenticated" class="menu-group d-flex d-sm-none pa-2 pt-0 flex-row">
-          <img class="profile-img" src="~/assets/images/ghn.jpeg" width="30">
+          <img v-if="userPicture" class="profile-img" :src="userPicture" width="30">
+          <img v-else class="profile-img" src="~/assets/images/ghn.jpeg" width="30">
           <p class="logged-orgName">
-            Org Name
+            {{ orgName || 'Organization' }}
           </p>
         </div>
         <div v-if="!authenticated" class="menu-group">
