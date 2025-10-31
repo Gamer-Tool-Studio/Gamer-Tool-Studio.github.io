@@ -2,7 +2,7 @@
 // import DialogCraftGPTLib from 'dialogcraftgpt-lib'
 
 export default {
-  name: 'trialModal',
+  name: 'TrialModal',
   components: {},
   emits: ['close'],
   data() {
