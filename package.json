@@ -19,6 +19,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@hellocoop/vue": "^2.1.9",
     "@mdi/font": "^7.1.96",
     "@pinia/nuxt": "^0.4.11",
     "@types/node": "^20.11.17",

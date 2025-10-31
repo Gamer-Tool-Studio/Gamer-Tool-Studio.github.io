@@ -62,14 +62,17 @@ function logout() {
           </v-list-item>
         </div>
         <div v-if="authenticated" class="menu-group">
+          <NuxtLink to="/dashboard/profile">
+            Profile
+          </NuxtLink>
           <NuxtLink to="/dashboard">
-            Manage account
+            Organization Settings
           </NuxtLink>
           <NuxtLink to="/dashboard/usage">
-            Check monthly usage
+            Usage
           </NuxtLink>
           <NuxtLink to="/dashboard/api-keys">
-            View API Keys
+            API Keys
           </NuxtLink>
         </div>
         <div class="menu-group d-flex d-sm-none">

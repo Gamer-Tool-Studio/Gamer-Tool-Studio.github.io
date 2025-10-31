@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const downloadURL = ref('/cluaido/js/plugins/NPC-GPT-Plugin.js')
+const downloadURLMz = ref('/public/downloads/NPC-GPT-Plugin.js')
+const downloadURLMV = ref('/public/downloads/NPC-GPT-MV.js')
+const downloadURLGodot = ref('/public/downloads/npc-gpt-godot.zip')
 
 // SEO Meta Tags
 useHead({
@@ -84,12 +86,12 @@ useHead({
         </p>
       </v-col>
       <v-col cols="12" class="engine-cards">
-        <v-col cols="12" class="card-header-section">
+        <v-col cols="12" class="card-header-section rmm">
           <img src="/images/RPGM-text.png">
         </v-col>
         <div class="cards-container">
           <v-col cols="6" class="download-cards left-card">
-            <a :href="downloadURL" download clas="downloadFile">
+            <a :href="downloadURLMz" download class="downloadFile">
               <v-col cols="12" class="card-icon-name">
                 <img class="download-logo" src="/images/RPGM-icon.png">
                 <h3>RPG Maker MZ</h3>
@@ -98,10 +100,26 @@ useHead({
             </a>
           </v-col>
           <v-col cols="6" class="download-cards right-card">
-            <a :href="downloadURL" download>
+            <a :href="downloadURLMV" download class="downloadFile">
               <v-col cols="12" class="card-icon-name">
                 <img class="download-logo" src="/images/MV-icon.png">
                 <h3>RPG Maker MV</h3>
+              </v-col>
+              <p>&#8595;Download</p>
+            </a>
+          </v-col>
+        </div>
+      </v-col>
+      <v-col cols="12" class="engine-cards">
+        <v-col cols="12" class="card-header-section godot">
+          <img src="assets/images/godot-white.png">
+        </v-col>
+        <div class="cards-container">
+          <v-col cols="12" class="download-cards left-card">
+            <a :href="downloadURLGodot" download class="downloadFile">
+              <v-col cols="12" class="card-icon-name center">
+                <img class="download-logo" src="/images/godot-logo.png">
+                <h3>Godot 4.3.</h3>
               </v-col>
               <p>&#8595;Download</p>
             </a>
@@ -148,14 +166,21 @@ useHead({
 .card-header-section{
   align-self: center;
   text-align: center;
-  background-image: url('/assets/images/RPGM-banner-transp.png');
-  background-size: cover;
   padding-left: 5%;
   padding-right: 5%;
   min-width: 100% !important;
   border: 1px solid #ECECF1;
   border-radius: 7px;
 
+}
+.rmm{
+  background-image: url('/assets/images/RPGM-banner-transp.png');
+  background-size: cover;
+}
+
+.godot{
+  background-image: url('/images/godot-banner.png');
+  background-size: cover;
 }
 
 .card-header-section img {
@@ -189,6 +214,7 @@ useHead({
   align-items: center;
   padding-bottom: 0;
 }
+
 .download-cards h3 {
   float: right;
   margin-left:10px;

@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import Web3 from 'web3'
-import { NFTS_LIST, NFT_ADDRESSES_LIST, nftContractAbi } from '@/constants'
+import { NETWORKS_LIST, NFTS_LIST, NFT_ADDRESSES_LIST, nftContractAbi } from '@/constants'
 
 const debug = getDebugger('page:cluaido')
 
@@ -30,9 +30,8 @@ const nfts = reactive(NFTS_LIST)
 const totalVotes = ref(0)
 
 onMounted(async () => {
-  const web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/'))
-  const networkId = 56 // Number(await web3.eth.net.getId())
-  // debug.log('networkId', networkId)
+  const web3 = new Web3(new Web3.providers.HttpProvider(NETWORKS_LIST.find(c => c.chainId === 2732190003600000).rpcUrls[0]))
+  const networkId = 2732190003600000 // Number(await web3.eth.net.getId())
   const contractAddress = NFT_ADDRESSES_LIST.find(c => c.chainId === networkId)?.nftContractAddress
   if (!contractAddress) {
     debug.error('Contract not found')
@@ -55,6 +54,7 @@ onMounted(async () => {
 
 const showModal = ref(false)
 const selectedSuspectId = ref(null)
+const showGameWindow = ref(false) // Reactive variable to control GameWindow visibility
 
 function connectAndOpenModal(suspectId) {
   selectedSuspectId.value = suspectId
@@ -69,117 +69,81 @@ function calculateVotesPercentage(suspect) {
   const percentage = (suspectVotes / totalVotes.value) * 100
   return `${Math.round(percentage)}%`
 }
+
+function openGameWindow() {
+  showGameWindow.value = true
+}
+
+function closeGameWindow() {
+  showGameWindow.value = false
+}
 </script>
 
 <template>
-  <modal-connect-wallet v-if="showModal" :suspect-id="selectedSuspectId" @close="showModal = false" />
-  <div :class="{ 'dimmed-content': showModal }">
+  <!-- Include the modal-game-window component -->
+  <modal-game-window
+    v-if="showGameWindow"
+    @close="closeGameWindow"
+  />
+
+  <modal-connect-wallet
+    v-if="showModal"
+    :suspect-id="selectedSuspectId"
+    @close="showModal = false"
+  />
+
+  <div :class="{ 'dimmed-content': showModal || showGameWindow }">
     <v-container class="lp">
+      <!-- Intro Section -->
       <v-row>
         <v-col cols="12" class="intro-section">
-          <h1>CLUAIDO - A Detective Demo Game Where You Can Freely Interrogate The Suspects.</h1>
+          <h1>
+            CLUAIDO - A Detective Game Where You Can Freely Interrogate The
+            Suspects.
+          </h1>
         </v-col>
         <v-col cols="12">
           <h2 class="hamilton-title">
             Who Killed Mr. Hamilton?
           </h2>
           <p class="game-desc">
-            You were called to the victims' house to solve a mysterious death. Interrogate the suspects, search for clues and discover secrets that will lead you to the culprit.
+            You were called to the victims' house to solve a mysterious death.
+            Interrogate the suspects, search for clues and discover secrets that
+            will lead you to the culprit.
           </p>
         </v-col>
         <v-col cols="12" class="demo-section">
-          <div class="demo-game">
-            <iframe
-              id="gameIframe"
-              src="/cluaido-demo/index.html"
-              title="CLUAIDO"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            />
-          </div>
+          <!-- Use an image that opens the modal-game-window when clicked -->
+          <img
+            src="~/assets/images/play-clu.png"
+            alt="Play the Game"
+            @click="openGameWindow"
+          >
         </v-col>
         <v-col cols="12">
           <div class="about-game">
-            <a href="https://store.steampowered.com/app/2919500/CLUAIDO/">
-              <h3 class="learn-more">Learn more about CLUAIDO!</h3>
+            <a
+              href="https://medium.com/@gamertoolstudio/play-cluaido-demo-and-unlock-exclusive-rewards-with-our-nfts-d1189568a6a1"
+            >
+              <h3 class="learn-more">How to Play!</h3>
             </a>
           </div>
         </v-col>
       </v-row>
+
+      <!-- Accusations and Funds Section -->
       <v-row class="get-started">
-        <!-- <v-col cols="6" class="controllers-section">
-          <v-col cols="12">
-            <h2 class="page-headers">
-              Controllers
-            </h2>
-          </v-col>
-          <v-col cols="12" class="controller-container">
-            <div class="keyboard-control">
-              &#11014;
-            </div>
-            <div class="keyboard-control">
-              &#11015;
-            </div>
-            <div class="keyboard-control">
-              &#10132;
-            </div>
-            <div class="keyboard-control">
-              &#11013;
-            </div>
-            <p class="controller-type">
-              Move Player
-            </p>
-          </v-col>
-          <v-col cols="12" class="controller-container enter-com">
-            <div class="keyboard-control">
-              Enter
-            </div>
-            <p class="controller-type">
-              Action Button/ Confirm Action
-            </p>
-          </v-col>
-          <v-col cols="12" class="controller-container enter-com">
-            <div class="keyboard-control">
-              Shift
-            </div>
-            <p class="controller-type">
-              Dash
-            </p>
-          </v-col>
-          <v-col cols="12" class="controller-container">
-            <div class="keyboard-control">
-              Esc
-            </div>
-            <p class="controller-type">
-              Open Menu/ Cancel Action
-            </p>
-          </v-col>
-        </v-col>
-        <v-col cols="6" class="plugin-explain">
-          <v-col cols="12">
-            <h2 class="page-headers">
-              Game Rules
-            </h2>
-          </v-col>
-          <v-col cols="12">
-            <ul class="game-rules">
-              <li>There are 7 suspects and only one culprit inside the house.</li>
-              <li>
-                You can ask anything to the characters to build your case.
-              </li>
-              <li>There are physical clues hidden all over the house. </li>
-              <li>A toxic gas is spreading through the house and quickly making clues unavailable.</li>
-            </ul>
-          </v-col>
-        </v-col> -->
         <v-col cols="12" class="intro-section">
-          <h1> Accuse the right culprit and win amazing prizes!</h1>
+          <h1>Accuse the right culprit and win amazing prizes!</h1>
         </v-col>
-        <v-col cols="12">
-          <v-col cols="6" class="vote-count votes">
+        <v-row>
+          <v-col cols="12" md="6" class="vote-count votes">
             <div class="results-container">
-              <img src="~/assets/images/document-icon.png" class="vote-icon">
+              <img
+                src="~/assets/images/document-icon.png"
+                class="vote-icon"
+                alt="Accusations Made"
+              >
               <h3 class="prize-money">
                 {{ totalVotes }}
               </h3>
@@ -188,9 +152,13 @@ function calculateVotesPercentage(suspect) {
               </h3>
             </div>
           </v-col>
-          <v-col cols="6" class="vote-count bets">
+          <v-col cols="12" md="6" class="vote-count bets">
             <div class="results-container">
-              <img src="~/assets/images/dollar-icon.png" class="vote-icon">
+              <img
+                src="~/assets/images/dollar-icon.png"
+                class="vote-icon"
+                alt="Funds Raised"
+              >
               <h3 class="prize-money">
                 ${{ totalVotes * 5 }}
               </h3>
@@ -199,57 +167,83 @@ function calculateVotesPercentage(suspect) {
               </h3>
             </div>
           </v-col>
-        </v-col>
+        </v-row>
+
+        <!-- Features Section -->
         <v-row class="features">
-          <h2 class="bet-title">
-            Bet on your most likely suspect to get a trading card of the character. Apply for amazing rewards and support the team launching the final version of the game.
-          </h2>
-          <v-col cols="12" class="">
+          <v-col cols="12">
+            <h2 class="bet-title">
+              Bet on your most likely suspect to get a trading card of the
+              character. Apply for amazing rewards and support the team
+              launching the final version of the game.
+            </h2>
+          </v-col>
+          <v-col cols="12">
             <div class="guide-link acc-guide">
-              <a href="https://medium.com/@gamertoolstudio/play-cluaido-demo-and-unlock-exclusive-rewards-with-our-nfts-d1189568a6a1">
-                <img class="acc-rules" src="~/assets/images/document-icon.png" alt="Betting Game Rules">
-                <h3>  Read the Rules and Learn All About the Rewards.</h3>
+              <a
+                href="https://medium.com/@gamertoolstudio/play-cluaido-demo-and-unlock-exclusive-rewards-with-our-nfts-d1189568a6a1"
+              >
+                <img
+                  class="acc-rules"
+                  src="~/assets/images/document-icon.png"
+                  alt="Betting Game Rules"
+                >
+                <h3>Read the Rules and Learn All About the Rewards.</h3>
               </a>
             </div>
           </v-col>
-          <div class="feature-boxes">
-            <div v-for="nft in nfts" :key="nft.id" class="feature-box">
+          <v-row class="feature-boxes">
+            <v-col
+              v-for="nft in nfts"
+              :key="nft.id"
+              cols="12"
+              sm="6"
+              md="4"
+              class="feature-box"
+            >
               <h2>{{ nft.name }}</h2>
-              <img :src="nft.src">
-              <v-col cols="12" class="vote-perc">
-                <h3>{{ calculateVotesPercentage(nft) }}</h3><p>votes</p>
-              </v-col>
-              <p>
-                {{ nft.description }}
-              </p>
+              <img :src="nft.src" :alt="nft.name">
+              <div class="vote-perc">
+                <h3>{{ calculateVotesPercentage(nft) }}</h3>
+                <p>votes</p>
+              </div>
+              <p>{{ nft.description }}</p>
               <button class="button shiny" @click="connectAndOpenModal(nft.id)">
                 Accuse
               </button>
-            </div>
-          </div>
+            </v-col>
+          </v-row>
         </v-row>
+
+        <!-- Join Section -->
         <v-row>
           <v-col cols="12">
             <h2 class="bet-title">
               Begin your detective journey now!
             </h2>
           </v-col>
-          <v-col cols="4" class="join-section">
+          <v-col cols="12" sm="4" class="join-section">
             <a href="https://store.steampowered.com/app/2919500/CLUAIDO/">
-              <img src="/images/Steam-white-logo.png" alt="Betting Game Rules">
-              <h3> Wishlist the Game</h3>
+              <img
+                src="/images/Steam-white-logo.png"
+                alt="Wishlist the Game"
+              >
+              <h3>Wishlist the Game</h3>
             </a>
           </v-col>
-          <v-col cols="4" class="join-section">
+          <v-col cols="12" sm="4" class="join-section">
             <a href="https://discord.gg/JdDwRfTGNF">
               <img src="/images/discord-logo.png" alt="Join the Community">
-              <h3> Join the Community</h3>
+              <h3>Join the Community</h3>
             </a>
           </v-col>
-          <v-col cols="4" class="join-section">
+          <v-col cols="12" sm="4" class="join-section">
             <a href="https://twitter.com/gamertoolstudio">
-              <img src="/images/twitter-white-logo.png" alt="Follow us on Twitter">
-              <h3> Follow our Journey</h3>
+              <img
+                src="/images/twitter-white-logo.png"
+                alt="Follow our Journey"
+              >
+              <h3>Follow our Journey</h3>
             </a>
           </v-col>
         </v-row>
@@ -300,34 +294,22 @@ section {
   font-size: 36px;
 }
 /*Demo Video */
-.demo-game {
-  position: relative;
-  width: 100%;
-  max-width: 816px; /* Adjust if needed */
-  max-height: 624px !important;
-  margin: auto;
-  overflow: hidden; /* Hide overflow to prevent scrollbars */
-}
 
 .demo-section {
   position: relative;
-  width: 100%;
   margin: auto;
-  max-height: 624px !important;
-
-}
-
-#gameIframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100% !important;
+  width:100%;
+  img {
+    border-radius: 25px;
+    width: 100%;
+    height: 700px;
+  }
 }
 
 #fullscreen-button {
   z-index: 999 !important;
 }
+
 .game-desc {
   margin-top: 20px;
   font-size: 26px;
@@ -708,7 +690,7 @@ section {
 }
 /* Footer Styles */
 footer {
-  background-color: black;
+  background-color: black !important;
   color: #6e6e80;
   text-align: center;
   padding: 20px;
@@ -815,11 +797,6 @@ footer {
 }
 
 @media (max-width: 960px) {
-  .feature-boxes {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .feature-boxes h2 {
     font-size: 35px;
   }
@@ -848,6 +825,10 @@ footer {
   .feature-box p {
     font-size: 20px;
   }
+  .demo-game {
+    padding-top: 56.25%; /* Maintain the 16:9 aspect ratio */
+  }
+
 }
 @media (max-width: 1290px) {
   .feature-boxes {
@@ -861,9 +842,14 @@ footer {
   }
 }
 
-@media (max-width: 820px) {
+@media (max-width: 960px) {
   .get-started .started-grid {
     flex-direction: column;
+
+  }
+
+  .feature-boxes{
+    padding:12px;
 
   }
 
@@ -917,7 +903,7 @@ footer {
   }
 }
 @media (max-width: 600px) {
-    .vote-count{
+  .vote-count{
     min-width:100%;
     text-align: center;
   }
@@ -932,11 +918,8 @@ footer {
   text-align: center !important;
   font-size: 22px;
   }
-  .feature-box{
-    min-width: 250px !important;
-    max-width:350px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+  .demo-game {
+    padding-top: 56.25%; /* Maintain aspect ratio for mobile */
   }
 }
 @media screen and (orientation: landscape) {

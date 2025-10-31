@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store/user'
 
@@ -8,23 +8,44 @@ const store = useUserStore()
 
 const { keys } = storeToRefs(store)
 
-debug.log(keys.value)
+// Force re-render trigger
+const refreshTrigger = ref(0)
 
-function deleteItem(editedIndex) {
-  debug.log(editedIndex)
+// Load keys on mount
+onMounted(async () => {
+  debug.log('Loading user profile and keys...')
+  await store.fetchUserProfile()
+  debug.log('Keys loaded:', keys.value)
+})
 
+function deleteItem(editedIndex: number) {
+  debug.log('Deleting item:', editedIndex)
   keys.value.splice(editedIndex, 1)
 }
 
-function editItem(editedIndex, editedItem) {
-  debug.log(editedIndex, editedItem)
+function editItem(editedIndex: number, editedItem: any) {
+  debug.log('Editing item:', editedIndex, editedItem)
   Object.assign(keys.value[editedIndex], editedItem)
 }
 
-function addItem(editedItem) {
-  debug.log(editedItem)
+function addItem(editedItem: any) {
+  debug.log('Adding item:', editedItem)
   editedItem.created = new Date(Date.now())
   keys.value.push(editedItem)
+}
+
+async function handleKeyGenerated(_keyData: any) {
+  // Force refresh to ensure UI updates
+  await store.fetchUserProfile()
+  // Force component re-render
+  refreshTrigger.value++
+}
+
+async function handleKeyEdited(keyData: any) {
+  debug.log('Key edited:', keyData)
+  // Refresh to get updated key
+  await store.fetchUserProfile()
+  debug.log('Keys after edit:', keys.value)
 }
 
 useHead({
@@ -47,7 +68,15 @@ useHead({
         </p>
       </v-col>
       <v-col cols="12">
-        <DashboardTableKeys :keys="keys" @delete-item="deleteItem" @edit-item="editItem" @add-item="addItem" />
+        <DashboardTableKeys
+          :key="refreshTrigger"
+          :keys="keys"
+          @delete-item="deleteItem"
+          @edit-item="editItem"
+          @add-item="addItem"
+          @key-generated="handleKeyGenerated"
+          @key-edited="handleKeyEdited"
+        />
       </v-col>
       <v-col v-if="false" cols="12">
         <h3>Default organization</h3>

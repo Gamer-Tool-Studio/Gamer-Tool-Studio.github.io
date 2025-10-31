@@ -24,15 +24,43 @@ debug.log('data', data)
 
 const isLightBoxHovered = ref(false)
 
-// Function to handle opening Stripe payment
-async function openStripe(priceId: string) {
-  const { data } = await useAuthAPI<StripeCreateLink>('/stripe/create', 'POST', {
-    price_id: priceId,
+// Function to handle opening Stripe payment or signup
+async function openStripe(stripePriceId: string) {
+  // Free trial redirects to signup page
+  if (stripePriceId === 'trial') {
+    navigateTo('/login?register=true')
+    return
+  }
+
+  // Check if price ID is configured
+  if (stripePriceId === 'CONFIGURE_IN_ENV') {
+    // eslint-disable-next-line no-alert
+    alert('This plan is not configured yet. Please set up Stripe Price IDs in your environment.')
+    return
+  }
+
+  // Check if user is logged in
+  const userStore = useUserStore()
+  if (!userStore.isLoggedIn) {
+    // Redirect to login with the price_id as a query param for post-login purchase
+    navigateTo(`/login?purchase=${stripePriceId}`)
+    return
+  }
+
+  // User is logged in - create Stripe checkout session
+  const { data, error } = await useAuthAPI<StripeCreateLink>('/stripe/create', 'POST', {
+    price_id: stripePriceId, // Pass the actual Stripe Price ID
     mode: 'payment',
   })
 
-  if (data.value.url)
-    window.open(data.value.url as string, '_blank')
+  if (data.value && data.value.url) {
+    window.location.href = data.value.url // Redirect in same tab for better UX
+  }
+  else {
+    debug.log('Error creating Stripe session:', error.value)
+    // eslint-disable-next-line no-alert
+    alert('Unable to create payment link. Please check that Stripe is configured correctly.')
+  }
 }
 
 // Function to format the price
@@ -108,48 +136,70 @@ useHead({
   <v-container class="pricing pt-0">
     <v-row class="intro-section">
       <v-col>
-        <h1>NPC-GPT Pricing Plans</h1>
+        <h1>NPC-GPT Token Packs</h1>
         <p>
-          Simple and flexible pricing plans adapted to the development stage of your game. Pay per volume of requests
-          made to our API.<br>
-          Only Developer packs are available at the moment. Packs for games in production will be available soon.
+          Purchase token packs adapted to the development stage of your game. One-time payment for the tokens you need.<br>
         </p>
       </v-col>
     </v-row>
 
-    <v-row>
-      <div class="feature-boxes my-9">
-        <div
-          v-for="pricing in pricingList"
-          :key="pricing.price_id"
-          class="feature-box"
-          :class="{ 'featured-item': pricing.featured && !isLightBoxHovered }"
-          @mouseover="isLightBoxHovered = !pricing.featured && true"
-          @mouseleave="isLightBoxHovered = !pricing.featured && false"
-        >
-          <h3>{{ pricing.description }}</h3>
-          <ul class="pricing-tables">
-            <li>Input tokens</li>
-            <li>Output tokens</li>
-            <li>Users</li>
-            <li class="align-right">
-              {{ formatTokens(pricing.inputTokens) }}
-            </li>
-            <li class="align-right">
-              {{ formatTokens(pricing.outputTokens) }}
-            </li>
-            <li class="align-right">
-              {{ pricing.users }}
-            </li>
-          </ul>
-          <div class="price-display" :class="{ 'featured-price': pricing.featured }">
-            <h4>{{ formatPrice(pricing.value) }}</h4>
+    <v-row justify="center">
+      <v-col cols="12">
+        <div class="pricing-grid">
+          <div
+            v-for="pricing in pricingList"
+            :key="pricing.stripe_price_id"
+            class="feature-box"
+            :class="{
+              'featured-item': pricing.featured && !isLightBoxHovered,
+              'trial-pack': pricing.isFreeTrial,
+            }"
+            @mouseover="isLightBoxHovered = !pricing.featured && true"
+            @mouseleave="isLightBoxHovered = !pricing.featured && false"
+          >
+            <div v-if="pricing.isFreeTrial" class="trial-badge">
+              Free Trial
+            </div>
+            <div v-if="pricing.featured" class="popular-badge">
+              Most Popular
+            </div>
+            <h3>{{ pricing.description }}</h3>
+            <div class="price-display" :class="{ 'featured-price': pricing.featured }">
+              <h4>{{ formatPrice(pricing.value) }}</h4>
+              <p v-if="pricing.value > 0" class="price-period">
+                one-time
+              </p>
+            </div>
+            <ul class="pricing-features">
+              <li>
+                <v-icon size="16" color="success">
+                  mdi-check-circle
+                </v-icon>
+                <span>{{ formatTokens(pricing.inputTokens) }} input tokens</span>
+              </li>
+              <li>
+                <v-icon size="16" color="success">
+                  mdi-check-circle
+                </v-icon>
+                <span>{{ formatTokens(pricing.outputTokens) }} output tokens</span>
+              </li>
+              <li>
+                <v-icon size="16" color="success">
+                  mdi-check-circle
+                </v-icon>
+                <span>{{ pricing.users }} {{ pricing.users === 'Unlimited' ? 'seats' : (pricing.users === 1 ? 'seat' : 'seats') }}</span>
+              </li>
+            </ul>
+            <button
+              class="button light-button"
+              :class="{ 'featured-button': pricing.featured }"
+              @click="openStripe(pricing.stripe_price_id)"
+            >
+              {{ pricing.isFreeTrial ? 'Start Free Trial' : 'Buy Now' }}
+            </button>
           </div>
-          <button class="button light-button" @click="openStripe(pricing.price_id)">
-            Subscribe
-          </button>
         </div>
-      </div>
+      </v-col>
     </v-row>
     <v-col cols="12" class="contact-us">
       <h3>Need a tailored solution for your project?</h3>
@@ -170,37 +220,85 @@ useHead({
   font-weight: 100;
 }
 
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 .pricing .feature-box {
   background-color: #fff;
-  margin-left: 30px;
-  margin-right: 30px;
-  width: 280px;
+  width: 100%;
+  position: relative;
 }
 
-.pricing-tables {
+.trial-badge, .popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 1;
+}
+
+.trial-badge {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.popular-badge {
+  background-color: #6200ee;
+  color: white;
+}
+
+.pricing-features {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 20px 0 30px 0;
   text-align: left;
-  column-count: 2;
-  column-gap: 20px;
-}
 
-.pricing-tables li {
-  margin-bottom: 10px;
-  font-size: 15px;
-  font-weight: 600;
-  font-family: 'NunitoSans';
+  li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'NunitoSans';
+
+    span {
+      flex: 1;
+    }
+  }
 }
 
 .pricing .feature-box h3 {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 26px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 .pricing .feature-box button {
-  font-size: 20px;
+  font-size: 18px;
+  width: 100%;
+}
+
+.featured-button {
+  background-color: #6200ee !important;
+  color: white !important;
+
+  &:hover {
+    background-color: #4a00b8 !important;
+  }
 }
 
 .contact-us h3 {
@@ -232,21 +330,30 @@ useHead({
   }
   .price-display {
     display: flex;
-    height: 48px;
+    align-items: baseline;
     justify-content: center;
-    margin-top: 14px;
-    margin-bottom: 26px;
+    gap: 4px;
+    margin-top: 8px;
+    margin-bottom: 20px;
     min-width: 100%;
-    &.featured-price {
-      font-weight: 500;
-      font-size: 30px;
-      color: #6200ee;
-    }
-  }
 
-  h4 {
-    font-weight: 400;
-    font-size: 20px;
+    &.featured-price {
+      h4 {
+        color: #6200ee;
+      }
+    }
+
+    h4 {
+      font-weight: 700;
+      font-size: 48px;
+      margin: 0;
+    }
+
+    .price-period {
+      font-size: 16px;
+      color: #666;
+      margin: 0;
+    }
   }
 
   button.button {
@@ -287,12 +394,44 @@ useHead({
 .feature-box.featured-item {
   background-color: #fff;
   outline: 3px solid #6200ee !important;
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(98, 0, 238, 0.2);
 
   button.button {
     background-color: #6200ee;
     color: #fff;
   }
 }
+
+@media (max-width: 1400px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-box.featured-item {
+    transform: scale(1);
+  }
+
+  .pricing .intro-section h1 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .pricing .feature-box h3 {
+    font-size: 24px;
+  }
+
+  .feature-box .price-display h4 {
+    font-size: 40px;
+  }
+}
+
 @media (max-width: 900px) {
   .contact-us button {
     padding: 15px;

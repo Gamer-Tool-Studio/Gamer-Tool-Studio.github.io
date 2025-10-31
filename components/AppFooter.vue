@@ -1,9 +1,9 @@
 <script>
 export default {
   computed: {
-    // Going to make some small js tweaks
     isLandingPage() {
-      return this.$route.path === '/'
+      const path = this.$route.path
+      return path === '/' || path === '/cluaido' || path === '/cluaido/'
     },
   },
 }
@@ -38,7 +38,7 @@ export default {
       </div>
     </div>
     <p class="footer-copy">
-      © Gamer Tool Studio 2024
+      © Gamer Tool Studio 2025
     </p>
   </footer>
 </template>

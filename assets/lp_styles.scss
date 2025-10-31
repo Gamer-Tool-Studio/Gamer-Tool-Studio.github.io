@@ -6,9 +6,13 @@ h2,
 
 main.lp {
   > div {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: auto;
   }
+}
+
+.lp{
+  max-width: 1280px;
 }
 /* Section Styles */
 section {
@@ -80,16 +84,14 @@ section {
 /*Demo Video */
 
 .demo-video {
-  display: block;
-  margin-top: 40px;
-  margin-bottom: 20px;
+max-width: 1200px;
 }
 
 
 /* Features Section */
 
 .features {
-  border-top: 1px solid #6e6e80;
+
   margin-top: 60px;
   margin: auto;
 }
@@ -99,45 +101,63 @@ section {
   font-size: 30px;
   font-weight: 200;
   line-height: 40px;
+
 }
 
 /* Plugin Features Box Styles */
 .feature-boxes {
-  margin-top: 30px;
-  margin-bottom: 30px;
-  width: 100%;
-  padding: 0;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  gap: 20px;
+  max-width: 1280px;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 .feature-box {
-  max-width: 300px;
-  margin: 20px;
-  padding: 20px;
+  display: flex;
+  align-items: center;
   background-color: black;
   border: 1px solid #6e6e80;
   border-radius: 5px;
-  text-align: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.feature-box img {
+.feature-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
+}
+
+.feature-image {
   max-width: 100px;
-  margin-bottom: 15px;
+  margin-right: 20px;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.feature-box:hover .feature-image {
+  transform: rotate(5deg);
+}
+
+.feature-content {
+  color: white;
 }
 
 .feature-box h3 {
-  font-size: 21px;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 30px;
-  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
+
 .feature-box p {
-  font-size: 20px;
-  color: #fff;
+  font-size: 16px;
+  text-align:start;
 }
+
 
 .button-display {
   text-align: center !important;
@@ -155,6 +175,9 @@ section {
   margin-top: 60px;
   border-top: 1px solid #6e6e80;
   margin: auto;
+  button{
+    margin-bottom: 40px;
+  }
 }
 
 .how-to-start {
@@ -169,16 +192,85 @@ section {
   margin-bottom: 25px;
   min-width: 120%; /* Make the list items fill the full width */
 }
+
+
 .engines-available {
-  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: auto;
+}
+
+.engine-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 15px; /* Space between logos */
+  width: 100%; /* Ensure grid takes full width of the column */
 }
 
 .engine-logo-container {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .engine-logo {
-  max-width: 100%;
+  width: 150px;
+  height: 150px;
   object-fit: contain;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.engine-logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 999px) {
+  .engines-available,
+  .plugin-explain {
+    min-width: 100% !important;
+    text-align: center;
+    ol{
+      margin: auto;
+      text-align: center;
+
+    }
+    li{
+      font-size: 20px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .engine-logo-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .engine-logo-grid {
+    grid-template-columns: 1fr; /* 1 column on very small screens */
+  }
+}
+
+.how-to-start {
+  padding-left: 15px;
+  font-size: 18px;
+  color: #ccc;
+}
+
+.how-to-start li {
+  margin-bottom: 15px;
+}
+
+.page-headers {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 20px;
 }
 
 .started-hs {
@@ -263,8 +355,12 @@ section {
   text-align: center;
 }
 
+.no-border{
+  border-top:none !important;
+}
+
 .start-trial h2 {
-  text-align: left;
+  text-align: center;
 }
 
 .start-trial button {
@@ -347,6 +443,15 @@ footer {
     cursor: pointer;
     text-decoration: underline;
   }
+  .feature-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .feature-image {
+    margin: 0 0 10px 0;
+    max-width: 150px;
+  }
 }
 
 @media (max-width: 960px) {
@@ -394,11 +499,6 @@ footer {
     font-size: 22px;
   }
 
-  .engines-available {
-    min-width: 100% !important;
-    margin: auto !important;
-  }
- 
 }
 
 .start-trial .button {
@@ -443,12 +543,6 @@ footer {
     width: 60%;
   }
 
-  .engines-available {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  
 
 }
 @media (max-width: 600px) {

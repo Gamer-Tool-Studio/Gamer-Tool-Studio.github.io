@@ -32,6 +32,7 @@ export default {
       stableContractABI: stableContractAbi,
       selectedChainId: 56,
       contracts: NFT_ADDRESSES_LIST,
+      tokenSymbol: 'ETH',
     }
   },
   computed: {
@@ -42,6 +43,10 @@ export default {
     stableContractAddress() {
       const contract = this.contracts.find(contract => contract.chainId === this.selectedChainId)
       return contract?.stableContractAddress
+    },
+    stableSymbol() {
+      const contract = this.contracts.find(contract => contract.chainId === this.selectedChainId)
+      return contract?.stableSymbol
     },
   },
   watch: {
@@ -106,6 +111,7 @@ export default {
       // Initialize contracts after getting accounts
       this.NFTContract = new this.web3.eth.Contract(this.contractABI, this.nftContractAddress)
       this.stableContract = new this.web3.eth.Contract(this.stableContractABI, this.stableContractAddress)
+      this.tokenSymbol = this.stableSymbol
     },
 
     async addDefaultNetwork() {
@@ -335,7 +341,7 @@ export default {
                 <p class="tx_status">
                   You have successfully minted your NFT.
                 </p>
-                <a href="https://testnets.opensea.io/collection/unidentified-contract-e4ba0bc2-ca14-4e90-b433-df91"><button class="opensea">Check on OpenSea</button></a>
+                <a href="https://bscscan.com/address/0x6313Ed503e467c235B2f3E1b6699F6EAf77A1FCC"><button class="opensea">Check on BNB explorer</button></a>
               </div>
               <div v-else>
                 <!-- Minting Content -->
@@ -346,7 +352,7 @@ export default {
                   <input v-model.number="mintAmount" type="number" min="1" class="mint-amount-input">
                 </v-col>
                 <v-col cols="12" class="text-section">
-                  <p>Total Price: {{ mintAmount * mintPrice }} BUSD</p>
+                  <p>Total Price: {{ mintAmount * mintPrice }} {{ tokenSymbol }}</p>
                 </v-col>
                 <v-col cols="12" class="connect-button">
                   <button class="button" @click="mintNFT">
@@ -354,7 +360,7 @@ export default {
                   </button>
                 </v-col>
                 <v-col cols="12" class="redirect">
-                  <p>Don't have any BUSD? Buy it on <a href="https://www.binance.com/">Binance</a> or in another exchange.</p>
+                  <p>Don't have any FDUSD? Buy it on <a href="https://www.binance.com/">Binance</a> or in another exchange.</p>
                 </v-col>
               </div>
             </v-row>
