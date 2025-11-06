@@ -71,25 +71,49 @@ async function openStripe(stripePriceId: string) {
 
   // Check if user is logged in
   const userStore = useUserStore()
-  if (!userStore.isLoggedIn) {
+  const token = useCookie('token')
+
+  debug.log('openStripe called:', { stripePriceId, isLoggedIn: userStore.isLoggedIn, hasToken: !!token.value })
+
+  if (!userStore.isLoggedIn && !token.value) {
     // Redirect to login with the price_id as a query param for post-login purchase
+    debug.log('User not logged in, redirecting to login')
     navigateTo(`/login?purchase=${stripePriceId}`)
     return
   }
 
   // User is logged in - create Stripe checkout session
-  const { data, error } = await useAuthAPI<StripeCreateLink>('/stripe/create', 'POST', {
-    price_id: stripePriceId, // Pass the actual Stripe Price ID
-    mode: 'payment',
-  })
+  debug.log('Creating Stripe session for:', stripePriceId)
 
-  if (data.value && data.value.url) {
-    window.location.href = data.value.url // Redirect in same tab for better UX
+  try {
+    const { data, error } = await useAuthAPI<StripeCreateLink>('/stripe/create', 'POST', {
+      price_id: stripePriceId, // Pass the actual Stripe Price ID
+      mode: 'payment',
+    })
+
+    debug.log('Stripe API response:', { data: data.value, error: error.value })
+
+    if (error.value) {
+      debug.log('Stripe creation error details:', error.value)
+      // eslint-disable-next-line no-alert
+      alert(`Unable to create payment link: ${error.value.data?.error || error.value.statusMessage || 'Unknown error'}`)
+      return
+    }
+
+    if (data.value && data.value.url) {
+      debug.log('Redirecting to Stripe URL:', data.value.url)
+      window.location.href = data.value.url // Redirect in same tab for better UX
+    }
+    else {
+      debug.log('No URL in response:', data.value)
+      // eslint-disable-next-line no-alert
+      alert('Unable to create payment link. No checkout URL received.')
+    }
   }
-  else {
-    debug.log('Error creating Stripe session:', error.value)
+  catch (e: any) {
+    debug.log('Exception creating Stripe session:', e)
     // eslint-disable-next-line no-alert
-    alert('Unable to create payment link. Please check that Stripe is configured correctly.')
+    alert(`Error: ${e.message || 'Unable to create payment link'}`)
   }
 }
 
