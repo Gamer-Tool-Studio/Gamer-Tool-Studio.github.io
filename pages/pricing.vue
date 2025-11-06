@@ -101,6 +101,15 @@ function formatPrice(price: number) {
   return `$${price}`
 }
 
+// Function to format tokens with K/M notation
+function formatTokens(tokens: number) {
+  if (tokens >= 1000000)
+    return `${tokens / 1000000}M`
+  if (tokens >= 1000)
+    return `${tokens / 1000}K`
+  return tokens.toString()
+}
+
 // SEO Meta Tags for the Pricing Page
 useHead({
   title: 'NPC-GPT Pricing Plans - Flexible and affordable AI character integration',
