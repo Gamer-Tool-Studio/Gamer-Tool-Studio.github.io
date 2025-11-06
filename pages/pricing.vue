@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 // Debugger for the pricing page
 const debug = getDebugger('pricing')
@@ -23,11 +23,41 @@ debug.log('pricingList', pricingList)
 debug.log('data', data)
 
 const isLightBoxHovered = ref(false)
+const trialStatus = ref<{ hasUsedTrial: boolean, isEligible: boolean } | null>(null)
+const checkingTrial = ref(false)
+
+// Check trial status on mount
+onMounted(async () => {
+  await checkTrialStatus()
+})
+
+async function checkTrialStatus() {
+  checkingTrial.value = true
+  try {
+    const { data, error } = await useAuthAPI('/user/trial-status', 'GET')
+    if (data.value && !error.value) {
+      trialStatus.value = data.value
+      debug.log('Trial status:', trialStatus.value)
+    }
+  }
+  catch (e) {
+    debug.log('Error checking trial status:', e)
+  }
+  finally {
+    checkingTrial.value = false
+  }
+}
 
 // Function to handle opening Stripe payment or signup
 async function openStripe(stripePriceId: string) {
   // Free trial redirects to signup page
   if (stripePriceId === 'trial') {
+    // Check if org has already used trial
+    if (trialStatus.value?.hasUsedTrial) {
+      // eslint-disable-next-line no-alert
+      alert('Your organization has already claimed the free trial. Please choose a paid plan.')
+      return
+    }
     navigateTo('/login?register=true')
     return
   }
@@ -192,11 +222,18 @@ useHead({
             </ul>
             <button
               class="button light-button"
-              :class="{ 'featured-button': pricing.featured }"
+              :class="{
+                'featured-button': pricing.featured,
+                'disabled': pricing.isFreeTrial && trialStatus?.hasUsedTrial,
+              }"
+              :disabled="pricing.isFreeTrial && trialStatus?.hasUsedTrial"
               @click="openStripe(pricing.stripe_price_id)"
             >
-              {{ pricing.isFreeTrial ? 'Start Free Trial' : 'Buy Now' }}
+              {{ pricing.isFreeTrial && trialStatus?.hasUsedTrial ? 'Trial Already Claimed' : (pricing.isFreeTrial ? 'Start Free Trial' : 'Buy Now') }}
             </button>
+            <div v-if="pricing.isFreeTrial && trialStatus?.hasUsedTrial" class="trial-claimed-notice">
+              ✅ Your organization has already used the free trial
+            </div>
           </div>
         </div>
       </v-col>
