@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clkmlh6wa1g2w"
-path="res://.godot/imported/Forest.png-95ee698f3eb32722876d8a6ee05d391a.ctex"
+uid="uid://bots0cymoq7se"
+path="res://.godot/imported/Forest.png-d6be57af3458d573dddd779d8320e44f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks2/Forest.png"
-dest_files=["res://.godot/imported/Forest.png-95ee698f3eb32722876d8a6ee05d391a.ctex"]
+source_file="res://Hidden Clues/img/battlebacks2/Forest.png"
+dest_files=["res://.godot/imported/Forest.png-d6be57af3458d573dddd779d8320e44f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg7fx5goty2df"
-path="res://.godot/imported/Wind.png-9764bb934040c47e45525894fe20a31b.ctex"
+uid="uid://brivo5dat8pnw"
+path="res://.godot/imported/Wind.png-73b67fc75d7b38f080584939281cebd8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/Wind.png"
-dest_files=["res://.godot/imported/Wind.png-9764bb934040c47e45525894fe20a31b.ctex"]
+source_file="res://Hidden Clues/effects/Texture/Wind.png"
+dest_files=["res://.godot/imported/Wind.png-73b67fc75d7b38f080584939281cebd8.ctex"]
 
 [params]
 

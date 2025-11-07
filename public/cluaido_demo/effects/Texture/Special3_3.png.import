@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjggvxinxwnu6"
-path="res://.godot/imported/Special3_3.png-1b52a7ee51412ae85725acbe81802782.ctex"
+uid="uid://bw0wdnxg21vi8"
+path="res://.godot/imported/Special3_3.png-f8dc75bf09e96e8f34f21b67b6a9c287.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/Special3_3.png"
-dest_files=["res://.godot/imported/Special3_3.png-1b52a7ee51412ae85725acbe81802782.ctex"]
+source_file="res://Hidden Clues/effects/Texture/Special3_3.png"
+dest_files=["res://.godot/imported/Special3_3.png-f8dc75bf09e96e8f34f21b67b6a9c287.ctex"]
 
 [params]
 

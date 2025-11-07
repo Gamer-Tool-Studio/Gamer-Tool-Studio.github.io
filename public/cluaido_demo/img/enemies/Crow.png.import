@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddyotuobx41dh"
-path="res://.godot/imported/Crow.png-bd634bdae350ed5d4ecedec36b14539a.ctex"
+uid="uid://cruh0kfsrm84n"
+path="res://.godot/imported/Crow.png-2055e6e8d0aa03599e8e31231fa2d35e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/enemies/Crow.png"
-dest_files=["res://.godot/imported/Crow.png-bd634bdae350ed5d4ecedec36b14539a.ctex"]
+source_file="res://Hidden Clues/img/enemies/Crow.png"
+dest_files=["res://.godot/imported/Crow.png-2055e6e8d0aa03599e8e31231fa2d35e.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cclrkw4gle40a"
-path="res://.godot/imported/butler.png-c19083945b2f08339d490f641ac1544f.ctex"
+uid="uid://2356w5kb35ot"
+path="res://.godot/imported/butler.png-e4b96dfca2967ea7f9747990ce40e87b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/characters/butler.png"
-dest_files=["res://.godot/imported/butler.png-c19083945b2f08339d490f641ac1544f.ctex"]
+source_file="res://Hidden Clues/img/characters/butler.png"
+dest_files=["res://.godot/imported/butler.png-e4b96dfca2967ea7f9747990ce40e87b.ctex"]
 
 [params]
 

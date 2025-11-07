@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpr1ewotj2xso"
-path="res://.godot/imported/Lava1.png-5fa80beb76d4c8329b58c5c6aab7f259.ctex"
+uid="uid://iicd3vxirhy3"
+path="res://.godot/imported/Lava1.png-c038e6f0cb22bf33f8d5857f3fb28d34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks1/Lava1.png"
-dest_files=["res://.godot/imported/Lava1.png-5fa80beb76d4c8329b58c5c6aab7f259.ctex"]
+source_file="res://Hidden Clues/img/battlebacks1/Lava1.png"
+dest_files=["res://.godot/imported/Lava1.png-c038e6f0cb22bf33f8d5857f3fb28d34.ctex"]
 
 [params]
 

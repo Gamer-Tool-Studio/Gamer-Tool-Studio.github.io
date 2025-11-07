@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bujry3lunjus"
-path="res://.godot/imported/hamilton.png-d9a3b7c6f575b01e95f2f77a66fe4441.ctex"
+uid="uid://cqesbwe8su28b"
+path="res://.godot/imported/hamilton.png-2f06db4d5b5ffc893aa064670075ad46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/characters/hamilton.png"
-dest_files=["res://.godot/imported/hamilton.png-d9a3b7c6f575b01e95f2f77a66fe4441.ctex"]
+source_file="res://Hidden Clues/img/characters/hamilton.png"
+dest_files=["res://.godot/imported/hamilton.png-2f06db4d5b5ffc893aa064670075ad46.ctex"]
 
 [params]
 

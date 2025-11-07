@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcyb67lhr5q3p"
-path="res://.godot/imported/Treant.png-cd907c462fee1a4c8a83958b7a279a3f.ctex"
+uid="uid://cmdmdqeawwt3i"
+path="res://.godot/imported/Treant.png-04e6e61050e20f9babc43a038313dcab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/enemies/Treant.png"
-dest_files=["res://.godot/imported/Treant.png-cd907c462fee1a4c8a83958b7a279a3f.ctex"]
+source_file="res://Hidden Clues/img/enemies/Treant.png"
+dest_files=["res://.godot/imported/Treant.png-04e6e61050e20f9babc43a038313dcab.ctex"]
 
 [params]
 

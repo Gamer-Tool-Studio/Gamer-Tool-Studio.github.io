@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmh14sonfns8d"
-path="res://.godot/imported/Snowfield.png-acd7b351d237d001d733705a93dd5a25.ctex"
+uid="uid://dbqyyhx26barm"
+path="res://.godot/imported/Snowfield.png-22ff6244b1ee5d59350865ec09d1ef9f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks1/Snowfield.png"
-dest_files=["res://.godot/imported/Snowfield.png-acd7b351d237d001d733705a93dd5a25.ctex"]
+source_file="res://Hidden Clues/img/battlebacks1/Snowfield.png"
+dest_files=["res://.godot/imported/Snowfield.png-22ff6244b1ee5d59350865ec09d1ef9f.ctex"]
 
 [params]
 

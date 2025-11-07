@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfrak08rk44ew"
-path="res://.godot/imported/main_damage.png-051a797dbb5e32df3a56d221517760a0.ctex"
+uid="uid://dvw2y1jf7ar04"
+path="res://.godot/imported/main_damage.png-a0103f3ca5c8cea7055a667935ec1ae2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/characters/main_damage.png"
-dest_files=["res://.godot/imported/main_damage.png-051a797dbb5e32df3a56d221517760a0.ctex"]
+source_file="res://Hidden Clues/img/characters/main_damage.png"
+dest_files=["res://.godot/imported/main_damage.png-a0103f3ca5c8cea7055a667935ec1ae2.ctex"]
 
 [params]
 

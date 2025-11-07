@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rd5o12mct00r"
-path="res://.godot/imported/clone.png-12192cf0177f4d9475146aebe7c00b4c.ctex"
+uid="uid://bac11wbkuubft"
+path="res://.godot/imported/clone.png-6890162092351175da97e0c475368ca8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/faces/clone.png"
-dest_files=["res://.godot/imported/clone.png-12192cf0177f4d9475146aebe7c00b4c.ctex"]
+source_file="res://Hidden Clues/img/faces/clone.png"
+dest_files=["res://.godot/imported/clone.png-6890162092351175da97e0c475368ca8.ctex"]
 
 [params]
 

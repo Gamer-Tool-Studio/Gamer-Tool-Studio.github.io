@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhu0470k1i72y"
-path="res://.godot/imported/PoisonSwamp.png-4d3d2799dbc0aaa42c35aba6e3f470ce.ctex"
+uid="uid://no4wpcvtbsd2"
+path="res://.godot/imported/PoisonSwamp.png-8beb7ac648b96b852d8381310cebf5ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks2/PoisonSwamp.png"
-dest_files=["res://.godot/imported/PoisonSwamp.png-4d3d2799dbc0aaa42c35aba6e3f470ce.ctex"]
+source_file="res://Hidden Clues/img/battlebacks2/PoisonSwamp.png"
+dest_files=["res://.godot/imported/PoisonSwamp.png-8beb7ac648b96b852d8381310cebf5ab.ctex"]
 
 [params]
 

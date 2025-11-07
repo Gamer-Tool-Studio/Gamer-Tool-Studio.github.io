@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vrguqmqyox7m"
-path="res://.godot/imported/Snow.png-fcd5ccd55c09022361304a9beff81e06.ctex"
+uid="uid://crh8mq3ochtut"
+path="res://.godot/imported/Snow.png-303233f8908b0eef4cc274df6444af9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/Snow.png"
-dest_files=["res://.godot/imported/Snow.png-fcd5ccd55c09022361304a9beff81e06.ctex"]
+source_file="res://Hidden Clues/effects/Texture/Snow.png"
+dest_files=["res://.godot/imported/Snow.png-303233f8908b0eef4cc274df6444af9a.ctex"]
 
 [params]
 

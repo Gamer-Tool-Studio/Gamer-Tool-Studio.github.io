@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blgn4hogn61aj"
-path="res://.godot/imported/DirtField.png-5369fcef2fd971c77ca73b8867b33df6.ctex"
+uid="uid://bln85jlq0dii7"
+path="res://.godot/imported/DirtField.png-4986e1f0cf096706935aad849d385758.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks1/DirtField.png"
-dest_files=["res://.godot/imported/DirtField.png-5369fcef2fd971c77ca73b8867b33df6.ctex"]
+source_file="res://Hidden Clues/img/battlebacks1/DirtField.png"
+dest_files=["res://.godot/imported/DirtField.png-4986e1f0cf096706935aad849d385758.ctex"]
 
 [params]
 

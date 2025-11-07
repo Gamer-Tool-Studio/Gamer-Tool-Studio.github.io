@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wk0clfk8cc5v"
-path="res://.godot/imported/ThunderC.png-61f039115eb51d26fb7951186baaa19b.ctex"
+uid="uid://08kk3r816m5k"
+path="res://.godot/imported/ThunderC.png-00bea431b14a330edf72dc9e556ea5b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/ThunderC.png"
-dest_files=["res://.godot/imported/ThunderC.png-61f039115eb51d26fb7951186baaa19b.ctex"]
+source_file="res://Hidden Clues/effects/Texture/ThunderC.png"
+dest_files=["res://.godot/imported/ThunderC.png-00bea431b14a330edf72dc9e556ea5b0.ctex"]
 
 [params]
 

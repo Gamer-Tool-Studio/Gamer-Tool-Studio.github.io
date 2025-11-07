@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv2jfxw5o2xrw"
-path="res://.godot/imported/Cliff.png-be00026b8aafa7ee652cbe956751d26f.ctex"
+uid="uid://bn0gqsorxtafs"
+path="res://.godot/imported/Cliff.png-737dab44f16b7cbfcb64812c976cf803.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks2/Cliff.png"
-dest_files=["res://.godot/imported/Cliff.png-be00026b8aafa7ee652cbe956751d26f.ctex"]
+source_file="res://Hidden Clues/img/battlebacks2/Cliff.png"
+dest_files=["res://.godot/imported/Cliff.png-737dab44f16b7cbfcb64812c976cf803.ctex"]
 
 [params]
 

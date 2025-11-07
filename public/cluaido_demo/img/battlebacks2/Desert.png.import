@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5c3cnugyffcp"
-path="res://.godot/imported/Desert.png-00b96de66c83fec0b6fab0f020095413.ctex"
+uid="uid://c6l1xs7xw6kpk"
+path="res://.godot/imported/Desert.png-2fb4fbcde2edd698a00da4f7ffecad08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks2/Desert.png"
-dest_files=["res://.godot/imported/Desert.png-00b96de66c83fec0b6fab0f020095413.ctex"]
+source_file="res://Hidden Clues/img/battlebacks2/Desert.png"
+dest_files=["res://.godot/imported/Desert.png-2fb4fbcde2edd698a00da4f7ffecad08.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyqsy4054hk8h"
-path="res://.godot/imported/GameOver.png-a7adf6818963adf9a597d21da9fc2939.ctex"
+uid="uid://bb4hmpakyvlj"
+path="res://.godot/imported/GameOver.png-522509935be11cdcdc30269be44c9f3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/system/GameOver.png"
-dest_files=["res://.godot/imported/GameOver.png-a7adf6818963adf9a597d21da9fc2939.ctex"]
+source_file="res://Hidden Clues/img/system/GameOver.png"
+dest_files=["res://.godot/imported/GameOver.png-522509935be11cdcdc30269be44c9f3b.ctex"]
 
 [params]
 

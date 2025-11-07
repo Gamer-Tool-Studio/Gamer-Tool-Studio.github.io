@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv6yqdufk2wxj"
-path="res://.godot/imported/ThunderV.png-3f09ecc90e4ed5714b148f9cbef09d37.ctex"
+uid="uid://bqihmcmu0avqd"
+path="res://.godot/imported/ThunderV.png-dc87c80b7fe7804e75db67adb75c954f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/ThunderV.png"
-dest_files=["res://.godot/imported/ThunderV.png-3f09ecc90e4ed5714b148f9cbef09d37.ctex"]
+source_file="res://Hidden Clues/effects/Texture/ThunderV.png"
+dest_files=["res://.godot/imported/ThunderV.png-dc87c80b7fe7804e75db67adb75c954f.ctex"]
 
 [params]
 

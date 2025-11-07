@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx72jx2q2w210"
-path="res://.godot/imported/ShockWave2.png-1605f998efc3238bd67583a69f0e01c9.ctex"
+uid="uid://ckhx2whui8pnk"
+path="res://.godot/imported/ShockWave2.png-03622c7a1a666b5f740828caf78405f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/ShockWave2.png"
-dest_files=["res://.godot/imported/ShockWave2.png-1605f998efc3238bd67583a69f0e01c9.ctex"]
+source_file="res://Hidden Clues/effects/Texture/ShockWave2.png"
+dest_files=["res://.godot/imported/ShockWave2.png-03622c7a1a666b5f740828caf78405f9.ctex"]
 
 [params]
 

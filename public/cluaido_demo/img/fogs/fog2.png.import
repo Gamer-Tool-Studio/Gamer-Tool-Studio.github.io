@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2fttpiuwnnjy"
-path="res://.godot/imported/fog2.png-1a145d6284b9cbb91b8bd17e442ed15f.ctex"
+uid="uid://cfubf7bhge5sa"
+path="res://.godot/imported/fog2.png-a92a42db9b7e7d40889aa2a1b34dc918.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/fogs/fog2.png"
-dest_files=["res://.godot/imported/fog2.png-1a145d6284b9cbb91b8bd17e442ed15f.ctex"]
+source_file="res://Hidden Clues/img/fogs/fog2.png"
+dest_files=["res://.godot/imported/fog2.png-a92a42db9b7e7d40889aa2a1b34dc918.ctex"]
 
 [params]
 

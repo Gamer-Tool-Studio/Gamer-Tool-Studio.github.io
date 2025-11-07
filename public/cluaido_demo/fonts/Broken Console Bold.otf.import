@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dnt73mpha7kdu"
-path="res://.godot/imported/Broken Console Bold.otf-9f7cb61288cf96bfe0b9fe6e2ac79426.fontdata"
+uid="uid://b0hosynveqqt6"
+path="res://.godot/imported/Broken Console Bold.otf-9e6bf03739fd9a3512ddee98115a0820.fontdata"
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/fonts/Broken Console Bold.otf"
-dest_files=["res://.godot/imported/Broken Console Bold.otf-9f7cb61288cf96bfe0b9fe6e2ac79426.fontdata"]
+source_file="res://Hidden Clues/fonts/Broken Console Bold.otf"
+dest_files=["res://.godot/imported/Broken Console Bold.otf-9e6bf03739fd9a3512ddee98115a0820.fontdata"]
 
 [params]
 

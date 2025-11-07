@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bojdd0qg5sudk"
-path="res://.godot/imported/Ship.png-27baa489f862c202012676ac341ce259.ctex"
+uid="uid://bob16vjjm05eb"
+path="res://.godot/imported/Ship.png-4a36556e5a6e5caa708cf0f52d372fe2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks1/Ship.png"
-dest_files=["res://.godot/imported/Ship.png-27baa489f862c202012676ac341ce259.ctex"]
+source_file="res://Hidden Clues/img/battlebacks1/Ship.png"
+dest_files=["res://.godot/imported/Ship.png-4a36556e5a6e5caa708cf0f52d372fe2.ctex"]
 
 [params]
 

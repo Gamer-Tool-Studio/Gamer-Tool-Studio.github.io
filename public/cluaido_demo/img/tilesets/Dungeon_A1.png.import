@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dahkb2f7m4d66"
-path="res://.godot/imported/Dungeon_A1.png-ee2fb57d87892eeaeafc3826e7a22a39.ctex"
+uid="uid://bgnm1hyuo5r4"
+path="res://.godot/imported/Dungeon_A1.png-f71e7ccca6b3ff7f8c1f7a47665c55a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/tilesets/Dungeon_A1.png"
-dest_files=["res://.godot/imported/Dungeon_A1.png-ee2fb57d87892eeaeafc3826e7a22a39.ctex"]
+source_file="res://Hidden Clues/img/tilesets/Dungeon_A1.png"
+dest_files=["res://.godot/imported/Dungeon_A1.png-f71e7ccca6b3ff7f8c1f7a47665c55a7.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwiwg04nyuwdc"
-path="res://.godot/imported/maid.png-a667a6a63e3622b7122aea6ca75ce017.ctex"
+uid="uid://c8032eloi6nsj"
+path="res://.godot/imported/maid.png-431d12de5efeccdcb672ccface183b03.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/faces/maid.png"
-dest_files=["res://.godot/imported/maid.png-a667a6a63e3622b7122aea6ca75ce017.ctex"]
+source_file="res://Hidden Clues/img/faces/maid.png"
+dest_files=["res://.godot/imported/maid.png-431d12de5efeccdcb672ccface183b03.ctex"]
 
 [params]
 

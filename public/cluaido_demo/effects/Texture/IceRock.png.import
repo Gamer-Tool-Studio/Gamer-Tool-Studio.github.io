@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcppw6axocvnw"
-path="res://.godot/imported/IceRock.png-803d841fdf65fab7cf96599f71369a65.ctex"
+uid="uid://clrvjuyxbwqtv"
+path="res://.godot/imported/IceRock.png-9d5c3683283080a111ea08e498f17c04.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/IceRock.png"
-dest_files=["res://.godot/imported/IceRock.png-803d841fdf65fab7cf96599f71369a65.ctex"]
+source_file="res://Hidden Clues/effects/Texture/IceRock.png"
+dest_files=["res://.godot/imported/IceRock.png-9d5c3683283080a111ea08e498f17c04.ctex"]
 
 [params]
 

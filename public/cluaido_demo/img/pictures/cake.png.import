@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ir04rbltfvql"
-path="res://.godot/imported/cake.png-bc2339e07cb0fd2952e72d6d122eb7a6.ctex"
+uid="uid://6nw75mn2gx0b"
+path="res://.godot/imported/cake.png-b9a800bd75fe21c750fb2ff467dd32f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/pictures/cake.png"
-dest_files=["res://.godot/imported/cake.png-bc2339e07cb0fd2952e72d6d122eb7a6.ctex"]
+source_file="res://Hidden Clues/img/pictures/cake.png"
+dest_files=["res://.godot/imported/cake.png-b9a800bd75fe21c750fb2ff467dd32f7.ctex"]
 
 [params]
 

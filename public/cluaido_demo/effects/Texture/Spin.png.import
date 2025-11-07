@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cldtwqpndvjrw"
-path="res://.godot/imported/Spin.png-22101d675adbc4239138d05093c8003e.ctex"
+uid="uid://wi1cpvsasq7j"
+path="res://.godot/imported/Spin.png-0ebee247761a2c47ec94a8fe94200d0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/Spin.png"
-dest_files=["res://.godot/imported/Spin.png-22101d675adbc4239138d05093c8003e.ctex"]
+source_file="res://Hidden Clues/effects/Texture/Spin.png"
+dest_files=["res://.godot/imported/Spin.png-0ebee247761a2c47ec94a8fe94200d0d.ctex"]
 
 [params]
 

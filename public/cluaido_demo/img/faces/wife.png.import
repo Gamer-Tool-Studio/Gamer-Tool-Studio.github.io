@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bakuwtcb42387"
-path="res://.godot/imported/wife.png-c39782ba7e2443c26638b3632bba5b3d.ctex"
+uid="uid://brbrlr3ov0d7s"
+path="res://.godot/imported/wife.png-1e22dea0b8f5d07f0ed96c6d19266414.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/faces/wife.png"
-dest_files=["res://.godot/imported/wife.png-c39782ba7e2443c26638b3632bba5b3d.ctex"]
+source_file="res://Hidden Clues/img/faces/wife.png"
+dest_files=["res://.godot/imported/wife.png-1e22dea0b8f5d07f0ed96c6d19266414.ctex"]
 
 [params]
 

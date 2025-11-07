@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7ilq5ux33nmv"
-path="res://.godot/imported/LightRing.png-42edde03e865befe100afb1d4721f477.ctex"
+uid="uid://bkmvg6ap6qqqx"
+path="res://.godot/imported/LightRing.png-f377ae2b79f64e0080e4d45625d5b376.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/LightRing.png"
-dest_files=["res://.godot/imported/LightRing.png-42edde03e865befe100afb1d4721f477.ctex"]
+source_file="res://Hidden Clues/effects/Texture/LightRing.png"
+dest_files=["res://.godot/imported/LightRing.png-f377ae2b79f64e0080e4d45625d5b376.ctex"]
 
 [params]
 

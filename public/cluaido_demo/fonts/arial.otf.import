@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dk17l7srq88cq"
-path="res://.godot/imported/arial.otf-a67c164cec8be3a2bda5f4958de54a0f.fontdata"
+uid="uid://kgvevgqi0iqj"
+path="res://.godot/imported/arial.otf-a66ea2ff4dcdf86afa9f58be75b12cb8.fontdata"
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/fonts/arial.otf"
-dest_files=["res://.godot/imported/arial.otf-a67c164cec8be3a2bda5f4958de54a0f.fontdata"]
+source_file="res://Hidden Clues/fonts/arial.otf"
+dest_files=["res://.godot/imported/arial.otf-a66ea2ff4dcdf86afa9f58be75b12cb8.fontdata"]
 
 [params]
 

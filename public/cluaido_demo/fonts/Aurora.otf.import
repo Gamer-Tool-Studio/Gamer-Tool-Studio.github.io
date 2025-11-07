@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b2nphj56ebf6u"
-path="res://.godot/imported/Aurora.otf-73644926e73c3035ea9d2b89a6968830.fontdata"
+uid="uid://xkl61v7hvh2h"
+path="res://.godot/imported/Aurora.otf-725adb3b64312cc36b75d031f0d80f06.fontdata"
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/fonts/Aurora.otf"
-dest_files=["res://.godot/imported/Aurora.otf-73644926e73c3035ea9d2b89a6968830.fontdata"]
+source_file="res://Hidden Clues/fonts/Aurora.otf"
+dest_files=["res://.godot/imported/Aurora.otf-725adb3b64312cc36b75d031f0d80f06.fontdata"]
 
 [params]
 

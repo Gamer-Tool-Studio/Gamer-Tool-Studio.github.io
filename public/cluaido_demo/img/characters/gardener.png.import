@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc72k3dw6oxc3"
-path="res://.godot/imported/gardener.png-4c4ac24cba380205c5ff0824037456d8.ctex"
+uid="uid://b1cg6tbv7i2dh"
+path="res://.godot/imported/gardener.png-9933cf1cdd13a606428b200b4d356d66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/characters/gardener.png"
-dest_files=["res://.godot/imported/gardener.png-4c4ac24cba380205c5ff0824037456d8.ctex"]
+source_file="res://Hidden Clues/img/characters/gardener.png"
+dest_files=["res://.godot/imported/gardener.png-9933cf1cdd13a606428b200b4d356d66.ctex"]
 
 [params]
 

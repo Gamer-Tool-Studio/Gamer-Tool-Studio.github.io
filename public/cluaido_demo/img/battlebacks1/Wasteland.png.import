@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6vcscorljayk"
-path="res://.godot/imported/Wasteland.png-cf3949609be469fc032653d934d8a955.ctex"
+uid="uid://bvohy08tbq5ue"
+path="res://.godot/imported/Wasteland.png-75fa39dd984e2af95164b588953198ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks1/Wasteland.png"
-dest_files=["res://.godot/imported/Wasteland.png-cf3949609be469fc032653d934d8a955.ctex"]
+source_file="res://Hidden Clues/img/battlebacks1/Wasteland.png"
+dest_files=["res://.godot/imported/Wasteland.png-75fa39dd984e2af95164b588953198ed.ctex"]
 
 [params]
 

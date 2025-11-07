@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bid4uilxx71x8"
-path="res://.godot/imported/Hi_monster.png-51f4e338938b536dd6ec246fbb6acb99.ctex"
+uid="uid://c6is7piyo6pba"
+path="res://.godot/imported/Hi_monster.png-932ed531eca77ea0334cfa80f2ddbc54.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/enemies/Hi_monster.png"
-dest_files=["res://.godot/imported/Hi_monster.png-51f4e338938b536dd6ec246fbb6acb99.ctex"]
+source_file="res://Hidden Clues/img/enemies/Hi_monster.png"
+dest_files=["res://.godot/imported/Hi_monster.png-932ed531eca77ea0334cfa80f2ddbc54.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtsatqc2coucm"
-path="res://.godot/imported/Grassland.png-84b2ef2f3050c09846d3defb7f759f87.ctex"
+uid="uid://7lhmnutrwajn"
+path="res://.godot/imported/Grassland.png-0fb72a07688b53b9024e93affa17782a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks1/Grassland.png"
-dest_files=["res://.godot/imported/Grassland.png-84b2ef2f3050c09846d3defb7f759f87.ctex"]
+source_file="res://Hidden Clues/img/battlebacks1/Grassland.png"
+dest_files=["res://.godot/imported/Grassland.png-0fb72a07688b53b9024e93affa17782a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfovwhrn51622"
-path="res://.godot/imported/WingL.png-478ffe4142414d19dfdf2720a184cf3c.ctex"
+uid="uid://8obcxl2wj4lw"
+path="res://.godot/imported/WingL.png-85c4292fb52b76daa132c6f33597259a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/WingL.png"
-dest_files=["res://.godot/imported/WingL.png-478ffe4142414d19dfdf2720a184cf3c.ctex"]
+source_file="res://Hidden Clues/effects/Texture/WingL.png"
+dest_files=["res://.godot/imported/WingL.png-85c4292fb52b76daa132c6f33597259a.ctex"]
 
 [params]
 

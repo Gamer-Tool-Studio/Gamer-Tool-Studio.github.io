@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4er078apxyra"
-path="res://.godot/imported/World_A2.png-25ab5c32c44bd6076201fc2aacdf1dbf.ctex"
+uid="uid://dcwyo3qj8olpc"
+path="res://.godot/imported/World_A2.png-16e2ddffdfe4f89307d095681624aa07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/tilesets/World_A2.png"
-dest_files=["res://.godot/imported/World_A2.png-25ab5c32c44bd6076201fc2aacdf1dbf.ctex"]
+source_file="res://Hidden Clues/img/tilesets/World_A2.png"
+dest_files=["res://.godot/imported/World_A2.png-16e2ddffdfe4f89307d095681624aa07.ctex"]
 
 [params]
 

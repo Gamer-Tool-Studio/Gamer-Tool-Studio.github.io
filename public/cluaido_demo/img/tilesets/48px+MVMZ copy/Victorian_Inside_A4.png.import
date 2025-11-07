@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sfxue2r7domg"
-path="res://.godot/imported/Victorian_Inside_A4.png-926a75d21cf765fd88999a6afaf24449.ctex"
+uid="uid://dke2d3eo2hvjy"
+path="res://.godot/imported/Victorian_Inside_A4.png-d83c2d4bc8990ba66904f043ae9690ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/tilesets/48px+MVMZ copy/Victorian_Inside_A4.png"
-dest_files=["res://.godot/imported/Victorian_Inside_A4.png-926a75d21cf765fd88999a6afaf24449.ctex"]
+source_file="res://Hidden Clues/img/tilesets/48px+MVMZ copy/Victorian_Inside_A4.png"
+dest_files=["res://.godot/imported/Victorian_Inside_A4.png-d83c2d4bc8990ba66904f043ae9690ae.ctex"]
 
 [params]
 

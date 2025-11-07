@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci34d675e2jtv"
-path="res://.godot/imported/ParticleAlpha.png-7d6d5091990faed62f90d18b11fd4307.ctex"
+uid="uid://c7f7rcy0aiwta"
+path="res://.godot/imported/ParticleAlpha.png-5a8d9bea121226fe57aa7bd26ccddbbe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/ParticleAlpha.png"
-dest_files=["res://.godot/imported/ParticleAlpha.png-7d6d5091990faed62f90d18b11fd4307.ctex"]
+source_file="res://Hidden Clues/effects/Texture/ParticleAlpha.png"
+dest_files=["res://.godot/imported/ParticleAlpha.png-5a8d9bea121226fe57aa7bd26ccddbbe.ctex"]
 
 [params]
 

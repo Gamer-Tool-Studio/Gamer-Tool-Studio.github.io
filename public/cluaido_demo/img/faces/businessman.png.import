@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://52eebgdo4bsr"
-path="res://.godot/imported/businessman.png-46d4c874b00fe05b91ce180c728da396.ctex"
+uid="uid://bu023rls2hwo7"
+path="res://.godot/imported/businessman.png-e4b60311e1287e8b520138fe7b5581a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/faces/businessman.png"
-dest_files=["res://.godot/imported/businessman.png-46d4c874b00fe05b91ce180c728da396.ctex"]
+source_file="res://Hidden Clues/img/faces/businessman.png"
+dest_files=["res://.godot/imported/businessman.png-e4b60311e1287e8b520138fe7b5581a2.ctex"]
 
 [params]
 

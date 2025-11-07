@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du4ttlntweaio"
-path="res://.godot/imported/HexCircle.png-1b94a3ef541fc1f305900657516e12e0.ctex"
+uid="uid://25xa307jpgqt"
+path="res://.godot/imported/HexCircle.png-d176004d5d00bbc2bc15d6adce0880e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/HexCircle.png"
-dest_files=["res://.godot/imported/HexCircle.png-1b94a3ef541fc1f305900657516e12e0.ctex"]
+source_file="res://Hidden Clues/effects/Texture/HexCircle.png"
+dest_files=["res://.godot/imported/HexCircle.png-d176004d5d00bbc2bc15d6adce0880e7.ctex"]
 
 [params]
 

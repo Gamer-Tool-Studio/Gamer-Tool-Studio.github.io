@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bh2ukgiigfvx1"
-path="res://.godot/imported/mplus-1m-regular.woff-34828c36954946e9a6bdfc383f27bbed.fontdata"
+uid="uid://bghruew8raogg"
+path="res://.godot/imported/mplus-1m-regular.woff-b5d9ffa533feed1cc7b047e72731692f.fontdata"
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/fonts/mplus-1m-regular.woff"
-dest_files=["res://.godot/imported/mplus-1m-regular.woff-34828c36954946e9a6bdfc383f27bbed.fontdata"]
+source_file="res://Hidden Clues/fonts/mplus-1m-regular.woff"
+dest_files=["res://.godot/imported/mplus-1m-regular.woff-b5d9ffa533feed1cc7b047e72731692f.fontdata"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://81eabies5q2l"
-path="res://.godot/imported/Rock.png-fe351c1764466eb45d3b3643456b482a.ctex"
+uid="uid://cjt68tdut7ghv"
+path="res://.godot/imported/Rock.png-9c31f2ac6484f336392fa7e8456ac379.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/Rock.png"
-dest_files=["res://.godot/imported/Rock.png-fe351c1764466eb45d3b3643456b482a.ctex"]
+source_file="res://Hidden Clues/effects/Texture/Rock.png"
+dest_files=["res://.godot/imported/Rock.png-9c31f2ac6484f336392fa7e8456ac379.ctex"]
 
 [params]
 

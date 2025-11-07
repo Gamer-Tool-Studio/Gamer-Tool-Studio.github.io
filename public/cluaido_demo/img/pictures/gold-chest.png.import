@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gd2g6i5pqbr2"
-path="res://.godot/imported/gold-chest.png-be964a55e9d1ce21727abcf1c97bf9be.ctex"
+uid="uid://0wvjkye56lqj"
+path="res://.godot/imported/gold-chest.png-fa66598f6a723cc8ee531e5b9e490144.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/pictures/gold-chest.png"
-dest_files=["res://.godot/imported/gold-chest.png-be964a55e9d1ce21727abcf1c97bf9be.ctex"]
+source_file="res://Hidden Clues/img/pictures/gold-chest.png"
+dest_files=["res://.godot/imported/gold-chest.png-fa66598f6a723cc8ee531e5b9e490144.ctex"]
 
 [params]
 

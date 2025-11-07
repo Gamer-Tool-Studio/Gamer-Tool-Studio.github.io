@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnep1lp0jwc8d"
-path="res://.godot/imported/journalist.png-ea98ac286b995fbe577a036234b1a7c0.ctex"
+uid="uid://btmeuuxqpysla"
+path="res://.godot/imported/journalist.png-993c6ee200bad78c83c143e9aada0cd8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/characters/journalist.png"
-dest_files=["res://.godot/imported/journalist.png-ea98ac286b995fbe577a036234b1a7c0.ctex"]
+source_file="res://Hidden Clues/img/characters/journalist.png"
+dest_files=["res://.godot/imported/journalist.png-993c6ee200bad78c83c143e9aada0cd8.ctex"]
 
 [params]
 

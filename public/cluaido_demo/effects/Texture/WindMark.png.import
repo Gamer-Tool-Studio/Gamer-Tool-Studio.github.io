@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dteq2qaw017kp"
-path="res://.godot/imported/WindMark.png-a176eb506ce1266abc9765d74cba7691.ctex"
+uid="uid://bgd6vabu023f4"
+path="res://.godot/imported/WindMark.png-2f9150b25eb96b521cbc14e8d5b47168.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/WindMark.png"
-dest_files=["res://.godot/imported/WindMark.png-a176eb506ce1266abc9765d74cba7691.ctex"]
+source_file="res://Hidden Clues/effects/Texture/WindMark.png"
+dest_files=["res://.godot/imported/WindMark.png-2f9150b25eb96b521cbc14e8d5b47168.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnkifu7yy8vde"
-path="res://.godot/imported/SF_Outside_A3.png-dd95ff6ff7656ee9cb983b0f39029639.ctex"
+uid="uid://cnrb8am2mwoto"
+path="res://.godot/imported/SF_Outside_A3.png-58b395aa088ca9cc11ae69a8fa2ee2a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/tilesets/SF_Outside_A3.png"
-dest_files=["res://.godot/imported/SF_Outside_A3.png-dd95ff6ff7656ee9cb983b0f39029639.ctex"]
+source_file="res://Hidden Clues/img/tilesets/SF_Outside_A3.png"
+dest_files=["res://.godot/imported/SF_Outside_A3.png-58b395aa088ca9cc11ae69a8fa2ee2a9.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clg5jwhv52op0"
-path="res://.godot/imported/cook.png-70d9e879ad92b38019da44c37bd1450e.ctex"
+uid="uid://cnbf1hrvw78ig"
+path="res://.godot/imported/cook.png-4cbdbb81909729759fd52e6fa7fec757.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/characters/cook.png"
-dest_files=["res://.godot/imported/cook.png-70d9e879ad92b38019da44c37bd1450e.ctex"]
+source_file="res://Hidden Clues/img/characters/cook.png"
+dest_files=["res://.godot/imported/cook.png-4cbdbb81909729759fd52e6fa7fec757.ctex"]
 
 [params]
 

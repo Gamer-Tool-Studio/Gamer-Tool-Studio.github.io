@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddhqgbgnhsrc1"
-path="res://.godot/imported/Feather.png-2df72a30475b8eae091dd11989f39c67.ctex"
+uid="uid://d15hm4y2u0m73"
+path="res://.godot/imported/Feather.png-5f22e4c452cc1202e191f3ba197c70f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/Feather.png"
-dest_files=["res://.godot/imported/Feather.png-2df72a30475b8eae091dd11989f39c67.ctex"]
+source_file="res://Hidden Clues/effects/Texture/Feather.png"
+dest_files=["res://.godot/imported/Feather.png-5f22e4c452cc1202e191f3ba197c70f0.ctex"]
 
 [params]
 

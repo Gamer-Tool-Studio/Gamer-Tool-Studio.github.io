@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs52o8uspr2xm"
-path="res://.godot/imported/ButtonSet.png-f66fc3b2e1bf6f29bb66d0e32b8b5328.ctex"
+uid="uid://b0d6ujo3t5yrw"
+path="res://.godot/imported/ButtonSet.png-3488a70b55a03ae1dfdfc2c21b95726f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/system/ButtonSet.png"
-dest_files=["res://.godot/imported/ButtonSet.png-f66fc3b2e1bf6f29bb66d0e32b8b5328.ctex"]
+source_file="res://Hidden Clues/img/system/ButtonSet.png"
+dest_files=["res://.godot/imported/ButtonSet.png-3488a70b55a03ae1dfdfc2c21b95726f.ctex"]
 
 [params]
 

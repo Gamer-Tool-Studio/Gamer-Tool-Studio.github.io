@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb2n8dsagiltd"
-path="res://.godot/imported/Weapons1.png-d2d8676d2146d280126ed806583dfa2f.ctex"
+uid="uid://dybxmgg4piu6u"
+path="res://.godot/imported/Weapons1.png-84d8b29896af369219de5fcfaf2b2169.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/system/Weapons1.png"
-dest_files=["res://.godot/imported/Weapons1.png-d2d8676d2146d280126ed806583dfa2f.ctex"]
+source_file="res://Hidden Clues/img/system/Weapons1.png"
+dest_files=["res://.godot/imported/Weapons1.png-84d8b29896af369219de5fcfaf2b2169.ctex"]
 
 [params]
 

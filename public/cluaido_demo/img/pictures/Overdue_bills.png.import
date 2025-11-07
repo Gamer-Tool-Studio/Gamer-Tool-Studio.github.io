@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw1e124ny53q2"
-path="res://.godot/imported/Overdue_bills.png-eb47afb022b2bbed94e8264f95f9ea86.ctex"
+uid="uid://dpxfplil2b4r4"
+path="res://.godot/imported/Overdue_bills.png-e6a791991e2b22182a9f4d4f4de2e9dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/pictures/Overdue_bills.png"
-dest_files=["res://.godot/imported/Overdue_bills.png-eb47afb022b2bbed94e8264f95f9ea86.ctex"]
+source_file="res://Hidden Clues/img/pictures/Overdue_bills.png"
+dest_files=["res://.godot/imported/Overdue_bills.png-e6a791991e2b22182a9f4d4f4de2e9dd.ctex"]
 
 [params]
 

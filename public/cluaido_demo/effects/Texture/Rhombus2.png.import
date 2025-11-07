@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfahxakd1ihct"
-path="res://.godot/imported/Rhombus2.png-095b19595c2a189bbeb18072db2c46cb.ctex"
+uid="uid://dhlec23eao7pc"
+path="res://.godot/imported/Rhombus2.png-9778ba78c181498de07e72a8397fe22b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/Rhombus2.png"
-dest_files=["res://.godot/imported/Rhombus2.png-095b19595c2a189bbeb18072db2c46cb.ctex"]
+source_file="res://Hidden Clues/effects/Texture/Rhombus2.png"
+dest_files=["res://.godot/imported/Rhombus2.png-9778ba78c181498de07e72a8397fe22b.ctex"]
 
 [params]
 

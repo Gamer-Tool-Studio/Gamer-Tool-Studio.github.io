@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlgg7fjnhrbgw"
-path="res://.godot/imported/Clouds.png-69a2a5e4891e49a26dbd3eca83085270.ctex"
+uid="uid://fpv8fvo0qedf"
+path="res://.godot/imported/Clouds.png-3e9a2e50c5f5e6de9d3ae52991ae9684.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/battlebacks2/Clouds.png"
-dest_files=["res://.godot/imported/Clouds.png-69a2a5e4891e49a26dbd3eca83085270.ctex"]
+source_file="res://Hidden Clues/img/battlebacks2/Clouds.png"
+dest_files=["res://.godot/imported/Clouds.png-3e9a2e50c5f5e6de9d3ae52991ae9684.ctex"]
 
 [params]
 

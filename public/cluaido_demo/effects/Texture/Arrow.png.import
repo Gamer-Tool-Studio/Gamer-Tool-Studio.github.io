@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ey05vbgnphs7"
-path="res://.godot/imported/Arrow.png-6ed1d2dd2b0a8ae5ee75bb60411ca8c1.ctex"
+uid="uid://baa2phdhujngo"
+path="res://.godot/imported/Arrow.png-8546a7c4c2c0d11a13594a5753e2dade.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/effects/Texture/Arrow.png"
-dest_files=["res://.godot/imported/Arrow.png-6ed1d2dd2b0a8ae5ee75bb60411ca8c1.ctex"]
+source_file="res://Hidden Clues/effects/Texture/Arrow.png"
+dest_files=["res://.godot/imported/Arrow.png-8546a7c4c2c0d11a13594a5753e2dade.ctex"]
 
 [params]
 

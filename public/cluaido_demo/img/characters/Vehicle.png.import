@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3wffkn2bqlit"
-path="res://.godot/imported/Vehicle.png-3ef96e5b65c227e3b281b8a34a078385.ctex"
+uid="uid://hqjpdj7umt5a"
+path="res://.godot/imported/Vehicle.png-087f5ae4f4607ae7d073a6e44dfedc9f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/characters/Vehicle.png"
-dest_files=["res://.godot/imported/Vehicle.png-3ef96e5b65c227e3b281b8a34a078385.ctex"]
+source_file="res://Hidden Clues/img/characters/Vehicle.png"
+dest_files=["res://.godot/imported/Vehicle.png-087f5ae4f4607ae7d073a6e44dfedc9f.ctex"]
 
 [params]
 

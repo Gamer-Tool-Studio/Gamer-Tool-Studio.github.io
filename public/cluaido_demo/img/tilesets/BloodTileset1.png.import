@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crstkhrp2rnrk"
-path="res://.godot/imported/BloodTileset1.png-3c5713cbcc9c7fa7148854f2454220a0.ctex"
+uid="uid://cmwt51hag0if4"
+path="res://.godot/imported/BloodTileset1.png-7b32cc062ea99605c6c2dab091929736.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GTS/Gamer-Tool-Studio.github.io/public/cluaido_demo/img/tilesets/BloodTileset1.png"
-dest_files=["res://.godot/imported/BloodTileset1.png-3c5713cbcc9c7fa7148854f2454220a0.ctex"]
+source_file="res://Hidden Clues/img/tilesets/BloodTileset1.png"
+dest_files=["res://.godot/imported/BloodTileset1.png-7b32cc062ea99605c6c2dab091929736.ctex"]
 
 [params]
 
