@@ -1,11 +1,38 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import type { ChartOptions } from 'chart.js'
+import { Bar } from 'vue-chartjs'
 
 definePageMeta({
   layout: 'default',
 })
 
 const debug = getDebugger('app:pages:metrics')
+
+type UsageSummaryGroup = 'organization' | 'user' | 'key'
+
+interface UsageSummaryEntry {
+  id: string
+  label: string
+  secondaryLabel?: string
+  totalCalls: number
+  totalInputTokens: number
+  totalOutputTokens: number
+  metadata?: Record<string, any>
+}
+
+interface RevenueSummaryEntry {
+  orgId: string
+  orgName: string
+  members: number
+  totalRevenue: number
+  totalPayments: number
+  packs: Record<string, {
+    label: string
+    count: number
+  }>
+  hasUsedFreeTrial: boolean
+}
 
 const loading = ref(true)
 const error = ref('')
@@ -27,6 +54,21 @@ const detailType = ref('')
 const detailData = ref<any[]>([])
 const detailTitle = ref('')
 
+// Usage summary state
+const usageSummaryTab = ref<UsageSummaryGroup>('organization')
+const usageSummary = ref<Record<UsageSummaryGroup, UsageSummaryEntry[]>>({
+  organization: [],
+  user: [],
+  key: [],
+})
+const usageSummaryLoading = ref(false)
+const usageSummaryError = ref('')
+
+// Revenue summary state
+const revenueSummary = ref<RevenueSummaryEntry[]>([])
+const revenueLoading = ref(false)
+const revenueError = ref('')
+
 onMounted(async () => {
   await fetchMetrics()
 })
@@ -36,10 +78,10 @@ async function fetchMetrics() {
   error.value = ''
 
   try {
-    const { data, error: apiError } = await useAuthAPI(
+    const { data, error: apiError } = (await useAuthAPI<any>(
       `/metrics/admin/metrics?timeFilter=${timeFilter.value}`,
       'GET',
-    )
+    )) as any
 
     if (apiError.value) {
       error.value = apiError.value.data?.error || 'Failed to fetch metrics'
@@ -48,6 +90,10 @@ async function fetchMetrics() {
     else if (data.value) {
       metrics.value = data.value
       debug.log('Metrics loaded:', metrics.value)
+      await Promise.all([
+        fetchUsageSummary(),
+        fetchRevenueSummary(),
+      ])
     }
   }
   catch (e: any) {
@@ -56,6 +102,78 @@ async function fetchMetrics() {
   }
   finally {
     loading.value = false
+  }
+}
+
+async function fetchUsageSummary() {
+  usageSummaryLoading.value = true
+  usageSummaryError.value = ''
+
+  const groupings: UsageSummaryGroup[] = ['organization', 'user', 'key']
+
+  try {
+    const responses = await Promise.all(groupings.map(group =>
+      useAuthAPI<{ results: UsageSummaryEntry[] }>(
+        '/metrics/admin/api-usage-summary',
+        'GET',
+        undefined,
+        {
+          groupBy: group,
+          timeFilter: timeFilter.value,
+        },
+      ),
+    )) as any[]
+
+    groupings.forEach((group, index) => {
+      const { data, error: apiError } = responses[index] as any
+      if (apiError.value)
+        throw new Error(apiError.value.data?.error || `Failed to fetch usage summary (${group})`)
+
+      usageSummary.value[group] = data.value?.results || []
+    })
+  }
+  catch (e: any) {
+    usageSummaryError.value = e.message || 'Error fetching usage summary'
+    debug.log('Usage summary error:', e)
+    usageSummary.value = {
+      organization: [],
+      user: [],
+      key: [],
+    }
+  }
+  finally {
+    usageSummaryLoading.value = false
+  }
+}
+
+async function fetchRevenueSummary() {
+  revenueLoading.value = true
+  revenueError.value = ''
+
+  try {
+    const { data, error: apiError } = (await useAuthAPI<{
+      results: RevenueSummaryEntry[]
+    }>(
+      '/metrics/admin/revenue-summary',
+      'GET',
+      undefined,
+      {
+        timeFilter: timeFilter.value,
+      },
+    )) as any
+
+    if (apiError.value)
+      throw new Error(apiError.value.data?.error || 'Failed to fetch revenue summary')
+
+    revenueSummary.value = data.value?.results || []
+  }
+  catch (e: any) {
+    revenueError.value = e.message || 'Error fetching revenue summary'
+    debug.log('Revenue summary error:', e)
+    revenueSummary.value = []
+  }
+  finally {
+    revenueLoading.value = false
   }
 }
 
@@ -86,7 +204,12 @@ async function showDetails(type: string) {
   }
 
   try {
-    const { data, error: apiError } = await useAuthAPI(endpoint, 'GET')
+    const { data, error: apiError } = (await useAuthAPI<{
+      users?: any[]
+      payments?: any[]
+      organizations?: any[]
+      usage?: any[]
+    }>(endpoint, 'GET')) as any
     if (data.value && !apiError.value) {
       // Extract the data array from the response
       detailData.value = data.value.users || data.value.payments || data.value.organizations || data.value.usage || []
@@ -116,6 +239,319 @@ function formatDate(date: string | Date): string {
   if (!date)
     return 'N/A'
   return new Date(date).toLocaleString()
+}
+
+const overviewCards = computed(() => {
+  if (!metrics.value)
+    return []
+
+  const overview = metrics.value.overview || {}
+  const payments = metrics.value.payments || {}
+  const apiUsage = metrics.value.apiUsage || {}
+
+  return [
+    {
+      title: 'Organizations',
+      value: formatNumber(overview.totalOrganizations || 0),
+      icon: 'mdi-domain',
+      iconColor: 'primary',
+    },
+    {
+      title: 'Users',
+      value: formatNumber(overview.totalUsers || 0),
+      icon: 'mdi-account-multiple',
+      iconColor: 'primary',
+    },
+    {
+      title: 'Active API Keys',
+      value: formatNumber(overview.activeApiKeys ?? overview.totalApiKeys ?? 0),
+      icon: 'mdi-key',
+      iconColor: 'primary',
+    },
+    {
+      title: 'Active Accounts',
+      value: formatNumber(overview.activeSubscriptions || 0),
+      icon: 'mdi-account-check',
+      iconColor: 'success',
+    },
+    {
+      title: 'Total Revenue',
+      value: formatCurrency(payments.totalRevenue || 0),
+      icon: 'mdi-currency-usd',
+      iconColor: 'success',
+    },
+    {
+      title: 'Total Payments',
+      value: formatNumber(payments.totalPayments || 0),
+      icon: 'mdi-cash-multiple',
+      iconColor: 'success',
+    },
+    {
+      title: 'API Calls',
+      value: formatNumber(apiUsage.totalCalls || 0),
+      icon: 'mdi-api',
+      iconColor: 'primary',
+    },
+    {
+      title: 'Input Tokens',
+      value: formatNumber(apiUsage.totalInputTokens || 0),
+      icon: 'mdi-download',
+      iconColor: 'primary',
+    },
+    {
+      title: 'Output Tokens',
+      value: formatNumber(apiUsage.totalOutputTokens || 0),
+      icon: 'mdi-upload',
+      iconColor: 'primary',
+    },
+  ]
+})
+
+const usageSummaryHeaders = computed(() => {
+  switch (usageSummaryTab.value) {
+    case 'organization':
+      return [
+        { title: 'Organization', key: 'label' },
+        { title: 'Members', key: 'membersDisplay' },
+        { title: 'API Calls', key: 'totalCallsDisplay' },
+        { title: 'Input Tokens', key: 'totalInputTokensDisplay' },
+        { title: 'Output Tokens', key: 'totalOutputTokensDisplay' },
+      ]
+    case 'user':
+      return [
+        { title: 'User Email', key: 'label' },
+        { title: 'Name', key: 'secondaryLabel' },
+        { title: 'Organization', key: 'organizationName' },
+        { title: 'API Calls', key: 'totalCallsDisplay' },
+        { title: 'Input Tokens', key: 'totalInputTokensDisplay' },
+        { title: 'Output Tokens', key: 'totalOutputTokensDisplay' },
+      ]
+    case 'key':
+      return [
+        { title: 'API Key', key: 'label' },
+        { title: 'Owner Email', key: 'userEmail' },
+        { title: 'Organization', key: 'organizationName' },
+        { title: 'API Calls', key: 'totalCallsDisplay' },
+        { title: 'Input Tokens', key: 'totalInputTokensDisplay' },
+        { title: 'Output Tokens', key: 'totalOutputTokensDisplay' },
+      ]
+    default:
+      return []
+  }
+})
+
+const currentUsageItems = computed(() => {
+  const data = usageSummary.value[usageSummaryTab.value] || []
+
+  if (usageSummaryTab.value === 'organization') {
+    return data.map(entry => ({
+      ...entry,
+      membersDisplay: formatNumber(entry.metadata?.members ?? 0),
+      totalCallsDisplay: formatNumber(entry.totalCalls || 0),
+      totalInputTokensDisplay: formatNumber(entry.totalInputTokens || 0),
+      totalOutputTokensDisplay: formatNumber(entry.totalOutputTokens || 0),
+    }))
+  }
+
+  if (usageSummaryTab.value === 'user') {
+    return data.map(entry => ({
+      ...entry,
+      organizationName: entry.metadata?.organizationName || '',
+      totalCallsDisplay: formatNumber(entry.totalCalls || 0),
+      totalInputTokensDisplay: formatNumber(entry.totalInputTokens || 0),
+      totalOutputTokensDisplay: formatNumber(entry.totalOutputTokens || 0),
+    }))
+  }
+
+  // groupBy === 'key'
+  return data.map(entry => ({
+    ...entry,
+    userEmail: entry.metadata?.userEmail || '',
+    organizationName: entry.metadata?.organizationName || '',
+    totalCallsDisplay: formatNumber(entry.totalCalls || 0),
+    totalInputTokensDisplay: formatNumber(entry.totalInputTokens || 0),
+    totalOutputTokensDisplay: formatNumber(entry.totalOutputTokens || 0),
+  }))
+})
+
+const revenuePackColumns = computed(() => {
+  const unique = new Map<string, {
+    label: string
+    packKey: string
+  }>()
+
+  revenueSummary.value.forEach((entry) => {
+    Object.entries(entry.packs || {}).forEach(([key, pack]) => {
+      if (!unique.has(key) && pack.count > 0)
+        unique.set(key, { label: pack.label, packKey: key })
+    })
+  })
+
+  return Array.from(unique.entries()).map(([key, value]) => ({
+    key: `pack_${key}`,
+    label: value.label,
+    packKey: value.packKey,
+  }))
+})
+
+const revenueHeaders = computed(() => {
+  const baseHeaders = [
+    { title: 'Organization', key: 'orgName' },
+    { title: 'Members', key: 'membersDisplay' },
+    { title: 'Total Revenue', key: 'totalRevenueDisplay' },
+    { title: 'Payments', key: 'totalPaymentsDisplay' },
+  ]
+
+  const packHeaders = revenuePackColumns.value.map(pack => ({
+    title: pack.label,
+    key: pack.key,
+  }))
+
+  return [...baseHeaders, ...packHeaders]
+})
+
+const revenueItems = computed(() => {
+  return revenueSummary.value.map((entry) => {
+    const item: Record<string, any> = {
+      orgName: entry.orgName,
+      membersDisplay: formatNumber(entry.members),
+      totalRevenueDisplay: formatCurrency(entry.totalRevenue),
+      totalPaymentsDisplay: formatNumber(entry.totalPayments),
+    }
+
+    revenuePackColumns.value.forEach((pack) => {
+      const packData = entry.packs?.[pack.packKey]
+      item[pack.key] = formatNumber(packData?.count || 0)
+    })
+
+    return item
+  })
+})
+
+const usageCallsChartData = computed(() => {
+  const items = usageSummary.value[usageSummaryTab.value] || []
+  return {
+    labels: items.map(item => item.label || 'Unknown'),
+    datasets: [
+      {
+        label: 'API Calls',
+        backgroundColor: '#6200EE',
+        data: items.map(item => item.totalCalls || 0),
+        borderRadius: 6,
+        maxBarThickness: 48,
+      },
+    ],
+  }
+})
+
+const usageTokensChartData = computed(() => {
+  const items = usageSummary.value[usageSummaryTab.value] || []
+  return {
+    labels: items.map(item => item.label || 'Unknown'),
+    datasets: [
+      {
+        label: 'Input Tokens',
+        backgroundColor: '#6200EE',
+        data: items.map(item => item.totalInputTokens || 0),
+        borderRadius: 6,
+        maxBarThickness: 48,
+      },
+      {
+        label: 'Output Tokens',
+        backgroundColor: '#C834A4',
+        data: items.map(item => item.totalOutputTokens || 0),
+        borderRadius: 6,
+        maxBarThickness: 48,
+      },
+    ],
+  }
+})
+
+const baseBarChartOptions: ChartOptions<'bar'> = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'top',
+      labels: {
+        usePointStyle: true,
+        boxWidth: 12,
+      },
+    },
+    tooltip: {
+      callbacks: {
+        label: (context: any) => {
+          const value = context.parsed.y ?? context.parsed
+          return `${context.dataset.label}: ${formatNumber(value)}`
+        },
+      },
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: '#616161',
+        maxRotation: 35,
+        minRotation: 0,
+        autoSkip: false,
+      },
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      ticks: {
+        color: '#616161',
+        callback: (value: number | string) => formatNumber(Number(value)),
+      },
+      beginAtZero: true,
+    },
+  },
+}
+
+const revenueChartData = computed(() => ({
+  labels: revenueSummary.value.map(entry => entry.orgName || 'No Organization'),
+  datasets: [
+    {
+      label: 'Revenue (USD)',
+      backgroundColor: '#4CAF50',
+      data: revenueSummary.value.map(entry => entry.totalRevenue || 0),
+      borderRadius: 6,
+      maxBarThickness: 48,
+    },
+  ],
+}))
+
+const packColors = ['#6200EE', '#C834A4', '#00ACC1', '#F9A825', '#8E44AD', '#EF6C00', '#009688']
+
+const revenuePackChartData = computed(() => {
+  const labels = revenueSummary.value.map(entry => entry.orgName || 'No Organization')
+
+  const datasets = revenuePackColumns.value.map((pack, index) => ({
+    label: pack.label,
+    backgroundColor: packColors[index % packColors.length],
+    data: revenueSummary.value.map(entry => entry.packs?.[pack.packKey]?.count || 0),
+    maxBarThickness: 48,
+    borderRadius: 6,
+    stack: 'packs',
+  }))
+
+  return { labels, datasets }
+})
+
+const stackedBarChartOptions: ChartOptions<'bar'> = {
+  ...baseBarChartOptions,
+  scales: {
+    ...(baseBarChartOptions.scales ?? {}),
+    x: {
+      ...(baseBarChartOptions.scales?.x ?? {}),
+      stacked: true,
+    },
+    y: {
+      ...(baseBarChartOptions.scales?.y ?? {}),
+      stacked: true,
+    },
+  },
 }
 
 const detailHeaders = computed(() => {
@@ -251,100 +687,40 @@ useHead({
           </v-col>
         </v-row>
 
-        <!-- Overview Cards -->
+        <!-- Summary Dashboard -->
         <v-row class="mt-4">
-          <v-col cols="12">
-            <h2 class="text-h4 mb-4 font-weight-bold">
-              👥 User Metrics
-            </h2>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="4">
-            <v-card
-              elevation="3"
-              class="metric-card clickable"
-              @click="showDetails('users')"
-            >
+          <v-col
+            v-for="card in overviewCards"
+            :key="card.title"
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
+            xl="2"
+          >
+            <v-card elevation="3" class="metric-card summary-card">
               <v-card-text>
                 <div class="d-flex justify-space-between align-center">
                   <div class="text-overline text-grey-darken-1">
-                    Total Users
+                    {{ card.title }}
                   </div>
-                  <v-icon color="primary">
-                    mdi-account-multiple
+                  <v-icon :color="card.iconColor" size="30">
+                    {{ card.icon }}
                   </v-icon>
                 </div>
-                <div class="text-h3 font-weight-bold mt-2 primary--text">
-                  {{ formatNumber(metrics.overview.totalUsers) }}
-                </div>
-                <div class="text-body-2 text-success mt-2">
-                  <v-icon size="small" color="success">
-                    mdi-arrow-up
-                  </v-icon>
-                  {{ formatNumber(metrics.overview.recentSignups) }} recent
-                </div>
-                <div class="text-caption text-grey mt-1">
-                  Click to view details
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="4">
-            <v-card
-              elevation="3"
-              class="metric-card clickable"
-              @click="showDetails('organizations')"
-            >
-              <v-card-text>
-                <div class="d-flex justify-space-between align-center">
-                  <div class="text-overline text-grey-darken-1">
-                    Organizations
-                  </div>
-                  <v-icon color="primary">
-                    mdi-domain
-                  </v-icon>
-                </div>
-                <div class="text-h3 font-weight-bold mt-2 primary--text">
-                  {{ formatNumber(metrics.overview.totalOrganizations) }}
-                </div>
-                <div class="text-body-2 text-grey-darken-1 mt-2">
-                  Organizations signed up
-                </div>
-                <div class="text-caption text-grey mt-1">
-                  Click to view details
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-col>
-
-          <v-col cols="12" sm="6" md="4">
-            <v-card elevation="3" class="metric-card">
-              <v-card-text>
-                <div class="d-flex justify-space-between align-center">
-                  <div class="text-overline text-grey-darken-1">
-                    API Keys Generated
-                  </div>
-                  <v-icon color="primary">
-                    mdi-key
-                  </v-icon>
-                </div>
-                <div class="text-h3 font-weight-bold mt-2 primary--text">
-                  {{ formatNumber(metrics.overview.totalApiKeys) }}
-                </div>
-                <div class="text-body-2 text-grey-darken-1 mt-2">
-                  Total keys created
+                <div class="text-h4 font-weight-bold mt-3 primary--text">
+                  {{ card.value }}
                 </div>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
 
-        <!-- Payment Metrics -->
+        <!-- Revenue Metrics -->
         <v-row class="mt-6">
           <v-col cols="12">
             <h2 class="text-h4 mb-4 font-weight-bold">
-              💰 Payment Metrics
+              💰 Revenue Metrics
             </h2>
           </v-col>
 
@@ -400,20 +776,17 @@ useHead({
               <v-card-text>
                 <div class="d-flex justify-space-between align-center">
                   <div class="text-overline text-grey-darken-1">
-                    Recent Revenue
+                    Free Subscriptions
                   </div>
                   <v-icon color="primary">
-                    mdi-chart-line
+                    mdi-account-plus
                   </v-icon>
                 </div>
                 <div class="text-h3 font-weight-bold mt-2 primary--text">
-                  {{ formatCurrency(metrics.payments.recentRevenue) }}
+                  {{ formatNumber(metrics.payments.freeTrialSubscriptions || 0) }}
                 </div>
                 <div class="text-body-2 text-success mt-2">
-                  <v-icon size="small" color="success">
-                    mdi-calendar-month
-                  </v-icon>
-                  Based on filter
+                  Organizations currently on free trial
                 </div>
               </v-card-text>
             </v-card>
@@ -424,23 +797,117 @@ useHead({
               <v-card-text>
                 <div class="d-flex justify-space-between align-center">
                   <div class="text-overline text-grey-darken-1">
-                    Active Subscriptions
+                    New Organizations
                   </div>
                   <v-icon color="primary">
-                    mdi-account-check
+                    mdi-domain-plus
                   </v-icon>
                 </div>
                 <div class="text-h3 font-weight-bold mt-2 primary--text">
-                  {{ formatNumber(metrics.overview.activeSubscriptions) }}
+                  {{ formatNumber(metrics.overview.newOrganizations || 0) }}
                 </div>
                 <div class="text-body-2 text-grey-darken-1 mt-2">
-                  Users with balance
+                  Created during selected window
                 </div>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
 
+        <!-- Revenue & Packs Breakdown -->
+        <v-row class="mt-6">
+          <v-col cols="12">
+            <v-card elevation="3">
+              <v-card-title class="d-flex justify-space-between align-center flex-wrap ga-2">
+                <div>
+                  <h2 class="text-h5 font-weight-bold mb-1">
+                    💸 Revenue & Pack Purchases by Organization
+                  </h2>
+                  <p class="text-body-2 text-grey-darken-1 mb-0">
+                    Track revenue and pack adoption (free trial, Solo, Indie, Enterprise) per organization.
+                  </p>
+                </div>
+                <v-btn
+                  variant="text"
+                  color="primary"
+                  prepend-icon="mdi-refresh"
+                  :loading="revenueLoading"
+                  @click="fetchRevenueSummary"
+                >
+                  Refresh
+                </v-btn>
+              </v-card-title>
+              <v-divider />
+              <v-card-text>
+                <v-alert
+                  v-if="revenueError"
+                  type="error"
+                  class="mb-4"
+                  border="start"
+                  prominent
+                >
+                  {{ revenueError }}
+                </v-alert>
+
+                <v-progress-linear
+                  v-else-if="revenueLoading"
+                  indeterminate
+                  color="primary"
+                  class="mb-4"
+                />
+
+                <template v-else>
+                  <v-row class="chart-grid">
+                    <v-col cols="12" md="6">
+                      <div class="chart-wrapper">
+                        <Bar
+                          v-if="revenueChartData.labels.length"
+                          :data="revenueChartData"
+                          :options="baseBarChartOptions"
+                        />
+                        <v-alert v-else type="info" variant="tonal">
+                          No revenue data available for this period.
+                        </v-alert>
+                      </div>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <div class="chart-wrapper">
+                        <Bar
+                          v-if="revenuePackChartData.labels.length && revenuePackChartData.datasets.length"
+                          :data="revenuePackChartData"
+                          :options="stackedBarChartOptions"
+                        />
+                        <v-alert v-else type="info" variant="tonal">
+                          No pack purchase data available for this period.
+                        </v-alert>
+                      </div>
+                    </v-col>
+                  </v-row>
+
+                  <v-divider class="my-6" />
+
+                  <v-alert
+                    v-if="revenueItems.length === 0"
+                    type="info"
+                    variant="tonal"
+                    class="mb-2"
+                  >
+                    No revenue data available for the selected time period.
+                  </v-alert>
+
+                  <v-data-table
+                    v-else
+                    :headers="revenueHeaders"
+                    :items="revenueItems"
+                    :items-per-page="10"
+                    class="elevation-0"
+                    hover
+                  />
+                </template>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
         <!-- API Usage Metrics -->
         <v-row class="mt-6">
           <v-col cols="12">
@@ -449,7 +916,7 @@ useHead({
             </h2>
           </v-col>
 
-          <v-col cols="12" sm="6" md="4">
+          <v-col cols="12" sm="6" md="3">
             <v-card
               elevation="3"
               class="metric-card clickable"
@@ -477,7 +944,7 @@ useHead({
             </v-card>
           </v-col>
 
-          <v-col cols="12" sm="6" md="4">
+          <v-col cols="12" sm="6" md="3">
             <v-card elevation="3" class="metric-card">
               <v-card-text>
                 <div class="d-flex justify-space-between align-center">
@@ -498,7 +965,7 @@ useHead({
             </v-card>
           </v-col>
 
-          <v-col cols="12" sm="6" md="4">
+          <v-col cols="12" sm="6" md="3">
             <v-card elevation="3" class="metric-card">
               <v-card-text>
                 <div class="d-flex justify-space-between align-center">
@@ -518,56 +985,135 @@ useHead({
               </v-card-text>
             </v-card>
           </v-col>
-        </v-row>
 
-        <!-- Usage Timeline -->
-        <v-row v-if="metrics.apiUsage.usageTimeline.length > 0" class="mt-6">
-          <v-col cols="12">
-            <v-card elevation="3">
-              <v-card-title class="text-h5 font-weight-bold">
-                📈 API Usage Timeline
-              </v-card-title>
+          <v-col cols="12" sm="6" md="3">
+            <v-card elevation="3" class="metric-card">
               <v-card-text>
-                <div class="timeline-container">
-                  <div
-                    v-for="day in metrics.apiUsage.usageTimeline"
-                    :key="day.date"
-                    class="timeline-item"
-                  >
-                    <div class="timeline-date">
-                      {{ new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }}
-                    </div>
-                    <div class="timeline-bar">
-                      <div
-                        class="timeline-bar-fill"
-                        :style="{ width: `${(day.calls / Math.max(...metrics.apiUsage.usageTimeline.map((d: any) => d.calls))) * 100}%` }"
-                      />
-                    </div>
-                    <div class="timeline-value">
-                      {{ formatNumber(day.calls) }} calls
-                    </div>
+                <div class="d-flex justify-space-between align-center">
+                  <div class="text-overline text-grey-darken-1">
+                    Active API Keys
                   </div>
+                  <v-icon color="primary">
+                    mdi-key-chain-variant
+                  </v-icon>
+                </div>
+                <div class="text-h3 font-weight-bold mt-2 primary--text">
+                  {{ formatNumber(metrics.apiUsage.activeApiKeys || 0) }}
+                </div>
+                <div class="text-body-2 text-grey-darken-1 mt-2">
+                  Used in the last 30 days
                 </div>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
 
-        <!-- Empty State for Timeline -->
-        <v-row v-else class="mt-6">
+        <!-- API Usage Breakdown -->
+        <v-row class="mt-6">
           <v-col cols="12">
             <v-card elevation="3">
-              <v-card-title class="text-h5 font-weight-bold">
-                📈 API Usage Timeline
+              <v-card-title class="d-flex justify-space-between align-center flex-wrap ga-2">
+                <div>
+                  <h2 class="text-h5 font-weight-bold mb-1">
+                    🔌 API Usage Breakdown
+                  </h2>
+                  <p class="text-body-2 text-grey-darken-1 mb-0">
+                    Analyze total API calls and tokens by organization, user, or API key.
+                  </p>
+                </div>
+                <v-btn
+                  variant="text"
+                  color="primary"
+                  prepend-icon="mdi-refresh"
+                  :loading="usageSummaryLoading"
+                  @click="fetchUsageSummary"
+                >
+                  Refresh
+                </v-btn>
               </v-card-title>
+              <v-divider />
+              <v-tabs v-model="usageSummaryTab" align-tabs="center" color="primary">
+                <v-tab value="organization">
+                  By Organization
+                </v-tab>
+                <v-tab value="user">
+                  By User
+                </v-tab>
+                <v-tab value="key">
+                  By API Key
+                </v-tab>
+              </v-tabs>
               <v-card-text>
-                <v-alert type="info" variant="tonal">
-                  No API usage data available for the selected time period.
+                <v-alert
+                  v-if="usageSummaryError"
+                  type="error"
+                  class="mb-4"
+                  prominent
+                  border="start"
+                >
+                  {{ usageSummaryError }}
                 </v-alert>
+
+                <v-progress-linear
+                  v-else-if="usageSummaryLoading"
+                  indeterminate
+                  color="primary"
+                  class="mb-4"
+                />
+
+                <template v-else>
+                  <v-row class="chart-grid">
+                    <v-col cols="12" md="6">
+                      <div class="chart-wrapper">
+                        <Bar
+                          v-if="usageCallsChartData.labels.length"
+                          :data="usageCallsChartData"
+                          :options="baseBarChartOptions"
+                        />
+                        <v-alert v-else type="info" variant="tonal">
+                          No API call data available for this view.
+                        </v-alert>
+                      </div>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <div class="chart-wrapper">
+                        <Bar
+                          v-if="usageTokensChartData.labels.length"
+                          :data="usageTokensChartData"
+                          :options="baseBarChartOptions"
+                        />
+                        <v-alert v-else type="info" variant="tonal">
+                          No token consumption data available for this view.
+                        </v-alert>
+                      </div>
+                    </v-col>
+                  </v-row>
+
+                  <v-divider class="my-6" />
+
+                  <v-alert
+                    v-if="currentUsageItems.length === 0"
+                    type="info"
+                    variant="tonal"
+                    class="mb-2"
+                  >
+                    No usage data available for the selected time period.
+                  </v-alert>
+
+                  <v-data-table
+                    v-else
+                    :headers="usageSummaryHeaders"
+                    :items="currentUsageItems"
+                    :items-per-page="10"
+                    class="elevation-0"
+                    hover
+                  />
+                </template>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
+
       </template>
     </v-container>
 
@@ -643,6 +1189,14 @@ useHead({
   min-height: 100vh;
   background: #f5f5f5;
 
+  .summary-card {
+    height: 100%;
+  }
+
+  .summary-card .text-h4 {
+    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  }
+
   .metric-card {
     height: 100%;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -701,6 +1255,24 @@ useHead({
     font-size: 14px;
     font-weight: 600;
     color: #333;
+  }
+
+  .chart-grid {
+    margin-top: 8px;
+  }
+
+  .chart-wrapper {
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    height: 320px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  }
+
+  @media (max-width: 960px) {
+    .chart-wrapper {
+      height: 260px;
+    }
   }
 }
 
